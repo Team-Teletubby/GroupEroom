@@ -9,6 +9,6 @@ public class UserController {
 
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login() {
-		return "redirect:/views/index.jsp";
+		return "index";
 	}
 }
