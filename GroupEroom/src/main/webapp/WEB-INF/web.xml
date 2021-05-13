@@ -25,9 +25,10 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
+		<!-- *.do로 끝나는 것들만 매핑 -->
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>
