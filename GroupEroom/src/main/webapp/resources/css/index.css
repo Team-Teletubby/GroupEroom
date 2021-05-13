@@ -1,0 +1,167 @@
+@font-face {
+    font-family: 'NanumR';
+    src: url("../font/NanumSquare_acR.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'NanumB';
+    src: url("../font/NanumSquare_acB.ttf") format('truetype');
+}
+
+
+/* 컬러 선택 1: #f6f6f6 */
+body {
+    height: 100%;
+    font-family: "NanumR";
+    font-size: 14px;
+    color: #5e5e5e;
+    background-size: cover;
+    background-color: #ffffff;
+    background-image: url();
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+
+}
+
+.content-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 70px 60px;
+}
+
+/* 타이틀에 이미지를 사용할 경우, 아래 주석 코드를 사용할 것 */
+/* 이미지형 타이틀 */
+/* .title-logo-box {
+    background:url();
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:150px;
+    height:120px;
+    text-align:center;
+    margin-bottom:30px;
+} */
+
+/*.title-logo-box img {width:140px; margin:40px 0;}*/
+
+/* 문자형 타이틀 */
+.title-logo-box {
+    /* font-family: 'Abel', sans-serif; */
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    text-align: center;
+    color:  #0059AB;
+    letter-spacing: 7px;
+    margin-right: 1px;
+    margin-bottom: 50px;
+}
+
+.content {
+    width: 388px;
+    margin: 0 auto;
+}
+
+.text-field {
+    padding: 0 0 0 10px;
+
+}
+
+#question {
+    text-align: center;
+}
+
+.submit-btn {
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    width: 388px;
+    height: 60px;
+    background-color:  #0059AB;
+    margin-bottom: 30px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font-family: "NanumR";
+    letter-spacing: 2px;
+}
+
+.submit-btn:active {
+    border: none;
+    outline: none;
+    background-color:  #0176e4;
+}
+
+.id_Out_Box .inputBox,
+.password_Out_Box .inputBox {
+    position: relative;
+    height: 50px;
+}
+
+.id_Out_Box:nth-child(1),
+.password_Out_Box:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+.id_Out_Box:nth-child(2),
+.password_Out_Box:nth-child(2) {
+    margin-bottom: 20px;
+}
+
+.id_Out_Box .inputBox input[type="text"],
+.password_Out_Box .inputBox input[type="password"] {
+    padding: 0 10px;
+    width: 388px;
+    height: 50px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid#e6e6e6;
+    outline: none;
+}
+
+.id_Out_Box .inputBox label,
+.password_Out_Box .inputBox label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 6px;
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+    background: #fff;
+    transform: scale(1) translate(4px, -18px);
+    transition: all 0.15s;
+    pointer-events: none;
+}
+
+/* 문자가 들어가있으면 테두리 효과가 계속 유지됨 (사용할 경우 주석 풀 것) */
+/* 
+.id_Out_Box.existence .inputBox input[type="text"],
+.password_Out_Box.existence .inputBox input[type="password"] 
+*/
+.id_Out_Box .inputBox input[type="text"]:focus,
+.password_Out_Box .inputBox input[type="password"]:focus {
+    border: 1px solid  #0059AB;
+    box-shadow: 0 0 2px 2px rgba(214, 214, 214, 0.57);
+}
+
+/* 
+    === .existence === 
+
+input 박스 안에 문자가 입력되면 
+아이디/비밀번호 label이 특정 위치로 이동되는 코드 
+*/
+.id_Out_Box .inputBox input[type="text"]:focus + label,
+.password_Out_Box .inputBox input[type="password"]:focus + label,
+.id_Out_Box.existence .inputBox label,
+.password_Out_Box.existence .inputBox label {
+    color:  #0059AB;
+    transform: scale(.90) translate(10px, -48px);
+}
