@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public String login() {
 		return "index";
 	}
