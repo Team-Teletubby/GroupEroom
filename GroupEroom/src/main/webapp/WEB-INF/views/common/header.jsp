@@ -5,30 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 파비콘 -->
-
-<!-- 부트스트랩 css -->
-<link href="resources/js/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- 이모티콘 css -->
-<link href="resources/js/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<!-- css  -->
-<link href="resources/css/style.css" rel="stylesheet">
-
-<!-- jQuery -->
-<script src="resources/js/jquery/jquery.min.js"></script>
-<!-- 부트스트랩 -->
-<script src="resources/js/bootstrap/js/bootstrap.min.js"></script>
-<!-- 기타 -->
-<script class="include" type="text/javascript" src="resoures/js/query.dcjqaccordion.2.7.js"></script>
-<script src="lresoures/js/jquery.scrollTo.min.js"></script>
-<script src="lresoures/js/jquery.sparkline.js"></script>
-<script src="lresoures/js/common-scripts.js"></script>
 </head>
-
 <body>
-
 	<section id="container">
 		<!-- **********************************************************************************************************************************************************
             TOP BAR CONTENT & NOTIFICATIONS

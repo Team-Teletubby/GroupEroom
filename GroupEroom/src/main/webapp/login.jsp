@@ -26,7 +26,7 @@
 				<!--<img src="asset/image/logo.png" alt="ë¡ê³ ">-->
 			</div>
 			<div class="login-form">
-				<form action="" method="post">
+				<form action="login.do" method="post">
 					<div class="id_Out_Box">
 						<div class="inputBox">
 							<input type="text" name="id" class="text-field" id="Id">
