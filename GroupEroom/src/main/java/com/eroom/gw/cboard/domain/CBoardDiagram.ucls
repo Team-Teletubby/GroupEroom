@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.eroom.gw.cboard.domain" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="731" width="510" x="94" y="50"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="com.eroom.gw.cboard.service.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="375" width="283" x="1211" y="398"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="com.eroom.gw.cboard.service" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="343" width="286" x="1207" y="36"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="com.eroom.gw.cboard.store" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="346" width="289" x="1516" y="32"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="com.eroom.gw.cboard.store.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="363" width="299" x="1520" y="395"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.eroom.gw.cboard.controller" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="432" width="561" x="621" y="214"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="7" language="java" name="com.eroom.gw.cboard.service.CBoardService" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/service/CBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1351" y="225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="com.eroom.gw.cboard.service.logic.CBoardServiceImpl" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/service/logic/CBoardServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1352" y="603"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="com.eroom.gw.cboard.store.CBoardStore" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/store/CBoardStore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1661" y="230"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="com.eroom.gw.cboard.store.logic.CBoardStoreLogic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/store/logic/CBoardStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1672" y="600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.eroom.gw.cboard.domain.CBoard" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/domain/CBoard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="614" width="204" x="112" y="135"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.eroom.gw.cboard.domain.CBoardCmt" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/domain/CBoardCmt.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="613" width="210" x="359" y="136"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.eroom.gw.cboard.controller.CBoardController" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cboard/controller/CBoardController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="899" y="449"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="14">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="15" name="service">        
+        <position height="0" width="0" x="838" y="-5"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="838" y="-5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="18" name="store">        
+        <position height="0" width="0" x="838" y="-5"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="838" y="-5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="20">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="21">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

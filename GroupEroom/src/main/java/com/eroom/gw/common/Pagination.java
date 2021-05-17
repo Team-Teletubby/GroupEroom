@@ -1,7 +1,5 @@
 package com.eroom.gw.common;
 
-import com.eroom.gw.fboard.domain.PageInfo;
-
 public class Pagination {
 	
 	public static PageInfo getPageInfo(int currentPage, int listCount) {
