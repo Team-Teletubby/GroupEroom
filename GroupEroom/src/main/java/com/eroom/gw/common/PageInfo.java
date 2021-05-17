@@ -1,4 +1,4 @@
-package com.eroom.gw.fboard.domain;
+package com.eroom.gw.common;
 
 public class PageInfo {
 	
