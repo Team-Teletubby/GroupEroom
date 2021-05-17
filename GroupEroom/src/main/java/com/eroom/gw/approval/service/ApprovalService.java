@@ -4,26 +4,16 @@ import java.util.ArrayList;
 
 import com.eroom.gw.approval.domain.Approval;
 import com.eroom.gw.approval.domain.ApprovalReply;
-import com.eroom.gw.fboard.domain.PageInfo;
+import com.eroom.gw.common.PageInfo;
 
-
-/**
- * @author gkdia
- *
- */
-/**
- * @author gkdia
- *
- */
 public interface ApprovalService {
-	
 
 	/**
 	 * 게시물 등록
 	 * @param approval
 	 * @return
 	 */
-	public int approvalRegister(Approval approval);
+	public int registerApproval(Approval approval);
 	
 	/**
 	 * 게시물 전체 조회
@@ -44,16 +34,21 @@ public interface ApprovalService {
 	 * @param approvalNo
 	 * @return
 	 */
-	public int approvalDelete(int approvalNo);
-	
+	public int deleteApproval(int approvalNo);
 
-	
+	/**
+	 * 게시물 상태 변경
+	 * @param approval
+	 * @return
+	 */
+	public int changeState(Approval approval);
+
 	/**
 	 * 댓글 등록
 	 * @param reply
 	 * @return
 	 */
-	public int replyRegister(ApprovalReply reply);
+	public int registerReply(ApprovalReply reply);
 	
 	/**
 	 * 댓글 전체 조회
@@ -67,14 +62,13 @@ public interface ApprovalService {
 	 * @param reply
 	 * @return
 	 */
-	public int replyModity(ApprovalReply reply);
+	public int modityReply(ApprovalReply reply);
 	
 	/**
 	 * 댓글 삭제
 	 * @param reply
 	 * @return
 	 */
-	public int replyDelete(ApprovalReply reply);
-	
+	public int deleteReply(ApprovalReply reply);
 	
 }

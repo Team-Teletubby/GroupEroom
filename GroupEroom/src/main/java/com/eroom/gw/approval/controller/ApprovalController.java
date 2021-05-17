@@ -65,8 +65,8 @@ public class ApprovalController {
 
 	// 결재 상태 변경 (진행함에서 결제자가 글을 봤을 경우,
 	// 반려, 승인 버튼을 눌렀을 경우 / 페이지에서 상태값 가져오기(heddin))
-	public void approvalState(int approvalNo, String approvalState) {
-
+	public void approvalState(Approval approval) {
+//		int approvalNo, String approvalState 사용
 	}
 
 	// 결재 삭제
