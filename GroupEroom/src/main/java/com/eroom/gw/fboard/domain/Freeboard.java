@@ -2,7 +2,7 @@ package com.eroom.gw.fboard.domain;
 
 import java.sql.Date;
 
-public class FBoard {
+public class Freeboard {
 	
 	private int fBoardNo;
 	private int memberId;
