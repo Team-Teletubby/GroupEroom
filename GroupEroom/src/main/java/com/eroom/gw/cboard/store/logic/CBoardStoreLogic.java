@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.Cmt;
+import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.domain.PageInfo;
 import com.eroom.gw.cboard.store.CBoardStore;
 
@@ -60,25 +60,25 @@ public class CBoardStoreLogic implements CBoardStore{
 	}
 
 	@Override
-	public ArrayList<Cmt> selectAllCmt(int cBoardNo) {
+	public ArrayList<CBoardCmt> selectAllCmt(int cBoardNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int insertCmt(Cmt cmt) {
+	public int insertCmt(CBoardCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateCmt(Cmt cmt) {
+	public int updateCmt(CBoardCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteCmt(Cmt cmt) {
+	public int deleteCmt(CBoardCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.eroom.gw.calendar.domain" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="633" width="244" x="29" y="54"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.eroom.gw.calendar.domain.Calendar" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/domain/Calendar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="152" y="388"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="3" language="java" name="com.eroom.gw.calendar.controller" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="375" x="298" y="61"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="com.eroom.gw.calendar.controller.CalendarController" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/controller/CalendarController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="486" y="229"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="5" language="java" name="com.eroom.gw.calendar.service" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="301" width="341" x="690" y="57"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.eroom.gw.calendar.service.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="294" width="337" x="693" y="393"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="7" language="java" name="com.eroom.gw.calendar.service.CalendarService" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/service/CalendarService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="856" y="217"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="com.eroom.gw.calendar.service.logic.CalendarServiceImpl" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/service/logic/CalendarServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="855" y="563"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="9" language="java" name="com.eroom.gw.calendar.store" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="295" width="356" x="1068" y="54"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="10" language="java" name="com.eroom.gw.calendar.store.CalendarStore" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/store/CalendarStore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="260" x="1118" y="116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="11" language="java" name="com.eroom.gw.calendar.store.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="278" width="364" x="1068" y="405"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="12" language="java" name="com.eroom.gw.calendar.store.logic.CalendarStoreLogic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/calendar/store/logic/CalendarStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1250" y="568"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="13">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="14">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="15" name="calStore"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="18" name="calService"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="20">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.Cmt;
+import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.domain.PageInfo;
 import com.eroom.gw.cboard.service.CBoardService;
 
@@ -155,7 +155,7 @@ public class CBoardController {
 	
 	@ResponseBody //스트링 보낼때만 사용
 	@RequestMapping(value="addReply.kh", method=RequestMethod.POST)
-	public String addReply(@ModelAttribute Cmt cmt, HttpSession session) {
+	public String addReply(@ModelAttribute CBoardCmt cmt, HttpSession session) {
 		return null;
 	}
 	
@@ -168,7 +168,7 @@ public class CBoardController {
 	// 댓글 삭제
 	@ResponseBody //성공,실패 얘네 스트링이자너 
 	@RequestMapping(value="deleteReply.kh", method=RequestMethod.GET)
-	public String removeReply(@ModelAttribute Cmt cmt, Model model) {
+	public String removeReply(@ModelAttribute CBoardCmt cmt, Model model) {
 		return null;
 		
 		

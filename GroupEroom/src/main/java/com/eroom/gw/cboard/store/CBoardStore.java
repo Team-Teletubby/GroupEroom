@@ -3,7 +3,7 @@ package com.eroom.gw.cboard.store;
 import java.util.ArrayList;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.Cmt;
+import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.domain.PageInfo;
 
 public interface CBoardStore {
@@ -17,9 +17,9 @@ public interface CBoardStore {
 	public int updateBoard(CBoard cBoard);
 	public int deleteBoard(int boardNo);
 	
-	public ArrayList<Cmt> selectAllCmt(int cBoardNo);
-	public int insertCmt(Cmt cmt);
-	public int updateCmt(Cmt cmt);
-	public int deleteCmt(Cmt cmt);
+	public ArrayList<CBoardCmt> selectAllCmt(int cBoardNo);
+	public int insertCmt(CBoardCmt cmt);
+	public int updateCmt(CBoardCmt cmt);
+	public int deleteCmt(CBoardCmt cmt);
 
 }

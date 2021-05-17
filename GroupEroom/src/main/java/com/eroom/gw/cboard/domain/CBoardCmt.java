@@ -2,7 +2,7 @@ package com.eroom.gw.cboard.domain;
 
 import java.sql.Date;
 
-public class Cmt {
+public class CBoardCmt {
 	
 	private int cmtNo;
 	private String cmtContents;
@@ -11,7 +11,7 @@ public class Cmt {
 	private int memberId;
 	private String memberName;
 	
-	public Cmt() {}
+	public CBoardCmt() {}
 
 	public int getCmtNo() {
 		return cmtNo;
