@@ -26,25 +26,6 @@ public class Approval {
 		super();
 	}
 
-	public Approval(int approvalNo, int memberId, String approvalType, String approvalTitle, String approvalContents,
-			int approvalCC, Date approvalDate, String approvalState, int approvalFirst, Date approvalFirstDate,
-			int approvalSecond, Date approvalScondDate, ApprovalFile file, ApprovalReply reply) {
-		super();
-		this.approvalNo = approvalNo;
-		this.memberId = memberId;
-		this.approvalType = approvalType;
-		this.approvalTitle = approvalTitle;
-		this.approvalContents = approvalContents;
-		this.approvalCC = approvalCC;
-		this.approvalDate = approvalDate;
-		this.approvalState = approvalState;
-		this.approvalFirst = approvalFirst;
-		this.approvalFirstDate = approvalFirstDate;
-		this.approvalSecond = approvalSecond;
-		this.approvalScondDate = approvalScondDate;
-		this.file = file;
-		this.reply = reply;
-	}
 
 	// getter/setter
 	public int getApprovalNo() {

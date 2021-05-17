@@ -7,6 +7,7 @@ import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.common.PageInfo;
 
 public interface ApprovalService {
+	
 
 	/**
 	 * 게시물 등록
