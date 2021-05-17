@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.booking.domain.Booking;
 import com.eroom.gw.booking.service.BookingService;
+import com.eroom.gw.member.service.MemberService;
 
 @Controller
 public class BookingController {
@@ -39,8 +40,9 @@ public class BookingController {
 //예약생성
 	@ResponseBody
 	@RequestMapping("bkRegster.do")
-	public ModelAndView bookingRegister(HttpSession session, @ModelAttribute Booking booking) {
-		
+	public ModelAndView bookingRegister(ModelAndView mv, HttpSession session, 
+										@ModelAttribute Booking booking) {
+		return mv;
 	}
 
 //날짜로부터 예약 내역 받아오기
@@ -52,6 +54,9 @@ public class BookingController {
 	
 //예약내용 수정
 	@ResponseBody
-	@RequestMapping("bkUpdate.do")
-	public String bookingUpdate(@RequestParam("id") int id, @RequestParam(""))
+	@RequestMapping("bkModify.do")
+	public String bookingUpdate(@RequestParam("id") int id, @RequestParam("bStatus") String bStatus,
+								@RequestParam("joinMember") String joinMember) {
+		return "";
+	}
 }
