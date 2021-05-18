@@ -68,7 +68,7 @@ public class CBoardController {
 		// 저장 폴더 설정
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
-		if(!folder.exists()) {
+		if(!folder. exists()) {
 			folder.mkdir();
 		}
 		// 파일명 변경하기
@@ -155,20 +155,20 @@ public class CBoardController {
 	
 	@ResponseBody //스트링 보낼때만 사용
 	@RequestMapping(value="addReply.kh", method=RequestMethod.POST)
-	public String addReply(@ModelAttribute CBoardCmt cmt, HttpSession session) {
+	public String addCmt(@ModelAttribute CBoardCmt cmt, HttpSession session) {
 		return null;
 	}
 	
 	//댓글목록
 	@RequestMapping(value="replyList.kh", method=RequestMethod.GET)
-	public void getReplyList(HttpServletResponse response, @RequestParam("boardNo") int boardNo) throws Exception {
+	public void getCmtList(HttpServletResponse response, @RequestParam("boardNo") int boardNo) throws Exception {
 
 	}
 	
 	// 댓글 삭제
 	@ResponseBody //성공,실패 얘네 스트링이자너 
 	@RequestMapping(value="deleteReply.kh", method=RequestMethod.GET)
-	public String removeReply(@ModelAttribute CBoardCmt cmt, Model model) {
+	public String removeCmt(@ModelAttribute CBoardCmt cmt, Model model) {
 		return null;
 		
 		

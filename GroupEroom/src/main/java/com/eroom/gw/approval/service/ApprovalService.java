@@ -21,7 +21,7 @@ public interface ApprovalService {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Approval> printAll(PageInfo pi);
+	public ArrayList<Approval> printAll(PageInfo pi, String boardType);
 	
 	/**
 	 * 게시물 상세 조회
@@ -71,5 +71,6 @@ public interface ApprovalService {
 	 * @return
 	 */
 	public int deleteReply(ApprovalReply reply);
+
 	
 }

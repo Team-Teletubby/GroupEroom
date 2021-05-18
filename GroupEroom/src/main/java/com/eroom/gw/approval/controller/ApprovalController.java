@@ -50,7 +50,8 @@ public class ApprovalController {
 	}
 
 	// 글 List 보기 (페이징 처리도)
-	public ModelAndView approvalList(ModelAndView mv, @RequestParam(value="page", required=false)Integer page) {
+	public ModelAndView approvalList(ModelAndView mv, @RequestParam(value="page", required=false)Integer page,
+									@RequestParam(value="boardType")String boardType) {
 
 		return mv;
 	}

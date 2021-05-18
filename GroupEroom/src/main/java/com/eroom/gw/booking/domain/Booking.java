@@ -5,30 +5,30 @@ import java.sql.Date;
 public class Booking {
 	
 	private int bookingNo;
-	private int roomNo;
+	private String bookingDate;
 	private int memberId;
-	private String participants;
-	private Date startTime;
-	private Date endTime;
-	private String Contents;
-	private String roomState;
+	private int roomNo;
+	private String joinMember;
+	private String bookingTime;
+	private String bContents;
+	private String bStatus;
 	
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Booking(int bookingNo, int roomNo, int memberId, String participants, Date startTime, Date endTime,
-			String contents, String roomState) {
+	public Booking(int bookingNo, String bookingDate, int memberId, int roomNo, String joinMember, String bookingTime,
+			String bContents, String bStatus) {
 		super();
 		this.bookingNo = bookingNo;
-		this.roomNo = roomNo;
+		this.bookingDate = bookingDate;
 		this.memberId = memberId;
-		this.participants = participants;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		Contents = contents;
-		this.roomState = roomState;
+		this.roomNo = roomNo;
+		this.joinMember = joinMember;
+		this.bookingTime = bookingTime;
+		this.bContents = bContents;
+		this.bStatus = bStatus;
 	}
 	
 	public int getBookingNo() {
@@ -37,11 +37,11 @@ public class Booking {
 	public void setBookingNo(int bookingNo) {
 		this.bookingNo = bookingNo;
 	}
-	public int getRoomNo() {
-		return roomNo;
+	public String getBookingDate() {
+		return bookingDate;
 	}
-	public void setRoomNo(int roomNo) {
-		this.roomNo = roomNo;
+	public void setBookingDate(String bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 	public int getMemberId() {
 		return memberId;
@@ -49,43 +49,43 @@ public class Booking {
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
-	public String getParticipants() {
-		return participants;
+	public int getRoomNo() {
+		return roomNo;
 	}
-	public void setParticipants(String participants) {
-		this.participants = participants;
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
-	public Date getStartTime() {
-		return startTime;
+	public String getJoinMember() {
+		return joinMember;
 	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
+	public void setJoinMember(String joinMember) {
+		this.joinMember = joinMember;
 	}
-	public Date getEndTime() {
-		return endTime;
+	public String getBookingTime() {
+		return bookingTime;
 	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setBookingTime(String bookingTime) {
+		this.bookingTime = bookingTime;
 	}
-	public String getContents() {
-		return Contents;
+	public String getbContents() {
+		return bContents;
 	}
-	public void setContents(String contents) {
-		Contents = contents;
+	public void setbContents(String bContents) {
+		this.bContents = bContents;
 	}
-	public String getRoomState() {
-		return roomState;
+	public String getbStatus() {
+		return bStatus;
 	}
-	public void setRoomState(String roomState) {
-		this.roomState = roomState;
+	public void setbStatus(String bStatus) {
+		this.bStatus = bStatus;
 	}
 	
 	@Override
 	public String toString() {
-		return "Booking [bookingNo=" + bookingNo + ", roomNo=" + roomNo + ", memberId=" + memberId + ", participants="
-				+ participants + ", startTime=" + startTime + ", endTime=" + endTime + ", Contents=" + Contents
-				+ ", roomState=" + roomState + "]";
+		return "Booking [bookingNo=" + bookingNo + ", bookingDate=" + bookingDate + ", memberId=" + memberId
+				+ ", roomNo=" + roomNo + ", joinMember=" + joinMember + ", bookingTime=" + bookingTime + ", bContents="
+				+ bContents + ", bStatus=" + bStatus + "]";
 	}
-
+	
 	
 }

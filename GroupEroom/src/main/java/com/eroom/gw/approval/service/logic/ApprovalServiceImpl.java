@@ -24,7 +24,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public ArrayList<Approval> printAll(PageInfo pi) {
+	public ArrayList<Approval> printAll(PageInfo pi, String boardType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
