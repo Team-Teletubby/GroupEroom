@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.eroom.gw.cooperation.controller" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="394" width="667" x="599" y="355"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="com.eroom.gw.cooperation.domain" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="583" width="560" x="22" y="264"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="3" language="java" name="com.eroom.gw.cooperation.controller.CooperationController" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/controller/CooperationController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="933" y="592"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="4" language="java" name="com.eroom.gw.cooperation.service" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="282" width="323" x="1283" y="215"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="com.eroom.gw.cooperation.service.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="305" width="329" x="1283" y="527"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.eroom.gw.cooperation.store" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="298" width="321" x="1713" y="199"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="7" language="java" name="com.eroom.gw.cooperation.store.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="312" width="402" x="1646" y="528"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="8" language="java" name="com.eroom.gw.cooperation.service.logic.CooperationServiceImpl" 
+    project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/service/logic/CooperationServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1458" y="698"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="com.eroom.gw.cooperation.service.CooperationService" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/service/CooperationService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1447" y="378"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="com.eroom.gw.cooperation.store.CooperationStore" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/store/CooperationStore.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1873" y="375"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="com.eroom.gw.cooperation.store.logic.CooperationStoreLogic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/store/logic/CooperationStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1857" y="710"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.eroom.gw.cooperation.domain.Cooperation" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/domain/Cooperation.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="580"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.eroom.gw.cooperation.domain.CooperationCmt" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/cooperation/domain/CooperationCmt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="452" y="524"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="14">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="15">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="16">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="17" name="coService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

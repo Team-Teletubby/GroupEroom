@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.eroom.gw.booking.domain" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="808" width="350" x="16" y="142"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.eroom.gw.booking.domain.Booking" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/domain/Booking.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="190" y="531"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="3" language="java" name="com.eroom.gw.booking.controller" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="327" width="468" x="423" y="326"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="com.eroom.gw.booking.controller.BookingController" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/controller/BookingController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="653" y="515"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="5" language="java" name="com.eroom.gw.booking.service" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="252" width="478" x="1013" y="155"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.eroom.gw.booking.service.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="255" width="473" x="1015" y="499"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="7" language="java" name="com.eroom.gw.booking.store" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="282" width="426" x="1681" y="141"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="8" language="java" name="com.eroom.gw.booking.store.logic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="284" width="427" x="1682" y="474"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="9" language="java" name="com.eroom.gw.booking.service.BookingService" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/service/BookingService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="366" x="1055" y="222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="com.eroom.gw.booking.service.logic.BookingServiceImpl" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/service/logic/BookingServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1245" y="649"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="com.eroom.gw.booking.store.BookingStore" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/store/BookingStore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1904" y="291"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="com.eroom.gw.booking.store.logic.BookingStoreLogic" project="GroupEroom" 
+    file="/GroupEroom/src/main/java/com/eroom/gw/booking/store/logic/BookingStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1902" y="636"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="13">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="14">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="15">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="bService"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="19" name="bStore"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

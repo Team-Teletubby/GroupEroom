@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cooperation.domain.Cooperation;
 import com.eroom.gw.cooperation.domain.CooperationCmt;
-import com.eroom.gw.cooperation.domain.CooperationFile;
 import com.eroom.gw.cooperation.service.CooperationService;
 
 @Controller
@@ -35,7 +34,7 @@ public class CooperationController {
 //게시글 등록
 	@RequestMapping(value="coRegister.do", method=RequestMethod.POST)
 	public ModelAndView cooperationRegister(ModelAndView mv,
-									@ModelAttribute Cooperation co, @ModelAttribute CooperationFile coFile,
+									@ModelAttribute Cooperation co,
 									@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, 
 									HttpServletRequest request) {
 		return mv;
@@ -55,7 +54,7 @@ public class CooperationController {
 //게시글 수정
 	@RequestMapping(value="coUpdate.do", method=RequestMethod.POST)
 	public ModelAndView cooperationUpdate(ModelAndView mv, HttpServletRequest request,
-									@ModelAttribute Cooperation co, @ModelAttribute CooperationFile coFile,
+									@ModelAttribute Cooperation co,
 									@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
 		return mv;
 	}
@@ -84,6 +83,13 @@ public class CooperationController {
 	@RequestMapping(value="addCoCmt.do", method=RequestMethod.POST)
 	public String addCooperationCmt(@ModelAttribute CooperationCmt coCmt, HttpSession session) {
 		return "";
+	}
+	
+//댓글수정
+	@ResponseBody
+	@RequestMapping(value="modifyCoCmt.do", method=RequestMethod.POST)
+	public String modifyCooperationCmt(@ModelAttribute CooperationCmt coCmt) {
+		return null;
 	}
 
 //댓글삭제
