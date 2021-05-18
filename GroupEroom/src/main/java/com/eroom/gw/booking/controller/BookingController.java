@@ -19,8 +19,6 @@ import com.eroom.gw.member.service.MemberService;
 public class BookingController {
 	
 	@Autowired
-	private MemberService mService;
-	@Autowired
 	private BookingService bService;
 		
 //예약리스트 조회화면
