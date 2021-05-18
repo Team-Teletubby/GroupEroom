@@ -21,7 +21,7 @@ public interface ApprovalStore {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Approval> selectAllList(PageInfo pi);
+	public ArrayList<Approval> selectAllList(PageInfo pi, String boardType);
 	
 	/**
 	 * 게시물 상세 조회
@@ -72,5 +72,6 @@ public interface ApprovalStore {
 	 * @return
 	 */
 	public int deleteReply(ApprovalReply reply);
+
 	
 }

@@ -2,6 +2,7 @@ package com.eroom.gw.approval.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.approval.domain.Approval;
@@ -19,8 +20,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
-	public ArrayList<Approval> selectAllList(PageInfo pi) {
+	public ArrayList<Approval> selectAllList(PageInfo pi, String boardType) {
 		// TODO Auto-generated method stub
+		
+		/* sqlSession.selectList( , , ); */
 		return null;
 	}
 
