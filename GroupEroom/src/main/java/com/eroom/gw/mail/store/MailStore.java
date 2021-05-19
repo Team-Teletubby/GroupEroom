@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.eroom.gw.mail.domain.Mail;
 
-public interface MailStrore {
+public interface MailStore {
  
 	
 	

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.eroom.gw.mail.domain.Mail;
-import com.eroom.gw.mail.store.MailStrore;
+import com.eroom.gw.mail.store.MailStore;
 
-public class MailStoreLogic implements MailStrore {
+public class MailStoreLogic implements MailStore {
 
 	@Override
 	public void create(Mail mail) throws Exception {

@@ -46,6 +46,7 @@ public class MailController {
 		
 		return null ;
 	}
+	
 	// 보낸메일 조회
 	@ResponseBody
 	@RequestMapping(value= "sndMailListSearch.do", method ={RequestMethod.GET, RequestMethod.POST})
