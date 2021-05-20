@@ -1,6 +1,7 @@
 package com.eroom.gw.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,27 @@ public class MemberController {
 	//로그인
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(HttpServletRequest request, @ModelAttribute Member member, Model model) {
+		Member mOne = new Member(member.getMemberId(), member.getMemberPwd());
+		Member loginMember = service.loginMember(mOne);
 		
-		return "index";
+		if(loginMember != null ) { 
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", loginMember);
+			return "index";
+		}else { 
+			model.addAttribute("msg", "로그인에 실패하였습니다! 다시 확인해주세요");
+			
+			return "common/errorPage"; 
+		}
 		
 	}
-	
+	// 로그아웃
+	 @RequestMapping(value="logout.do", method=RequestMethod.GET)
+	 public String memberLogOut(HttpServletRequest request) { 
+		 HttpSession session = request.getSession();
+		 session.invalidate();
+		 return "redirect:index.do";
+	 }
 	//회면가입 
 	
 	@RequestMapping(value="enrollView.do", method=RequestMethod.GET)

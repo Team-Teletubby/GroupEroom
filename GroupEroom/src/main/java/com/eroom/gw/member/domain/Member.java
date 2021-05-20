@@ -21,25 +21,15 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
-			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, int account,
-			Date regDate, String quitYn, Date quitDate) {
+
+
+	public Member(int memberId, String memberPwd) {
 		super();
 		this.memberId = memberId;
-		this.memberDept = memberDept;
-		this.memberJob = memberJob;
-		this.memberName = memberName;
 		this.memberPwd = memberPwd;
-		this.memberRrn = memberRrn;
-		this.memberPhone = memberPhone;
-		this.memberEmail = memberEmail;
-		this.memberAddr = memberAddr;
-		this.bank = bank;
-		Account = account;
-		this.regDate = regDate;
-		this.quitYn = quitYn;
-		this.quitDate = quitDate;
 	}
+
+
 
 	public int getMemberId() {
 		return memberId;

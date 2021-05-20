@@ -1,5 +1,7 @@
 package com.eroom.gw.notice.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eroom.gw.common.Search;
+import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Pagination;
 import com.eroom.gw.notice.domain.Notice;
+
 import com.eroom.gw.notice.service.NoticeService;
 
 @Controller
@@ -22,8 +26,16 @@ public class NoticeController {
 	@Autowired
 	private NoticeService nService;
 	// 리스트 화면
+	
 	@RequestMapping(value="noticeList.do", method=RequestMethod.GET)
 	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount = nService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Notice> nList = nService.printAll(pi);
+		
+		
+		
 		return mv;
 	}
 	//상세 페이지, 조회수 화면

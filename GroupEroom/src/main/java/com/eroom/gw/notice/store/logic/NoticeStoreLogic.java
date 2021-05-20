@@ -2,12 +2,20 @@ package com.eroom.gw.notice.store.logic;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.notice.domain.Notice;
 import com.eroom.gw.notice.store.NoticeStore;
 
+@Repository
 public class NoticeStoreLogic implements NoticeStore {
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public int selectListCount() {
 		// TODO Auto-generated method stub
