@@ -50,11 +50,11 @@ public class MemberController {
 		 session.invalidate();
 		 return "redirect:index.do";
 	 }
-	//회면가입 
+	// 사원등록 폼 연결 
 	
 	@RequestMapping(value="enrollView.do", method=RequestMethod.GET)
 	public String enrollView() { 
-		return "";
+		return "member/memberForm";
 	}
 	// 사원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
