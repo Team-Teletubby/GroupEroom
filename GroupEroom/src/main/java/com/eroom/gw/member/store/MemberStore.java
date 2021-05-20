@@ -9,7 +9,7 @@ public interface MemberStore {
 	
 	public ArrayList<Member> selectList();
 	public ArrayList<Member> selectSearchList(Search search);
-	public Member selectOne(int mId);
+	public Member selectOne(Member member);
 	public int insertMember(Member member);
 	public int updateMember(Member member);
 }

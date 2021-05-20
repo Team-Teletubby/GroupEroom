@@ -27,10 +27,11 @@ public class MemberController {
 	private MemberService service;
 	
 	//로그인
-	@RequestMapping(value="login.do", method=RequestMethod.GET)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(HttpServletRequest request, @ModelAttribute Member member, Model model) {
 		Member mOne = new Member(member.getMemberId(), member.getMemberPwd());
-		Member loginMember = service.loginMember(mOne);
+	
+		Member loginMember =service.loginMember(mOne);
 		
 		if(loginMember != null ) { 
 			HttpSession session = request.getSession();

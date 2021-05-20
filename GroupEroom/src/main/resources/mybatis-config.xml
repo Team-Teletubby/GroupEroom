@@ -14,12 +14,14 @@
 		<typeAlias type="com.eroom.gw.fboard.domain.FreeboardFile" alias="FreeboardFile" />
 		<typeAlias type="com.eroom.gw.cboard.domain.CBoard" alias="cBoard"/>
 		<typeAlias type="com.eroom.gw.cboard.domain.CBoardCmt" alias="cBoardCmt"/>
+		<typeAlias type="com.eroom.gw.member.domain.Member" alias="Member"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/mail-mapper.xml"></mapper>
 		<mapper resource="mappers/fboard-mapper.xml"></mapper>
 		<mapper resource="mappers/cBoard-mapper.xml"></mapper>
+		<mapper resource="mappers/member-mapper.xml"></mapper>
 	</mappers>
 	
 </configuration>

@@ -29,13 +29,13 @@
 				<form action="login.do" method="post">
 					<div class="id_Out_Box">
 						<div class="inputBox">
-							<input type="text" name="id" class="text-field" id="Id">
+							<input type="text" name="memberId" class="text-field" id="Id">
 							<label for="id">아이디</label>
 						</div>
 					</div>
 					<div class="password_Out_Box">
 						<div class="inputBox">
-							<input type="password" name="password" class="text-field"
+							<input type="password" name="memberPwd" class="text-field"
 								id="Password"> <label for="password">비밀번호</label>
 						</div>
 					</div>
