@@ -5,4 +5,18 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 		<!-- 만약에 null로 데이터가 전달되었다면 빈칸이 아닌 NULL로 인식하도록 설정 -->
 	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.eroom.gw.mail.domain.Mail" alias="Mail" />
+		<typeAlias type="com.eroom.gw.mail.domain.MailFile" alias="MailFile" />
+		<typeAlias type="com.eroom.gw.fboard.domain.Freeboard" alias="Freeboard" />
+		<typeAlias type="com.eroom.gw.fboard.domain.FreeboardCmt" alias="FreeboardCmt" />
+		<typeAlias type="com.eroom.gw.fboard.domain.FreeboardFile" alias="FreeboardFile" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/mail-mapper.xml"></mapper>
+		<mapper resource="mappers/fboard-mapper.xml"></mapper>
+	</mappers>
+	
 </configuration>

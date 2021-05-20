@@ -62,7 +62,7 @@
                     </li>
                     <!-- 메일 메뉴 -->
                     <li>
-                        <a href="inbox.html">
+                        <a href="mailViewList.do">
                             <i class="fa fa-envelope"></i>
                             <span>메일 </span>
                             <span class="label label-theme pull-right mail-info">2</span>

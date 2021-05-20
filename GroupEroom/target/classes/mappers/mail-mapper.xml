@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mailMapper">
+
+	<resultMap type="Mail" id="mailResultMap">
+		<id property="MailNo" column="MAIL_NO" />
+		<result property="receiverId" column="RECEIVER_ID" />
+		<result property="senderId" column="SENDER_ID" />
+		<result property="ccId" column="CC_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="mailTitle" column="MAIL_TITLE" />
+		<result property="mailContents" column="MAIL_CONTENTS" />
+		<result property="sentDate" column="SENT_DATE" />
+		<result property="readDate" column="READ_DATE" />
+		<result property="readCount" column="READ_COUNT" />
+	</resultMap>
+	
+<!-- 	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM MAIL
+		WHERE B_STATUS = 'Y'
+	</select> -->
+	
+<!-- 	<select id="selectAllList" resultMap="mailResultMap">
+		SELECT * FROM BOARD 
+		WHERE B_STATUS = 'Y' 
+		ORDER BY BOARD_NO DESC
+	</select> -->
+	
+	<!-- 
+게시글 상세조회
+	<select id="selectOne" resultMap="boardResultMap">
+		SELECT * FROM BOARD WHERE BOARD_NO = #{boardNo} AND B_STATUS = 'Y'
+	</select>
+	
+게시글 작성
+	<insert id="insertBoard">
+		INSERT INTO BOARD
+		VALUES(SEQ_BOARDID.NEXTVAL, #{boardTitle }, #{boardContent }, #{boardWriter }, #{originalFilename }, #{renameFilename }, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+게시글 수정
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, ORIGINAL_FILENAME = #{originalFilename}, B_UPDATE_DATE = #{bUpdateDate}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+조회수
+	<update id="updateCount">
+		UPDATE BOARD
+		SET BOARD_COUNT = BOARD_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+게시글 삭제
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+댓글리스트
+	<select id="selectReplyList" resultMap="replyResultMap">
+		SELECT * FROM REPLY
+		WHERE REF_BOARD_NO = #{boardNo}
+		AND R_STATUS = 'Y'
+		ORDER BY REPLY_NO DESC
+	</select>
+	
+댓글달기
+	<insert id="insertReply">
+		INSERT INTO REPLY
+		VALUES(SEQ_REPLYID.NEXTVAL, #{replyContent}, #{refBoardNo}, #{replyWriter}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+댓글수정
+	<update id="updateReply">
+		UPDATE REPLY 
+		SET REPLY_CONTENT = #{replyContent} 
+		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo} AND R_STATUS = 'Y'
+	</update>
+	
+댓글삭제
+	<update id="deleteReply">
+		UPDATE REPLY 
+		SET R_STATUS = 'N' 
+		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo}
+	</update>
+	
+	
+	 -->
+	
+</mapper>
