@@ -48,7 +48,7 @@ public class MemberController {
 	 public String memberLogOut(HttpServletRequest request) { 
 		 HttpSession session = request.getSession();
 		 session.invalidate();
-		 return "redirect:index.do";
+		 return "redirect:index";
 	 }
 	// 사원등록 폼 연결 
 	
