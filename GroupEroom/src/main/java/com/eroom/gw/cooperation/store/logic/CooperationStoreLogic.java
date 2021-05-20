@@ -12,9 +12,6 @@ import com.eroom.gw.cooperation.store.CooperationStore;
 
 @Repository
 public class CooperationStoreLogic implements CooperationStore {
-	
-	@Autowired
-	private SqlSession session;
 
 	@Override
 	public ArrayList<Cooperation> selectAllList() {
@@ -23,19 +20,19 @@ public class CooperationStoreLogic implements CooperationStore {
 	}
 
 	@Override
-	public int insertCooperation(Cooperation co) {
+	public int insertCoop(Cooperation co) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateCooperation(Cooperation co) {
+	public int updateCoop(Cooperation co) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteCooperation(int coNo) {
+	public int deleteCoop(int coNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -47,23 +44,21 @@ public class CooperationStoreLogic implements CooperationStore {
 	}
 
 	@Override
-	public int insertCooperationCmt(CooperationCmt coCmt) {
+	public int insertCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateCooperationCmt(CooperationCmt coCmt) {
+	public int updateCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteCooperationCmt(CooperationCmt coCmt) {
+	public int deleteCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
-	
-
 }

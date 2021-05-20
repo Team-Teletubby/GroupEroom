@@ -27,13 +27,13 @@ public class CooperationController {
 	
 //게시글리스트 조회
 	@RequestMapping(value="coList.do")
-	public ModelAndView cooperationListView(ModelAndView mv) {	
+	public ModelAndView coopListView(ModelAndView mv) {	
 		return mv;
 	}
 	
 //게시글 등록
 	@RequestMapping(value="coRegister.do", method=RequestMethod.POST)
-	public ModelAndView cooperationRegister(ModelAndView mv,
+	public ModelAndView coopRegister(ModelAndView mv,
 									@ModelAttribute Cooperation co,
 									@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, 
 									HttpServletRequest request) {
@@ -47,13 +47,13 @@ public class CooperationController {
 	
 //게시글 수정화면단
 	@RequestMapping(value="coModifyView.do")
-	public ModelAndView cooperationModifyView(ModelAndView mv, @RequestParam("coNo") int coNo) {
+	public ModelAndView coopModifyView(ModelAndView mv, @RequestParam("coNo") int coNo) {
 		return mv;
 	}
 	
 //게시글 수정
 	@RequestMapping(value="coUpdate.do", method=RequestMethod.POST)
-	public ModelAndView cooperationUpdate(ModelAndView mv, HttpServletRequest request,
+	public ModelAndView coopUpdate(ModelAndView mv, HttpServletRequest request,
 									@ModelAttribute Cooperation co,
 									@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
 		return mv;
@@ -61,7 +61,7 @@ public class CooperationController {
 	
 //게시글 삭제
 	@RequestMapping(value="coDelete.do")
-	public String cooperationDelete(Model model, @RequestParam("coNo") int coNo,
+	public String coopDelete(Model model, @RequestParam("coNo") int coNo,
 								@RequestParam("renameFilename") String renameFileName,
 								HttpServletRequest request) {
 		return "";
@@ -81,21 +81,21 @@ public class CooperationController {
 //댓글리스트
 	@ResponseBody
 	@RequestMapping(value="addCoCmt.do", method=RequestMethod.POST)
-	public String addCooperationCmt(@ModelAttribute CooperationCmt coCmt, HttpSession session) {
+	public String addCooperationCmt(@ModelAttribute CooperationCmt cmt, HttpSession session) {
 		return "";
 	}
 	
 //댓글수정
 	@ResponseBody
 	@RequestMapping(value="modifyCoCmt.do", method=RequestMethod.POST)
-	public String modifyCooperationCmt(@ModelAttribute CooperationCmt coCmt) {
+	public String modifyCoopCmt(@ModelAttribute CooperationCmt cmt) {
 		return null;
 	}
 
 //댓글삭제
 	@ResponseBody
 	@RequestMapping(value="deleteCoCmt.do")
-	public String removeCooperationCmt(@ModelAttribute CooperationCmt coCmt) {
+	public String removeCoopCmt(@ModelAttribute CooperationCmt cmt) {
 	return "";
 	}
 	

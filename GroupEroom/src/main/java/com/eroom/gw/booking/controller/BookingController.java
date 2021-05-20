@@ -28,16 +28,16 @@ public class BookingController {
 		return mv;
 	}
 	
-//예약생성 조회화면
+//예약생성 화면
 	@RequestMapping("bkInsertView.do")
-	public ModelAndView bookingInsertView(ModelAndView mv) {
+	public ModelAndView bookingInsertView (ModelAndView mv) {
 		
 		return mv;
 	}
 	
 //예약생성
 	@ResponseBody
-	@RequestMapping("bkRegster.do")
+	@RequestMapping("bkRegister.do")
 	public ModelAndView bookingRegister(ModelAndView mv, HttpSession session, 
 										@ModelAttribute Booking booking) {
 		return mv;

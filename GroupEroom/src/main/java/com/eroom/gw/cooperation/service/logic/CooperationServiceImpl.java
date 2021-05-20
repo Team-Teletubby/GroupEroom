@@ -18,19 +18,19 @@ public class CooperationServiceImpl implements CooperationService {
 	}
 
 	@Override
-	public int registerCooperation(Cooperation co) {
+	public int registerCoop(Cooperation co) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int modifyCooperation(Cooperation co) {
+	public int modifyCoop(Cooperation co) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int removeCooperation(int coNo) {
+	public int removeCoop(int coNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -42,19 +42,19 @@ public class CooperationServiceImpl implements CooperationService {
 	}
 
 	@Override
-	public int registerCoCmt(CooperationCmt coCmt) {
+	public int registerCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int modifyCoCmt(CooperationCmt coCmt) {
+	public int modifyCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int removeCoCmt(CooperationCmt coCmt) {
+	public int removeCoopCmt(CooperationCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
