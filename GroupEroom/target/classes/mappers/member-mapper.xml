@@ -21,7 +21,7 @@
 	</resultMap>
 
 	
-	<select id="loginMember" resultType="Member" resultMap="memberResultMap">
+	<select id="loginMember"  resultMap="memberResultMap">
 	 SELECT *FROM MEMBER 
 	 WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd } 
 	</select>
