@@ -23,8 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
-import com.eroom.gw.cboard.domain.PageInfo;
 import com.eroom.gw.cboard.service.CBoardService;
+import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Pagination;
 
 @Controller
 public class CBoardController {
@@ -33,11 +34,25 @@ public class CBoardController {
 	
 	private CBoardService service;
 	
-	@RequestMapping(value="boardList.kh", method=RequestMethod.GET)
+	
+	//전체 조회
+	@RequestMapping(value="cBoardListView.do", method=RequestMethod.GET)
 	public ModelAndView boardListView(ModelAndView mv
 											, @RequestParam(value="page", required=false)Integer page) {
+		int currentPage = (page !=null) ? page : 1;
+		int listCount = service.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<CBoard> list = service.printAll(pi);
+		System.out.println(list);
+		if(!list.isEmpty()) {
+			mv.addObject("cBoardList",list);
+			mv.addObject("pi", pi);
+			mv.setViewName("cBoard/cBoardListView");
+		}else {
+			mv.addObject("msg", "게시글 전체조회 실패");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
-
 	}
 	
 	

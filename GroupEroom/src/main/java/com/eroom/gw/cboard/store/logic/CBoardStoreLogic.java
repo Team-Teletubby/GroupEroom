@@ -2,14 +2,15 @@ package com.eroom.gw.cboard.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
-import com.eroom.gw.cboard.domain.PageInfo;
 import com.eroom.gw.cboard.store.CBoardStore;
+import com.eroom.gw.common.PageInfo;
 
 @Repository
 public class CBoardStoreLogic implements CBoardStore{
@@ -19,14 +20,14 @@ public class CBoardStoreLogic implements CBoardStore{
 	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("cBoardMapper.selectListCount");
 	}
 
 	@Override
 	public ArrayList<CBoard> selectAllList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("cBoardMapper.selectAllList", null, rowBounds); 
 	}
 
 	@Override
