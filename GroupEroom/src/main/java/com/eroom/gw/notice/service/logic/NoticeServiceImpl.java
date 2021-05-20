@@ -2,10 +2,13 @@ package com.eroom.gw.notice.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.notice.domain.Notice;
 import com.eroom.gw.notice.service.NoticeService;
 
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
 	@Override
