@@ -27,7 +27,7 @@ public class MemberController {
 	private MemberService service;
 	
 	//로그인
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.GET)
 	public String memberLogin(HttpServletRequest request, @ModelAttribute Member member, Model model) {
 		Member mOne = new Member(member.getMemberId(), member.getMemberPwd());
 		Member loginMember = service.loginMember(mOne);
