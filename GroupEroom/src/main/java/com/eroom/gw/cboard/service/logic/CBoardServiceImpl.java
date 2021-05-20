@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
-import com.eroom.gw.cboard.domain.PageInfo;
 import com.eroom.gw.cboard.service.CBoardService;
 import com.eroom.gw.cboard.store.CBoardStore;
+import com.eroom.gw.common.PageInfo;
 
 @Service
 public class CBoardServiceImpl implements CBoardService{
@@ -19,14 +19,12 @@ public class CBoardServiceImpl implements CBoardService{
 
 	@Override
 	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.selectListCount();
 	}
 
 	@Override
 	public ArrayList<CBoard> printAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectAllList(pi);
 	}
 
 	@Override

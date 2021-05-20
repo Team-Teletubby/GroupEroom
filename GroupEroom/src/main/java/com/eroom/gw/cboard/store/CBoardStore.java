@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
-import com.eroom.gw.cboard.domain.PageInfo;
+import com.eroom.gw.common.PageInfo;
 
 public interface CBoardStore {
 	
