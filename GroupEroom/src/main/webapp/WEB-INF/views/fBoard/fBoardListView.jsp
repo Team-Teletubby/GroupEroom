@@ -27,26 +27,28 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th width="300">제목</th>
+									<th width="500">제목</th>
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>조회수</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${ fList } var="fBoard">
+								<c:forEach items="${ fList }" var="fBoard">
 									<tr>
-										<td align="center">${ fBoard.fBoardNo }</td>
-										<td align="center"><c:url var="fBoardDetail"
-												value="fBoardDetail.do">
+										<td>${ fBoard.fBoardNo }</td>
+										<td>
+										<c:url var="fBoardDetail" value="fBoardDetail.do">
 												<c:param name="fBoardNo" value="${fBoard.fBoardNo}"></c:param>
-											</c:url> <a href="${fBoardDetail }">${fBoard.fBoardTitle }</a></td>
-										<td align="center">${fBoard.memberId }</td>
-										<td align="center">${fBoard.enrollDate }</td>
-										<td align="center">${fBoard.hits }</td>
+											</c:url> 
+										<a href="${fBoardDetail }">${fBoard.fBoardTitle }</a></td>
+										<td>${fBoard.memberName }</td>
+										<td>${fBoard.enrollDate }</td>
+										<td>${fBoard.hits }</td>
 									</tr>
 								</c:forEach>
-
+							</tbody>
+						</table>
 						<div class="span6">
 							<div class="dataTables_paginate paging_bootstrap pagination">
 								<ul>
@@ -60,8 +62,6 @@
 								</ul>
 							</div>
 						</div>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</div>

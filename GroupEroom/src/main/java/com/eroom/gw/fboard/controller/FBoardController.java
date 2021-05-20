@@ -42,10 +42,11 @@ public class FBoardController {
 		if(!fList.isEmpty()) {
 			mv.addObject("fList", fList);
 			mv.addObject("pi", pi);
-			mv.setViewName("board/boardListView");
+			mv.setViewName("fBoard/fBoardListView");
 		}else {
+			System.out.println("실패");
 			mv.addObject("msg", "리스트 불러오기 실패");
-			mv.setViewName("board/errorPage");
+			mv.setViewName("fBoard/errorPage");
 		}
 		return mv;
 	}
@@ -60,7 +61,7 @@ public class FBoardController {
 //게시글 등록화면단
 	@RequestMapping(value="fBoardWriteView.do")
 	public String fBoardWriteView() {
-		return "fBoard/boardWriteForm";
+		return "fBoard/fBoardWriteForm";
 	}
 	
 //게시글 등록

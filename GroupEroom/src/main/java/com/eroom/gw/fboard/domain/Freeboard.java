@@ -6,6 +6,7 @@ public class Freeboard {
 	
 	private int fBoardNo;
 	private int memberId;
+	private String memberName;
 	private String fBoardTitle;
 	private String fBoardContents;
 	private Date enrollDate;
@@ -17,11 +18,12 @@ public class Freeboard {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Freeboard(int fBoardNo, int memberId, String fBoardTitle, String fBoardContents, Date enrollDate, int hits,
-			String fStatus) {
+	public Freeboard(int fBoardNo, int memberId, String memberName, String fBoardTitle, String fBoardContents,
+			Date enrollDate, int hits, String fStatus) {
 		super();
 		this.fBoardNo = fBoardNo;
 		this.memberId = memberId;
+		this.memberName = memberName;
 		this.fBoardTitle = fBoardTitle;
 		this.fBoardContents = fBoardContents;
 		this.enrollDate = enrollDate;
@@ -43,6 +45,14 @@ public class Freeboard {
 
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getfBoardTitle() {
@@ -87,11 +97,10 @@ public class Freeboard {
 
 	@Override
 	public String toString() {
-		return "Freeboard [fBoardNo=" + fBoardNo + ", memberId=" + memberId + ", fBoardTitle=" + fBoardTitle
-				+ ", fBoardContents=" + fBoardContents + ", enrollDate=" + enrollDate + ", hits=" + hits + ", fStatus="
-				+ fStatus + "]";
+		return "Freeboard [fBoardNo=" + fBoardNo + ", memberId=" + memberId + ", memberName=" + memberName
+				+ ", fBoardTitle=" + fBoardTitle + ", fBoardContents=" + fBoardContents + ", enrollDate=" + enrollDate
+				+ ", hits=" + hits + ", fStatus=" + fStatus + "]";
 	}
-	
 	
 	
 
