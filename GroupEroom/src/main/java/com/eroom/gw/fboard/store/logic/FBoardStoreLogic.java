@@ -20,7 +20,7 @@ public class FBoardStoreLogic implements FBoardStore {
 	@Override
 	public int selectListHits() {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("fBoardMapper.selectListHits");
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class FBoardStoreLogic implements FBoardStore {
 	@Override
 	public ArrayList<Freeboard> selectAllList(PageInfo pi) {
 		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("fBoardMapper.selectAllList", pi);
 	}
 
 	@Override

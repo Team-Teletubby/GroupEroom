@@ -19,7 +19,7 @@
 	
 	<mappers>
 		<mapper resource="mappers/mail-mapper.xml"></mapper>
-		<mapper resource="mappers/fboard-mapper.xml"></mapper>
+		<mapper resource="mappers/fBoard-mapper.xml"></mapper>
 		<mapper resource="mappers/cBoard-mapper.xml"></mapper>
 		<mapper resource="mappers/member-mapper.xml"></mapper>
 	</mappers>

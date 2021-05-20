@@ -1,5 +1,7 @@
 package com.eroom.gw.fboard.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Pagination;
 import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.fboard.domain.FreeboardCmt;
 import com.eroom.gw.fboard.domain.FreeboardFile;
@@ -30,6 +34,19 @@ public class FBoardController {
 	@RequestMapping(value="fBoardListView.do")
 	public ModelAndView fBoardListView(ModelAndView mv,
 									@RequestParam(value="page", required=false) Integer page) {	
+		int currentPage = (page != null) ? page : 1;
+		int listHits = fService.getListHits();
+		PageInfo pi = Pagination.getPageInfo(currentPage,  listHits);
+		
+		ArrayList<Freeboard> fList = fService.printAll(pi);
+		if(!fList.isEmpty()) {
+			mv.addObject("fList", fList);
+			mv.addObject("pi", pi);
+			mv.setViewName("board/boardListView");
+		}else {
+			mv.addObject("msg", "리스트 불러오기 실패");
+			mv.setViewName("board/errorPage");
+		}
 		return mv;
 	}
 	

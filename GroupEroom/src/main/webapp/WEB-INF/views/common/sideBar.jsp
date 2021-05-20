@@ -112,7 +112,7 @@
                         </a>
                         <ul class="sub">
                             <li><a href="form_component.html">공지사항</a></li>
-                            <li><a href="advanced_form_components.html">자유게시판</a></li>
+                            <li><a href="fBoardListView.do">자유게시판</a></li>
                             <li><a href="cBoardListView.do">동호회게시판</a></li>
                         </ul>
                     </li>

@@ -20,7 +20,7 @@ public class FBoardServiceImpl implements FBoardService{
 	@Override
 	public int getListHits() {
 		// TODO Auto-generated method stub
-		return 0;
+		return fStore.selectListHits();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class FBoardServiceImpl implements FBoardService{
 	@Override
 	public ArrayList<Freeboard> printAll(PageInfo pi) {
 		// TODO Auto-generated method stub
-		return null;
+		return fStore.selectAllList(pi);
 	}
 
 	@Override

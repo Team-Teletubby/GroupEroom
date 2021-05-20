@@ -1,87 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="fboardMapper">
+<mapper namespace="fBoardMapper">
 
-<!-- 	<resultMap type="Reply" id="replyResultMap">
-		<id property="replyNo" column="REPLY_NO" />
-		<result property="replyContent" column="REPLY_CONTENT" />
-		<result property="refBoardNo" column="REF_BOARD_NO" />
-		<result property="replyWriter" column="REPLY_WRITER" />
-		<result property="rCreateDate" column="R_CREATE_DATE" />
-		<result property="rUpdateDate" column="R_UPDATE_DATE" />
-		<result property="rStatus" column="R_STATUS" />
+ 	<resultMap type="Freeboard" id="fBoardResultMap">
+		<id property="fBoardNo" column="F_BOARD_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="fBoardTitle" column="F_BOARD_TITLE" />
+		<result property="fBoardContents" column="F_BOARD_CONTENTS" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="hits" column="HITS" />
+		<result property="fStatus" column="F_STATUS" />
 	</resultMap>
 
-	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD
-		WHERE B_STATUS = 'Y'
+	<select id="selectListHits" resultType="_int">
+		SELECT COUNT(*) FROM FREEBOARD 
+		WHERE F_STATUS = 'Y'
 	</select>
 	
-	<select id="selectAllList" resultMap="boardResultMap">
-		SELECT * FROM BOARD 
-		WHERE B_STATUS = 'Y' 
-		ORDER BY BOARD_NO DESC
+	<select id="selectAllList" resultMap="fBoardResultMap">
+		SELECT * FROM FREEBOARD 
+		WHERE F_STATUS = 'Y' 
+		ORDER BY F_BOARD_NO DESC
 	</select>
 	
-게시글 상세조회
+<!-- 게시글 상세조회
 	<select id="selectOne" resultMap="boardResultMap">
 		SELECT * FROM BOARD WHERE BOARD_NO = #{boardNo} AND B_STATUS = 'Y'
-	</select>
-	
+	</select> -->
+	<!-- 
 게시글 작성
 	<insert id="insertBoard">
 		INSERT INTO BOARD
 		VALUES(SEQ_BOARDID.NEXTVAL, #{boardTitle }, #{boardContent }, #{boardWriter }, #{originalFilename }, #{renameFilename }, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
-	</insert>
+	</insert> -->
 	
-게시글 수정
+<!-- 게시글 수정
 	<update id="updateBoard">
 		UPDATE BOARD
 		SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, ORIGINAL_FILENAME = #{originalFilename}, B_UPDATE_DATE = #{bUpdateDate}
 		WHERE BOARD_NO = #{boardNo}
-	</update>
+	</update> -->
 	
-조회수
+<!-- 조회수
 	<update id="updateCount">
 		UPDATE BOARD
 		SET BOARD_COUNT = BOARD_COUNT + 1
 		WHERE BOARD_NO = #{boardNo}
-	</update>
+	</update> -->
 
-게시글 삭제
+<!-- 게시글 삭제
 	<delete id="deleteBoard" parameterType="_int">
 		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
-	</delete>
+	</delete> -->
 	
-댓글리스트
+<!-- 댓글리스트
 	<select id="selectReplyList" resultMap="replyResultMap">
 		SELECT * FROM REPLY
 		WHERE REF_BOARD_NO = #{boardNo}
 		AND R_STATUS = 'Y'
 		ORDER BY REPLY_NO DESC
-	</select>
+	</select> -->
 	
-댓글달기
+<!-- 댓글달기
 	<insert id="insertReply">
 		INSERT INTO REPLY
 		VALUES(SEQ_REPLYID.NEXTVAL, #{replyContent}, #{refBoardNo}, #{replyWriter}, DEFAULT, DEFAULT, DEFAULT)
-	</insert>
+	</insert> -->
 	
-댓글수정
+<!-- 댓글수정
 	<update id="updateReply">
 		UPDATE REPLY 
 		SET REPLY_CONTENT = #{replyContent} 
 		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo} AND R_STATUS = 'Y'
-	</update>
+	</update> -->
 	
-댓글삭제
+<!-- 댓글삭제
 	<update id="deleteReply">
 		UPDATE REPLY 
 		SET R_STATUS = 'N' 
 		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo}
-	</update>
-	
-	 -->
+	</update> -->
 	
 	
 </mapper>
