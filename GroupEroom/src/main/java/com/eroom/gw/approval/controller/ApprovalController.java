@@ -37,7 +37,7 @@ public class ApprovalController {
 	// 결재 페이지로 이동
 	@RequestMapping(value = "approvalWriteView.do", method=RequestMethod.GET)
 	public String approvalWriteView() {
-		return "approval/approvalWriteForm";
+		return "approval/approvalWrite";
 	}
 
 	// 결재글 등록
