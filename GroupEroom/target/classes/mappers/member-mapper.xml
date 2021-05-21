@@ -26,6 +26,11 @@
 	 WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd } 
 	</select>
 	
+	<select id="memberList" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_ID = #{memberId } AND MEMBER_DEPT = #{memberDept } AND MEMBER_JOB = #{memberJob } AND MEMBER_NAME = #{memberName } 
+		
+	</select>
 	
 	
 	

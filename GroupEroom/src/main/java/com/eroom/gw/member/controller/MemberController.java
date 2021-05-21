@@ -1,5 +1,8 @@
 package com.eroom.gw.member.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -51,7 +54,9 @@ public class MemberController {
 		 session.invalidate();
 		 return "redirect:index";
 	 }
-	// 사원등록 폼 연결 
+	 
+	 
+	 // 사원등록 폼 연결 
 	
 	@RequestMapping(value="enrollView.do", method=RequestMethod.GET)
 	public String enrollView() { 
@@ -74,11 +79,13 @@ public class MemberController {
 	
 		return "";
 	}
-	//사원 조회 
+	//사원 목록조회 
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
 	public String memberList(Model model) { 
-	
-		return "";
+		List<Member> list = service.printAll();
+		model.addAttribute("list", list);
+		
+		return "member/memberlist";
 	}
 	
 	// 사원 검색 

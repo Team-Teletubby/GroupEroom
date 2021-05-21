@@ -1,6 +1,7 @@
 package com.eroom.gw.member.store.logic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,8 @@ public class MemberStoreLogic implements MemberStore {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public ArrayList<Member> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> selectList() {
+		return sqlSession.selectList("memberMapper.memberList");
 	}
 
 	@Override

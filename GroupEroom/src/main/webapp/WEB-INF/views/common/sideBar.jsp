@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,6 +95,15 @@
 					</a>
 						<ul class="sub">
 							<li><a href="form_component.html">공지사항</a></li>
+							<li><a href="fBoardListView.do">자유게시판</a></li>
+							<li><a href="cBoardListView.do">동호회게시판</a></li>
+						</ul></li>
+							<!-- 인사관리 메뉴 -->
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-tasks"></i> <span>인사관리</span>
+					</a>
+						<ul class="sub">
+							<li><a href="${path }/member/memberlist.do">사원목록</a></li>
 							<li><a href="fBoardListView.do">자유게시판</a></li>
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
 						</ul></li>
