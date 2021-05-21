@@ -30,7 +30,7 @@
                 	<option value="C_BOARD_CONTENTS">내용</option>
                 	<option value="MEMBER_NAME">작성자</option>
                 </select>
-                <input type="text" name="searchValue" style="width:100px" class="form-control" >
+                <input type="text" name="searchValue" style="width:100px" class="form-control" value="${search.searchValue }">
                 <input type="submit" value="검색" class="btn btn-theme">
                 </form>
                 </div>
@@ -49,12 +49,7 @@
 					<c:forEach items="${cBoardList }" var="cBoard">
 						<tr>
 							<td>${cBoard.cBoardNo }</td>
-							<td>
-								<c:url var="cBoardDetail" value="cBoardDetail.do">
-									<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
-								</c:url>
-								<a href="${cBoardDetail}">${cBoard.cBoardTitle }</a>
-							</td>
+							<td>${cBoard.cBoardTitle }</td>
 							<td>${cBoard.memberName }</td>
 							<td>${cBoard.enrollDate }</td>
 							<td>${cBoard.hits }</td>
@@ -65,8 +60,10 @@
             <div align="center">
             <div class="btn-group">
 						<!-- 이전 -->
-						<c:url var="before" value="cBoardListView.do">
+						<c:url var="before" value="cBoardSearch.do">
 							<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
+							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+							<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						</c:url>
 						<c:if test="${pi.currentPage <= 1 }">
 							<button type="button" class="btn btn-default">이전</button>
@@ -77,8 +74,10 @@
 						
 					<!-- 페이지 -->
 					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-						<c:url var="pagination" value="cBoardListView.do">
+						<c:url var="pagination" value="cBoardSearch.do">
 							<c:param name="page" value="${p }"></c:param>
+							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+							<c:param name="searchValue" value="${search.searchValue }"></c:param>
 						</c:url>
 						<c:if test="${p eq pi.currentPage }">
 						<button type="button" class="btn btn-default btn-theme">${p }</button>
@@ -91,8 +90,10 @@
 				
 				
 				<!-- 다음 -->
-				<c:url var="after" value="cBoardListView.do">
+				<c:url var="after" value="cBoardSearch.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+					<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+					<c:param name="searchValue" value="${search.searchValue }"></c:param>
 				</c:url>
 				<c:if test="${pi.currentPage >= pi.maxPage }">
 					<button type="button" class="btn btn-default">다음</button>

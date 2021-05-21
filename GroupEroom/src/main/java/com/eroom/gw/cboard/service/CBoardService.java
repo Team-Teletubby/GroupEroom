@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 
 public interface CBoardService {
 	
@@ -21,5 +22,10 @@ public interface CBoardService {
 	public int registerCmt(CBoardCmt cmt);
 	public int modifyCmt(CBoardCmt cmt);
 	public int removeCmt(CBoardCmt cmt);
+
+	
+	//검색시벌..
+	public ArrayList<CBoard> printSearchAll(Search search, PageInfo pi);
+	public int getSearchListCount(Search search);
 
 }
