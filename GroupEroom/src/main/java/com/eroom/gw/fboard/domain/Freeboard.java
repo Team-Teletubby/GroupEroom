@@ -3,32 +3,20 @@ package com.eroom.gw.fboard.domain;
 import java.sql.Date;
 
 public class Freeboard {
-	
+
 	private int fBoardNo;
 	private int memberId;
 	private String fWriter;
+	private String fBullet;
 	private String fBoardTitle;
 	private String fBoardContents;
 	private Date enrollDate;
 	private int hits;
 	private String fStatus;
-	
+
 	public Freeboard() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Freeboard(int fBoardNo, int memberId, String fWriter, String fBoardTitle, String fBoardContents,
-			Date enrollDate, int hits, String fStatus) {
-		super();
-		this.fBoardNo = fBoardNo;
-		this.memberId = memberId;
-		this.fWriter = fWriter;
-		this.fBoardTitle = fBoardTitle;
-		this.fBoardContents = fBoardContents;
-		this.enrollDate = enrollDate;
-		this.hits = hits;
-		this.fStatus = fStatus;
 	}
 
 	public int getfBoardNo() {
@@ -53,6 +41,14 @@ public class Freeboard {
 
 	public void setfWriter(String fWriter) {
 		this.fWriter = fWriter;
+	}
+
+	public String getfBullet() {
+		return fBullet;
+	}
+
+	public void setfBullet(String fBullet) {
+		this.fBullet = fBullet;
 	}
 
 	public String getfBoardTitle() {
@@ -97,11 +93,10 @@ public class Freeboard {
 
 	@Override
 	public String toString() {
-		return "Freeboard [fBoardNo=" + fBoardNo + ", memberId=" + memberId + ", fWriter=" + fWriter
-				+ ", fBoardTitle=" + fBoardTitle + ", fBoardContents=" + fBoardContents + ", enrollDate=" + enrollDate
-				+ ", hits=" + hits + ", fStatus=" + fStatus + "]";
+		return "Freeboard [fBoardNo=" + fBoardNo + ", memberId=" + memberId + ", fWriter=" + fWriter + ", fBullet="
+				+ fBullet + ", fBoardTitle=" + fBoardTitle + ", fBoardContents=" + fBoardContents + ", enrollDate="
+				+ enrollDate + ", hits=" + hits + ", fStatus=" + fStatus + "]";
 	}
-	
-	
 
+	
 }

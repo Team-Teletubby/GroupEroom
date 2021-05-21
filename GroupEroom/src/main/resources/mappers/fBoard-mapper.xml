@@ -7,6 +7,7 @@
 		<id property="fBoardNo" column="F_BOARD_NO" />
 		<result property="memberId" column="MEMBER_ID" />
 		<result property="fWriter" column="F_WRITER" />
+		<result property="fBullet" column="F_BULLET" />
 		<result property="fBoardTitle" column="F_BOARD_TITLE" />
 		<result property="fBoardContents" column="F_BOARD_CONTENTS" />
 		<result property="enrollDate" column="ENROLL_DATE" />
@@ -20,7 +21,7 @@
 	</select>
 	
 	<select id="selectAllList" resultMap="fBoardResultMap">
- 		SELECT a.F_BOARD_NO, a.F_BOARD_TITLE, b.MEMBER_NAME AS "F_WRITER", a.ENROLL_DATE, a.HITS FROM FREEBOARD a
+ 		SELECT a.F_BOARD_NO, a.F_BULLET, a.F_BOARD_TITLE, b.MEMBER_NAME AS "F_WRITER", a.ENROLL_DATE, a.HITS FROM FREEBOARD a
 		JOIN MEMBER b USING(MEMBER_ID) 
 		WHERE F_STATUS = 'Y' 
 		ORDER BY F_BOARD_NO DESC
