@@ -12,7 +12,7 @@ public class Approval {
 	private String approvalType;
 	private String approvalTitle;
 	private String approvalContents;
-	private int approvalCC;
+	private String approvalCC;
 	private Date approvalDate;
 	private String approvalState;
 	private int approvalFirst;
@@ -26,9 +26,6 @@ public class Approval {
 	public Approval() {
 		super();
 	}
-
-
-
 
 	// getter/setter
 	public int getApprovalNo() {
@@ -79,11 +76,11 @@ public class Approval {
 		this.approvalContents = approvalContents;
 	}
 
-	public int getApprovalCC() {
+	public String getApprovalCC() {
 		return approvalCC;
 	}
 
-	public void setApprovalCC(int approvalCC) {
+	public void setApprovalCC(String approvalCC) {
 		this.approvalCC = approvalCC;
 	}
 

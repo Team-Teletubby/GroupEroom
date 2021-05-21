@@ -1,5 +1,9 @@
 package com.eroom.gw.approval.controller;
 
+import java.io.File;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +24,7 @@ import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.Search;
+import com.eroom.gw.member.domain.Member;
 
 @Controller
 public class ApprovalController {
@@ -30,8 +35,7 @@ public class ApprovalController {
 	// 멤버 정보 가져오기 (게시글 이동할 때 사용)
 	public void getMemberinfo() {
 
-		// 세션에 저장된 정보 가져와서 객체에 저장해서 반환
-
+		
 		// 나중에 return형 member로 바꾸기
 	}
 
@@ -41,33 +45,31 @@ public class ApprovalController {
 		return "approval/approvalWrite";
 	}
 
-	// 결재글 등록
+	// 결재 등록
 	@RequestMapping(value = "approvalRegister.do", method=RequestMethod.POST)
 	public ModelAndView approvalRegister(ModelAndView mv, @ModelAttribute Approval approval,
 			@RequestParam(value = "uploadFile", required=false) MultipartFile uploadFile,
 			HttpServletRequest request) {
-		// 파일 정보 저장하는 객체
-		ApprovalFile aFile = new ApprovalFile();
+		
+		ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
+		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
+		Member member = (Member)session.getAttribute("loginMember"); 		// 멤버 객체에 세션 저장
+		approval.setMemberId(member.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
 		
 		// jsp에서 uploadFile 정보를 가져 왔다면
 		if(!uploadFile.getOriginalFilename().contentEquals("")) {
-			// 파일 이름을 시간으로 변환하고 서버에 저장
-			String reNameFileName = saveFile(uploadFile, request);
+			String reNameFileName = saveFile(uploadFile, request); 			// 파일 이름을 시간으로 변환하고 서버에 저장
 			// 변환이 성공하면
 			if(reNameFileName != null) {
-				// 객체에 저장
-				aFile.setOriginalFileName(uploadFile.getOriginalFilename());
+				aFile.setOriginalFileName(uploadFile.getOriginalFilename()); 				// 객체에 저장
 				aFile.setReNameFileName(reNameFileName);
 			}
 		}
-		// DB에 결재글 등록
-		int resultApproval = approvalService.registerApproval(approval);
-		// DB에 파일 정보 등록
-		int resultFile = approvalService.registerFile(aFile);
+		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
+		int resultFile = approvalService.registerFile(aFile); 		// DB에 파일 정보 등록
 		
-		// DB 저장여부 확인 후, 페이지 이동
-		String path = "";
-		if(resultApproval > 0) {
+		String path = ""; 		
+		if(resultApproval > 0) { // DB 저장여부 확인 후, 페이지 이동
 			path = "";
 		}else {
 			mv.addObject("msg", "결재등록or파일등록 실패");
@@ -77,7 +79,6 @@ public class ApprovalController {
 		return mv;
 	}
 
-	
 	// 글 List 보기 (페이징 처리도)
 	public ModelAndView approvalList(ModelAndView mv, @RequestParam(value="page", required=false)Integer page,
 									@RequestParam(value="boardType")String boardType) {
@@ -153,9 +154,28 @@ public class ApprovalController {
 	// ======================================================
 	
 	// 파일 저장
-	public String fileSave(MultipartFile file, HttpServletRequest request) {
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		
-		return "";
+		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
+		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
+		File folder = new File(savePath); // 저장 폴더 선택
+		if(!folder.exists()) { // 폴더 없으면 자동 생성
+			folder.mkdir(); 
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss"); // 파일명 변경하기
+		String originalFileName = file.getOriginalFilename();
+		String reNameFileName = sdf.format(new Date(System.currentTimeMillis()))
+				+ "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		String filePath = folder + "\\" + reNameFileName;
+		// 파일 저장
+		try {
+			file.transferTo(new File(filePath));
+		} catch (Exception e) {
+			System.out.println("결재 파일 저장 오류");
+		}
+		
+		return reNameFileName; 	// 바뀐 파일명 반환
 	}
 	
 	// 파일 삭제

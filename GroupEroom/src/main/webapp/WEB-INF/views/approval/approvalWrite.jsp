@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,45 +33,49 @@
 								<p>결재 기안하기</p>
 								<div class="form">
 									<p>기본 설정</p>
-									<table>
-										<tr>
-											<th>문서 종류</th>
-											<td><select>
-													<option value="">문서 선택</option>
-													<option value="">일반 결재</option>
-													<option value="">양식2</option>
-													<option value="">양식3</option>
-											</select></td>
-											<th>기안자</th>
-											<td>이혜성</td>
-										</tr>
-									</table>
-									<p>결재선</p>
-									<span><button>1</button></span>
-									<table>
-										<tr>
-											<th>이름</th>
-											<th>부서</th>
-											<th>직급</th>
-										</tr>
-										<tr>
-											<th>결재자1</th>
-											<td>민트</td>
-											<td>땅콩파</td>
-											<td>민트왕</td>
-										</tr>
-										<tr>
-											<th>결재자2</th>
-											<td>민트</td>
-											<td>땅콩파</td>
-											<td>민트왕</td>
-										</tr>
-									</table>
-									<p>제목</p>
-									<input type="text">
-									<p>상세입력</p>
-									<div id="summernote"></div>
-									<input type=submit value="기안 제출하기">
+									<form action="approvalRegister.do" method="post">
+										<table>
+											<tr>
+												<th>문서 종류</th>
+												<td>
+													<select name="approvalType">
+														<option value="">문서 선택</option>
+														<option value="Cooperation">업무 협조문</option>
+														<option value="">양식2</option>
+														<option value="">양식3</option>
+													</select>
+												</td>
+												<th>기안자</th>
+												<td>${loginUser.MemberName }</td>
+											</tr>
+										</table>
+										<p>결재선</p>
+										<span><button>1</button></span>
+										<table>
+											<tr>
+												<th>이름</th>
+												<th>부서</th>
+												<th>직급</th>
+											</tr>
+											<tr>
+												<th>결재자1</th>
+												<td>민트</td>
+												<td>땅콩파</td>
+												<td>민트왕</td>
+											</tr>
+											<tr>
+												<th>결재자2</th>
+												<td>민트</td>
+												<td>땅콩파</td>
+												<td>민트왕</td>
+											</tr>
+										</table>
+										<p>제목</p>
+										<input type="text" name="approvalTitle">
+										<p>상세입력</p>
+										<div id="summernote"></div>
+										<input type=submit value="기안 제출하기">
+									</form>
 								</div>
 							</div>
 						</div>
@@ -108,20 +113,21 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script>
- 
-  // =============== 썸머 노트 ====================
-    // 불러오기
-    $('#summernote').summernote('code','<h2 style="text-align: center; "><b>업무 협조문</b></h2><h5 style="text-align: center; "><br></h5><p style="text-align: left; margin-left: 50px;">1. 귀 부서의 무궁한 발전을 기원합니다.</p><p style="text-align: left; margin-left: 50px;">2. 오래과 같이 업무 협조를 요청하오니 적극 협조하여 주시기 바랍니다.</p><p style="text-align: left; margin-left: 50px;"><br></p><p style="text-align: center; margin-left: 50px;">- 아&nbsp; &nbsp; 래 -</p><p style="text-align: center; margin-left: 50px;"><br></p><h5 style="text-align: left; margin-left: 50px;"><b>1. 취 지&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>2. 협조사항&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>3. 협조 불이행 조치사항</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>4. 시행일</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>5. 문의</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5>'); 
+		// =============== 썸머 노트 ====================
+		// 불러오기
+		$('#summernote')
+				.summernote(
+						'code',
+						'<h2 style="text-align: center; "><b>업무 협조문</b></h2><h5 style="text-align: center; "><br></h5><p style="text-align: left; margin-left: 50px;">1. 귀 부서의 무궁한 발전을 기원합니다.</p><p style="text-align: left; margin-left: 50px;">2. 오래과 같이 업무 협조를 요청하오니 적극 협조하여 주시기 바랍니다.</p><p style="text-align: left; margin-left: 50px;"><br></p><p style="text-align: center; margin-left: 50px;">- 아&nbsp; &nbsp; 래 -</p><p style="text-align: center; margin-left: 50px;"><br></p><h5 style="text-align: left; margin-left: 50px;"><b>1. 취 지&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>2. 협조사항&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>3. 협조 불이행 조치사항</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>4. 시행일</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>5. 문의</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5>');
 
-    // 초기화
-    $('#summernote').summernote({
+		// 초기화
+		$('#summernote').summernote({
 			height : 400, // set editor height
 			minHeight : null, // set minimum height of editor
 			maxHeight : null, // set maximum height of editor
 			focus : true,
 			lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
 		});
-  
-  </script>
+	</script>
 </body>
 </html>

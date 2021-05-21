@@ -103,7 +103,7 @@
 							class="fa fa-tasks"></i> <span>인사관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="${path }/member/memberlist.do">사원목록</a></li>
+							<li><a href="memberList.do">사원목록</a></li>
 							<li><a href="fBoardListView.do">자유게시판</a></li>
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
 						</ul></li>
@@ -111,7 +111,7 @@
 			</div>
 		</aside>
 	</section>
-
+	
 	<!-- 스크롤, 사이드바 등 설정  -->
 	<script class="include" type="text/javascript"
 		src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
