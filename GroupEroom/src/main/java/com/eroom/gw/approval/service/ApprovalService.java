@@ -3,6 +3,7 @@ package com.eroom.gw.approval.service;
 import java.util.ArrayList;
 
 import com.eroom.gw.approval.domain.Approval;
+import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.common.PageInfo;
 
@@ -72,5 +73,10 @@ public interface ApprovalService {
 	 */
 	public int deleteReply(ApprovalReply reply);
 
-	
+	/**
+	 * 파일 등록
+	 * @param file
+	 * @return
+	 */
+	public int registerFile(ApprovalFile file);
 }

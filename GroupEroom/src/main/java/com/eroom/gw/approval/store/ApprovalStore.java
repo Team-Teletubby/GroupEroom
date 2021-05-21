@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import com.eroom.gw.approval.domain.Approval;
+import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.common.PageInfo;
 
@@ -74,4 +75,10 @@ public interface ApprovalStore {
 	public int deleteReply(ApprovalReply reply);
 
 	
+	/**
+	 * 파일 등록
+	 * @param file
+	 * @return
+	 */
+	public int insertFile(ApprovalFile file);
 }

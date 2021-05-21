@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eroom.gw.approval.domain.Approval;
+import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.approval.store.ApprovalStore;
@@ -17,10 +18,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 	@Autowired
 	private ApprovalStore approvalStore;
 	
+	// 결재 등록
 	@Override
 	public int registerApproval(Approval approval) {
-		// TODO Auto-generated method stub
-		return 0;
+		return approvalStore.insertApproval(approval);
 	}
 
 	@Override
@@ -69,6 +70,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public int deleteReply(ApprovalReply reply) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	// 파일 등록
+	@Override
+	public int registerFile(ApprovalFile file) {
+		return approvalStore.insertFile(file);
 	}
 
 }

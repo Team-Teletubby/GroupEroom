@@ -7,7 +7,8 @@ public class ApprovalFile {
 
 	// 멤버변수
 	private int approvalFileNo;
-	private String approvalFileName;
+	private String originalFileName;
+	private String reNameFileName;
 	private String approvalFilePath;
 	private int approvalFileSize;
 	private Date approvalUploadTime;
@@ -18,11 +19,12 @@ public class ApprovalFile {
 		super();
 		
 	}
-	public ApprovalFile(int approvalFileNo, String approvalFileName, String approvalFilePath, int approvalFileSize,
+	public ApprovalFile(int approvalFileNo, String originalFileName, String reNameFileName, String approvalFilePath, int approvalFileSize,
 			Date approvalUploadTime, int approvalNo) {
 		super();
 		this.approvalFileNo = approvalFileNo;
-		this.approvalFileName = approvalFileName;
+		this.originalFileName = originalFileName;
+		this.reNameFileName = reNameFileName;
 		this.approvalFilePath = approvalFilePath;
 		this.approvalFileSize = approvalFileSize;
 		this.approvalUploadTime = approvalUploadTime;
@@ -36,11 +38,17 @@ public class ApprovalFile {
 	public void setApprovalFileNo(int approvalFileNo) {
 		this.approvalFileNo = approvalFileNo;
 	}
-	public String getApprovalFileName() {
-		return approvalFileName;
+	public String getOriginalFileName() {
+		return originalFileName;
 	}
-	public void setApprovalFileName(String approvalFileName) {
-		this.approvalFileName = approvalFileName;
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+	public String getReNameFileName() {
+		return reNameFileName;
+	}
+	public void setReNameFileName(String reNameFileName) {
+		this.reNameFileName = reNameFileName;
 	}
 	public String getApprovalFilePath() {
 		return approvalFilePath;
@@ -70,8 +78,8 @@ public class ApprovalFile {
 	// toString
 	@Override
 	public String toString() {
-		return "ApprovalFile [approvalFileNo=" + approvalFileNo + ", approvalFileName=" + approvalFileName
-				+ ", approvalFilePath=" + approvalFilePath + ", approvalFileSize=" + approvalFileSize
+		return "ApprovalFile [approvalFileNo=" + approvalFileNo + ", originalFileName=" + originalFileName
+				+ ", reNameFileName=" + reNameFileName + ", approvalFilePath=" + approvalFilePath + ", approvalFileSize=" + approvalFileSize
 				+ ", approvalUploadTime=" + approvalUploadTime + ", approvalNo=" + approvalNo + "]";
 	}
 	

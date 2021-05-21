@@ -3,9 +3,12 @@ package com.eroom.gw.approval.store.logic;
 import java.util.ArrayList;
 
 import org.apache.ibatis.jdbc.SQL;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.approval.domain.Approval;
+import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.store.ApprovalStore;
 import com.eroom.gw.common.PageInfo;
@@ -13,10 +16,13 @@ import com.eroom.gw.common.PageInfo;
 @Repository
 public class ApprovalStoreLogic implements ApprovalStore{
 
+	@Autowired
+	SqlSessionTemplate sqlSession;
+	
+	// 결재 등록
 	@Override
 	public int insertApproval(Approval approval) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("approvalMapper.insertApproval", approval);
 	}
 
 	@Override
@@ -68,5 +74,14 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	// 파일 등록
+	@Override
+	public int insertFile(ApprovalFile file) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("approvalMapper.insertFile", file);
+	}
+	
+	
 
 }

@@ -8,6 +8,7 @@ public class Approval {
 	// 멤버변수
 	private int approvalNo;
 	private int memberId;
+	private String memberName;
 	private String approvalType;
 	private String approvalTitle;
 	private String approvalContents;
@@ -27,6 +28,8 @@ public class Approval {
 	}
 
 
+
+
 	// getter/setter
 	public int getApprovalNo() {
 		return approvalNo;
@@ -44,6 +47,14 @@ public class Approval {
 		this.memberId = memberId;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	
 	public String getApprovalType() {
 		return approvalType;
 	}
@@ -143,7 +154,7 @@ public class Approval {
 	// toString
 	@Override
 	public String toString() {
-		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", approvalType=" + approvalType
+		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", memberName=" + memberName +", approvalType=" + approvalType
 				+ ", approvalTitle=" + approvalTitle + ", approvalContents=" + approvalContents + ", approvalCC="
 				+ approvalCC + ", approvalDate=" + approvalDate + ", approvalState=" + approvalState
 				+ ", approvalFirst=" + approvalFirst + ", approvalFirstDate=" + approvalFirstDate + ", approvalSecond="

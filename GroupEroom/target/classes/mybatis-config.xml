@@ -7,6 +7,7 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.eroom.gw.approval.domain.Approval" alias="Approval" />
 		<typeAlias type="com.eroom.gw.mail.domain.Mail" alias="Mail" />
 		<typeAlias type="com.eroom.gw.mail.domain.MailFile" alias="MailFile" />
 		<typeAlias type="com.eroom.gw.fboard.domain.Freeboard" alias="Freeboard" />
@@ -17,6 +18,7 @@
 		<typeAlias type="com.eroom.gw.member.domain.Member" alias="Member"/>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mappers/approval-mapper.xml"></mapper>
 		<mapper resource="mappers/mail-mapper.xml"></mapper>
 		<mapper resource="mappers/fBoard-mapper.xml"></mapper>
 		<mapper resource="mappers/cBoard-mapper.xml"></mapper>

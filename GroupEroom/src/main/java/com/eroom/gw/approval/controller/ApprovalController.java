@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.approval.domain.Approval;
+import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.Search;
@@ -45,10 +46,38 @@ public class ApprovalController {
 	public ModelAndView approvalRegister(ModelAndView mv, @ModelAttribute Approval approval,
 			@RequestParam(value = "uploadFile", required=false) MultipartFile uploadFile,
 			HttpServletRequest request) {
-
+		// 파일 정보 저장하는 객체
+		ApprovalFile aFile = new ApprovalFile();
+		
+		// jsp에서 uploadFile 정보를 가져 왔다면
+		if(!uploadFile.getOriginalFilename().contentEquals("")) {
+			// 파일 이름을 시간으로 변환하고 서버에 저장
+			String reNameFileName = saveFile(uploadFile, request);
+			// 변환이 성공하면
+			if(reNameFileName != null) {
+				// 객체에 저장
+				aFile.setOriginalFileName(uploadFile.getOriginalFilename());
+				aFile.setReNameFileName(reNameFileName);
+			}
+		}
+		// DB에 결재글 등록
+		int resultApproval = approvalService.registerApproval(approval);
+		// DB에 파일 정보 등록
+		int resultFile = approvalService.registerFile(aFile);
+		
+		// DB 저장여부 확인 후, 페이지 이동
+		String path = "";
+		if(resultApproval > 0) {
+			path = "";
+		}else {
+			mv.addObject("msg", "결재등록or파일등록 실패");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
 		return mv;
 	}
 
+	
 	// 글 List 보기 (페이징 처리도)
 	public ModelAndView approvalList(ModelAndView mv, @RequestParam(value="page", required=false)Integer page,
 									@RequestParam(value="boardType")String boardType) {
