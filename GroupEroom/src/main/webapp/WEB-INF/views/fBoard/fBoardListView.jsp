@@ -42,7 +42,7 @@
 												<c:param name="fBoardNo" value="${fBoard.fBoardNo}"></c:param>
 											</c:url> 
 										<a href="${fBoardDetail }">${fBoard.fBoardTitle }</a></td>
-										<td>${fBoard.memberName }</td>
+										<td>${fBoard.fWriter }</td>
 										<td>${fBoard.enrollDate }</td>
 										<td>${fBoard.hits }</td>
 									</tr>

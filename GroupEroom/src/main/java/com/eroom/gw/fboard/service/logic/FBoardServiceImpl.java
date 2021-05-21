@@ -18,9 +18,9 @@ public class FBoardServiceImpl implements FBoardService{
 	private FBoardStore fStore;
 	
 	@Override
-	public int getListHits() {
+	public int getListCount() {
 		// TODO Auto-generated method stub
-		return fStore.selectListHits();
+		return fStore.selectListCount();
 	}
 
 	@Override

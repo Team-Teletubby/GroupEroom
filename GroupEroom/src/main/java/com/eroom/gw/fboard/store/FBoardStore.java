@@ -8,7 +8,7 @@ import com.eroom.gw.fboard.domain.FreeboardCmt;
 
 public interface FBoardStore {
 	
-	public int selectListHits(); //게시물 전체 조회수
+	public int selectListCount(); //게시물 전체 수
 	public int addHits(int fBoardNo); //게시물 조회수 증가
 	
 	public ArrayList<Freeboard> selectAllList(PageInfo pi); //게시물 리스트조회

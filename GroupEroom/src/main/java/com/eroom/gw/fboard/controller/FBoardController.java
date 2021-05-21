@@ -35,8 +35,8 @@ public class FBoardController {
 	public ModelAndView fBoardListView(ModelAndView mv,
 									@RequestParam(value="page", required=false) Integer page) {	
 		int currentPage = (page != null) ? page : 1;
-		int listHits = fService.getListHits();
-		PageInfo pi = Pagination.getPageInfo(currentPage,  listHits);
+		int listCount = fService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage,  listCount);
 		
 		ArrayList<Freeboard> fList = fService.printAll(pi);
 		if(!fList.isEmpty()) {
