@@ -1,6 +1,7 @@
 package com.eroom.gw.approval.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.Search;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.service.MemberService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class ApprovalController {
@@ -115,8 +119,8 @@ public class ApprovalController {
 	// 특정 부서 멤버 목록 조회
 	
 	@RequestMapping(value="departmentMember.do", method=RequestMethod.POST)
-	public String departmentSelect(@RequestParam("depType")int depType) {
-		
+	public void departmentSelect(@RequestParam("depType")int depType,
+								HttpServletResponse response) throws JsonIOException, IOException {
 		/*
 		 * 1 : 인사관리, 2 : IT개발팀, 3 : 재무팀
 		 */
@@ -133,13 +137,16 @@ public class ApprovalController {
 			depName = "재무팀";
 			break;
 		}
-		
 		ArrayList<Member> mList = memberService.printdepartMentMemberAll(depName);
 		
-		System.out.println(mList);
-		
-		return "true";
+		if(!mList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(mList, response.getWriter());
+		}else {
+			System.out.println("부서별 회원 조회 실패(데이터없음)");
+		}
 	}
+	
 	// ======================================================
 	// ======================================================
 	// ======================================================

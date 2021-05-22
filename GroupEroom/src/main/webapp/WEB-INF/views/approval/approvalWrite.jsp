@@ -84,9 +84,11 @@
                                                         				url : "departmentMember.do",
                                                         				type : "post",
                                                         				data : { "depType" : depType },
+                                                        				dataType : "json",
                                                         				success : function(data) {
-                                                        					if(data == "true") {
-                                                        						alert("테스트완료");
+                                                        					if(data.length > 0) {
+                                                        						const html = "";
+                                                        						
                                                         					}
                                                         				},
                                                         				error : function(){
