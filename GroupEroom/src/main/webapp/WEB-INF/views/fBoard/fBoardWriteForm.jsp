@@ -40,8 +40,8 @@
 							        </label>
 							    </div>
  							    <div class="form-group">
-							      <label class="form-label mt-4">작성자 사번</label>
-							      <textarea class="form-control" id="title" rows="1" name="fWriter" readonly>${loginUser.memberId }</textarea>
+							      <label class="form-label mt-4">작성자</label>
+							      <textarea class="form-control" id="title" rows="1" name="fWriter" readonly>${loginUser.memberName }</textarea>
 							    </div>		
 							    <div class="form-group">
 							      <label class="form-label mt-4">제목</label>
