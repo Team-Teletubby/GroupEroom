@@ -33,7 +33,7 @@
 	
 
 	<insert id="insertMember" parameterType="com.eroom.gw.member.domain.Member">
-		INSERT INTO MEMBER(MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_RRN, MEMBER_PHONE,MEMBER_ADDR) VALUES(#{memberDept }, #{memberJob }, #{memberName },#{memberRrn }, #{memberPhone },#{memberAddr })
+		INSERT INTO MEMBER(MEMBER_ID,MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_RRN, MEMBER_PHONE,MEMBER_ADDR) VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName },#{memberRrn }, #{memberPhone },#{memberAddr })
 
 </insert>
 
