@@ -142,6 +142,7 @@ public class ApprovalController {
 		if(!mList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			gson.toJson(mList, response.getWriter());
+			System.out.println(mList);
 		}else {
 			System.out.println("부서별 회원 조회 실패(데이터없음)");
 		}

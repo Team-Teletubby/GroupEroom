@@ -56,4 +56,11 @@ tr > th {
     font-size: 16px;
     
 }
+.modal-body > ul {
+	display: inline-block;
+	width: 60px;
+}
 
+.modal-body > ul > li {
+	list-style:none;
+}

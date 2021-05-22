@@ -69,11 +69,30 @@
                                                     </div>
                                                     <div class="modal-body">
                                                     <!-- ======= 부서 목록 ======= -->
-                                                        <ul>
-                                                        	<li value="1" class="DepartmentName">인사관리팀</li>
-                                                        	<li value="2" class="DepartmentName">IT개발팀</li>
-                                                        	<li value="3" class="DepartmentName">재무팀</li>
-                                                        </ul>
+                                                    	<table class="table">
+                                                            <tr>
+                                                                <td>
+                                                                  <ul>
+                                                                      <span>부서 이름</span>
+                                                                        <li value="1" class="DepartmentName">인사관리팀</li>
+                                                                        <li value="2" class="DepartmentName">IT개발팀</li>
+                                                                        <li value="3" class="DepartmentName">재무팀</li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td>
+                                                                    <table align="center" width="500" border="1" cellspacing="0" id="rtb">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>사원명</th>
+                                                                                <th>직급</th>
+                                                                                <th>부서</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody></tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                         <script>
                                                         	$("li.DepartmentName").each(function() {
                                                         		$(this).click(function() {
@@ -86,16 +105,31 @@
                                                         				data : { "depType" : depType },
                                                         				dataType : "json",
                                                         				success : function(data) {
+                                                        						var tableBody = $("#rtb tbody");
+                                                        						tableBody.html("");
+                                                        						var html = "";
+                                                        						var $tr;
+                                                        						var $rMemberName;
+                                                        						var $rMemberJob;
+                                                        						var $rMemberDept;
+   																				
                                                         					if(data.length > 0) {
-                                                        						const html = "";
-                                                        						
+                                                        						for(var i in data) {
+                                                        							$tr = $("<tr>");
+                                                        							$rMemberName = $("<td width='100' align='center'>").text(data[i].memberName);
+                                                        							$rMemberJob = $("<td width='100' align='center'>").text(data[i].memberJob);
+                                                        							$rMemberDept = $("<td width='120' align='center'>").text(data[i].memberDept);
+                                                        							$tr.append($rMemberName);
+                                                        							$tr.append($rMemberJob);
+                                                        							$tr.append($rMemberDept);
+                                                        							
+                                                        							tableBody.append($tr);
+                                                        						}
                                                         					}
                                                         				},
                                                         				error : function(){
                                                         					alert("실패..");	
                                                         				}
-                                                        	
-                                                        				
                                                         			});
                                                         		});
                                                         	});
