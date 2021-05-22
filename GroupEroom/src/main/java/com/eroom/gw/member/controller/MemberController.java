@@ -32,16 +32,16 @@ public class MemberController {
 	
 //로그인 
 	@RequestMapping(value="login.do" , method=RequestMethod.POST)
-	public String memberLogin(Model model , @ModelAttribute Member mem , HttpServletRequest request ) {
-		Member member = new Member(mem.getMemberId(), mem.getMemberPwd());
-		Member loginUser = service.loginMember(member);
+	public String memberLogin(Model model , @ModelAttribute Member member , HttpServletRequest request ) {
 		
-		if(loginUser == null) { 
+		Member result = service.loginMember(member);
+		
+		if(result == null) { 
 			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
 			return "login";
 		}else { 
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("memberId", result.getMemberId());
 			return "index";
 		}
 			
@@ -65,8 +65,8 @@ public class MemberController {
 		return "member/memberForm";
 	}
 	// 사원등록
-		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
-		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model) { 
+		@RequestMapping(value="memberRegister.do", method= {RequestMethod.POST , RequestMethod.GET})
+		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model, @RequestParam(required= false)) { 
 		
 			member.setMemberAddr(post+","+address1+","+address2);
 			int result = service.registerMember(member);
