@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 <meta charset="UTF-8">
 <title>자유게시판</title>
 </head>
@@ -21,45 +22,42 @@
 				<div class="col-md-12">
 					<div class="content-panel">
 						<h4>
-							<i class="fa fa-angle-right"></i> 게시글리스트
+							<i class="fa fa-angle-right"></i> ${ fBoard.fBoardNo }번 글 상세보기
 						</h4>
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th width="500">제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${ fList }" var="fBoard">
-									<tr>
-										<td>${ fBoard.fBoardNo }</td>
-										<td>
-										<c:url var="fBoardDetail" value="fBoardDetail.do">
-												<c:param name="fBoardNo" value="${fBoard.fBoardNo}"></c:param>
-											</c:url> 
-										<a href="${fBoardDetail }">${fBoard.fBoardTitle }</a></td>
-										<td>${fBoard.fWriter }</td>
-										<td>${fBoard.enrollDate }</td>
-										<td>${fBoard.hits }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<div class="span6">
-							<div class="dataTables_paginate paging_bootstrap pagination">
+						<br>
+						<!-- #############소스 적용 중############### -->
+						<div class="panel-body">
+							<div class="mail-header row">
+								<div class="col-md-8">
+									<p name="fBullet">${fBoard.fBullet }</p>
+									<h4 class="pull-left" name="fBoardTitle">${fBoard.fBoardTitle }</h4>
+								</div>
+							</div>
+							<div class="mail-sender">
+								<div class="row">
+									<div class="col-md-8">
+										<span>작성자</span> <strong name="fWriter">${fBoard.fWriter }</strong>
+									</div>
+									<div class="col-md-8">
+										<span>작성일자</span> <strong name="fWriter">${fBoard.enrollDate }</strong>&nbsp;&nbsp;&nbsp;|&nbsp;
+										<span>조회수</span> <strong name="fWriter">${fBoard.hits }</strong>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div name="fBoardContents" height="500">${ fBoard.fBoardContents }
+								</div>
+							</div>
+							<div class="attachment-mail">
+								<p>
+									<span><i class="fa fa-paperclip"></i> 첨부파일 </span> <a href="#">Download
+										all attachments</a>
+								</p>
 								<ul>
-									<li class="prev disabled"><a href="#">← Previous</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li class="next"><a href="#">Next → </a></li>
 								</ul>
+							</div>
+							<div class="compose-btn pull-left">
+								<button onclick="location.href='fBoardListView.do'" class="btn btn-theme03">목록으로</button>
 							</div>
 						</div>
 					</div>

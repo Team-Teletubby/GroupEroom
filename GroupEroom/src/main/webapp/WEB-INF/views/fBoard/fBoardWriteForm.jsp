@@ -4,15 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<!-- include libraries(jQuery, bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-<!-- include summernote css/js-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-<!-- include summernote-ko-KR -->
-<script src="/resources/js/summernote-ko-KR.js"></script>
+
 <meta charset="UTF-8">
 <title>자유게시판</title>
 </head>
@@ -35,29 +28,35 @@
 						<br>
 						<form action="fBoardRegister.do" method="post" enctype="multipart/form-data">
 							<fieldset>
-								<label for="exampleInputEmail1" class="form-label mt-4">말머리 구분</label>
+								<label class="form-label mt-4">말머리 구분</label>
 								<div class="form-group">
 							        <label class="form-check-label">
-							          <input type="radio" class="form-check-input" name="fBullet" id="bullet1" value="일반" checked="">
+							          <input type="radio" class="form-check-input" name="fBullet" id="fBullet" value="일반" checked="">
 							          일반&nbsp;&nbsp;
 							        </label>
 							        <label class="form-check-label">
-							          <input type="radio" class="form-check-input" name="fBullet" id="bullet2" value="경조사">
+							          <input type="radio" class="form-check-input" name="fBullet" id="fBullet" value="경조사">
 							          경조사
 							        </label>
 							    </div>
+ 							    <div class="form-group">
+							      <label class="form-label mt-4">작성자 사번</label>
+							      <textarea class="form-control" id="title" rows="1" name="fWriter" readonly>${loginUser.memberId }</textarea>
+							    </div>		
 							    <div class="form-group">
-							      <label for="exampleTextarea" class="form-label mt-4">제목</label>
+							      <label class="form-label mt-4">제목</label>
 							      <textarea class="form-control" id="title" rows="1" name="fBoardTitle"></textarea>
 							    </div>
 						
 							    <div class="form-group">
-							      <label for="exampleTextarea" class="form-label mt-4">내용</label>
-							      <textarea class="summernote" id="contents" name="editordata"></textarea>
+							      <label class="form-label mt-4">내용</label>
+							      <div id="summernote" name="fBoardContents"></div>
 							    </div>
 							    <div class="form-group">
 							      <label for="formFile" class="form-label mt-4">첨부파일</label>
-							      <input class="form-control" type="file" id="formFile">
+							      <form id="fileForm" method="post" enctype="multipart/form-data"> 
+							     	<input type="file" multiple="true" class="form-control" id="formFile" name="uploadfile">
+							      </form>
 							    </div>
 							   <br><br>
 							   <div align="center">
@@ -73,11 +72,41 @@
 		</section>
 	</section>
 	
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script>
-		$('.summernote').summernote({
-			height : 150,
-			lang : "ko-KR"
+		// =============== 썸머 노트 ====================
+		$('#summernote').summernote({
+			height : 400, // set editor height
+			minHeight : null, // set minimum height of editor
+			maxHeight : null, // set maximum height of editor
+			focus : true,
+			lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
 		});
+		
+		// ============== 파일업로드 구현 ================
+		var formdata = new FormData($('#fileForm')[0]);
+		
+		$.ajax({
+			type: "POST",
+			enctype: 'multipart/form-data',
+			url:'/mltipartUpload.do',
+			data: formData,
+			processData: false,
+			contentType: false,
+			chche: false,
+			success: function (result) {
+				
+			},
+			error: function (e)	{
+				
+			}
+		});
+		
 	</script>
 </body>
 </html>

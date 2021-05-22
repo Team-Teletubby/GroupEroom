@@ -26,7 +26,7 @@ public class FBoardServiceImpl implements FBoardService{
 	@Override
 	public int addHits(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return fStore.addHits(fBoardNo);
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class FBoardServiceImpl implements FBoardService{
 	@Override
 	public Freeboard printOne(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return fStore.selectOne(fBoardNo);
 	}
 
 	@Override
 	public int registerFBoard(Freeboard fBoard) {
 		// TODO Auto-generated method stub
-		return 0;
+		return fStore.insertFBoard(fBoard);
 	}
 
 	@Override

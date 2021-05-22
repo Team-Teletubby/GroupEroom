@@ -1,6 +1,7 @@
 package com.eroom.gw.fboard.controller;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.common.PageInfo;
@@ -23,6 +25,7 @@ import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.fboard.domain.FreeboardCmt;
 import com.eroom.gw.fboard.domain.FreeboardFile;
 import com.eroom.gw.fboard.service.FBoardService;
+import com.eroom.gw.member.domain.Member;
 
 @Controller
 public class FBoardController {
@@ -52,9 +55,20 @@ public class FBoardController {
 	}
 	
 //게시글 상세조회
-	@RequestMapping(value="fBoardDetail.do", method=RequestMethod.POST)
+	@RequestMapping(value="fBoardDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView fBoardDetail(ModelAndView mv,
 									@RequestParam("fBoardNo") int fBoardNo) {
+		//조회수 증가
+		fService.addHits(fBoardNo);
+		
+		//상세조회 불러오기
+		Freeboard fBoard = fService.printOne(fBoardNo);
+		if(fBoard != null) {
+			mv.addObject("fBoard", fBoard).setViewName("fBoard/fBoardDetailView");
+		}else {
+			mv.addObject("msg", "게시글 상세 조회 실패");
+			mv.setViewName("fBoard/errorPage");
+		}
 		return mv;
 	}
 	
@@ -69,13 +83,35 @@ public class FBoardController {
 	public ModelAndView fBoardRegister(ModelAndView mv,
 									@ModelAttribute Freeboard fBoard, @ModelAttribute FreeboardFile fBoardFile,
 									@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, 
-									HttpServletRequest request) {
+									MultipartHttpServletRequest request, HttpSession session) {
+//		if(!uploadFile.getOriginalFilename().equals("")) {
+//			Map renameFileName = saveFile(uploadFile, request);
+//			if(renameFileName != null) {
+//				fBoardFile.setOriginalFilename(uploadFile.getOriginalFilename());
+//				fBoardFile.setRenameFilename(renameFileName);
+//			}
+//		}
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		fBoard.setMemberId(loginUser.getMemberId());
+		
+		int result = 0;
+		String path = "";
+		result = fService.registerFBoard(fBoard);
+		if(result > 0) {
+			path = "redirect:fBoardListView.do";
+		}else {
+			mv.addObject("msg", "게시글 등록 실패");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
 		return mv;
 	}
 
 //파일첨부
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		return "";
+	@RequestMapping(value="multipartUpload.do", method = RequestMethod.POST)
+	public Map<String, Object> saveFile (MultipartFile file, MultipartHttpServletRequest request) {
+		
+		return null;
 	}
 	
 //게시글 수정화면단

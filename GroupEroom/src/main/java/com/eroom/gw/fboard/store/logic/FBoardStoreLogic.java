@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.fboard.domain.FreeboardCmt;
@@ -35,19 +34,19 @@ public class FBoardStoreLogic implements FBoardStore {
 	@Override
 	public int addHits(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("fBoardMapper.updateCount", fBoardNo);
 	}
 
 	@Override
 	public Freeboard selectOne(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("fBoardMapper.selectOne", fBoardNo);
 	}
 
 	@Override
 	public int insertFBoard(Freeboard fBoard) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("fBoardMapper.insertFBoard", fBoard);
 	}
 
 	@Override
