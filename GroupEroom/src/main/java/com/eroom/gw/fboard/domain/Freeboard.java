@@ -18,6 +18,22 @@ public class Freeboard {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Freeboard(int fBoardNo, int memberId, String fWriter, String fBullet, String fBoardTitle,
+			String fBoardContents, Date enrollDate, int hits, String fStatus) {
+		super();
+		this.fBoardNo = fBoardNo;
+		this.memberId = memberId;
+		this.fWriter = fWriter;
+		this.fBullet = fBullet;
+		this.fBoardTitle = fBoardTitle;
+		this.fBoardContents = fBoardContents;
+		this.enrollDate = enrollDate;
+		this.hits = hits;
+		this.fStatus = fStatus;
+	}
+
 
 	public int getfBoardNo() {
 		return fBoardNo;

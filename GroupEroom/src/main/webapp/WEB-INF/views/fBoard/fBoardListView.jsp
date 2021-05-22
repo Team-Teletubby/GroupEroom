@@ -5,6 +5,8 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="resources/css/style-responsive.css" rel="stylesheet">
+<link href="resources/css/style2.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>자유게시판</title>
 </head>
@@ -52,27 +54,45 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<!-- 페이징 처리 -->
-						<div class="span6">
-							<div class="dataTables_paginate paging_bootstrap pagination">
-								<ul>
-									<!-- 이전 -->
-									<c:url var="before" value="fBoardListView.do">
-										<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+						<!-- ##############페이징 처리################# -->
+						<div align="center">
+							<div class="btn-group">
+								<!-- 이전 -->
+								<c:url var="before" value="fBoardListView.do">
+									<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
+								</c:url>
+								<c:if test="${pi.currentPage <= 1 }">
+									<button type="button" class="btn btn-default" disabled><i class="fa fa-caret-left"></i> 이전</button>
+								</c:if>
+								<c:if test="${pi.currentPage > 1 }">
+									<a href="${before }" class="btn btn-default"><i class="fa fa-caret-left"></i> 이전</a>&nbsp;
+								</c:if>
+
+								<!-- 페이지 -->
+								<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+									<c:url var="pagination" value="fBoardListView.do">
+										<c:param name="page" value="${p }"></c:param>
 									</c:url>
-									<c:if test="${pi.currentPage <= 1 }">
-										<li class="prev disabled">← Previous</a></li>
+									<c:if test="${p eq pi.currentPage }">
+										<button type="button" class="btn btn-default btn-theme">${p }</button>
+
 									</c:if>
-									<c:if test="${pi.currentPage > 1 }">
-										<li class="prev">← Previous</a></li>
+									<c:if test="${p ne pi.currentPage }">
+										<a href="${pagination }" class="btn btn-default">${p }</a>&nbsp;
 									</c:if>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li class="next"><a href="#">Next → </a></li>
-								</ul>
+								</c:forEach>
+
+
+								<!-- 다음 -->
+								<c:url var="after" value="fBoardListView.do">
+									<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+								</c:url>
+								<c:if test="${pi.currentPage >= pi.maxPage }">
+									<button type="button" class="btn btn-default" disabled>다음 <i class="fa fa-caret-right"></i></button>
+								</c:if>
+								<c:if test="${pi.currentPage < pi.maxPage }">
+									<a href="${after }" class="btn btn-default">다음 <i class="fa fa-caret-right"></i></a>&nbsp;
+								</c:if>
 							</div>
 						</div>
 					</div>

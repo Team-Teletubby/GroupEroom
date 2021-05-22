@@ -1,7 +1,11 @@
 package com.eroom.gw.fboard.controller;
 
+import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,18 +85,42 @@ public class FBoardController {
 //게시글 등록
 	@RequestMapping(value="fBoardRegister.do", method=RequestMethod.POST)
 	public ModelAndView fBoardRegister(ModelAndView mv,
-									@ModelAttribute Freeboard fBoard, @ModelAttribute FreeboardFile fBoardFile,
-									@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, 
-									MultipartHttpServletRequest request, HttpSession session) {
-//		if(!uploadFile.getOriginalFilename().equals("")) {
-//			Map renameFileName = saveFile(uploadFile, request);
-//			if(renameFileName != null) {
-//				fBoardFile.setOriginalFilename(uploadFile.getOriginalFilename());
-//				fBoardFile.setRenameFilename(renameFileName);
-//			}
-//		}
+									@ModelAttribute Freeboard fBoard,
+									HttpServletRequest request, HttpSession session, MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
+		session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		fBoard.setMemberId(loginUser.getMemberId());
+		
+		//파일 저장경로 설정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/fUploadFiles";
+		//저장폴더 선택
+		File folder = new File(savePath);
+		//폴더가 없으면 자동 생성
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			
+		} else {
+			for (int i=0 ; i < mf.size() ; i++) {
+				//파일 중복명 처리
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				//원파일명
+				String originalFileName = mf.get(i).getOriginalFilename();
+				//파일명 재설정
+				String renameFileName = sdf.format(new Date(System.currentTimeMillis())) 
+										+ "." + originalFileName.substring(originalFileName.lastIndexOf("."), 1);
+				//파일경로,사이즈
+				String filePath = folder + "/" + renameFileName;
+				long fileSize = mf.get(i).getSize();
+				//파일저장
+				mf.get(i).transferTo(new File(filePath));
+				fService.fileUpload(originalFileName, renameFileName, filePath, fileSize);
+			}
+		}
 		
 		int result = 0;
 		String path = "";
@@ -107,33 +135,50 @@ public class FBoardController {
 		return mv;
 	}
 
-//파일첨부
-	@RequestMapping(value="multipartUpload.do", method = RequestMethod.POST)
-	public Map<String, Object> saveFile (MultipartFile file, MultipartHttpServletRequest request) {
-		
-		return null;
-	}
+////파일등록
+//	@RequestMapping(value="multipartUpload.do", method = RequestMethod.POST)
+//	public void saveFile (MultipartFile file, MultipartHttpServletRequest request) {
+//		//파일 저장경로 설정
+//		return null;
+//	}
 	
 //게시글 수정화면단
 	@RequestMapping(value="fBoardModifyView.do")
 	public ModelAndView fBoardModifyView(ModelAndView mv, @RequestParam("fBoardNo") int fBoardNo) {
+		Freeboard fBoard = fService.printOne(fBoardNo);
+		if(fBoard != null) {
+			mv.addObject("fBoard", fBoard).setViewName("fBoard/fBoardUpdateView");
+		}else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("fBoard/errorPage");
+		}
 		return mv;
 	}
 	
 //게시글 수정
 	@RequestMapping(value="fBoardUpdate.do", method=RequestMethod.POST)
 	public ModelAndView fBoardUpdate(ModelAndView mv, HttpServletRequest request,
-									@ModelAttribute Freeboard fBoard, @ModelAttribute FreeboardFile fBoardFile,
-									@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+									@ModelAttribute Freeboard fBoard) {
+		int result = fService.modifyFBoard(fBoard);
+		if(result > 0) {
+			mv.setViewName("redirect:fBoardListView.do");
+		}else {
+			mv.addObject("msg", "게시글 수정 실패").setViewName("fBoard/errorPage");
+		}
 		return mv;
 	}
 	
 //게시글 삭제
 	@RequestMapping(value="fBoardDelete.do")
 	public String fBoardDelete(Model model, @RequestParam("fBoardNo") int fBoardNo,
-								@RequestParam("renameFilename") String renameFileName,
 								HttpServletRequest request) {
-		return "";
+		
+		int result = fService.removeFBoard(fBoardNo);
+		if(result > 0) {
+			return "redirect:fBoardListView.do";
+		}else {
+			model.addAttribute("msg", "게시글 삭제 실패");
+			return "fBoard/errorPage";
+		}
 	}
 	
 //파일 삭제
