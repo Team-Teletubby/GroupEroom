@@ -64,9 +64,11 @@ public class MemberController {
 	public String enrollView() { 
 		return "member/memberForm";
 	}
+	
+	
 	// 사원등록
-		@RequestMapping(value="memberRegister.do", method= {RequestMethod.POST , RequestMethod.GET})
-		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model,@RequestParam(required = false) String memberId ) { 
+		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
+		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
 		
 			member.setMemberAddr(post+","+address1+","+address2);
 			int result = service.registerMember(member);
