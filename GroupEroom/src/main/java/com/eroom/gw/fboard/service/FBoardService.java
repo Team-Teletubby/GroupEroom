@@ -14,6 +14,7 @@ public interface FBoardService {
 	public ArrayList<Freeboard> printAll(PageInfo pi); //게시물 리스트조회
 	public Freeboard printOne(int fBoardNo); //게시물 상세조회
 	public int registerFBoard(Freeboard fBoard); //게시물 작성
+	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize); //파일업로드
 	public int modifyFBoard(Freeboard fBoard); //게시물 수정
 	public int removeFBoard(int fBoardNo); //게시물 삭제
 	

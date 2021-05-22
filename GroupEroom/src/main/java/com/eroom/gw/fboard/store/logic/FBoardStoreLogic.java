@@ -1,6 +1,7 @@
 package com.eroom.gw.fboard.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,15 +51,21 @@ public class FBoardStoreLogic implements FBoardStore {
 	}
 
 	@Override
+	public Object uploadFile(HashMap<String, Object> hmap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("fBoardMapper.uploadFile", hmap);
+	}
+	
+	@Override
 	public int updateFBoard(Freeboard fBoard) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("fBoardMapper.updateFBoard", fBoard);
 	}
 
 	@Override
 	public int deleteFBoard(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("fBoardMapper.deleteFBoard", fBoardNo);
 	}
 
 	@Override
@@ -84,5 +91,6 @@ public class FBoardStoreLogic implements FBoardStore {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

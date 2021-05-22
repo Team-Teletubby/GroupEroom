@@ -1,6 +1,7 @@
 package com.eroom.gw.fboard.domain;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 public class FreeboardFile {
 	
@@ -11,7 +12,6 @@ public class FreeboardFile {
 	private int fileSize;
 	private Timestamp uploadDate;
 	private int fBoardNo;
-	private int memberId;
 	
 	public FreeboardFile() {
 		super();
@@ -19,7 +19,7 @@ public class FreeboardFile {
 	}
 	
 	public FreeboardFile(int fileNo, String originalFilename, String renameFilename, String filePath, int fileSize,
-			Timestamp uploadDate, int fBoardNo, int memberId) {
+			Timestamp uploadDate, int fBoardNo) {
 		super();
 		this.fileNo = fileNo;
 		this.originalFilename = originalFilename;
@@ -28,7 +28,6 @@ public class FreeboardFile {
 		this.fileSize = fileSize;
 		this.uploadDate = uploadDate;
 		this.fBoardNo = fBoardNo;
-		this.memberId = memberId;
 	}
 	
 	public int getFileNo() {
@@ -73,18 +72,17 @@ public class FreeboardFile {
 	public void setfBoardNo(int fBoardNo) {
 		this.fBoardNo = fBoardNo;
 	}
-	public int getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
-	}
 	
 	@Override
 	public String toString() {
 		return "FreeboardFile [fileNo=" + fileNo + ", originalFilename=" + originalFilename + ", renameFilename="
 				+ renameFilename + ", filePath=" + filePath + ", fileSize=" + fileSize + ", uploadDate=" + uploadDate
-				+ ", fBoardNo=" + fBoardNo + ", memberId=" + memberId + "]";
+				+ ", fBoardNo=" + fBoardNo + "]";
+	}
+
+	public static void uploadFile(HashMap<String, Object> hmap) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

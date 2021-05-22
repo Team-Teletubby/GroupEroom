@@ -5,6 +5,8 @@
 <html lang="ko">
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="resources/css/style-responsive.css" rel="stylesheet">
+<link href="resources/css/style2.css" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>자유게시판</title>
@@ -39,8 +41,9 @@
 										<span>작성자</span> <strong name="fWriter">${fBoard.fWriter }</strong>
 									</div>
 									<div class="col-md-8">
-										<span>작성일자</span> <strong name="fWriter">${fBoard.enrollDate }</strong>&nbsp;&nbsp;&nbsp;|&nbsp;
-										<span>조회수</span> <strong name="fWriter">${fBoard.hits }</strong>
+										<span>작성일자</span> <strong name="enrollDate">${fBoard.enrollDate }</strong>&nbsp;&nbsp;&nbsp;|&nbsp;
+										<span>조회수</span> <strong name="hits">${fBoard.hits }</strong>
+										<span hidden>글번호</span> <strong name="fBoardNo" hidden>${fBoard.fBoardNo }</strong>
 									</div>
 								</div>
 							</div>
@@ -56,8 +59,18 @@
 								<ul>
 								</ul>
 							</div>
-							<div class="compose-btn pull-left">
+							<div class="button" align="center">
 								<button onclick="location.href='fBoardListView.do'" class="btn btn-theme03">목록으로</button>
+<%-- 								<c:if test="${loginUser.memberId == fBoard.memberId }"> --%>
+								<c:url var="fModify" value="fBoardModifyView.do">
+									<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+								</c:url>
+								<c:url var="fDelete" value="fBoardDelete.do">
+									<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+								</c:url>
+									<button onclick="location.href='${fModify}'" class="btn btn-theme02">수정</button>
+									<button onclick="location.href='${fDelete}'" class="btn btn-theme04">삭제</button>
+								<%-- </c:if> --%>
 							</div>
 						</div>
 					</div>

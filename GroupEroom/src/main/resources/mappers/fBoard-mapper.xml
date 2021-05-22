@@ -42,12 +42,18 @@
 		VALUES(FBOARD_SEQ.NEXTVAL, #{memberId}, #{fBullet}, #{fBoardTitle }, #{fBoardContents }, SYSDATE, DEFAULT, DEFAULT)
 	</insert>
 	
-<!-- 게시글 수정
-	<update id="updateBoard">
-		UPDATE BOARD
-		SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, ORIGINAL_FILENAME = #{originalFilename}, B_UPDATE_DATE = #{bUpdateDate}
-		WHERE BOARD_NO = #{boardNo}
-	</update> -->
+<!-- 파일첨부 -->
+	<insert id="uploadFile" parameterType="HashMap">
+		INSERT INTO FREEBOARD_FILE (FILE_NO, ORIGINAL_FILENAME, RENAME_FILENAME, FILE_PATH, FILE_SIZE, UPLOAD_DATE, F_BOARD_NO) 
+		VALUES(FBOARD_FILE_SEQ.NEXTVAL, #{originalFilename}, #{renameFilename}, #{filePath}, #{fileSize}, SYSDATE, FBOARD_SEQ.CURRVAL)
+	</insert>
+	
+<!-- 게시글 수정 -->
+	<update id="updateFBoard">
+		UPDATE FREEBOARD 
+		SET F_BOARD_TITLE = #{fBoardTitle}, F_BOARD_CONTENTS = #{fBoardContents}, F_BULLET = #{fBullet} 
+		WHERE F_BOARD_NO = #{fBoardNo}
+	</update>
 	
 <!-- 조회수  -->
 	<update id="updateCount">
@@ -56,10 +62,12 @@
 		WHERE F_BOARD_NO = #{fBoardNo}
 	</update>
 
-<!-- 게시글 삭제
-	<delete id="deleteBoard" parameterType="_int">
-		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
-	</delete> -->
+<!-- 게시글 삭제 -->
+	<delete id="deleteFBoard" parameterType="_int">
+		UPDATE FREEBOARD 
+		SET F_STATUS = 'N' 
+		WHERE F_BOARD_NO = #{fBoardNo}
+	</delete>
 	
 <!-- 댓글리스트
 	<select id="selectReplyList" resultMap="replyResultMap">
