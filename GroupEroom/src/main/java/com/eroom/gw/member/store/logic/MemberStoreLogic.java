@@ -30,13 +30,14 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public Member selectOne(Member member) {
-		
-		return sqlSession.selectOne("memberMapper.loginMember", member);
+		Member loginUser = sqlSession.selectOne("memberMapper.loginMember", member);
+		return loginUser;
 	}
 
 	@Override
 	public int insertMember(Member member) {
-		return sqlSession.insert("memberMapper.registerMember", member);
+		int result = sqlSession.insert("memberMapper.registerMember", member);
+		return result;
 	}
 
 	@Override

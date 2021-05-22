@@ -21,12 +21,14 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Member loginMember(Member member) {
+		
 		return mStore.selectOne(member);
 	}
 
 	@Override
 	public int registerMember(Member member) {
-		return mStore.insertMember(member);
+		int result = mStore.insertMember(member);
+		return result;
 	}
 
 	@Override

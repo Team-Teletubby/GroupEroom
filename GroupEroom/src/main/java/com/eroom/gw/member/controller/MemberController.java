@@ -66,14 +66,15 @@ public class MemberController {
 	// 사원등록
 		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
 		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model) { 
+		
 			member.setMemberAddr(post+","+address1+","+address2);
 			int result = service.registerMember(member);
 			if(result >0) {
 				return "redirect:index";
 				
 			}else {
-				model.addAttribute("msg" , "회원가입실패");
-				return "";
+				model.addAttribute("msg" , "사원등록실패");
+				return "index";
 			}
 			
 	}
