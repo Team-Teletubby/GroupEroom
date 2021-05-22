@@ -63,9 +63,18 @@ public class MemberController {
 		return "member/memberForm";
 	}
 	// 사원등록
-	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
-		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model) {
-		 return "";
+		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
+		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model) { 
+			member.setMemberAddr(post+","+address1+","+address2);
+			int result = service.registerMember(member);
+			if(result >0) {
+				return "redirect:index";
+				
+			}else {
+				model.addAttribute("msg" , "회원가입실패");
+				return "";
+			}
+			
 	}
 	// 인사관리 뷰 
 	
@@ -79,7 +88,7 @@ public class MemberController {
 	
 		return "";
 	}
-	//사원 목록조회 
+	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
 	public String memberList(Model model) { 
 		List<Member> list = service.printAll();

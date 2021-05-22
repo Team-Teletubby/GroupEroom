@@ -11,6 +11,7 @@ import com.eroom.gw.member.domain.Search;
 public interface MemberService {
 
 	public Member loginMember(Member member);
+	//등록
 	public int registerMember(Member member);
 	public int modifyMember(Member member);
 	//사원목록 

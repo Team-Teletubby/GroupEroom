@@ -14,7 +14,7 @@ public class Member {
 	private String memberEmail;
 	private String memberAddr;
 	private String bank;
-	private int Account;
+	private long Account;
 	private Date regDate;
 	private String quitYn;
 	private Date quitDate;
@@ -111,7 +111,7 @@ public class Member {
 		this.bank = bank;
 	}
 
-	public int getAccount() {
+	public long getAccount() {
 		return Account;
 	}
 
