@@ -31,8 +31,18 @@
 		
 	</select>
 	
+
 	<insert id="insertMember" parameterType="com.eroom.gw.member.domain.Member">
 		INSERT INTO MEMBER(MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, ACCOUNT) VALUES(#{memberId }, #{memberDept }, #{memberJob }, #{memberName }, #{memberPwd }, #{memberRrn }, #{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, #{Account })
+
+	<select id="selectDepMemberList" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_DEPT = #{depName }
+	</select>
+	
+	<insert id="registerMember" parameterType="com.eroom.gw.member.domain.Member">
+		INSERT INTO MEMBER(MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, ACCOUNT) VALUES(#{memberId }, #{memberDept }, #{memberJob }, #{memberName }, #{memberPwd }, #{memberRrn }, #{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, #{Account })
+
 	</insert>
 	
 	

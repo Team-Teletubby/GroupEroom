@@ -45,5 +45,11 @@ public class MemberStoreLogic implements MemberStore {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	// 특정부서의 멤버목록
+	@Override
+	public ArrayList<Member> selectDepartMentMember(String depName) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectDepMemberList", depName);
+	}
 	
 }

@@ -11,6 +11,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>GER</title>
+<link href="resources/css/approvalWrite.css" rel="stylesheet">
 </head>
 <body>
 	<section id="container">
@@ -24,65 +25,120 @@
         *********************************************************************************************************************************************************** -->
 		<!-- 메인 콘텐츠 -->
 		<section id="main-content">
-			<section class="wrapper">
-				<div class="row">
-					<div class="col-lg-12 main-chart">
-						<div class="border-head"></div>
-						<div class="col-md-11 mb">
-							<div class="write-Wrap">
-								<p>결재 기안하기</p>
-								<div class="form">
-									<p>기본 설정</p>
-									<form action="approvalRegister.do" method="post">
-										<table>
-											<tr>
-												<th>문서 종류</th>
-												<td>
-													<select name="approvalType">
-														<option value="">문서 선택</option>
-														<option value="Cooperation">업무 협조문</option>
-														<option value="">양식2</option>
-														<option value="">양식3</option>
-													</select>
-												</td>
-												<th>기안자</th>
-												<td>${loginUser.MemberName }</td>
-											</tr>
-										</table>
-										<p>결재선</p>
-										<span><button>1</button></span>
-										<table>
-											<tr>
-												<th>이름</th>
-												<th>부서</th>
-												<th>직급</th>
-											</tr>
-											<tr>
-												<th>결재자1</th>
-												<td>민트</td>
-												<td>땅콩파</td>
-												<td>민트왕</td>
-											</tr>
-											<tr>
-												<th>결재자2</th>
-												<td>민트</td>
-												<td>땅콩파</td>
-												<td>민트왕</td>
-											</tr>
-										</table>
-										<p>제목</p>
-										<input type="text" name="approvalTitle">
-										<p>상세입력</p>
-										<div id="summernote"></div>
-										<input type=submit value="기안 제출하기">
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</section>
+                <section class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-12 main-chart">
+                            <div class="border-head"></div>
+                            <div class="col-md-11 mb">
+                                <div class="write-Wrap">
+                                    <p>결재 기안하기</p>
+                                    <div class="write-form">
+                                        <p>기본 설정</p>
+                                        <div id="Document-type">
+                                            <table id="table">
+                                                <tr>
+                                                    <th>문서 종류</th>
+                                                    <td class="document-select">
+                                                        <select>
+                                                            <option value="">문서 선택</option>
+                                                            <option value="">일반 결재</option>
+                                                            <option value="">양식2</option>
+                                                            <option value="">양식3</option>
+                                                        </select>
+                                                    </td>
+                                                    <th>기안자</th>
+                                                    <td>이혜성</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <span class="approval-line-title">결재선</span>
+                                        <!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
+                                        모달 창 전체를 감싸는 div의 id 이름을 지정하면 된다. -->
+                                        <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg">모달 창 열기</button>
+                                        <!-- Modal -->
+
+                                        <div class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1" aria-labelledby="myLargeModalLabel">
+                                            <!-- 사용자 지정 부분① : id명 -->
+                                            <div class="modal-dialog modal-lg">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                                        <!-- 모달 title -->
+                                                        <h4 class="modal-title">모달 창 타이틀</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <!-- ======= 부서 목록 ======= -->
+                                                        <ul>
+                                                        	<li value="1" class="DepartmentName">인사관리팀</li>
+                                                        	<li value="2" class="DepartmentName">IT개발팀</li>
+                                                        	<li value="3" class="DepartmentName">재무팀</li>
+                                                        </ul>
+                                                        <script>
+                                                        	$("li.DepartmentName").each(function() {
+                                                        		$(this).click(function() {
+                                                        			const depType = $(this).val();
+                                                        			
+                                                        			/* 클릭한 부서 멤버 목록 가져오기 */
+                                                        			$.ajax({
+                                                        				url : "departmentMember.do",
+                                                        				type : "post",
+                                                        				data : { "depType" : depType },
+                                                        				success : function(data) {
+                                                        					if(data == "true") {
+                                                        						alert("테스트완료");
+                                                        					}
+                                                        				},
+                                                        				error : function(){
+                                                        					alert("실패..");	
+                                                        				}
+                                                        	
+                                                        				
+                                                        			});
+                                                        		});
+                                                        	});
+                                                        </script>
+                                                        <!-- 사용자 지정 부분③ : 텍스트 메시지 -->
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                         <button type="button" class="btn btn-primary">Save changes</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table class="table">
+                                            <tr>
+                                                <th>구분</th>
+                                                <th>이름</th>
+                                                <th>부서</th>
+                                                <th>직급</th>
+                                            </tr>
+                                            <tr>
+                                                <th>결재자1</th>
+                                                <td align="center">민트</td>
+                                                <td align="center">땅콩파</td>
+                                                <td align="center">민트왕</td>
+                                            </tr>
+                                            <tr>
+                                                <th>결재자2</th>
+                                                <td align="center">민트</td>
+                                                <td align="center">땅콩파</td>
+                                                <td align="center">민트왕</td>
+                                            </tr>
+                                        </table>
+                                        <span>제목</span>
+                                        <input type="text">
+                                        <div id="summernote"></div>
+                                        <input type="submit" value="기안 제출하기">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
 		<!-- footer -->
 		<footer class="site-footer">
 			<div class="text-center">

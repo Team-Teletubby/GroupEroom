@@ -19,6 +19,8 @@ public interface MemberService {
 	public ArrayList<Member> printSearchAll(Search search);
 
 	public Member printMemberOne(int mId);
+	// 특정 부서 사원 목록 
+	public ArrayList<Member> printdepartMentMemberAll(String depName);
 
 	}
 	
