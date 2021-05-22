@@ -32,13 +32,14 @@ public class MemberController {
 	
 //로그인 
 	@RequestMapping(value="login.do" , method=RequestMethod.POST)
-	public String memberLogin(Member member, Model model, HttpSession session ) {
+	public String memberLogin(Model model , @ModelAttribute Member member , HttpServletRequest request ) {
 		Member result = service.loginMember(member);
 		
 		if(result ==null) { 
 			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
 			return "login";
 		}else { 
+			HttpSession session= request.getSession();
 			session.setAttribute("memberId", result.getMemberId());
 			return "index";
 		}
