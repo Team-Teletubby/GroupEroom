@@ -3,6 +3,8 @@ package com.eroom.gw.member.service.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,4 +53,6 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-}
+		
+	}
+

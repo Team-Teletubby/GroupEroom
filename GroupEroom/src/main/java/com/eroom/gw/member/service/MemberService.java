@@ -3,6 +3,8 @@ package com.eroom.gw.member.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 
@@ -16,5 +18,7 @@ public interface MemberService {
 	public ArrayList<Member> printSearchAll(Search search);
 
 	public Member printMemberOne(int mId);
+
+	}
 	
-}
+

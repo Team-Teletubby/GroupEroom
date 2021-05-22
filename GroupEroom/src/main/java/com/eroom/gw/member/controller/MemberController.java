@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
@@ -29,24 +30,23 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	//로그인
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public String memberLogin(HttpServletRequest request, @ModelAttribute Member member, Model model) {
-		Member mOne = new Member(member.getMemberId(), member.getMemberPwd());
-	
-		Member loginMember =service.loginMember(mOne);
+//로그인 
+	@RequestMapping(value="login.do" , method=RequestMethod.POST)
+	public String memberLogin(Member member, Model model, HttpSession session ) {
+		Member result = service.loginMember(member);
 		
-		if(loginMember != null ) { 
-			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", loginMember);
-			return "index";
+		if(result ==null) { 
+			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
+			return "login";
 		}else { 
-			model.addAttribute("msg", "로그인에 실패하였습니다! 다시 확인해주세요");
-			
-			return "common/errorPage"; 
+			session.setAttribute("memberId", result.getMemberId());
+			return "index";
 		}
-		
-	}
+			
+		}
+	
+			
+			
 	// 로그아웃
 	 @RequestMapping(value="logout.do", method=RequestMethod.GET)
 	 public String memberLogOut(HttpServletRequest request) { 
