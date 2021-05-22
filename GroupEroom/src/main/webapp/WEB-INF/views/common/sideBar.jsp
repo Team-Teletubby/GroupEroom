@@ -66,7 +66,7 @@
 							class="label label-theme pull-right mail-info">2</span>
 					</a></li>
 					<!-- 일정관리 메뉴 -->
-					<li><a href="inbox.html"> <i class="fa fa-envelope"></i> <span>일정관리
+					<li><a href="calendarListView.do"> <i class="fa fa-envelope"></i> <span>일정관리
 						</span>
 					</a></li>
 					<!-- 예약 메뉴 -->
