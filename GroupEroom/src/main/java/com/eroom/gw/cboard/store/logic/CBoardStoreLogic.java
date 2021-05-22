@@ -11,6 +11,7 @@ import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.store.CBoardStore;
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 
 @Repository
 public class CBoardStoreLogic implements CBoardStore{
@@ -32,14 +33,12 @@ public class CBoardStoreLogic implements CBoardStore{
 
 	@Override
 	public int addReadCount(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("cBoardMapper.updateCount", cBoardNo);
 	}
 
 	@Override
 	public CBoard selectOne(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("cBoardMapper.selectOne", cBoardNo);
 	}
 
 	@Override
@@ -82,6 +81,18 @@ public class CBoardStoreLogic implements CBoardStore{
 	public int deleteCmt(CBoardCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ArrayList<CBoard> selectSearchList(Search search,PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("cBoardMapper.selectSearchList",search, rowBounds);
+	}
+
+	@Override
+	public int selectSearchListCount(Search search) {
+		return sqlSession.selectOne("cBoardMapper.selectSearchListCount",search);
 	}
 
 

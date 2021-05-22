@@ -26,6 +26,7 @@ import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.service.CBoardService;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
+import com.eroom.gw.common.Search;
 
 @Controller
 public class CBoardController {
@@ -35,7 +36,7 @@ public class CBoardController {
 	private CBoardService service;
 	
 	
-	//전체 조회
+	//전체 조회:)
 	@RequestMapping(value="cBoardListView.do", method=RequestMethod.GET)
 	public ModelAndView boardListView(ModelAndView mv
 											, @RequestParam(value="page", required=false)Integer page) {
@@ -43,7 +44,6 @@ public class CBoardController {
 		int listCount = service.getListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<CBoard> list = service.printAll(pi);
-		System.out.println(list);
 		if(!list.isEmpty()) {
 			mv.addObject("cBoardList",list);
 			mv.addObject("pi", pi);
@@ -55,6 +55,23 @@ public class CBoardController {
 		return mv;
 	}
 	
+	//검색 :)
+	@RequestMapping(value="cBoardSearch.do")
+	public String boardSearch(@ModelAttribute Search search, Model model,@RequestParam(value="page", required=false)Integer page) {
+		int currentPage = (page !=null) ? page : 1;
+		int listCount = service.getSearchListCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<CBoard> searchList = service.printSearchAll(search,pi);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("cBoardList",searchList);
+			model.addAttribute("pi", pi);
+			model.addAttribute("search",search);
+			return "cBoard/cBoardSearchListView";
+		}else {
+			model.addAttribute("msg", "검색 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	//작성폼
 	@RequestMapping(value="boardWriteView.kh", method=RequestMethod.GET)
@@ -106,9 +123,18 @@ public class CBoardController {
 		return renameFileName;
 	}
 	
-	//게시글 상세
-	@RequestMapping(value="boardDetail.kh", method=RequestMethod.GET)
-	public ModelAndView boardDetailView(ModelAndView mv,@RequestParam("boardNo")int boardNo) {
+	//게시글 상세 :)
+	@RequestMapping(value="cBoardDetail.do", method=RequestMethod.GET)
+	public ModelAndView boardDetailView(ModelAndView mv,@RequestParam("cBoardNo")int cBoardNo) {
+		CBoard cBoard = service.printOne(cBoardNo);
+		if(cBoard !=null) {
+			service.addReadCount(cBoardNo);
+			mv.addObject("cBoard",cBoard);
+			mv.setViewName("cBoard/cBoardDetailView");
+		}else {
+			mv.addObject("msg", "상세조회 실패");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

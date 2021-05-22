@@ -10,6 +10,7 @@ import com.eroom.gw.cboard.domain.CBoardCmt;
 import com.eroom.gw.cboard.service.CBoardService;
 import com.eroom.gw.cboard.store.CBoardStore;
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 
 @Service
 public class CBoardServiceImpl implements CBoardService{
@@ -29,14 +30,12 @@ public class CBoardServiceImpl implements CBoardService{
 
 	@Override
 	public int addReadCount(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.addReadCount(cBoardNo);
 	}
 
 	@Override
 	public CBoard printOne(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectOne(cBoardNo);
 	}
 
 	@Override
@@ -79,6 +78,18 @@ public class CBoardServiceImpl implements CBoardService{
 	public int removeCmt(CBoardCmt cmt) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	
+	//검색
+	@Override
+	public ArrayList<CBoard> printSearchAll(Search search,PageInfo pi) {
+		return store.selectSearchList(search, pi);
+	}
+
+	@Override
+	public int getSearchListCount(Search search) {
+		return store.selectSearchListCount(search);
 	}
 
 	

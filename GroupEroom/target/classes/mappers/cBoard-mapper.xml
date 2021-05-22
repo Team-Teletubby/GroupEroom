@@ -17,13 +17,37 @@
 
 	
 	<select id="selectListCount" resultType="_int"> 
-	SELECT COUNT(*) FROM CLUBBOARD
+		SELECT COUNT(*) FROM CLUBBOARD
 	</select>
 	
 	<select id="selectAllList" resultMap="cBoardResultMap"> 
-	SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS
-	FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) ORDER BY C_BOARD_NO DESC
+		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS
+		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) ORDER BY C_BOARD_NO DESC
 	</select>
 	
+	<select id="selectSearchList" resultMap="cBoardResultMap">
+		SELECT C_BOARD_NO, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE
+		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID)
+			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR C_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR C_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
+		 ORDER BY C_BOARD_NO DESC
+	</select>
 	
+	<select id="selectSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID)
+			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR C_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR C_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
+		 ORDER BY C_BOARD_NO DESC
+	</select>
+	
+	<select id="selectOne" resultMap="cBoardResultMap" parameterType="_int">
+		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS
+		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) 
+		WHERE C_BOARD_NO = #{cBoardNo}
+		ORDER BY C_BOARD_NO DESC
+	</select>
+	
+	<update id="updateCount">
+		UPDATE CLUBBOARD SET HITS = HITS + 1 WHERE C_BOARD_NO = #{boardNo}
+	</update>
 </mapper>
