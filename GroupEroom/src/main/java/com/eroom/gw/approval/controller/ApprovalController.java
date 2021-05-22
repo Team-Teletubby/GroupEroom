@@ -3,6 +3,8 @@ package com.eroom.gw.approval.controller;
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +27,15 @@ import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.Search;
 import com.eroom.gw.member.domain.Member;
+import com.eroom.gw.member.service.MemberService;
 
 @Controller
 public class ApprovalController {
 
 	@Autowired
 	private ApprovalService approvalService;
+	@Autowired
+	private MemberService memberService;
 
 	// 멤버 정보 가져오기 (게시글 이동할 때 사용)
 	public void getMemberinfo() {
@@ -105,6 +110,35 @@ public class ApprovalController {
 	public String approvalDelete(@RequestParam("approvalNo")int approvalNo) {
 
 		return "redirect:approvalList.do";
+	}
+	
+	// 특정 부서 멤버 목록 조회
+	
+	@RequestMapping(value="departmentMember.do", method=RequestMethod.POST)
+	public String departmentSelect(@RequestParam("depType")int depType) {
+		
+		/*
+		 * 1 : 인사관리, 2 : IT개발팀, 3 : 재무팀
+		 */
+		String depName = "";
+		
+		switch(depType) {
+		case 1:
+			depName = "인사관리팀";
+			break;
+		case 2:
+			depName = "IT개발팀";
+			break;
+		case 3:
+			depName = "재무팀";
+			break;
+		}
+		
+		ArrayList<Member> mList = memberService.printdepartMentMemberAll(depName);
+		
+		System.out.println(mList);
+		
+		return "true";
 	}
 	// ======================================================
 	// ======================================================
