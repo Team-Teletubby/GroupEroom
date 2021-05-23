@@ -138,8 +138,9 @@ public class ApprovalController {
 			break;
 		}
 		ArrayList<Member> mList = memberService.printdepartMentMemberAll(depName);
-		
+		System.out.println("메소드 작동중");
 		if(!mList.isEmpty()) {
+			System.out.println("값 불러오기 성공");
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			gson.toJson(mList, response.getWriter());
 			System.out.println(mList);

@@ -64,3 +64,8 @@ tr > th {
 .modal-body > ul > li {
 	list-style:none;
 }
+
+.modeal-title > .table > tr > td {
+	padding : 0px;
+	width : 120px;
+}
