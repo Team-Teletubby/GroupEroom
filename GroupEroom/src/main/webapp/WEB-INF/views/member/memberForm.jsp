@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>사원등록</title>
 <style type="text/css">
    .centerText table {
       margin : auto;
@@ -60,10 +60,23 @@
                <td>상세 주소</td>
                <td><input type="text" name="address2" class="postcodify_extra_info"></td>
             </tr>
+             <tr>
+               <td>은행</td>
+               <td><input type="text" name="Bank"></td>
+            </tr>
+             <tr>
+               <td>계좌번호</td>
+               <td><input type="text" name="Account"></td>
+            </tr>
+             <tr>
+               <td>이메일</td>
+               <td><input type="email" name="memberEmail"></td>
+            </tr>
+
             <tr>
                <td colspan="2" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
-                  <input type="submit" value="가입하기">
+                  <input type="submit" value="사원등록">
                   <button type="button" onclick="location.href='index';">홈으로</button>
                </td>
             </tr>

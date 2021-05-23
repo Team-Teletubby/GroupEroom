@@ -32,8 +32,10 @@
 	</select>
 	
 
-	<insert id="insertMember" parameterType="com.eroom.gw.member.domain.Member">
-		INSERT INTO MEMBER(MEMBER_ID,MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_RRN, MEMBER_PHONE,MEMBER_ADDR) VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName },#{memberRrn }, #{memberPhone },#{memberAddr })
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES
+		(ID_SEQ.NEXTVAL, #{memberDept },#{memberJob },#{memberName },#{memberPwd }, 
+		#{memberRrn }, #{memberPhone },#{memberEmail },#{memberAddr },#{bank },#{Account },SYSDATE, 'N', NULL,'Y')
 
 </insert>
 
