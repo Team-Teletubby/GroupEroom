@@ -105,7 +105,7 @@
 						<ul class="sub">
 							<li><a href="memberList.do">사원목록</a></li>
 							<li><a href="enrollView.do">사원등록</a></li>
-							<li><a href="cBoardListView.do">사원정보수정</a></li>
+							<li><a href="modify.do">사원정보수정</a></li>
 						</ul></li>
 				</ul>
 			</div>

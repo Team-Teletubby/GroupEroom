@@ -9,12 +9,13 @@ import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 
 public interface MemberService {
-
+	// 로그인
 	public Member loginMember(Member member);
 	//등록
 	public int registerMember(Member member);
+	// 정보수정
 	public int modifyMember(Member member);
-	//사원목록 
+	//사원목록조회
 	public List<Member> printAll();
 	public ArrayList<Member> printSearchAll(Search search);
 

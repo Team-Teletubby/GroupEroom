@@ -33,9 +33,10 @@
 	
 
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER VALUES
-		(ID_SEQ.NEXTVAL, #{memberDept },#{memberJob },#{memberName },#{memberPwd }, 
-		#{memberRrn }, #{memberPhone },#{memberEmail },#{memberAddr },#{bank },#{Account },SYSDATE, 'N', NULL,'Y')
+		INSERT INTO MEMBER (MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, 
+		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE, QUIT_YN, QUIT_DATE, ACCOUNT, PROFILE_MODIFY) 
+		VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName }, DEFAULT, #{memberRrn }, 
+		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{Account }, 'Y')
 
 </insert>
 
@@ -43,7 +44,10 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_DEPT = #{depName }
 	</select>
-	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER 
+		SET MEMBER_DEPT = #{memberDept}, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{Account }
+	</update>
 	
 	
 	

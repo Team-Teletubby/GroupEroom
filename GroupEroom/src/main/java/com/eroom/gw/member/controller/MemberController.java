@@ -73,7 +73,7 @@ public class MemberController {
 			member.setMemberAddr(post+","+address1+","+address2);
 			int result = service.registerMember(member);
 			if(result >0) {
-				return "redirect:index";
+				return "member/memberlist";
 				
 			}else {
 				model.addAttribute("msg" , "사원등록실패");
@@ -81,17 +81,25 @@ public class MemberController {
 			}
 			
 	}
-	// 인사관리 뷰 
+	// 정보수정뷰 뷰 
 	
-	@RequestMapping(value="Info.do", method=RequestMethod.GET)  
+	@RequestMapping(value="modify.do", method=RequestMethod.GET)  
 	public String infoView() { 
-		return "";
+		return "member/memberModify";
 	}
 	// 사원 정보수정 
 	@RequestMapping(value="memberModify.do", method=RequestMethod.POST)
 	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model, HttpServletRequest request) {
 	
-		return "";
+		HttpSession session = request.getSession();
+		member.setMemberAddr(post+","+address1+","+address2);
+		int result = service.modifyMember(member);
+		if(result >0) { 
+			session.setAttribute("memberId", member);
+			return "redict:index.do";
+		}
+		model.addAttribute("msg", "정보 수정 실패");
+		return "redict:index.do";
 	}
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
