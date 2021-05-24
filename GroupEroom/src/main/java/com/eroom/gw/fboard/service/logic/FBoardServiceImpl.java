@@ -74,17 +74,19 @@ public class FBoardServiceImpl implements FBoardService{
 		// TODO Auto-generated method stub
 		return fStore.deleteFBoard(fBoardNo);
 	}
-
+	
+//댓글리스트 조회
 	@Override
 	public ArrayList<FreeboardCmt> printAllCmt(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return fStore.selectAllCmt(fBoardNo);
 	}
 
+//댓글등록
 	@Override
 	public int registerFBoardCmt(FreeboardCmt fBoardCmt) {
 		// TODO Auto-generated method stub
-		return 0;
+		return fStore.insertFBoardCmt(fBoardCmt);
 	}
 
 	@Override
