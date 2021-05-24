@@ -14,4 +14,5 @@ public interface MemberStore {
 	public int insertMember(Member member);
 	public int updateMember(Member member);
 	public ArrayList<Member> selectDepartMentMember(String depName);
+	public Member selectOneById(int memberId);
 }

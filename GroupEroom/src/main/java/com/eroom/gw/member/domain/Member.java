@@ -2,6 +2,7 @@ package com.eroom.gw.member.domain;
 
 import java.sql.Date;
 
+
 public class Member {
 
 	private int memberId; 
@@ -21,13 +22,16 @@ public class Member {
 	private String profileModify;
 	
 	
-	public Member() {}
+public Member() {} 
 	
 	public Member(int memberId, String memberPwd) {
 		super();
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 	}
+
+
+
 
 	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
 			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, long account,
@@ -51,9 +55,13 @@ public class Member {
 	}
 
 
+
+
 	public int getMemberId() {
 		return memberId;
 	}
+
+
 
 
 	public void setMemberId(int memberId) {
@@ -61,9 +69,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberDept() {
 		return memberDept;
 	}
+
+
 
 
 	public void setMemberDept(String memberDept) {
@@ -71,9 +83,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberJob() {
 		return memberJob;
 	}
+
+
 
 
 	public void setMemberJob(String memberJob) {
@@ -81,9 +97,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberName() {
 		return memberName;
 	}
+
+
 
 
 	public void setMemberName(String memberName) {
@@ -91,9 +111,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberPwd() {
 		return memberPwd;
 	}
+
+
 
 
 	public void setMemberPwd(String memberPwd) {
@@ -101,9 +125,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberRrn() {
 		return memberRrn;
 	}
+
+
 
 
 	public void setMemberRrn(String memberRrn) {
@@ -111,9 +139,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberPhone() {
 		return memberPhone;
 	}
+
+
 
 
 	public void setMemberPhone(String memberPhone) {
@@ -121,9 +153,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberEmail() {
 		return memberEmail;
 	}
+
+
 
 
 	public void setMemberEmail(String memberEmail) {
@@ -131,9 +167,13 @@ public class Member {
 	}
 
 
+
+
 	public String getMemberAddr() {
 		return memberAddr;
 	}
+
+
 
 
 	public void setMemberAddr(String memberAddr) {
@@ -141,9 +181,13 @@ public class Member {
 	}
 
 
+
+
 	public String getBank() {
 		return bank;
 	}
+
+
 
 
 	public void setBank(String bank) {
@@ -151,14 +195,20 @@ public class Member {
 	}
 
 
+
+
 	public long getAccount() {
 		return account;
 	}
 
 
+
+
 	public void setAccount(long account) {
-		account = account;
+		this.account = account;
 	}
+
+
 
 
 	public Date getRegDate() {
@@ -166,9 +216,13 @@ public class Member {
 	}
 
 
+
+
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+
+
 
 
 	public String getQuitYn() {
@@ -176,9 +230,13 @@ public class Member {
 	}
 
 
+
+
 	public void setQuitYn(String quitYn) {
 		this.quitYn = quitYn;
 	}
+
+
 
 
 	public Date getQuitDate() {
@@ -186,9 +244,13 @@ public class Member {
 	}
 
 
+
+
 	public void setQuitDate(Date quitDate) {
 		this.quitDate = quitDate;
 	}
+
+
 
 
 	public String getProfileModify() {
@@ -196,9 +258,13 @@ public class Member {
 	}
 
 
+
+
 	public void setProfileModify(String profileModify) {
 		this.profileModify = profileModify;
 	}
+
+
 
 
 	@Override
@@ -209,6 +275,4 @@ public class Member {
 				+ ", bank=" + bank + ", account=" + account + ", regDate=" + regDate + ", quitYn=" + quitYn
 				+ ", quitDate=" + quitDate + ", profileModify=" + profileModify + "]";
 	}
-
-
-}
+	}

@@ -35,15 +35,15 @@ public class MemberController {
 	public String memberLogin(Model model , @ModelAttribute Member mem , HttpServletRequest request ) {
 		
 		Member member = new Member(mem.getMemberId(), mem.getMemberPwd());
-		Member loginUser = service.loginMember(member);
+		Member selectOne = service.loginMember(member);
 
 		
-		if(loginUser == null) { 
+		if(selectOne == null) { 
 			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
 			return "login";
 		}else { 
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("LoginUser", selectOne);
 			
 			return "index";
 		}
@@ -70,13 +70,13 @@ public class MemberController {
 	
 	
 	// 사원등록
-		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
+		@RequestMapping(value="memberRegister.do", method=RequestMethod.GET )
 		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
 		
 			member.setMemberAddr(post+","+address1+","+address2);
 			int result = service.registerMember(member);
 			if(result >0) {
-				return "member/memberlist";
+				return "index";
 				
 			}else {
 				model.addAttribute("msg" , "사원등록실패");
@@ -86,23 +86,23 @@ public class MemberController {
 	}
 	// 정보수정뷰 뷰 
 	
-	@RequestMapping(value="modify.do", method=RequestMethod.GET)  
-	public String infoView() { 
+	@RequestMapping(value="modify.do", method= {RequestMethod.GET, RequestMethod.POST})  
+	public String infoView(@RequestParam("memberId") int memberId, Model model) {
+		Member member = service.printMemberOne(memberId);
+		model.addAttribute("memberOne", member);
 		return "member/memberModify";
 	}
 	// 사원 정보수정 
 	@RequestMapping(value="memberModify.do", method=RequestMethod.POST)
 	public String modifyMember(@ModelAttribute Member member, 
-							@RequestParam("memberId") int memberId, 
-							@RequestParam("post") String post, 
-							@RequestParam("address1") String address1, 
-							@RequestParam("address2") String address2, Model model, HttpServletRequest request) {
+							@RequestParam("memberId") int memberId,
+							@RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2,
+							 Model model, HttpServletRequest request) {
 	
-		HttpSession session = request.getSession();
 		member.setMemberAddr(post+","+address1+","+address2);
 		int result = service.modifyMember(member);
 		if(result >0) { 
-			return "redirect:modify.do";
+			return "redirect:modify.do?memberId="+memberId;
 		}
 		model.addAttribute("msg", "정보 수정 실패");
 		return "redirect:modify.do";

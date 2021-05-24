@@ -50,8 +50,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member printMemberOne(int mId) {
-		// TODO Auto-generated method stub
-		return null;
+		return mStore.selectOneById(mId);
 	}
 	
 	@Override

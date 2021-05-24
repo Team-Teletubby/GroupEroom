@@ -26,6 +26,11 @@
 	 WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd } 
 	</select>
 	
+	<select id="selectOneMember" resultMap="memberResultMap">
+		SELECT * FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId } 
+	</select>
+	
 	<select id="memberList" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 		
@@ -36,7 +41,7 @@
 		INSERT INTO MEMBER (MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, 
 		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE, QUIT_YN, QUIT_DATE, ACCOUNT, PROFILE_MODIFY) 
 		VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName }, DEFAULT, #{memberRrn }, 
-		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{Account }, 'Y')
+		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{account }, 'Y')
 
 </insert>
 
@@ -46,7 +51,9 @@
 	</select>
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
-		SET MEMBER_DEPT = #{memberDept}, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{account }
+		SET MEMBER_DEPT = #{memberDept}, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{account } 
+		WHERE MEMBER_ID = #{memberId }
+		
 	</update>
 	
 	

@@ -24,32 +24,33 @@
    <jsp:include page="../common/sideBar.jsp"></jsp:include>
    <h1 align="center">사원정보수정</h1>
    <div class="centerText">
-      <form action="modify.do" method="post">
+      <form action="memberModify.do" method="post">
          <table width="650" cellspacing="5">
          <tr>
                <td>* 사번</td>
-				<td><input type="text" name="memberId" value="${loginUser.memberId }" readonly></td>
+				<td><input type="text" name="memberId" value="${memberOne.memberId }" readonly></td>
             <tr>
                <td>* 부서</td>
-               <td><input type="text" name="memberDept" value="${loginUser.memberDept}"></td>
+               <td><input type="text" name="memberDept" value="${memberOne.memberDept}"></td>
             </tr>
             <tr>
                <td>* 직급</td>
-               <td><input type="text" name="memberJob" value="${loginUser.memberJob }"></td>
+               <td><input type="text" name="memberJob" value="${memberOne.memberJob }"></td>
             </tr>
             <tr>
                <td>* 이름</td>
-               <td><input type="text" name="memberName" value="${loginUser.memberName }"></td>
+               <td><input type="text" name="memberName" value="${memberOne.memberName }"></td>
             </tr>
             <tr>
                <td>* 주민등록 번호</td>
-               <td><input type="text" name="memberRrn" value="${loginUser.memberRrn }"></td>
+               <td><input type="text" name="memberRrn" value="${memberOne.memberRrn }"></td>
             </tr>
             <tr>
-               <td>* 폰번호</td>
-               <td><input type="text" name="memberPhone" value="${loginUser.memberPhone }"></td>
+               <td>* 폰번호11</td>
+               <td><input type="text" name="memberPhone" value="${memberOne.memberPhone }"></td>
             </tr>
-            <c:forTokens items="${loginUser.memberAddr }" delims="," var="addr" varStatus="status">
+            
+            <c:forTokens items="${memberOne.memberAddr }" delims="," var="addr" varStatus="status">
             <c:if test="${status.index eq 0 }">
             <tr>
                <td>우편번호</td>
@@ -75,15 +76,15 @@
           </c:forTokens>
              <tr>
                <td>은행</td>
-               <td><input type="text" name="Bank" value="${loginUser.bank }"></td>
+               <td><input type="text" name="Bank" value="${memberOne.bank }"></td>
             </tr>
              <tr>
                <td>계좌번호</td>
-               <td><input type="text" name="account" value="${loginUser.account }"></td>
+               <td><input type="text" name="account" value="${memberOne.account }"></td>
             </tr>
              <tr>
                <td>이메일</td>
-               <td><input type="email" name="memberEmail" value="${loginUser.memberEmail }"></td>
+               <td><input type="email" name="memberEmail" value="${memberOne.memberEmail }"></td>
             </tr>
 
             <tr>

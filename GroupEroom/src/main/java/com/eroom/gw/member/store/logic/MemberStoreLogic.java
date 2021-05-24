@@ -51,5 +51,10 @@ public class MemberStoreLogic implements MemberStore {
 	public ArrayList<Member> selectDepartMentMember(String depName) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectDepMemberList", depName);
 	}
+
+	@Override
+	public Member selectOneById(int memberId) {
+		return sqlSession.selectOne("memberMapper.selectOneMember", memberId);
+	}
 	
 }
