@@ -22,7 +22,12 @@ public class Member {
 	
 	
 	public Member() {}
-
+	
+	public Member(int memberId, String memberPwd) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+	}
 
 	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
 			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, long account,

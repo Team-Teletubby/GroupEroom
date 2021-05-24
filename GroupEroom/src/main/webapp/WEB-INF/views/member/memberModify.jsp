@@ -28,7 +28,7 @@
          <table width="650" cellspacing="5">
             <tr>
                <td>* 부서</td>
-               <td><input type="text" name="memberDept" value="${memberId.MemberDept}"></td>
+               <td><input type="text" name="memberDept" value="${memberId.memberDept}"></td>
             </tr>
             <tr>
                <td>* 직급</td>
