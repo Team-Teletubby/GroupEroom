@@ -98,12 +98,12 @@
       </form>
    </div>
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-<!--     <script>
+    <script>
       $(function() {
          $("#postcodify_search_button").postcodifyPopUp();
       });
       
-      $("#userId").on("blur", function() {
+     /*  $("#userId").on("blur", function() {
          var userId = $("#userId").val();
          $.ajax({
             url : "dupId.kh",
@@ -123,7 +123,7 @@
             }
          });
          
-      });
-   </script> -->
+      }); */
+   </script> 
 </body>
 </html>

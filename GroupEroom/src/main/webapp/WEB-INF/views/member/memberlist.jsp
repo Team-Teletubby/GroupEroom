@@ -6,8 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>사원 목록 조회</title>
+
+
 </head>
 <body>
+<!-- 헤더 시작 -->
+		<jsp:include page="../common/header.jsp"></jsp:include>
+		<!-- 헤더 끝 -->
+		<!-- 사이드바 시작 -->
+		<jsp:include page="../common/sideBar.jsp"></jsp:include>
+		<!-- 사이드바 끝  -->
 	<h2>사원 목록 </h2>
 	<table border="1" width="700px">
 	<tr>

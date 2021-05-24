@@ -60,6 +60,13 @@ public class MemberController {
 		 return "redirect:index";
 	 }
 	 
+	 // 사원등록에서 홈으로 클릭시 홈으로 연결 
+	
+	 @RequestMapping(value="index.do", method=RequestMethod.GET)
+	 public String indexView() { 
+		 return "index";
+	 }
+	 
 	 
 	 // 사원등록 폼 연결 
 	
