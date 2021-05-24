@@ -67,7 +67,7 @@
             </tr>
              <tr>
                <td>계좌번호</td>
-               <td><input type="text" name="Account"></td>
+               <td><input type="text" name="account"></td>
             </tr>
              <tr>
                <td>이메일</td>
