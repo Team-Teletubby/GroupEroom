@@ -66,9 +66,8 @@ public class ApprovalController {
 		Member loginUser = (Member)session.getAttribute("loginUser"); 		// 멤버 객체에 세션 저장
 		approval.setMemberId(loginUser.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
 		approval.setMemberName(loginUser.getMemberName());
-		
-		System.out.println("결재등록메소드 왔음");
-		System.out.println(approval);
+
+		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
 		
 		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
 		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
@@ -84,17 +83,20 @@ public class ApprovalController {
 			aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
 			aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
 			aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
+			aFile.setApprovalFilePath(folder + "\\" + aFile.getReNameFileName());
+			int resultFile = approvalService.registerFile(aFile); // DB에 파일 정보 등록
 			
-			int resultFile = approvalService.registerFile(aFile);
+			if(resultFile > 0) {
+				System.out.println("파일 저장 성공");
+			}else {
+				System.out.println("파일 저장 실패");
+			}
 			
 		}
-		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
-		int resultFile = approvalService.registerFile(aFile); 		// DB에 파일 정보 등록
-		
 		
 		String path = ""; 		
 		if(resultApproval > 0) { // DB 저장여부 확인 후, 페이지 이동
-			path = "";
+			path = "index";
 		}else {
 			mv.addObject("msg", "결재등록or파일등록 실패");
 			path = "common/errorPage";
@@ -137,7 +139,7 @@ public class ApprovalController {
 	public void departmentSelect(@RequestParam("depType")int depType,
 								HttpServletResponse response) throws JsonIOException, IOException {
 		/*
-		 * 1 : 인사관리, 2 : IT개발팀, 3 : 재무팀
+		 * 1 : 인사관리, 2 : IT개발팀, 3 : 재무팀, 4 : 영업팀
 		 */
 		String depName = "";
 		
@@ -153,12 +155,10 @@ public class ApprovalController {
 			break;
 		}
 		ArrayList<Member> mList = memberService.printdepartMentMemberAll(depName);
-		System.out.println("메소드 작동중");
+		
 		if(!mList.isEmpty()) {
-			System.out.println("값 불러오기 성공");
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			gson.toJson(mList, response.getWriter());
-			System.out.println(mList);
 		}else {
 			System.out.println("부서별 회원 조회 실패(데이터없음)");
 		}
