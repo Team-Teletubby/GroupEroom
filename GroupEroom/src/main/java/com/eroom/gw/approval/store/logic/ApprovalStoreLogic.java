@@ -77,9 +77,9 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	// 파일 등록
 	@Override
-	public int insertFile(ApprovalFile file) {
+	public int insertFile(ApprovalFile aFile) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("approvalMapper.insertFile", file);
+		return sqlSession.insert("approvalMapper.insertFile", aFile);
 	}
 	
 	

@@ -32,14 +32,15 @@
 						<div class="col-md-11 mb">
 							<div class="write-Wrap">
 								<p>결재 기안하기</p>
-								<form>
+								<form action="approvalRegister.do" method="post" enctype="multipart/form-data">
 									<div class="write-form">
 										<p>기본 설정</p>
 										<div id="Document-type">
 											<table id="table">
 												<tr>
 													<th>문서 종류</th>
-													<td class="document-select"><select>
+													<td class="document-select" >
+													<select name="approvalType">
 															<option value="">문서 선택</option>
 															<option value="Cooperation">협조문</option>
 															<option value="">양식2</option>
@@ -67,7 +68,7 @@
 											<tr>
 												<th>결재자1</th>
 												<td align="center">
-													<input type="text" readOnly id="midApprovalId" name="midApprovalId" >
+													<input align="center" type="number" readOnly id="midApprovalId" name="approvalFirst" >
 												</td>
 												<td align="center">
 													<input type="text" readOnly id="midApprovalName" name="midApprovalName">
@@ -82,7 +83,7 @@
 											<tr>
 												<th>결재자2</th>
 												<td align="center">
-													<input type="text" readOnly id="finApprovalId" name="finApprovalId">
+													<input type="number" readOnly id="finApprovalId" name="approvalSecond">
 												</td>
 												<td align="center">
 													<input type="text" readOnly id="finApprovalName" name="finApprovalName">
@@ -97,7 +98,9 @@
 										</table>
 										<span>제목</span> 
 										<input type="text" name="approvalTitle">
-										<div id="summernote"></div>
+										<textarea id="summernote" name="approvalContents"></textarea>
+										<input type="file" name="uploadFile" multiple="multiple" />
+										<input type="text" name="src" />
 										<input type="submit" value="기안 제출하기">
 									</div>
 								</form>
@@ -190,7 +193,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary save">Save changes</button>
+					<button type="button" class="btn btn-primary save" data-dismiss="modal">Save changes</button>
 
 				</div>
 			</div>
@@ -271,33 +274,42 @@
         	});
         	
         	// 중간결재자/최종결재자 값 저장할 객체
-        	const approvalMembers = new Array(); 
+        	const approvalMembers = {};
         	
         	/* 중간결재자 클릭할 경우 */
         	$(".midApproval").click(function() {
 				const midTdArr = checked();
-        		approvalMembers.push(midTdArr);
-        		$(".midApprovalTextArea").html(approvalMembers[0]);
+        		approvalMembers.mid = midTdArr;
+        		
+        		$(".midApprovalTextArea").html(approvalMembers.mid.id+", "+approvalMembers.mid.name+", "+approvalMembers.mid.dept+", "+approvalMembers.mid.job);
         	});
         	
         	/* 최종결재자 클릭할 경우 */
         	$(".finApproval").click(function() {
         		const finTdArr = checked();
-        		approvalMembers.push(finTdArr);
-        		$(".finApprovalTextArea").html(approvalMembers[1]);
+        		approvalMembers.fin = finTdArr;
+        		
+        		$(".finApprovalTextArea").html(approvalMembers.fin.id+", "+approvalMembers.fin.name+", "+approvalMembers.fin.dept+", "+approvalMembers.fin.job);
         	});
         	
         	/* 선택 완료를 클릭할 경우 */
         	$(".save").click(function() {
-        		$("#midApprovalId").val(approvalMembers[0][0]);
-        		$("#midApprovalName").val(approvalMembers[0][1]);
-        		$("#midApprovalDept").val(approvalMembers[0][2]);
-        		$("#midApprovalJob").val(approvalMembers[0][3]);
         		
-        		$("#finApprovalId").val(approvalMembers[1][0]);
-        		$("#finApprovalName").val(approvalMembers[1][1]);
-        		$("#finApprovalDept").val(approvalMembers[1][2]);
-        		$("#finApprovalJob").val(approvalMembers[1][3]);
+        		$("#midApprovalId").val(approvalMembers.mid.id);
+        		$("#midApprovalName").val(approvalMembers.mid.name);
+        		$("#midApprovalDept").val(approvalMembers.mid.dept);
+        		$("#midApprovalJob").val(approvalMembers.mid.job);
+        		
+        		$("#finApprovalId").val(approvalMembers.fin.id);
+        		$("#finApprovalName").val(approvalMembers.fin.name);
+        		$("#finApprovalDept").val(approvalMembers.fin.dept);
+        		$("#finApprovalJob").val(approvalMembers.fin.job);
+        		
+        		// 배열 내부 요소 삭제
+        		approvalMembers.pop();
+        		approvalMembers.pop();
+        		
+        		$("#model").modal('hide');
         	});
         	
         	/* 선택한 체크 박스의 멤버 정보 가져오는 메소드 */
@@ -307,17 +319,29 @@
         		// 선택한 checkbox를 감싸고 있는 tr 선택
         		const tr = checked.parent().parent();
         		// td의 값들을 넣을 배열
-        		const tdArr = new Array();
-        		// 문자
-        		var str = "";
+        		const tdObj = {};
+
         		// 위에서 찾은 tr내에 있는 모든 td 선택
         		var td = tr.children();
         		
-        		td.each(function(index) {
-        			tdArr.push(td.eq(index+1).text());
-        		});
-        		return tdArr
+        		tdObj.id = td.eq(1).text();
+        		tdObj.name = td.eq(2).text();
+        		tdObj.dept = td.eq(3).text();
+        		tdObj.job = td.eq(4).text();
+   				
+        		// 체크박스 해제
+        		$("input:checkbox[name='member']").prop("checked",false);
+        		
+        		return tdObj;
+        		
         	};
+        	
+        	/* 배열의 특정 요소를 가지고 있는 객체 찾기 */
+        	function findObj(element, value) {
+        		if(element.Id === value) {
+        			return true;
+        		}
+        	}
         });
         
 	</script>
