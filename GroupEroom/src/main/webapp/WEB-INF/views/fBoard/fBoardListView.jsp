@@ -25,7 +25,11 @@
 						<h4>
 							<i class="fa fa-angle-right"></i> 게시글리스트
 						</h4>
-						<br>
+						<br><br><br>
+						<div class="searchbox">
+							
+						</div>
+						<br><br>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -54,51 +58,61 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<!-- ##############페이징 처리################# -->
-						<div align="center">
-							<div class="btn-group">
-								<!-- 이전 -->
-								<c:url var="before" value="fBoardListView.do">
-									<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
-								</c:url>
-								<c:if test="${pi.currentPage <= 1 }">
-									<button type="button" class="btn btn-default" disabled><i class="fa fa-caret-left"></i> 이전</button>
-								</c:if>
-								<c:if test="${pi.currentPage > 1 }">
-									<a href="${before }" class="btn btn-default"><i class="fa fa-caret-left"></i> 이전</a>&nbsp;
-								</c:if>
-
-								<!-- 페이지 -->
-								<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-									<c:url var="pagination" value="fBoardListView.do">
-										<c:param name="page" value="${p }"></c:param>
+						<div align="right">
+							<button onclick="location.href='fBoardWriteView.do'"
+								class="btn btn-theme03">글쓰기</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<br><br><br><br>
+							<!-- ##############페이징 처리################# -->
+							<div align="center">
+								<div class="btn-group">
+									<!-- 이전 -->
+									<c:url var="before" value="fBoardListView.do">
+										<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 									</c:url>
-									<c:if test="${p eq pi.currentPage }">
-										<button type="button" class="btn btn-default btn-theme">${p }</button>
-
+									<c:if test="${pi.currentPage <= 1 }">
+										<button type="button" class="btn btn-default" disabled>
+											<i class="fa fa-caret-left"></i> 이전
+										</button>
 									</c:if>
-									<c:if test="${p ne pi.currentPage }">
-										<a href="${pagination }" class="btn btn-default">${p }</a>&nbsp;
+									<c:if test="${pi.currentPage > 1 }">
+										<a href="${before }" class="btn btn-default"><i
+											class="fa fa-caret-left"></i> 이전</a>&nbsp;
+								</c:if>
+
+									<!-- 페이지 -->
+									<c:forEach var="p" begin="${pi.startPage }"
+										end="${pi.endPage }">
+										<c:url var="pagination" value="fBoardListView.do">
+											<c:param name="page" value="${p }"></c:param>
+										</c:url>
+										<c:if test="${p eq pi.currentPage }">
+											<button type="button" class="btn btn-default btn-theme">${p }</button>
+
+										</c:if>
+										<c:if test="${p ne pi.currentPage }">
+											<a href="${pagination }" class="btn btn-default">${p }</a>&nbsp;
 									</c:if>
-								</c:forEach>
+									</c:forEach>
 
 
-								<!-- 다음 -->
-								<c:url var="after" value="fBoardListView.do">
-									<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-								</c:url>
-								<c:if test="${pi.currentPage >= pi.maxPage }">
-									<button type="button" class="btn btn-default" disabled>다음 <i class="fa fa-caret-right"></i></button>
+									<!-- 다음 -->
+									<c:url var="after" value="fBoardListView.do">
+										<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+									</c:url>
+									<c:if test="${pi.currentPage >= pi.maxPage }">
+										<button type="button" class="btn btn-default" disabled>
+											다음 <i class="fa fa-caret-right"></i>
+										</button>
+									</c:if>
+									<c:if test="${pi.currentPage < pi.maxPage }">
+										<a href="${after }" class="btn btn-default">다음 <i
+											class="fa fa-caret-right"></i></a>&nbsp;
 								</c:if>
-								<c:if test="${pi.currentPage < pi.maxPage }">
-									<a href="${after }" class="btn btn-default">다음 <i class="fa fa-caret-right"></i></a>&nbsp;
-								</c:if>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div align="right">
-					<button onclick="location.href='fBoardWriteView.do'" class="btn btn-theme03">글쓰기</button>
 				</div>
 			</div>
 		</section>

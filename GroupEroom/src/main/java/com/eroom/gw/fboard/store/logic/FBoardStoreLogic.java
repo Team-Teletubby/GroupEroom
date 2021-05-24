@@ -71,13 +71,13 @@ public class FBoardStoreLogic implements FBoardStore {
 	@Override
 	public ArrayList<FreeboardCmt> selectAllCmt(int fBoardNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("fBoardMapper.selectAllCmtList", fBoardNo);
 	}
 
 	@Override
 	public int insertFBoardCmt(FreeboardCmt fBoardCmt) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("fBoardMapper.insertCmt", fBoardCmt);
 	}
 
 	@Override

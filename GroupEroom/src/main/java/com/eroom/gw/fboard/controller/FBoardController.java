@@ -30,6 +30,9 @@ import com.eroom.gw.fboard.domain.FreeboardCmt;
 import com.eroom.gw.fboard.domain.FreeboardFile;
 import com.eroom.gw.fboard.service.FBoardService;
 import com.eroom.gw.member.domain.Member;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class FBoardController {
@@ -91,6 +94,16 @@ public class FBoardController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		fBoard.setMemberId(loginUser.getMemberId());
 		
+		int result = 0;
+		String path = "";
+		result = fService.registerFBoard(fBoard);
+		if(result > 0) {
+			path = "redirect:fBoardListView.do";
+		}else {
+			mv.addObject("msg", "게시글 등록 실패");
+			path = "common/errorPage";
+		}
+		
 		//파일 저장경로 설정
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "/fUploadFiles";
@@ -112,7 +125,7 @@ public class FBoardController {
 				String originalFileName = mf.get(i).getOriginalFilename();
 				//파일명 재설정
 				String renameFileName = sdf.format(new Date(System.currentTimeMillis())) 
-										+ "." + originalFileName.substring(originalFileName.lastIndexOf("."), 1);
+										+ "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
 				//파일경로,사이즈
 				String filePath = folder + "/" + renameFileName;
 				long fileSize = mf.get(i).getSize();
@@ -122,15 +135,6 @@ public class FBoardController {
 			}
 		}
 		
-		int result = 0;
-		String path = "";
-		result = fService.registerFBoard(fBoard);
-		if(result > 0) {
-			path = "redirect:fBoardListView.do";
-		}else {
-			mv.addObject("msg", "게시글 등록 실패");
-			path = "common/errorPage";
-		}
 		mv.setViewName(path);
 		return mv;
 	}
@@ -188,14 +192,29 @@ public class FBoardController {
 	
 //댓글리스트
 	@RequestMapping(value="fbCmtList.do")
-	public void getFBoardCmtList(HttpServletResponse response, @RequestParam("fBoardNo") int fBoardNo) {
-		
+	public void getFBoardCmtList(HttpServletResponse response, @RequestParam("fBoardNo") int fBoardNo) throws JsonIOException, IOException {
+		ArrayList<FreeboardCmt> cmtList = fService.printAllCmt(fBoardNo);
+		if(!cmtList.isEmpty()) {
+			//gson형태로 빌드
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			//arraylist를 gson형태로 변환
+			gson.toJson(cmtList, response.getWriter());
+		}else {
+			System.out.println("데이터가 없습니다");
+		}
 	}
 	
 //댓글등록
 	@RequestMapping(value="fbCmtAdd.do", method=RequestMethod.POST)
 	public String addFBoardCmt(@ModelAttribute FreeboardCmt fBoardCmt, HttpSession session) {
-		return "";
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		fBoardCmt.setMemberId(loginUser.getMemberId());
+		int result = fService.registerFBoardCmt(fBoardCmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 //댓글수정

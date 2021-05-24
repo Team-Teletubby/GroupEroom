@@ -53,30 +53,127 @@
 							</div>
 							<div class="attachment-mail">
 								<p>
-									<span><i class="fa fa-paperclip"></i> 첨부파일 </span> <a href="#">Download
-										all attachments</a>
+									<span><i class="fa fa-paperclip"></i> 첨부파일 </span> <a href="#">Download all attachments</a>
 								</p>
 								<ul>
 								</ul>
 							</div>
-							<div class="button" align="center">
-								<button onclick="location.href='fBoardListView.do'" class="btn btn-theme03">목록으로</button>
-<%-- 								<c:if test="${loginUser.memberId == fBoard.memberId }"> --%>
-								<c:url var="fModify" value="fBoardModifyView.do">
-									<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
-								</c:url>
-								<c:url var="fDelete" value="fBoardDelete.do">
-									<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
-								</c:url>
-									<button onclick="location.href='${fModify}'" class="btn btn-theme02">수정</button>
-									<button onclick="location.href='${fDelete}'" class="btn btn-theme04">삭제</button>
-								<%-- </c:if> --%>
+							<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$댓글$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+							<!-- 댓글등록 -->
+							<div class="card mb-2">
+								<div class="card-header bg-light">
+									<i class="fa fa-comment fa"></i> REPLY
+								</div>
+								<div class="card-body">
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item"><textarea
+												class="form-control" id="cmtContents"
+												rows="3" placeholder="댓글을 입력하세요."></textarea>
+											<div align="right" style="margin-top: 2px">
+												<button class="btn btn-sm btn-theme03" id="cmtSubmit">POST</button>
+											</div></li>
+									</ul>
+								</div>
+								<!-- 댓글조회 -->
+								<div>
+									<table align="center" width="500" border="1" cellspacing="0"
+										id="cmttb">
+										<thead>
+											<tr>
+												<td colspan="3"><b id="cmtCount"></b></td>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+								<br>
+								<br>
+								<br>
+								<div class="button" align="center">
+									<button onclick="location.href='fBoardListView.do'"
+										class="btn btn-theme03">목록으로</button>
+									<%-- 								<c:if test="${loginUser.memberId == fBoard.memberId }"> --%>
+									<c:url var="fModify" value="fBoardModifyView.do">
+										<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+									</c:url>
+									<c:url var="fDelete" value="fBoardDelete.do">
+										<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+									</c:url>
+									<button onclick="location.href='${fModify}'"
+										class="btn btn-theme02">수정</button>
+									<button onclick="location.href='${fDelete}'"
+										class="btn btn-theme04">삭제</button>
+									<%-- </c:if> --%>
+								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</section>
 	</section>
+	
+	<script>
+		$(function() {
+			getCmtList();
+			$("#cmtSubmit").on("click", function() {
+				var fBoardNo = '${fBoard.fBoardNo}';
+				var cmtContent = $("#cmtContents").val();
+				$.ajax({
+					url : "fbCmtAdd.do",
+					type : "post",
+					data : {"fBoardNo" : fBoardNo, "cmtContents" : cmtContents},
+					success : function(data) {
+						if(data == "success") {
+							getCmtList();
+							$("#cmtContents").val("");
+						}else{
+							alert("댓글 등록 실패");
+						}
+					},
+					error : function() {						
+					}
+				});
+			});
+		});
+		
+		function getCmtList() {
+			var fBoardNo = '${fBoard.fBoardNo}'
+			$.ajax({
+				url : "fbCmtList.do",
+				type : "get",
+				data : {"fBoardNo" : fBoardNo},
+				dataType : "json",
+				success : function(data) {
+					var $tableBody = $("#cmttb tbody");
+					$tableBody.html(""); //비워주기 후 추가
+					var $tr;
+					var $memberId;
+					var $cmtContents;
+					var $enrollDate;
+					var $btnArea;
+					$("#cmtCount").text("댓글 (" + data.length + ")"); // 댓글 개수 표시
+					if(data.length > 0) {
+						for(var i in data) {
+							$tr = $("<tr>"); /* tr태그가 만들어짐 */
+							$memberId = $("<td width='100'>").text(data[i].cmtWriter);
+							$enrollDate = $("<td width='100'>").text(data[i].enrollDate);
+							$btnArea = $("<td>")
+							.append("<a href='#' onclick='fbCmtModify(this,"+fBoardNo+","+data[i].cmtNo+",\""+data[i].cmtContents+"\");'>수정 </a>") //수정버튼 만들기			
+							.append("<a href='#' onclick='fbCmtDelete("+fBoardNo+","+data[i].cmtNo+");'> 삭제</a>"); //삭제버튼 만들기
+							$cmtContents = $("<td>").text(data[i].cmtContents);
+							$tr.append($memberId);
+							$tr.append($enrollDate);
+							$tr.append($btnArea); //수정,삭제버튼 만들기
+							$tr.append($cmtContents);
+							$tableBody.append($tr);
+						}
+					}
+				},
+				error : function(data) {
+					
+				}
+			});
+		}
+	</script>
 </body>
 </html>
