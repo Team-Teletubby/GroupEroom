@@ -27,6 +27,8 @@ import com.eroom.gw.approval.domain.Approval;
 import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.approval.service.ApprovalService;
+import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Pagination;
 import com.eroom.gw.common.Search;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.service.MemberService;
@@ -51,7 +53,7 @@ public class ApprovalController {
 
 	// 결재 페이지로 이동
 	@RequestMapping(value = "approvalWriteView.do", method=RequestMethod.GET)
-	public String approvalWriteView() {
+	public String approvalWriteView(@RequestParam("type")String type) {
 		return "approval/approvalWrite";
 	}
 
@@ -63,7 +65,7 @@ public class ApprovalController {
 		
 		ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
 		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
-		Member loginUser = (Member)session.getAttribute("loginUser"); 		// 멤버 객체에 세션 저장
+		Member loginUser = (Member)session.getAttribute("LoginUser"); 		// 멤버 객체에 세션 저장
 		approval.setMemberId(loginUser.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
 		approval.setMemberName(loginUser.getMemberName());
 
@@ -105,10 +107,41 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 글 List 보기 (페이징 처리도)
-	public ModelAndView approvalList(ModelAndView mv, @RequestParam(value="page", required=false)Integer page,
-									@RequestParam(value="boardType")String boardType) {
-
+	// 진행함 List 보기 (페이징 처리도)
+	@RequestMapping(value="ProgressBoard.do", method=RequestMethod.POST)
+	public ModelAndView approvalList(ModelAndView mv, 
+									HttpServletRequest request,
+									@RequestParam(value="page", required=false)Integer page) {
+		//======================== 글 페이징 ========================
+		// jsp에 page가 존재할 경우, 1로 변경
+		int currentPage = (page != null) ? page : 1;
+		// 진행함 게시판 타입
+		String boardType = "N";
+		int listCount = approvalService.getListCount(boardType);
+		// ======= 글 갯수 가져온거 확인용 (나중에 지우기) =======
+		System.out.println("가져온 글 갯수 : " + listCount); 
+		// =======================================================
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		//===========================================================
+		
+		//======================== 글 리스트 ========================
+		// 세션에 저장된 멤버객체 가져오기
+		HttpSession session = request.getSession();
+		Member user = (Member)session.getAttribute("LoginUser");
+		
+		// DB에서 사용할 로그인한 ID값을 Approval객체에 저장
+		Approval approval = new Approval();
+		approval.setMemberId(user.getMemberId());
+		// 글 목록 가져오기
+		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
+		
+		if(!aList.isEmpty()) {
+			mv.addObject("aList", aList);
+			mv.addObject("page", page);
+			
+		}
+		
+			
 		return mv;
 	}
 

@@ -24,10 +24,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.insertApproval(approval);
 	}
 
+	// 글 리스트
 	@Override
-	public ArrayList<Approval> printAll(PageInfo pi, String boardType) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Approval> printAll(PageInfo pi, Approval approval) {
+		return approvalStore.selectAllList(pi, approval);
 	}
 
 	@Override
@@ -48,6 +48,14 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return 0;
 	}
 
+	// 조건에 맞는 글 갯수 가져오기
+	@Override
+	public int getListCount(String boardType) {
+		return approvalStore.selectListCount(boardType);
+	}
+	
+	//================ 댓글 ================
+	
 	@Override
 	public int registerReply(ApprovalReply reply) {
 		// TODO Auto-generated method stub

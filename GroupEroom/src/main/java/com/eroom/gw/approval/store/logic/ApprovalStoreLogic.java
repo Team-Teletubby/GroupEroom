@@ -3,6 +3,7 @@ package com.eroom.gw.approval.store.logic;
 import java.util.ArrayList;
 
 import org.apache.ibatis.jdbc.SQL;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,12 +26,12 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.insert("approvalMapper.insertApproval", approval);
 	}
 
+	// 글 리스트
 	@Override
-	public ArrayList<Approval> selectAllList(PageInfo pi, String boardType) {
-		// TODO Auto-generated method stub
-		
-		/* sqlSession.selectList( , , ); */
-		return null;
+	public ArrayList<Approval> selectAllList(PageInfo pi, Approval approval) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectList", approval, rowBounds);
 	}
 
 	@Override
@@ -45,6 +46,14 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return 0;
 	}
 
+	// 조건에 맞는 글 갯수 가져오기
+	@Override
+	public int selectListCount(String boardType) {
+		return sqlSession.selectOne("approvalMapper.selectListCount", boardType);
+	}
+	
+	//================ 댓글 ================
+	
 	@Override
 	public int updateState(Approval approval) {
 		// TODO Auto-generated method stub
@@ -81,7 +90,5 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("approvalMapper.insertFile", aFile);
 	}
-	
-	
 
 }

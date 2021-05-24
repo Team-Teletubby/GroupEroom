@@ -19,10 +19,10 @@ public interface ApprovalStore {
 	
 	/**
 	 * 게시물 전체 조회
-	 * @param pi
+	 * @param pi, approval
 	 * @return
 	 */
-	public ArrayList<Approval> selectAllList(PageInfo pi, String boardType);
+	public ArrayList<Approval> selectAllList(PageInfo pi, Approval approval);
 	
 	/**
 	 * 게시물 상세 조회
@@ -44,6 +44,13 @@ public interface ApprovalStore {
 	 * @return
 	 */
 	public int updateState(Approval approval);
+	
+	/**
+	 * 조건에 맞는 글 갯수 가져오기
+	 * @param boardType
+	 * @return
+	 */
+	public int selectListCount(String boardType);
 	
 	
 	/**

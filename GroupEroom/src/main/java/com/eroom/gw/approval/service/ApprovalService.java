@@ -7,6 +7,10 @@ import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.common.PageInfo;
 
+/**
+ * @author user1
+ *
+ */
 public interface ApprovalService {
 	
 
@@ -19,10 +23,10 @@ public interface ApprovalService {
 	
 	/**
 	 * 게시물 전체 조회
-	 * @param pi
+	 * @param pi, approval
 	 * @return
 	 */
-	public ArrayList<Approval> printAll(PageInfo pi, String boardType);
+	public ArrayList<Approval> printAll(PageInfo pi, Approval approval);
 	
 	/**
 	 * 게시물 상세 조회
@@ -45,6 +49,13 @@ public interface ApprovalService {
 	 */
 	public int changeState(Approval approval);
 
+	/**
+	 * 조건에 맞는 글 갯수 가져오기
+	 * @param boardType
+	 * @return
+	 */
+	public int getListCount(String boardType);
+	
 	/**
 	 * 댓글 등록
 	 * @param reply
