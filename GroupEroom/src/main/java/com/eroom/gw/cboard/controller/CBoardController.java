@@ -22,11 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.CBoardCmt;
+import com.eroom.gw.cboard.domain.Reply;
 import com.eroom.gw.cboard.service.CBoardService;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
 import com.eroom.gw.common.Search;
+import com.eroom.gw.member.domain.Member;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class CBoardController {
@@ -73,34 +76,51 @@ public class CBoardController {
 		}
 	}
 	
-	//작성폼
-	@RequestMapping(value="boardWriteView.kh", method=RequestMethod.GET)
+	//작성폼 :)
+	@RequestMapping(value="cBoardWriteView.do", method=RequestMethod.GET)
 	public String boardWriteView() {
-		return "";
+		return "cBoard/cBoardWriteView";
 	}
 	
-	// 게시글 등록
-	@RequestMapping(value="boardRegister.kh", method=RequestMethod.POST)
+	// 게시글 등록 :)
+	@RequestMapping(value="cBoardRegister.do", method=RequestMethod.POST)
 	public ModelAndView boardRegister(ModelAndView mv, 
 			@ModelAttribute CBoard cBoard, 
 			@RequestParam(value="uploadFile", required=false)MultipartFile uploadFile, 
 			HttpServletRequest request) {
 		
+		//서버에 파일 저장
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String renameFileName = saveFile(uploadFile, request);
+			if(renameFileName !=null) {
+				cBoard.setOriginalFileName(uploadFile.getOriginalFilename());
+				cBoard.setRenameFileName(renameFileName);
+			}
+		}
 		
-		return mv ;
-		
+		//디비에 파일 저장
+		int result = service.registerBoard(cBoard);
+		String path = "";
+		if(result>0) {
+			path = "redirect:cBoardListView.do";
+		}else {
+			mv.addObject("msg", "게시글 등록 실패..");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
+		return mv;
 	}
 
 	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
 		// 파일 저장 경로 설정
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\buploadFiles";
+		String savePath = root + "\\cBoardFiles";
 		
 		
 		// 저장 폴더 설정
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
-		if(!folder. exists()) {
+		if(!folder.exists()) {
 			folder.mkdir();
 		}
 		// 파일명 변경하기
@@ -138,36 +158,54 @@ public class CBoardController {
 		return mv;
 	}
 	
-	// 게시글 수정페이지 이동
-	@RequestMapping(value="boardModifyView.kh", method=RequestMethod.GET)
-	public String boardModifyView(@RequestParam("boardNo")int boardNo, Model model) {
-		return null;
-		
+	// 게시글 수정페이지 이동 :)
+	@RequestMapping(value="cBoardModifyView.do", method=RequestMethod.GET)
+	public String boardModifyView(@RequestParam("cBoardNo")int cBoardNo, Model model) {
+		CBoard cBoard = service.printOne(cBoardNo);
+		if(cBoard !=null) {
+			model.addAttribute("cBoard", cBoard);
+			return "cBoard/cBoardModifyView";
+		}else {
+			return "common/erroePage";
+		}
 	}
 	
-	@RequestMapping(value="boardUpdate.kh", method=RequestMethod.POST)
+	// 게시글 수정
+	@RequestMapping(value="cBoardModify.do", method=RequestMethod.POST)
 	public ModelAndView boardModify(ModelAndView mv,
 									HttpServletRequest request,
 									@ModelAttribute CBoard cBoard,
 									@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
 
+		//파일 삭제 후 업로드 (수정)
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			if(cBoard.getOriginalFileName() !="") {
+				deleteFile(cBoard.getRenameFileName(), request);
+			}
+			
+			//새 파일 업로드
+			String renameFileName = saveFile(reloadFile, request);
+			if(renameFileName !=null) {
+				cBoard.setOriginalFileName(reloadFile.getOriginalFilename());
+				cBoard.setRenameFileName(renameFileName);
+			}
+		}
+		//디비 수정
+		int result = service.modifyBoard(cBoard);
+		if(result>0) {
+			mv.setViewName("redirect:cBoardListView.do");
+		}else {
+			mv.addObject("msg","게시글 수정 실패").setViewName("common/errorPage");
+		}
 		return mv;
 		
 	}
-//	public ModelAndView boardModifyView(@RequestParam("boardNo")int boardNo, ModelAndView mv) {
-//		Board board = bService.printOne(boardNo);
-//		if(board !=null) {
-//			mv.addObject("board",board).setViewName("board/boardUpdateView");
-//		}else {
-//			
-//		}
-//		return mv;
-//	}
+
 	
-	//게시글 삭제
-	@RequestMapping(value="boardDelete.kh", method=RequestMethod.GET)
+	//게시글 삭제 :)
+	@RequestMapping(value="cBoardDelete.do", method=RequestMethod.GET)
 	public String boardDelete(Model model, 
-					@RequestParam("boardNo") int boardNo,
+					@RequestParam("cBoardNo") int cBoardNo,
 					@RequestParam("renameFileName") String fileName,
 					HttpServletRequest request) {
 		
@@ -176,9 +214,9 @@ public class CBoardController {
 			deleteFile(fileName, request);
 		}	
 		
-		int result = service.removeBoard(boardNo);
+		int result = service.removeBoard(cBoardNo);
 		if(result>0) {
-			return "redirect:boardList.kh";
+			return "redirect:cBoardListView.do";
 		}else {
 			model.addAttribute("msg","삭제실패");
 			return "common/errorPgae";			
@@ -187,33 +225,63 @@ public class CBoardController {
 	
 	public void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\buploadFiles";
+		String savePath = root + "\\cBoardFiles";
 		File file = new File(savePath + "\\" + fileName);
 		if(file.exists()) {
 			file.delete();
 		}
 	}
 	
-	@ResponseBody //스트링 보낼때만 사용
-	@RequestMapping(value="addReply.kh", method=RequestMethod.POST)
-	public String addCmt(@ModelAttribute CBoardCmt cmt, HttpSession session) {
-		return null;
-	}
-	
-	//댓글목록
-	@RequestMapping(value="replyList.kh", method=RequestMethod.GET)
-	public void getCmtList(HttpServletResponse response, @RequestParam("boardNo") int boardNo) throws Exception {
 
-	}
-	
-	// 댓글 삭제
-	@ResponseBody //성공,실패 얘네 스트링이자너 
-	@RequestMapping(value="deleteReply.kh", method=RequestMethod.GET)
-	public String removeCmt(@ModelAttribute CBoardCmt cmt, Model model) {
-		return null;
-		
-		
-	}
+	//댓글zone..====================================
 	
 
+	//댓글목록 :)
+	@RequestMapping(value="cBoardReply.do", method=RequestMethod.GET)
+	public void getReplyList(HttpServletResponse response, @RequestParam("cBoardNo") int cBoardNo) throws Exception {
+		System.out.println(cBoardNo);
+		ArrayList<Reply> rList = service.printAllReply(cBoardNo);
+		if(!rList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); // 날짜 포맷 변경!
+			gson.toJson(rList, response.getWriter());
+		}else {
+			System.out.println("데이터가 없습니다.");
+		}
+	}
+	//댓글등록 :)
+	@ResponseBody
+	@RequestMapping(value="cBoardAddReply.do", method=RequestMethod.POST)
+	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		reply.setMemberId(loginUser.getMemberId());
+		int result = service.registerReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	//댓글수정 :)
+	@ResponseBody
+	@RequestMapping(value="cBoardModifyReply.do", method=RequestMethod.POST)
+	public String modifyReply(@ModelAttribute Reply reply) {
+		int result = service.modifyReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	//댓글삭제 :)
+	@ResponseBody
+	@RequestMapping(value="cBoardDeleteReply.do", method=RequestMethod.GET)
+	public String removeReply(@ModelAttribute Reply reply) {
+		int result = service.removeReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 }

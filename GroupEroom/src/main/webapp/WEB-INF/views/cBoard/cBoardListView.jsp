@@ -103,7 +103,7 @@
 			</div>
 			</div>
               <div align="right">
-              	<a href="#" class="btn btn-theme02">글 쓰기</a>
+              	<a href="cBoardWriteView.do" class="btn btn-theme02">글 쓰기</a>
               </div>
             </div>
           </div>

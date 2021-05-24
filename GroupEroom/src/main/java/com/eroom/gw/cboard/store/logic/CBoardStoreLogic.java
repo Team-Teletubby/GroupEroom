@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.CBoardCmt;
+import com.eroom.gw.cboard.domain.Reply;
 import com.eroom.gw.cboard.store.CBoardStore;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Search;
@@ -43,44 +43,17 @@ public class CBoardStoreLogic implements CBoardStore{
 
 	@Override
 	public int insertBoard(CBoard cBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("cBoardMapper.insertcBoard",cBoard);
 	}
 
 	@Override
 	public int updateBoard(CBoard cBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("cBoardMapper.updatecBoard", cBoard);
 	}
 
 	@Override
-	public int deleteBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<CBoardCmt> selectAllCmt(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insertCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteBoard(int cBoardNo) {
+		return sqlSession.delete("cBoardMapper.deletecBoard",cBoardNo);
 	}
 
 	@Override
@@ -95,6 +68,25 @@ public class CBoardStoreLogic implements CBoardStore{
 		return sqlSession.selectOne("cBoardMapper.selectSearchListCount",search);
 	}
 
+	@Override
+	public ArrayList<Reply> selectAllReply(int cBoardNo) {
+		return (ArrayList)sqlSession.selectList("cBoardMapper.selectReplyList", cBoardNo);
+	}
 
+	@Override
+	public int insertReply(Reply reply) {
+		return sqlSession.insert("cBoardMapper.insertReply", reply);
+	}
 
+	@Override
+	public int updateReply(Reply reply) {
+		return sqlSession.update("cBoardMapper.updateReply", reply);
+	}
+
+	@Override
+	public int deleteReply(Reply reply) {
+		return sqlSession.delete("cBoardMapper.deleteReply", reply);
+	}
+
+	
 }

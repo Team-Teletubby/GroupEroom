@@ -3,7 +3,7 @@ package com.eroom.gw.cboard.store;
 import java.util.ArrayList;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.CBoardCmt;
+import com.eroom.gw.cboard.domain.Reply;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Search;
 
@@ -16,14 +16,13 @@ public interface CBoardStore {
 	public CBoard selectOne(int cBoardNo);
 	public int insertBoard(CBoard cBoard);
 	public int updateBoard(CBoard cBoard);
-	public int deleteBoard(int boardNo);
+	public int deleteBoard(int cBoardNo);
 	
-	public ArrayList<CBoardCmt> selectAllCmt(int cBoardNo);
-	public int insertCmt(CBoardCmt cmt);
-	public int updateCmt(CBoardCmt cmt);
-	public int deleteCmt(CBoardCmt cmt);
+	public ArrayList<Reply> selectAllReply(int cBoardNo);
+	public int insertReply(Reply reply);
+	public int updateReply(Reply reply);
+	public int deleteReply(Reply reply);
 	
-	//검색짜증
 	public ArrayList<CBoard> selectSearchList(Search search, PageInfo pi);
 	public int selectSearchListCount(Search search);
 

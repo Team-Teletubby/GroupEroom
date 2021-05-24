@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eroom.gw.cboard.domain.CBoard;
-import com.eroom.gw.cboard.domain.CBoardCmt;
+import com.eroom.gw.cboard.domain.Reply;
 import com.eroom.gw.cboard.service.CBoardService;
 import com.eroom.gw.cboard.store.CBoardStore;
 import com.eroom.gw.common.PageInfo;
@@ -40,46 +40,18 @@ public class CBoardServiceImpl implements CBoardService{
 
 	@Override
 	public int registerBoard(CBoard cBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.insertBoard(cBoard);
 	}
 
 	@Override
 	public int modifyBoard(CBoard cBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.updateBoard(cBoard);
 	}
 
 	@Override
 	public int removeBoard(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.deleteBoard(cBoardNo);
 	}
-
-	@Override
-	public ArrayList<CBoardCmt> printAllCmt(int cBoardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int registerCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int modifyCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int removeCmt(CBoardCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
 	//검색
 	@Override
@@ -90,6 +62,28 @@ public class CBoardServiceImpl implements CBoardService{
 	@Override
 	public int getSearchListCount(Search search) {
 		return store.selectSearchListCount(search);
+	}
+
+	
+	//댓글쓰,,
+	@Override
+	public ArrayList<Reply> printAllReply(int cBoardNo) {
+		return store.selectAllReply(cBoardNo);
+	}
+
+	@Override
+	public int registerReply(Reply reply) {
+		return store.insertReply(reply);
+	}
+
+	@Override
+	public int modifyReply(Reply reply) {
+		return store.updateReply(reply);
+	}
+
+	@Override
+	public int removeReply(Reply reply) {
+		return store.deleteReply(reply);
 	}
 
 	

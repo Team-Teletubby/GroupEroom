@@ -11,8 +11,8 @@
 		<result property="cBoardContents" column="C_BOARD_CONTENTS"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
 		<result property="hits" column="HITS"></result>
-		<result property="originalFile" column="ORIGINAL_FILE"></result>
-		<result property="renameFile" column="RENAME_FILE"></result>
+		<result property="originalFileName" column="ORIGINAL_FILE"></result>
+		<result property="renameFileName" column="RENAME_FILE"></result>
 	</resultMap>
 
 	
@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="selectOne" resultMap="cBoardResultMap" parameterType="_int">
-		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS
+		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS, ORIGINAL_FILE, RENAME_FILE
 		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) 
 		WHERE C_BOARD_NO = #{cBoardNo}
 		ORDER BY C_BOARD_NO DESC
@@ -50,4 +50,48 @@
 	<update id="updateCount">
 		UPDATE CLUBBOARD SET HITS = HITS + 1 WHERE C_BOARD_NO = #{boardNo}
 	</update>
+	
+	<insert id="insertcBoard">
+		INSERT INTO CLUBBOARD VALUES (CBOARD_SEQ.NEXTVAL,#{memberId},#{cBoardTitle},#{cBoardContents},SYSDATE,0, #{originalFileName}, #{renameFileName})
+	</insert>
+	
+	<delete id="deletecBoard" parameterType="int">
+		DELETE FROM CLUBBOARD WHERE C_BOARD_NO = #{cBoardNo}
+	</delete>
+	
+	<update id="updatecBoard">
+		UPDATE CLUBBOARD SET C_BOARD_TITLE = #{cBoardTitle}, C_BOARD_CONTENTS = #{cBoardContents}, ORIGINAL_FILE = #{originalFileName} , RENAME_FILE = #{renameFileName}
+		WHERE C_BOARD_NO = #{cBoardNo}
+	</update>
+
+<!--============== 댓글 ================-->
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="replyNo" column="REPLY_NO"/>
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="rCreateDate" column="R_CREATE_DATE" />
+		<result property="cBoardNo" column="C_BOARD_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+	</resultMap>
+
+	<select id="selectReplyList" resultMap="replyResultMap">
+		SELECT REPLY_NO, REPLY_CONTENT, R_CREATE_DATE, C_BOARD_NO, MEMBER_ID, MEMBER_NAME
+		FROM CLUBBOARD_REPLY JOIN MEMBER USING(MEMBER_ID)
+		WHERE C_BOARD_NO = #{cBoardNo } ORDER BY REPLY_NO ASC
+	</select>
+	
+	<insert id="insertReply">
+		INSERT INTO CLUBBOARD_REPLY
+		VALUES(CBOARD_REPLY_SEQ.NEXTVAL, #{replyContent}, SYSDATE, #{cBoardNo},#{memberId})
+	</insert>
+	
+	<update id="updateReply">
+		UPDATE CLUBBOARD_REPLY SET REPLY_CONTENT = #{replyContent}
+		WHERE REPLY_NO = #{replyNo}
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE FROM CLUBBOARD_REPLY WHERE REPLY_NO = #{replyNo}
+	</delete>
+
 </mapper>

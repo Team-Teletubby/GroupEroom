@@ -11,13 +11,13 @@ public class CBoard {
 	private String cBoardContents;
 	private Date enrollDate;
 	private int hits;
-	private String originalFile;
-	private String renameFile;
+	private String originalFileName;
+	private String renameFileName;
 	
 	public CBoard() {}
 
 	public CBoard(int cBoardNo, int memberId, String memberName, String cBoardTitle, String cBoardContents,
-			Date enrollDate, int hits, String originalFile, String renameFile) {
+			Date enrollDate, int hits, String originalFileName, String renameFileName) {
 		super();
 		this.cBoardNo = cBoardNo;
 		this.memberId = memberId;
@@ -26,8 +26,8 @@ public class CBoard {
 		this.cBoardContents = cBoardContents;
 		this.enrollDate = enrollDate;
 		this.hits = hits;
-		this.originalFile = originalFile;
-		this.renameFile = renameFile;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
 	}
 
 	public int getcBoardNo() {
@@ -86,27 +86,27 @@ public class CBoard {
 		this.hits = hits;
 	}
 
-	public String getOriginalFile() {
-		return originalFile;
+	public String getOriginalFileName() {
+		return originalFileName;
 	}
 
-	public void setOriginalFile(String originalFile) {
-		this.originalFile = originalFile;
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
 	}
 
-	public String getRenameFile() {
-		return renameFile;
+	public String getRenameFileName() {
+		return renameFileName;
 	}
 
-	public void setRenameFile(String renameFile) {
-		this.renameFile = renameFile;
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 
 	@Override
 	public String toString() {
 		return "CBoard [cBoardNo=" + cBoardNo + ", memberId=" + memberId + ", memberName=" + memberName
 				+ ", cBoardTitle=" + cBoardTitle + ", cBoardContents=" + cBoardContents + ", enrollDate=" + enrollDate
-				+ ", hits=" + hits + ", originalFile=" + originalFile + ", renameFile=" + renameFile + "]";
+				+ ", hits=" + hits + ", originalFile=" + originalFileName + ", renameFileName=" + renameFileName + "]";
 	}
 	
 	
