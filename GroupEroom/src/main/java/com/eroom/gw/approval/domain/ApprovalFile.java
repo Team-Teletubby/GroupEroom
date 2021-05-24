@@ -10,7 +10,7 @@ public class ApprovalFile {
 	private String originalFileName;
 	private String reNameFileName;
 	private String approvalFilePath;
-	private int approvalFileSize;
+	private long approvalFileSize;
 	private Date approvalUploadTime;
 	private int approvalNo;
 	
@@ -19,7 +19,7 @@ public class ApprovalFile {
 		super();
 		
 	}
-	public ApprovalFile(int approvalFileNo, String originalFileName, String reNameFileName, String approvalFilePath, int approvalFileSize,
+	public ApprovalFile(int approvalFileNo, String originalFileName, String reNameFileName, String approvalFilePath, long approvalFileSize,
 			Date approvalUploadTime, int approvalNo) {
 		super();
 		this.approvalFileNo = approvalFileNo;
@@ -56,10 +56,10 @@ public class ApprovalFile {
 	public void setApprovalFilePath(String approvalFilePath) {
 		this.approvalFilePath = approvalFilePath;
 	}
-	public int getApprovalFileSize() {
+	public long getApprovalFileSize() {
 		return approvalFileSize;
 	}
-	public void setApprovalFileSize(int approvalFileSize) {
+	public void setApprovalFileSize(long approvalFileSize) {
 		this.approvalFileSize = approvalFileSize;
 	}
 	public Date getApprovalUploadTime() {

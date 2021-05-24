@@ -74,8 +74,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	// 파일 등록
 	@Override
-	public int registerFile(ApprovalFile file) {
-		return approvalStore.insertFile(file);
+	public int registerFile(ApprovalFile aFile) {
+		return approvalStore.insertFile(aFile);
 	}
 
 }

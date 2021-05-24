@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.eroom.gw.approval.domain.Approval" alias="Approval" />
+		<typeAlias type="com.eroom.gw.approval.domain.ApprovalFile" alias="ApprovalFile" />
 		<typeAlias type="com.eroom.gw.mail.domain.Mail" alias="Mail" />
 		<typeAlias type="com.eroom.gw.mail.domain.MailFile" alias="MailFile" />
 		<typeAlias type="com.eroom.gw.fboard.domain.Freeboard" alias="Freeboard" />

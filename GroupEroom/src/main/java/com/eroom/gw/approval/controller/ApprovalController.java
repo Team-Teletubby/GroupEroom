@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.approval.domain.Approval;
@@ -57,25 +58,39 @@ public class ApprovalController {
 	// 결재 등록
 	@RequestMapping(value = "approvalRegister.do", method=RequestMethod.POST)
 	public ModelAndView approvalRegister(ModelAndView mv, @ModelAttribute Approval approval,
-			@RequestParam(value = "uploadFile", required=false) MultipartFile uploadFile,
+			MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
 		
 		ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
 		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
-		Member member = (Member)session.getAttribute("loginMember"); 		// 멤버 객체에 세션 저장
-		approval.setMemberId(member.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
+		Member loginUser = (Member)session.getAttribute("loginUser"); 		// 멤버 객체에 세션 저장
+		approval.setMemberId(loginUser.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
+		approval.setMemberName(loginUser.getMemberName());
 		
-		// jsp에서 uploadFile 정보를 가져 왔다면
-		if(!uploadFile.getOriginalFilename().contentEquals("")) {
-			String reNameFileName = saveFile(uploadFile, request); 			// 파일 이름을 시간으로 변환하고 서버에 저장
-			// 변환이 성공하면
-			if(reNameFileName != null) {
-				aFile.setOriginalFileName(uploadFile.getOriginalFilename()); 				// 객체에 저장
-				aFile.setReNameFileName(reNameFileName);
-			}
+		System.out.println("결재등록메소드 왔음");
+		System.out.println(approval);
+		
+		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
+		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
+		File folder = new File(savePath); // 저장 폴더 선택
+		if(!folder.exists()) { // 폴더 없으면 자동 생성
+			folder.mkdir(); 
+		}
+		
+		// jsp에서 uploadFile 정보를 가져오기 (다중 파일)
+		List<MultipartFile> multFileList = mtfRequest.getFiles("uploadFile");
+		
+		for(MultipartFile mf : multFileList) {
+			aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
+			aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
+			aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
+			
+			int resultFile = approvalService.registerFile(aFile);
+			
 		}
 		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
 		int resultFile = approvalService.registerFile(aFile); 		// DB에 파일 정보 등록
+		
 		
 		String path = ""; 		
 		if(resultApproval > 0) { // DB 저장여부 확인 후, 페이지 이동
@@ -197,14 +212,8 @@ public class ApprovalController {
 	// ======================================================
 	
 	// 파일 저장
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
+	public String saveFile(MultipartFile file, File folder, HttpServletRequest request) {
 		
-		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
-		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
-		File folder = new File(savePath); // 저장 폴더 선택
-		if(!folder.exists()) { // 폴더 없으면 자동 생성
-			folder.mkdir(); 
-		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss"); // 파일명 변경하기
 		String originalFileName = file.getOriginalFilename();

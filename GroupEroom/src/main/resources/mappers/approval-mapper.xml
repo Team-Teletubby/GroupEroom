@@ -7,7 +7,7 @@
 	<!-- 결재문 등록 -->
 	<insert id="insertApproval" parameterType="approval">
 		INSERT INTO APPROVAL 
-		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, #{approvalCC }, SYSDATE, 'N', #{approvalFirst }, NULL, ${approvalSecond }, NULL, 'N', 'N')
+		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirst }, NULL, ${approvalSecond }, NULL, 'N', 'N')
 	</insert>
 
 
