@@ -9,6 +9,10 @@
 		INSERT INTO APPROVAL 
 		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirst }, NULL, ${approvalSecond }, NULL, 'N', 'N')
 	</insert>
-
-
+	
+	<!-- 파일 등록  -->
+	<insert id="insertFile" parameterType="approvalFile">
+		INSERT INTO APPROVAL_FILE
+		VALUES(APPROVAL_FILE_SEQ.NEXTVAL, #{originalFileName }, #{reNameFileName }, #{approvalFilePath }, #{approvalFileSize }, SYSDATE, APPROVAL_SEQ.CURRVAL)
+	</insert>
 </mapper>

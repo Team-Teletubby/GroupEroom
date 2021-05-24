@@ -62,8 +62,8 @@
 												<th>구분</th>
 												<th>사번</th>
 												<th>이름</th>
-												<th>부서</th>
 												<th>직급</th>
+												<th>부서</th>
 											</tr>
 											<tr>
 												<th>결재자1</th>
@@ -74,10 +74,10 @@
 													<input type="text" readOnly id="midApprovalName" name="midApprovalName">
 												</td>
 												<td align="center">
-													<input type="text" readOnly id ="midApprovalDept" name="midApprovalDept">
+													<input type="text" readOnly id="midApprovalJob" name="midApprovalJob">
 												</td>
 												<td align="center">
-													<input type="text" readOnly id="midApprovalJob" name="midApprovalJob">
+													<input type="text" readOnly id ="midApprovalDept" name="midApprovalDept">
 												</td>
 											</tr>
 											<tr>
@@ -89,10 +89,10 @@
 													<input type="text" readOnly id="finApprovalName" name="finApprovalName">
 												</td>
 												<td align="center">
-													<input type="text" readOnly id="finApprovalDept" name="finApprovalDept">
+													<input type="text" readOnly id="finApprovalJob" name="finApprovalJob">
 												</td>
 												<td align="center">
-													<input type="text" readOnly id="finApprovalJob" name="finApprovalJob">
+													<input type="text" readOnly id="finApprovalDept" name="finApprovalDept">
 												</td>
 											</tr>
 										</table>
@@ -326,8 +326,8 @@
         		
         		tdObj.id = td.eq(1).text();
         		tdObj.name = td.eq(2).text();
-        		tdObj.dept = td.eq(3).text();
-        		tdObj.job = td.eq(4).text();
+        		tdObj.job = td.eq(3).text();
+        		tdObj.dept = td.eq(4).text();
    				
         		// 체크박스 해제
         		$("input:checkbox[name='member']").prop("checked",false);
