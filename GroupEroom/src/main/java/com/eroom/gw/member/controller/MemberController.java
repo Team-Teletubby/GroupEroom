@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.service.MemberService;
@@ -122,7 +123,20 @@ public class MemberController {
 		
 		return "member/memberlist";
 	}
-	
+	// 사원 상세 조회 
+	@RequestMapping(value="memberDetail.do", method=RequestMethod.GET)
+	public ModelAndView memberDetailView(ModelAndView mv,@RequestParam("memberId") int memberId) {
+		Member member = service.printOne(memberId);
+		if(member !=null) {
+			
+			mv.addObject("Member", member);
+			mv.setViewName("member/memberDetailView");
+		}else {
+			mv.addObject("msg", "사원상세조회 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
 	// 사원 검색 
 	@RequestMapping(value="memberSearch.do", method=RequestMethod.GET)
 	public String memberSearch(@ModelAttribute Search search,Model model) {

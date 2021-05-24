@@ -57,6 +57,12 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> printdepartMentMemberAll(String depName) {
 		return mStore.selectDepartMentMember(depName);
 	}
+
+	@Override
+	public Member printOne(int memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	}
 

@@ -46,7 +46,7 @@
                <td><input type="text" name="memberRrn" value="${memberOne.memberRrn }"></td>
             </tr>
             <tr>
-               <td>* 폰번호11</td>
+               <td>* 폰번호</td>
                <td><input type="text" name="memberPhone" value="${memberOne.memberPhone }"></td>
             </tr>
             
@@ -91,7 +91,7 @@
                <td colspan="2" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
                   <input type="submit" value="정보수정">
-                  <button type="button" onclick="location.href='login.do';">홈으로</button>
+                  <button type="button" onclick="location.href='index.do';">홈으로</button>
                </td>
             </tr>
          </table>

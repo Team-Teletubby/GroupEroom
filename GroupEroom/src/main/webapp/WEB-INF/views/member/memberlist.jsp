@@ -6,7 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>사원 목록 조회</title>
-
+<style type="text/css">
+   .centerText table {
+      margin : auto;
+   }
+   span.guide {
+      display : none;
+      font-size : 12px;
+      top : 12px;
+      right : 10px;
+   }
+   span.ok{color:green}
+   span.error{color:red}
+</style>
 
 </head>
 <body>
@@ -16,8 +28,13 @@
 		<!-- 사이드바 시작 -->
 		<jsp:include page="../common/sideBar.jsp"></jsp:include>
 		<!-- 사이드바 끝  -->
-	<h2>사원 목록 </h2>
-	<table border="1" width="700px">
+	
+       <section id="main-content">
+      <section class="wrapper">
+	<h1 align="center">사원 목록 </h1>
+	<div class="centerText">
+      <form action="memberModify.do" method="post">
+	<table border="1" width="650px" cellspacing="5">
 	<tr>
 		<th>사번</th>
 		<th>부서</th>
@@ -35,6 +52,10 @@
 		
 	</tr>
 	</c:forEach>
+	</section>
+	</section>
+	</div>
+	</form>
 	</table>
 </body>
 </html>

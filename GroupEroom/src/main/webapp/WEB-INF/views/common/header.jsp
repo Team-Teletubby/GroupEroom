@@ -18,7 +18,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
+			<a href="index.do" class="logo"><b>DASH<span>IO</span></b></a>
 			<!--logo end-->
 			<div class="top-menu">
 				<ul class="nav pull-right top-menu">

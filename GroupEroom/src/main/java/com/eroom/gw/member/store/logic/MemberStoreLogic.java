@@ -56,5 +56,11 @@ public class MemberStoreLogic implements MemberStore {
 	public Member selectOneById(int memberId) {
 		return sqlSession.selectOne("memberMapper.selectOneMember", memberId);
 	}
+
+	@Override
+	public Member detailMember(int memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
