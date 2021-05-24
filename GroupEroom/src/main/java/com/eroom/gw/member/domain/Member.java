@@ -14,7 +14,7 @@ public class Member {
 	private String memberEmail;
 	private String memberAddr;
 	private String bank;
-	private long Account;
+	private long account;
 	private Date regDate;
 	private String quitYn;
 	private Date quitDate;
@@ -43,7 +43,7 @@ public class Member {
 		this.memberEmail = memberEmail;
 		this.memberAddr = memberAddr;
 		this.bank = bank;
-		Account = account;
+		this.account = account;
 		this.regDate = regDate;
 		this.quitYn = quitYn;
 		this.quitDate = quitDate;
@@ -152,12 +152,12 @@ public class Member {
 
 
 	public long getAccount() {
-		return Account;
+		return account;
 	}
 
 
 	public void setAccount(long account) {
-		Account = account;
+		account = account;
 	}
 
 
@@ -206,7 +206,7 @@ public class Member {
 		return "Member [memberId=" + memberId + ", memberDept=" + memberDept + ", memberJob=" + memberJob
 				+ ", memberName=" + memberName + ", memberPwd=" + memberPwd + ", memberRrn=" + memberRrn
 				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddr=" + memberAddr
-				+ ", bank=" + bank + ", Account=" + Account + ", regDate=" + regDate + ", quitYn=" + quitYn
+				+ ", bank=" + bank + ", account=" + account + ", regDate=" + regDate + ", quitYn=" + quitYn
 				+ ", quitDate=" + quitDate + ", profileModify=" + profileModify + "]";
 	}
 

@@ -92,17 +92,20 @@ public class MemberController {
 	}
 	// 사원 정보수정 
 	@RequestMapping(value="memberModify.do", method=RequestMethod.POST)
-	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model, HttpServletRequest request) {
+	public String modifyMember(@ModelAttribute Member member, 
+							@RequestParam("memberId") int memberId, 
+							@RequestParam("post") String post, 
+							@RequestParam("address1") String address1, 
+							@RequestParam("address2") String address2, Model model, HttpServletRequest request) {
 	
 		HttpSession session = request.getSession();
 		member.setMemberAddr(post+","+address1+","+address2);
 		int result = service.modifyMember(member);
 		if(result >0) { 
-			session.setAttribute("memberId", member);
-			return "redict:index.do";
+			return "redirect:modify.do";
 		}
 		model.addAttribute("msg", "정보 수정 실패");
-		return "redict:index.do";
+		return "redirect:modify.do";
 	}
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
