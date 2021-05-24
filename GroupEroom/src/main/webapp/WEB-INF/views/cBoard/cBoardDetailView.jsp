@@ -39,7 +39,7 @@ $(document).ready(function(){
 					<span style="float:right">작성일 : ${cBoard.enrollDate} 조회수 : ${cBoard.hits }</span>
 					</div>
 					<div style="padding:50px; border:1px solid lightgrey; font-size:15px">${cBoard.cBoardContents }</div>
-					첨부 파일 : ${cBoard.originalFileName}<br><br>
+					<i class="fa fa-paperclip"></i>첨부 파일 : <a href="/resources/cBoardFiles/${cBoard.renameFileName }" download>${cBoard.originalFileName}</a><br><br>
 					<div style="padding:10px; border:1px solid lightgrey; font-size:15px">
 					
 					<table style="width:100%" id="rtb">
@@ -57,7 +57,7 @@ $(document).ready(function(){
 					<table style="width:100%">
 						<tr>
 							<td style="width:90%">
-								<textarea class="form-control" style="width:100%" id="rContent" name="comment" required></textarea>
+								<textarea placeholder="댓글 입력 창" class="form-control" style="width:100%" id="rContent" name="comment" required></textarea>
 							</td>
 							<td style="width:10%" align="right">
 								<button class="btn btn-theme" id="rSubmit">등록하기</button>

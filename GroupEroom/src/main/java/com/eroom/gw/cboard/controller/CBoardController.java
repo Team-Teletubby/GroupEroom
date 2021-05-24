@@ -206,12 +206,12 @@ public class CBoardController {
 	@RequestMapping(value="cBoardDelete.do", method=RequestMethod.GET)
 	public String boardDelete(Model model, 
 					@RequestParam("cBoardNo") int cBoardNo,
-					@RequestParam("renameFileName") String fileName,
+					@RequestParam("renameFileName") String renameFilename,
 					HttpServletRequest request) {
 		
 		//업로드된 파일 삭제
-		if(fileName != null) {
-			deleteFile(fileName, request);
+		if(renameFilename != "") {
+			deleteFile(renameFilename, request);
 		}	
 		
 		int result = service.removeBoard(cBoardNo);
