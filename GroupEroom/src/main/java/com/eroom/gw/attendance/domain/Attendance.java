@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Attendance {
 	
 	private int attendanceNo;
-	private String memberId;
+	private int memberId;
 	private String holidayType;
 	private Date startDate;
 	private Date endDate;
@@ -21,10 +21,10 @@ public class Attendance {
 	public void setAttendanceNo(int attendanceNo) {
 		this.attendanceNo = attendanceNo;
 	}
-	public String getMemberId() {
+	public int getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(String memberId) {
+	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
 	public String getHolidayType() {

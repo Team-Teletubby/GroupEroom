@@ -42,6 +42,12 @@ public class AttendanceController {
 	
 	// 연차 등록
 	public ModelAndView atdRegister(ModelAndView mv, @ModelAttribute Attendance attendance) {
+		int result = atdService.registerAttendance(attendance);
+		if(result>0) {
+			mv.setViewName("attendance/attendanceList");
+		}else {
+			mv.setViewName("error");
+		}
 		return mv;
 	}
 	

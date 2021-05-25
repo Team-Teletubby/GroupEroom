@@ -17,6 +17,7 @@
 		<typeAlias type="com.eroom.gw.cboard.domain.CBoard" alias="cBoard"/>
 		<typeAlias type="com.eroom.gw.cboard.domain.Reply" alias="Reply"/>
 		<typeAlias type="com.eroom.gw.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.eroom.gw.attendance.domain.Attendance" alias="Attendance"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/approval-mapper.xml"></mapper>
@@ -24,6 +25,7 @@
 		<mapper resource="mappers/fBoard-mapper.xml"></mapper>
 		<mapper resource="mappers/cBoard-mapper.xml"></mapper>
 		<mapper resource="mappers/member-mapper.xml"></mapper>
+		<mapper resource="mappers/attendance-mapper.xml"></mapper>
 	</mappers>
 	
 </configuration>

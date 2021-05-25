@@ -54,6 +54,7 @@
             	<div>
             	<h4><i class="fa fa-angle-right"></i>연차 신청</h4>
             	<form action="">
+            	<input type="hidden" value="${LoginUser.memberId }" name="memberId">
             		<table class="table">
             		<tr>
             			<th>종류</th>
