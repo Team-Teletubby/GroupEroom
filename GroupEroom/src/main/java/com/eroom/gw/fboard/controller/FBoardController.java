@@ -1,11 +1,11 @@
 package com.eroom.gw.fboard.controller;
 
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.fboard.domain.FreeboardCmt;
 import com.eroom.gw.fboard.domain.FreeboardFile;
@@ -39,6 +40,26 @@ public class FBoardController {
 	
 	@Autowired
 	private FBoardService fService;
+	
+//검색
+	@RequestMapping(value="fBoardSearch.do")
+	public String fBoardSearch(@ModelAttribute Search search, 
+								Model model, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fService.getSearchListCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage,  listCount);
+		ArrayList<Freeboard> fSearchList = fService.printSearchAll(search, pi);
+		if(!fSearchList.isEmpty()) {
+			model.addAttribute("fBoardList", fSearchList);
+			model.addAttribute("pi",pi);
+			model.addAttribute("search", search);
+			return "fBoard/fBoardSearchList";
+		}else {
+			model.addAttribute("msg", "검색실패!");
+			return "fBoard/errorPage";
+		}
+	}
+	
 	
 //게시글리스트 조회
 	@RequestMapping(value="fBoardListView.do")
@@ -67,6 +88,8 @@ public class FBoardController {
 									@RequestParam("fBoardNo") int fBoardNo) {
 		//조회수 증가
 		fService.addHits(fBoardNo);
+		//파일리스트 불러오기
+		List<FreeboardFile> fileList = fService.printFile(fBoardNo);
 		
 		//상세조회 불러오기
 		Freeboard fBoard = fService.printOne(fBoardNo);
@@ -91,7 +114,7 @@ public class FBoardController {
 									@ModelAttribute Freeboard fBoard,
 									HttpServletRequest request, HttpSession session, MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
 		session = request.getSession();
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("LoginUser");
 		fBoard.setMemberId(loginUser.getMemberId());
 		
 		int result = 0;
@@ -139,13 +162,6 @@ public class FBoardController {
 		return mv;
 	}
 
-////파일등록
-//	@RequestMapping(value="multipartUpload.do", method = RequestMethod.POST)
-//	public void saveFile (MultipartFile file, MultipartHttpServletRequest request) {
-//		//파일 저장경로 설정
-//		return null;
-//	}
-	
 //게시글 수정화면단
 	@RequestMapping(value="fBoardModifyView.do")
 	public ModelAndView fBoardModifyView(ModelAndView mv, @RequestParam("fBoardNo") int fBoardNo) {
@@ -161,20 +177,27 @@ public class FBoardController {
 //게시글 수정
 	@RequestMapping(value="fBoardUpdate.do", method=RequestMethod.POST)
 	public ModelAndView fBoardUpdate(ModelAndView mv, HttpServletRequest request,
-									@ModelAttribute Freeboard fBoard) {
+									@ModelAttribute Freeboard fBoard, @ModelAttribute FreeboardFile Files,
+//									@RequestParam(value="reloadFile", required=false) MultipartfFile reloadFile,
+									MultipartHttpServletRequest mhsq) {
+		//DB수정
 		int result = fService.modifyFBoard(fBoard);
 		if(result > 0) {
 			mv.setViewName("redirect:fBoardListView.do");
 		}else {
 			mv.addObject("msg", "게시글 수정 실패").setViewName("fBoard/errorPage");
 		}
+		//파일수정
+		
+		
+		
 		return mv;
 	}
 	
 //게시글 삭제
 	@RequestMapping(value="fBoardDelete.do")
-	public String fBoardDelete(Model model, @RequestParam("fBoardNo") int fBoardNo,
-								HttpServletRequest request) {
+	public String fBoardDelete(Model model, @RequestParam("fBoardNo") int fBoardNo, @RequestParam("fileNo") int fileNo,
+								HttpServletRequest request, HttpSession session, MultipartHttpServletRequest mhsq) {
 		
 		int result = fService.removeFBoard(fBoardNo);
 		if(result > 0) {
@@ -207,7 +230,7 @@ public class FBoardController {
 //댓글등록
 	@RequestMapping(value="fbCmtAdd.do", method=RequestMethod.POST)
 	public String addFBoardCmt(@ModelAttribute FreeboardCmt fBoardCmt, HttpSession session) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member)session.getAttribute("LoginUser");
 		fBoardCmt.setMemberId(loginUser.getMemberId());
 		int result = fService.registerFBoardCmt(fBoardCmt);
 		if(result > 0) {
@@ -221,14 +244,24 @@ public class FBoardController {
 	@ResponseBody
 	@RequestMapping(value="fbCmtModify.do", method=RequestMethod.POST)
 	public String modifyFBoardCmt(@ModelAttribute FreeboardCmt fBoardCmt) {
-		return null;
+		int result = fService.modifyFBoardCmt(fBoardCmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 //댓글삭제
 	@ResponseBody
-	@RequestMapping(value="fbCmtDelete.do", method=RequestMethod.POST)
+	@RequestMapping(value="fbCmtDelete.do")
 	public String removeFBoardCmt(@ModelAttribute FreeboardCmt fBoardCmt) {
-	return "";
+		int result = fService.removeFBoardCmt(fBoardCmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 	

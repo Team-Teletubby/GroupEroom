@@ -25,6 +25,16 @@
 		<result property="cmtWriter" column="CMT_WRITER" />
 	</resultMap>
 	
+	<resultMap type="FreeboardFile" id="fFileResultMap">
+		<id property="fileNo" column="FILE_NO" />
+		<result property="originalFilename" column="ORIGINAL_FILENAME" />
+		<result property="renameFilename" column="RENAME_FILENAME" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="uploadDate" column="UPLOAD_DATE" />
+		<result property="fBoardNo" column="F_BOARD_NO" />
+	</resultMap>
+	
 <!-- 전체 글 수 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM FREEBOARD 
@@ -48,6 +58,12 @@
 		WHERE F_BOARD_NO = #{fBoardNo} AND F_STATUS = 'Y'
 	</select>
 	
+<!-- 파일 상세조회 -->
+	<select id="printFileList" resultMap="fFileResultMap">
+		SELECT * FROM FREEBOARD_FILE 
+		WHERE F_BOARD_NO = #{fBoardNo}
+	</select>
+	
 <!-- 게시글 작성 -->
 	<insert id="insertFBoard">
 		INSERT INTO FREEBOARD(F_BOARD_NO, MEMBER_ID, F_BULLET, F_BOARD_TITLE, F_BOARD_CONTENTS, ENROLL_DATE, HITS, F_STATUS) 
@@ -67,6 +83,13 @@
 		WHERE F_BOARD_NO = #{fBoardNo}
 	</update>
 	
+<!-- 파일 수정 -->
+	<update id="updateFile">
+		UPDATE FREEBOARD_FILE  
+		SET ORIGINAL_FILENAME = #{originalFilename}, RENAME_FILENAME = #{renameFilename}, FILE_PATH = #{filePath}, FILE_SIZE = #{fileSize}, UPLOAD_DATE = SYSDATE  
+		WHERE F_BOARD_NO = #{fBoardNo}
+	</update>
+	
 <!-- 조회수  -->
 	<update id="updateCount">
 		UPDATE FREEBOARD 
@@ -78,6 +101,12 @@
 	<delete id="deleteFBoard" parameterType="_int">
 		UPDATE FREEBOARD 
 		SET F_STATUS = 'N' 
+		WHERE F_BOARD_NO = #{fBoardNo}
+	</delete>
+	
+<!-- 파일 삭제 -->
+	<delete id="deleteFile" parameterType="_int">
+		DELETE FROM FREEBOARD_FILE 
 		WHERE F_BOARD_NO = #{fBoardNo}
 	</delete>
 	
@@ -96,19 +125,38 @@
 		VALUES(FBOARD_CMT_SEQ.NEXTVAL, #{cmtContents}, SYSDATE, #{fBoardNo}, #{memberId}, DEFAULT)
 	</insert>
 	
-<!-- 댓글수정
-	<update id="updateReply">
-		UPDATE REPLY 
-		SET REPLY_CONTENT = #{replyContent} 
-		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo} AND R_STATUS = 'Y'
-	</update> -->
+<!-- 댓글수정 -->
+	<update id="updateCmt">
+		UPDATE FREEBOARD_CMT 
+		SET CMT_CONTENTS = #{cmtContents} 
+		WHERE F_BOARD_NO = #{fBoardNo} AND CMT_NO = #{cmtNo} AND CMT_STATUS = 'Y'
+	</update>
 	
-<!-- 댓글삭제
-	<update id="deleteReply">
-		UPDATE REPLY 
-		SET R_STATUS = 'N' 
-		WHERE REF_BOARD_NO = #{refBoardNo} AND REPLY_NO = #{replyNo}
-	</update> -->
+<!-- 댓글삭제 -->
+	<update id="deleteCmt">
+		UPDATE FREEBOARD_CMT 
+		SET CMT_STATUS = 'N' 
+		WHERE F_BOARD_NO = #{fBoardNo} AND CMT_NO = #{cmtNo}
+	</update>
 	
+<!-- 검색리스트 -->
+	<select id="selectSearchList" resultMap="fBoardResultMap">
+ 		SELECT a.F_BOARD_NO, a.F_BULLET, a.F_BOARD_TITLE, b.MEMBER_NAME, a.ENROLL_DATE, a.HITS 
+ 		FROM FREEBOARD a 
+		JOIN MEMBER b USING(MEMBER_ID) 
+		<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR F_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR F_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+		<if test="searchCondition.toString() != 'ALL'"> WHERE #{searchCondition} LIKE '%' || #{searchValue } || '%' </if>
+		AND F_STATUS = 'Y' 
+		ORDER BY F_BOARD_NO DESC
+	</select>
+	
+<!-- 검색된 게시물 수 -->
+		<select id="searchListCount" resultType="_int">
+		SELECT COUNT(*) FROM FREEBOARD JOIN MEMBER USING(MEMBER_ID)
+			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR F_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR F_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+			<if test="searchCondition.toString() != 'ALL'"> WHERE #{searchCondition} LIKE '%' || #{searchValue } || '%'</if>
+		AND F_STATUS = 'Y' 
+		ORDER BY F_BOARD_NO DESC
+	</select>
 	
 </mapper>

@@ -51,9 +51,8 @@
 							    </div>
 							    <div class="form-group">
 							      <label for="formFile" class="form-label mt-4">첨부파일</label>
-							      <form id="fileForm" method="post" enctype="multipart/form-data"> 
-							     	<input type="file" multiple="true" class="form-control" id="formFile" name="uploadfile">
-							      </form>
+							     	<input type="file" multiple="true" class="form-control" id="formFile" name="reloadFile">
+							    </div>
 							    </div>
 							   <br><br>
 							   <div align="center">

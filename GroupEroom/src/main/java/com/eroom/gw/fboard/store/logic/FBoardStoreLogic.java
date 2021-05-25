@@ -2,6 +2,7 @@ package com.eroom.gw.fboard.store.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.fboard.domain.FreeboardCmt;
+import com.eroom.gw.fboard.domain.FreeboardFile;
 import com.eroom.gw.fboard.store.FBoardStore;
 
 @Repository
@@ -51,12 +54,6 @@ public class FBoardStoreLogic implements FBoardStore {
 	}
 
 	@Override
-	public Object uploadFile(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("fBoardMapper.uploadFile", hmap);
-	}
-	
-	@Override
 	public int updateFBoard(Freeboard fBoard) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("fBoardMapper.updateFBoard", fBoard);
@@ -68,6 +65,8 @@ public class FBoardStoreLogic implements FBoardStore {
 		return sqlSession.delete("fBoardMapper.deleteFBoard", fBoardNo);
 	}
 
+//////////////////////////////////////////////// 댓글 ///////////////////////////////////////////////////
+	
 	@Override
 	public ArrayList<FreeboardCmt> selectAllCmt(int fBoardNo) {
 		// TODO Auto-generated method stub
@@ -83,14 +82,44 @@ public class FBoardStoreLogic implements FBoardStore {
 	@Override
 	public int updateFBoardCmt(FreeboardCmt fBoardCmt) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("fBoardMapper.updateCmt", fBoardCmt);
 	}
 
 	@Override
 	public int deleteFBoardCmt(FreeboardCmt fBoardCmt) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("fBoardMapper.deleteCmt", fBoardCmt);
 	}
+	
+//////////////////////////////////////////////// 파일 ///////////////////////////////////////////////////
+
+	@Override
+	public List<FreeboardFile> printFile(int fBoardNo) {
+		// TODO Auto-generated method stub
+		return (List)sqlSession.selectList("fBoardMapper.printFileList", fBoardNo);
+	}
+	
+	@Override
+	public Object uploadFile(HashMap<String, Object> hmap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("fBoardMapper.uploadFile", hmap);
+	}
+	
+//////////////////////////////////////////////// 검색 ///////////////////////////////////////////////////
+
+	@Override
+	public ArrayList<Freeboard> printSearchAll(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fBoardMapper.selectSearchList", null, rowBounds); 
+	}
+
+	@Override
+	public int searchListCount(Search search) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("fBoardMapper.searchListCount", search);
+	}
+	
 
 
 }

@@ -69,10 +69,6 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<div align="right">
-							<button onclick="location.href='fBoardWriteView.do'"
-								class="btn btn-theme03">글쓰기</button>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
 							<br>
 							<br>
 							<br>

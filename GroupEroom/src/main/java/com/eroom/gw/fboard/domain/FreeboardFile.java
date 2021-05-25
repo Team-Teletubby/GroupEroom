@@ -15,7 +15,6 @@ public class FreeboardFile {
 	
 	public FreeboardFile() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public FreeboardFile(int fileNo, String originalFilename, String renameFilename, String filePath, int fileSize,
