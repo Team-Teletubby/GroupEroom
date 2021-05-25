@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
-            	<div>부여 연차 : ${LoginUser. } /사용 연차/ 잔여 연차</div>
+            	<div>부여 연차 : ${LoginUser.regDate } /사용 연차/ 잔여 연차</div>
             </div>
          </div>
         </div>
