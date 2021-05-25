@@ -12,32 +12,36 @@
 		<result column="APPROVAL_CC" property="approvalCC" />
 		<result column="APPROVAL_DATE" property="approvalDate" />
 		<result column="APPROVAL_STATE" property="approvalState" />
-		<result column="APPROVAL_FIRST" property="approvalFirst" />
+		<result column="APPROVAL_FIRST_ID" property="approvalFirstId" />
 		<result column="APPROVAL_FIRST_DATE" property="approvalFirstDate" />
-		<result column="APPROVAL_SECOND" property="approvalSecond" />
-		<result column="APPROVAL_SECOND_DATE" property="approvalSecondDate" />
 		<result column="APPROVAL_FIRST_CHECK" property="approvalFirstCheck" />
+		<result column="APPROVAL_FIRST_NAME" property="approvalFirstName" />
+		<result column="APPROVAL_SECOND_ID" property="approvalSecondId" />
+		<result column="APPROVAL_SECOND_DATE" property="approvalSecondDate" />
 		<result column="APPROVAL_SECOND_CHECK" property="approvalSecondCheck" />
+		<result column="APPROVAL_SECOND_NAME" property="approvalSecondName" />
 	</resultMap>
 	
 	<!-- =============== SELECT =============== -->
 	<!-- 조건에 맞는 글 갯수 구하기  -->
-	<select id="selectListCount" resultMap="approvalResultMap">
-		SELECT COUNT(*) FROM APPROVAL WHERE APPROVAL_TYPE = #{boardType }
+	<select id="selectListCount" resultType="_int" parameterType="String">
+		SELECT COUNT(*) FROM APPROVAL WHERE APPROVAL_STATE = #{boardType }
 	</select>
 	
-	<!-- 글 리스트  -->
+	<!-- 진행함 리스트  -->
 	<select id="selectList" resultMap="approvalResultMap" parameterType="Approval">
-		<if test="approvalType.toString() == 'N'">
-		SELECT * FROM APPROVAL WHERE MEMBER_ID = #{memberId };
-		</if>
-	
+		SELECT a.APPROVAL_NO, a.MEMBER_ID, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK 
+		FROM APPROVAL a 
+		INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
+		INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID
+		ORDER BY a.APPROVAL_NO DESC
 	</select>
+	
 	<!-- =============== INSERT =============== -->
 	<!-- 결재문 등록 -->
 	<insert id="insertApproval" parameterType="Approval">
 		INSERT INTO APPROVAL 
-		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirst }, NULL, ${approvalSecond }, NULL, 'N', 'N')
+		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirstId }, NULL, 'N', ${approvalSecondId }, NULL, 'N')
 	</insert>
 	
 	<!-- 파일 등록  -->

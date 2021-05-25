@@ -55,7 +55,7 @@
 						<ul class="sub">
 							<li><a href="general.html">전자결재홈</a></li>
 							<li><a href="approvalWriteView.do">결재문 작성</a></li>
-							<li><a href="panels.html">진행함</a></li>
+							<li><a href="progressBoard.do">진행함</a></li>
 							<li><a href="font_awesome.html">미결함</a></li>
 							<li><a href="font_awesome.html">완료함</a></li>
 							<li><a href="font_awesome.html">반려함</a></li>

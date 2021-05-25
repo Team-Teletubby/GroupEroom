@@ -68,7 +68,7 @@
 											<tr>
 												<th>결재자1</th>
 												<td align="center">
-													<input align="center" type="number" readOnly id="midApprovalId" name="approvalFirst" >
+													<input align="center" type="number" readOnly id="midApprovalId" name="approvalFirstId" >
 												</td>
 												<td align="center">
 													<input type="text" readOnly id="midApprovalName" name="midApprovalName">
@@ -83,7 +83,7 @@
 											<tr>
 												<th>결재자2</th>
 												<td align="center">
-													<input type="number" readOnly id="finApprovalId" name="approvalSecond">
+													<input type="number" readOnly id="finApprovalId" name="approvalSecondId">
 												</td>
 												<td align="center">
 													<input type="text" readOnly id="finApprovalName" name="finApprovalName">
@@ -229,7 +229,7 @@
         	$("li.DepartmentName").each(function() {
         		$(this).click(function() {
         			const depType = $(this).val();
-        			
+        			console.log(depType);
         			/* 클릭한 부서 멤버 목록 가져오기 */
         			$.ajax({
         				url : "departmentMember.do",

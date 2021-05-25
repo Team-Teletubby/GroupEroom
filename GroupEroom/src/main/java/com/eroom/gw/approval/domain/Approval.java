@@ -8,17 +8,20 @@ public class Approval {
 	// 멤버변수
 	private int approvalNo;
 	private int memberId;
-	private String memberName;
 	private String approvalType;
 	private String approvalTitle;
 	private String approvalContents;
 	private String approvalCC;
 	private Date approvalDate;
 	private String approvalState;
-	private int approvalFirst;
+	private int approvalFirstId;
 	private Date approvalFirstDate;
-	private int approvalSecond;
+	private String approvalFirstCheck;
+	private String approvalFirstName;
+	private int approvalSecondId;
 	private Date approvalScondDate;
+	private String approvalSecondCheck;
+	private String approvalSecondName;
 	private ApprovalFile file;
 	private ApprovalReply reply;
 	
@@ -27,7 +30,7 @@ public class Approval {
 		super();
 	}
 
-	// getter/setter
+	// getter, setter
 	public int getApprovalNo() {
 		return approvalNo;
 	}
@@ -44,14 +47,6 @@ public class Approval {
 		this.memberId = memberId;
 	}
 
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	
 	public String getApprovalType() {
 		return approvalType;
 	}
@@ -100,12 +95,12 @@ public class Approval {
 		this.approvalState = approvalState;
 	}
 
-	public int getApprovalFirst() {
-		return approvalFirst;
+	public int getApprovalFirstId() {
+		return approvalFirstId;
 	}
 
-	public void setApprovalFirst(int approvalFirst) {
-		this.approvalFirst = approvalFirst;
+	public void setApprovalFirstId(int approvalFirstId) {
+		this.approvalFirstId = approvalFirstId;
 	}
 
 	public Date getApprovalFirstDate() {
@@ -116,12 +111,20 @@ public class Approval {
 		this.approvalFirstDate = approvalFirstDate;
 	}
 
-	public int getApprovalSecond() {
-		return approvalSecond;
+	public String getApprovalFirstCheck() {
+		return approvalFirstCheck;
 	}
 
-	public void setApprovalSecond(int approvalSecond) {
-		this.approvalSecond = approvalSecond;
+	public void setApprovalFirstCheck(String approvalFirstCheck) {
+		this.approvalFirstCheck = approvalFirstCheck;
+	}
+
+	public int getApprovalSecondId() {
+		return approvalSecondId;
+	}
+
+	public void setApprovalSecondId(int approvalSecondId) {
+		this.approvalSecondId = approvalSecondId;
 	}
 
 	public Date getApprovalScondDate() {
@@ -130,6 +133,14 @@ public class Approval {
 
 	public void setApprovalScondDate(Date approvalScondDate) {
 		this.approvalScondDate = approvalScondDate;
+	}
+
+	public String getApprovalSecondCheck() {
+		return approvalSecondCheck;
+	}
+
+	public void setApprovalSecondCheck(String approvalSecondCheck) {
+		this.approvalSecondCheck = approvalSecondCheck;
 	}
 
 	public ApprovalFile getFile() {
@@ -148,15 +159,33 @@ public class Approval {
 		this.reply = reply;
 	}
 
+	public String getApprovalFirstName() {
+		return approvalFirstName;
+	}
+
+	public void setApprovalFirstName(String approvalFirstName) {
+		this.approvalFirstName = approvalFirstName;
+	}
+
+	public String getApprovalSecondName() {
+		return approvalSecondName;
+	}
+
+	public void setApprovalSecondName(String approvalSecondName) {
+		this.approvalSecondName = approvalSecondName;
+	}
+
 	// toString
 	@Override
 	public String toString() {
-		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", memberName=" + memberName +", approvalType=" + approvalType
+		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", approvalType=" + approvalType
 				+ ", approvalTitle=" + approvalTitle + ", approvalContents=" + approvalContents + ", approvalCC="
 				+ approvalCC + ", approvalDate=" + approvalDate + ", approvalState=" + approvalState
-				+ ", approvalFirst=" + approvalFirst + ", approvalFirstDate=" + approvalFirstDate + ", approvalSecond="
-				+ approvalSecond + ", approvalScondDate=" + approvalScondDate + ", file=" + file + ", reply=" + reply
-				+ "]";
+				+ ", approvalFirstId=" + approvalFirstId + ", approvalFirstDate=" + approvalFirstDate
+				+ ", approvalFirstCheck=" + approvalFirstCheck + ", approvalFirstName=" + approvalFirstName
+				+ ", approvalSecondId=" + approvalSecondId + ", approvalScondDate=" + approvalScondDate
+				+ ", approvalSecondCheck=" + approvalSecondCheck + ", approvalSecondName=" + approvalSecondName
+				+ ", file=" + file + ", reply=" + reply + "]";
 	}
 	
 }

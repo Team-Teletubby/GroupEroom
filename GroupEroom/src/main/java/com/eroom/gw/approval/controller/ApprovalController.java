@@ -53,7 +53,7 @@ public class ApprovalController {
 
 	// 결재 페이지로 이동
 	@RequestMapping(value = "approvalWriteView.do", method=RequestMethod.GET)
-	public String approvalWriteView(@RequestParam("type")String type) {
+	public String approvalWriteView() {
 		return "approval/approvalWrite";
 	}
 
@@ -66,8 +66,7 @@ public class ApprovalController {
 		ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
 		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
 		Member loginUser = (Member)session.getAttribute("LoginUser"); 		// 멤버 객체에 세션 저장
-		approval.setMemberId(loginUser.getMemberId()); 		// 세션에 저장된 멤버ID값 결재 객체에 저장
-		approval.setMemberName(loginUser.getMemberName());
+		approval.setMemberId(loginUser.getMemberId());		// 세션에 저장된 멤버ID값 결재 객체에 저장
 
 		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
 		
@@ -107,8 +106,8 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 진행함 List 보기 (페이징 처리도)
-	@RequestMapping(value="ProgressBoard.do", method=RequestMethod.POST)
+	// 진행함 List 보기
+	@RequestMapping(value="progressBoard.do", method=RequestMethod.GET)
 	public ModelAndView approvalList(ModelAndView mv, 
 									HttpServletRequest request,
 									@RequestParam(value="page", required=false)Integer page) {
@@ -118,9 +117,7 @@ public class ApprovalController {
 		// 진행함 게시판 타입
 		String boardType = "N";
 		int listCount = approvalService.getListCount(boardType);
-		// ======= 글 갯수 가져온거 확인용 (나중에 지우기) =======
-		System.out.println("가져온 글 갯수 : " + listCount); 
-		// =======================================================
+		System.out.println("가져온 글 갯수 : " + listCount);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		//===========================================================
 		
@@ -128,20 +125,18 @@ public class ApprovalController {
 		// 세션에 저장된 멤버객체 가져오기
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("LoginUser");
-		
 		// DB에서 사용할 로그인한 ID값을 Approval객체에 저장
 		Approval approval = new Approval();
 		approval.setMemberId(user.getMemberId());
 		// 글 목록 가져오기
 		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
-		
+		//===========================================================
 		if(!aList.isEmpty()) {
 			mv.addObject("aList", aList);
+			mv.addObject("userName", user.getMemberName());
 			mv.addObject("page", page);
-			
+			mv.setViewName("approval/progressListView");
 		}
-		
-			
 		return mv;
 	}
 
@@ -167,24 +162,26 @@ public class ApprovalController {
 	}
 	
 	// 특정 부서 멤버 목록 조회
-	
 	@RequestMapping(value="departmentMember.do", method=RequestMethod.POST)
 	public void departmentSelect(@RequestParam("depType")int depType,
 								HttpServletResponse response) throws JsonIOException, IOException {
 		/*
-		 * 1 : 인사관리, 2 : IT개발팀, 3 : 재무팀, 4 : 영업팀
+		 * 1 : 인사관리, 2 : IT개발, 3 : 재무, 4 : 영업
 		 */
 		String depName = "";
 		
 		switch(depType) {
 		case 1:
-			depName = "인사관리팀";
+			depName = "인사관리";
 			break;
 		case 2:
-			depName = "IT개발팀";
+			depName = "IT개발";
 			break;
 		case 3:
-			depName = "재무팀";
+			depName = "재무";
+			break;
+		case 4:
+			depName = "영업";
 			break;
 		}
 		ArrayList<Member> mList = memberService.printdepartMentMemberAll(depName);
