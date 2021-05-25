@@ -23,8 +23,7 @@ public class AttendanceImpl implements AttendanceService{
 
 	@Override
 	public int registerAttendance(Attendance attendance) {
-		// TODO Auto-generated method stub
-		return 0;
+		return atdStore.insertAttendance(attendance);
 	}
 
 	@Override

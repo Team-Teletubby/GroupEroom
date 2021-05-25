@@ -2,5 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="attendanceMapper">
+
+	<insert id="insertAttendance">
+		INSERT INTO ATTENDANCE VALUES 
+		<if test="holidayType.toString() == '연차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, #{usedHoliday}, #{reason})</if>
+		<if test="holidayType.toString() == '오후 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason})</if>
+		<if test="holidayType.toString() == '오전 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason})</if>
+		<if test="holidayType.toString() == '경조사'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0, #{reason})</if>
+	</insert>
 	
 </mapper>

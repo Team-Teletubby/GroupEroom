@@ -16,15 +16,20 @@
   <link rel="stylesheet" type="text/css" href="resources/js/bootstrap-datetimepicker/datertimepicker.css" />
 <style>
 	.circle{
-	border-radius:100px;
+	border-radius:50px;
 	background:#f4f4f4;
 	width:33%;
 	height:100px;
 	text-align:center;
-	line-height:100px;
+	line-height:50px;
 	float:left;
 	font-weight:bold;
 	font-size:15px;
+	}
+	
+	#diffDate{
+	text-align:center;
+	font-size:20px;
 	}
 </style>
 </head>
@@ -37,11 +42,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-panel">
-            <p>함께 한지 12838일째</p>
-            
+            <br>
+            <p id="diffDate"> <i class="fa fa-trophy"></i> 함께 한지 <span style="color:#967adc; font-weight:bold; font-size:25px">${diffDate }</span>일 째</p>
+            <hr><br>
             <div style="width:100%">
             	<div class="circle">
             	부여 연차
+            	<p style="font-size:40px">${totalHoliday }</p>
             	</div>
             	<div class="circle" style="background:#ffc247;" >
             	잔여 연차
@@ -50,10 +57,10 @@
             	사용 연차
             	</div>
             </div>	
-            	<br><br><br><br><br><br><br><br><br><br>
+            	<br><br><br><br><br><br><br>
             	<div>
             	<h4><i class="fa fa-angle-right"></i>연차 신청</h4>
-            	<form action="">
+            	<form action="attendanceRegister.do" method="post">
             	<input type="hidden" value="${LoginUser.memberId }" name="memberId">
             		<table class="table">
             		<tr>
