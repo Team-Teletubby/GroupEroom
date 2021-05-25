@@ -53,8 +53,8 @@
             <tr>
                <td>우편번호</td>
                <td>
-                  <input type="text" class="form-control" name="post" class="postcodify_postcode5" size="6">
-                  <button type="button" class="form-control" id="postcodify_search_button">검색</button>
+                  <input type="text"  name="post" class="postcodify_postcode5" size="6">
+                  <button type="button"  id="postcodify_search_button">검색</button>
                </td>
             </tr>
             <tr>

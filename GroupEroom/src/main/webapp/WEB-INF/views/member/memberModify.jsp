@@ -21,7 +21,12 @@
 </style>
 </head>
 <body>
+   <!-- 헤더 시작 -->
+		<jsp:include page="../common/header.jsp"></jsp:include>
+		<!-- 헤더 끝 -->
    <jsp:include page="../common/sideBar.jsp"></jsp:include>
+  <section id="main-content">
+      <section class="wrapper">
    <h1 align="center">사원정보수정</h1>
    <div class="centerText">
       <form action="memberModify.do" method="post">
@@ -96,6 +101,8 @@
             </tr>
          </table>
       </form>
+      </section>
+      </section>
    </div>
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
     <script>

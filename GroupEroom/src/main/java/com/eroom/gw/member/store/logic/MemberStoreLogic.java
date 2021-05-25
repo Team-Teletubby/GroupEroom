@@ -28,6 +28,7 @@ public class MemberStoreLogic implements MemberStore {
 		return null;
 	}
 
+	//멤버 한명 선택
 	@Override
 	public Member selectOne(Member member) {
 		Member loginUser = sqlSession.selectOne("memberMapper.loginMember", member);
@@ -59,8 +60,7 @@ public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public Member detailMember(int memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("memberMapper.selectOneMember", memberId);
 	}
 	
 }

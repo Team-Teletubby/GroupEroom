@@ -31,26 +31,37 @@
 	
        <section id="main-content">
       <section class="wrapper">
+      						<div class="searchbox">
+      
 	<h1 align="center">사원 목록 </h1>
 	<div class="centerText">
       <form action="memberModify.do" method="post">
 	<table border="1" width="650px" cellspacing="5">
+	<thead>
 	<tr>
-		<th>사번</th>
 		<th>부서</th>
+		<th>사번</th>
 		<th>직급</th>
 		<th>이름</th>
-	
+		<th>폰번호</th>
 	
 	</tr>
-	<c:forEach var="row" items="${list }">
+	</thead>
+	<tbody>
+					<c:forEach var="row" items="${list }">
 	<tr>
-		<td>${row.memberId }</td>
-		<td>${row.memberDept }</td>
-		<td>${row.memberJob }</td>
-		<td>${row.memberName }</td>
-		
-	</tr>
+										<td>${ row.memberDept }</td>
+										
+										<td>
+										<c:url var="memberDetailView" value="memberDetail.do">
+												<c:param name="memberId" value="${row.memberId}"></c:param>
+											</c:url> 
+										<a href="${memberDetailView }">${row.memberId}</a></td>
+										<td>${row.memberJob }</td>
+										<td>${row.memberName }</td>
+										<td>${row.memberPhone }</td>
+									</tr>
+	</tbody>
 	</c:forEach>
 	</section>
 	</section>

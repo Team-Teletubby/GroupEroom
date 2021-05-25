@@ -20,8 +20,7 @@ public interface MemberService {
 	public ArrayList<Member> printSearchAll(Search search);
 
 	public Member printMemberOne(int mId);
-	//상세조회
-	public Member printOne(int memberId);
+
 	// 특정 부서 사원 목록 
 	public ArrayList<Member> printdepartMentMemberAll(String depName);
 	

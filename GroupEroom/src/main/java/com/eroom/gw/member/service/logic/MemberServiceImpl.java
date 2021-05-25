@@ -58,11 +58,6 @@ public class MemberServiceImpl implements MemberService {
 		return mStore.selectDepartMentMember(depName);
 	}
 
-	@Override
-	public Member printOne(int memberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-		
+
 	}
 
