@@ -82,7 +82,7 @@
 							class="fa fa-comments-o"></i> <span>근태관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="lobby.html">근태관리 홈</a></li>
+							<li><a href="attendanceList.do">근태관리 홈</a></li>
 							<li><a href="chat_room.html">연차 신청</a></li>
 						</ul></li>
 					<!-- 협업 메뉴 -->

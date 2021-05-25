@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,11 @@ public class AttendanceController {
 
 	@Autowired
 	private AttendanceService atdService;
+	
+	@RequestMapping(value="attendanceList.do")
+	public String attendanceList() {
+		return "attendance/attendanceList";
+	}
 	
 	// 연차 기록 전체 출력
 	public ModelAndView atdListView(ModelAndView mv,@RequestParam("")int memberId) {
