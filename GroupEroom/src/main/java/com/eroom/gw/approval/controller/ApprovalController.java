@@ -117,7 +117,6 @@ public class ApprovalController {
 		// 진행함 게시판 타입
 		String boardType = "N";
 		int listCount = approvalService.getListCount(boardType);
-		System.out.println("가져온 글 갯수 : " + listCount);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		//===========================================================
 		
@@ -128,30 +127,53 @@ public class ApprovalController {
 		// DB에서 사용할 로그인한 ID값을 Approval객체에 저장
 		Approval approval = new Approval();
 		approval.setMemberId(user.getMemberId());
+		System.out.println("로그인한 유저id : " + approval.getMemberId());
 		// 글 목록 가져오기
 		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
 		//===========================================================
-		if(!aList.isEmpty()) {
+		
 			mv.addObject("aList", aList);
 			mv.addObject("userName", user.getMemberName());
 			mv.addObject("page", page);
 			mv.setViewName("approval/progressListView");
-		}
+		
 		return mv;
 	}
 
 	// 글 상세보기
 	@RequestMapping(value="approvalDetail.do", method=RequestMethod.GET)
-	public ModelAndView approvalDetail(ModelAndView mv, @RequestParam("approvalNo")int approvalNo) {
-		// 글 번호에 맞는 정보 가져오기
+	public ModelAndView approvalDetail(ModelAndView mv, 
+									@RequestParam("approvalNo")int approvalNo,
+									HttpServletRequest request) {
+		// 세션 정보 가져오기
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("LoginUser");
 		// 결제 상태 변경 메소드 사용하기 (조건문 사용)
+		Approval approval = approvalService.printOne(approvalNo);
+		// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
+		if(approval != null) {
+			approvalState(approval, member);
+			mv.addObject("approval", approval);
+			mv.setViewName("approval/approvalDetail");
+		}else {
+			System.out.println("글 상세보기 오류");
+		}
 		return mv;
 	}
 
 	// 결재 상태 변경 (진행함에서 결제자가 글을 봤을 경우,
 	// 반려, 승인 버튼을 눌렀을 경우 / 페이지에서 상태값 가져오기(heddin))
-	public void approvalState(Approval approval) {
-//		int approvalNo, String approvalState 사용
+	public void approvalState(Approval approval, Member member) {
+		// 변경할 상태값을 저장하는 변수
+		String changeState = "";
+		
+		if(approval.getApprovalState().equals("N")) {
+			if(approval.getApprovalFirstId() == member.getMemberId() || approval.getApprovalSecondId() == member.getMemberId()) {
+				changeState = "I";
+				approval.setApprovalState(changeState);
+				int result = approvalService.changeState(approval);
+			}
+		}
 	}
 
 	// 결재 삭제

@@ -6,6 +6,7 @@
 	<resultMap type="Approval" id="approvalResultMap">
 		<id column="APPROVAL_NO" property="approvalNo" />
 		<result column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_NAME" property="memberName" />
 		<result column="APPROVAL_TYPE" property="approvalType" />
 		<result column="APPROVAL_TITLE" property="approvalTitle" />
 		<result column="APPROVAL_CONTENTS" property="approvalContents" />
@@ -30,11 +31,18 @@
 	
 	<!-- 진행함 리스트  -->
 	<select id="selectList" resultMap="approvalResultMap" parameterType="Approval">
-		SELECT a.APPROVAL_NO, a.MEMBER_ID, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK 
+		SELECT a.APPROVAL_NO, a.MEMBER_ID, d.MEMBER_NAME AS MEMBER_NAME, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK 
 		FROM APPROVAL a 
 		INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
-		INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID
+		INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
+		INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
+		WHERE (a.MEMBER_ID = #{memberId } AND a.APPROVAL_STATE = 'N') OR (a.MEMBER_ID = #{memberId } AND a.APPROVAL_STATE = 'I')
 		ORDER BY a.APPROVAL_NO DESC
+	</select>
+	
+	<!-- 글 상세보기  -->
+	<select id="selectOne" resultMap="approvalResultMap" parameterType="Approval">
+		SELECT * FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo }
 	</select>
 	
 	<!-- =============== INSERT =============== -->
@@ -49,4 +57,13 @@
 		INSERT INTO APPROVAL_FILE
 		VALUES(APPROVAL_FILE_SEQ.NEXTVAL, #{originalFileName }, #{reNameFileName }, #{approvalFilePath }, #{approvalFileSize }, SYSDATE, APPROVAL_SEQ.CURRVAL)
 	</insert>
+	
+	<!-- =============== UPDATE =============== -->
+	<!-- 글 상태 변경  -->
+	<update id="updateApprovalState" parameterType="Approval">
+		UPDATE APPROVAL 
+		SET  APPROVAL_STATE = #{approvalState } 
+		WHERE APPROVAL_NO = #{approvalNo }
+	</update>
+	
 </mapper>

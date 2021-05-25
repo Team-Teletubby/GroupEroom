@@ -8,6 +8,7 @@ public class Approval {
 	// 멤버변수
 	private int approvalNo;
 	private int memberId;
+	private String memberName;
 	private String approvalType;
 	private String approvalTitle;
 	private String approvalContents;
@@ -45,6 +46,14 @@ public class Approval {
 
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	
+	public void setMemberName() {
+		this.memberName = memberName;
 	}
 
 	public String getApprovalType() {
@@ -178,14 +187,13 @@ public class Approval {
 	// toString
 	@Override
 	public String toString() {
-		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", approvalType=" + approvalType
-				+ ", approvalTitle=" + approvalTitle + ", approvalContents=" + approvalContents + ", approvalCC="
-				+ approvalCC + ", approvalDate=" + approvalDate + ", approvalState=" + approvalState
-				+ ", approvalFirstId=" + approvalFirstId + ", approvalFirstDate=" + approvalFirstDate
-				+ ", approvalFirstCheck=" + approvalFirstCheck + ", approvalFirstName=" + approvalFirstName
-				+ ", approvalSecondId=" + approvalSecondId + ", approvalScondDate=" + approvalScondDate
-				+ ", approvalSecondCheck=" + approvalSecondCheck + ", approvalSecondName=" + approvalSecondName
-				+ ", file=" + file + ", reply=" + reply + "]";
+		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", memberName=" + memberName
+				+ ", approvalType=" + approvalType + ", approvalTitle=" + approvalTitle + ", approvalContents="
+				+ approvalContents + ", approvalCC=" + approvalCC + ", approvalDate=" + approvalDate
+				+ ", approvalState=" + approvalState + ", approvalFirstId=" + approvalFirstId + ", approvalFirstDate="
+				+ approvalFirstDate + ", approvalFirstCheck=" + approvalFirstCheck + ", approvalFirstName="
+				+ approvalFirstName + ", approvalSecondId=" + approvalSecondId + ", approvalScondDate="
+				+ approvalScondDate + ", approvalSecondCheck=" + approvalSecondCheck + ", approvalSecondName="
+				+ approvalSecondName + ", file=" + file + ", reply=" + reply + "]";
 	}
-	
 }

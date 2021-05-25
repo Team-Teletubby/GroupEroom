@@ -34,10 +34,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectList", approval, rowBounds);
 	}
 
+	// 글 상세보기
 	@Override
 	public Approval selectOne(int approvalNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("approvalMapper.selectOne", approvalNo);
 	}
 
 	@Override
@@ -52,14 +52,13 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.selectOne("approvalMapper.selectListCount", boardType);
 	}
 	
-	//================ 댓글 ================
-	
+	// 글 상태 변경
 	@Override
 	public int updateState(Approval approval) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("approvalMapper.updateApprovalState", approval);
 	}
-
+	
+	//================ 댓글 ================
 	@Override
 	public int insertReply(ApprovalReply reply) {
 		// TODO Auto-generated method stub

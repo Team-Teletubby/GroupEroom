@@ -30,10 +30,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.selectAllList(pi, approval);
 	}
 
+	// 글 상세보기
 	@Override
 	public Approval printOne(int approvalNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return approvalStore.selectOne(approvalNo);
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return 0;
 	}
 
+	// 글 상태 변경
 	@Override
 	public int changeState(Approval approval) {
-		// TODO Auto-generated method stub
-		return 0;
+		return approvalStore.updateState(approval);
 	}
 
 	// 조건에 맞는 글 갯수 가져오기
