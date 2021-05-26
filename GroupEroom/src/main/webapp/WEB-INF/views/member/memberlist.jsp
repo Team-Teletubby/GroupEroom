@@ -35,7 +35,7 @@
       
 	<h1 align="center">사원 목록 </h1>
 	<div class="centerText">
-      <form action="memberModify.do" method="post">
+     
 	<table border="1" width="650px" cellspacing="5">
 	<thead>
 	<tr>
@@ -66,7 +66,7 @@
 	</section>
 	</section>
 	</div>
-	</form>
+	
 	</table>
 	
 	

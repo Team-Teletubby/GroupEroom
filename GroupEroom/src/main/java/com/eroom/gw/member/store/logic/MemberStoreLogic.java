@@ -32,8 +32,8 @@ public class MemberStoreLogic implements MemberStore {
 	//멤버 한명 선택
 	@Override
 	public Member selectOne(Member member) {
-		Member loginUser = sqlSession.selectOne("memberMapper.loginMember", member);
-		return loginUser;
+		Member memberOne = sqlSession.selectOne("memberMapper.loginMember", member);
+		return memberOne;
 	}
 
 	@Override

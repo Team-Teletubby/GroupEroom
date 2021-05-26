@@ -81,11 +81,11 @@
           </c:forTokens>
              <tr>
                <td>은행</td>
-               <td><input type="text" name="Bank" value="${memberOne.bank }"></td>
+               <td><input type="text" name="bank" value="${memberOne.bank }"></td>
             </tr>
              <tr>
                <td>계좌번호</td>
-               <td><input type="text" name="account" value="${memberOne.account }"></td>
+               <td><input type="text" name="bankAccount" value="${memberOne.bankAccount }"></td>
             </tr>
              <tr>
                <td>이메일</td>

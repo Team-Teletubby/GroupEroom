@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -60,19 +60,19 @@
 						</tr>
 							<tr>
 							<td>계좌번호</td>
-					<td><input type="text" name="account" value="${memberOne.account }" readonly></td>
+					<td><input type="text" name="bankAccount" value="${memberOne.bankAccount }" readonly></td>
 						</tr>
 						<tr>
                <td colspan="3" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
-                  <c:url var="memberModifyForm" value="memberModifyForm.do">
+                  <c:url var="mModify" value="memberModify.do">
 							<c:param name="memberId" value="${memberOne.memberId }"></c:param>
 						</c:url>
-							<a href="${memberModifyForm }" class="btn btn-theme02">수정</a>
+							<a href="${mModify }" class="btn btn-theme02">수정</a>
                </td>
             </tr>
 					</table>
-				</form>
+				
 			</div>
 		</section>
 	</section>

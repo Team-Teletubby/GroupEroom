@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
@@ -85,7 +86,7 @@ public class MemberController {
 	// 사원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
 	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
-		System.out.println(post);
+	
 		member.setMemberAddr(post+","+address1+","+address2);
 		int result = service.registerMember(member);
 		if(result >0) {
@@ -99,30 +100,29 @@ public class MemberController {
 	}
 	// 정보수정뷰 뷰 
 	
-	@GetMapping(value="memberModifyForm.do")
-	public String infoView(@RequestParam("memberId")int memberId, Model model) {
-		Member member = service.printMemberOne(memberId);
+	@RequestMapping(value="memForm.do", method=RequestMethod.GET)
+	public String infoView() {
+		return "member/memberModify";
 		
-		if(member!=null) {
-			model.addAttribute("memberOne",member);
-			return "member/memberModify";
-		}else {
-			return "index";
-		}
+	
+		
 	}
 	// 사원 정보수정 
-	@PostMapping(value="memberModify.do")
-	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1 ,@RequestParam("address2") String address2 ,
+	
+	@RequestMapping(value="memberModify.do", method= {RequestMethod.POST, RequestMethod.GET})
+	public String modifyMember(@ModelAttribute Member member, @RequestParam(required = false) String post, @RequestParam(required = false) String address1 ,@RequestParam(required = false) String address2 ,
 							 Model model, HttpServletRequest request) {
-		System.out.println("postmapping 들어옴");
-		
+		HttpSession session = request.getSession();
+		System.out.println(member.getMemberJob());
 		member.setMemberAddr(post +", "+address1+", "+address2);
 		int result = service.modifyMember(member);
 		
-		if(result > 0) { 
+		if(result > 0) {
+			session.setAttribute("memberOne", member);
 			return "redirect:memberList.do";
 		}else {
-			return "";
+			model.addAttribute("msg","정보수정실패");
+			return "common/errorPage";
 		}
 		
 	}
