@@ -14,7 +14,7 @@
 		<result property="memberEmail" column="MEMBER_EMAIL"></result>
 		<result property="memberAddr" column="MEMBER_ADDR"></result>
 		<result property="bank" column="BANK"></result>
-		<result property="account" column="ACCOUNT"></result>
+		<result property="bankAccount" column="ACCOUNT"></result>
 		<result property="regDate" column="REG_DATE"></result>
 		<result property="quitYn" column="QUIT_YN"></result>
 		<result property="quitDate" column="QUIT_DATE"></result>
@@ -59,7 +59,7 @@
 		INSERT INTO MEMBER (MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, 
 		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE, QUIT_YN, QUIT_DATE, ACCOUNT, PROFILE_MODIFY) 
 		VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName }, DEFAULT, #{memberRrn }, 
-		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{account }, 'Y')
+		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{bankAccount }, 'Y')
 
 </insert>
 
@@ -70,7 +70,7 @@
 	<!-- 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
-		SET MEMBER_DEPT = #{memberDept}, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{account } 
+		SET MEMBER_DEPT = #{memberDept}, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount } 
 		WHERE MEMBER_ID = #{memberId }
 		
 	</update>
