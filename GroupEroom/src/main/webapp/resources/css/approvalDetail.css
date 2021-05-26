@@ -1,0 +1,34 @@
+tr > th {
+    padding: 10px; 
+    text-align: center;
+}
+
+.panel-body {
+    background-color: white;
+    padding-top: 10px;
+}
+
+.panel-body > .header-title {
+
+    font-size: 25px;
+    padding-top : 3px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.header-title > .fl {
+    float: left;
+}
+
+.header-title > .fr {
+    float: right;
+}
+
+.bottom-btnbox > .fl {
+    float: left;
+}
+
+.bottom-btnbox > .fr {
+    float: right;
+}
