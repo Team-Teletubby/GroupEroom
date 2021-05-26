@@ -65,10 +65,10 @@
 						<tr>
                <td colspan="3" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
-                  <c:url var="mModify" value="memberModify.do">
+                  <c:url var="mModify" value="info.do">
 							<c:param name="memberId" value="${memberOne.memberId }"></c:param>
 						</c:url>
-							<a href="${mModify }" class="btn btn-theme02">수정</a>
+							<a href="${mModify } " class="btn btn-theme02">수정</a>
                </td>
             </tr>
 					</table>

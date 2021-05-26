@@ -56,6 +56,7 @@ public class MemberController {
 		}
 			
 		}
+
 	
 			
 			
@@ -100,20 +101,28 @@ public class MemberController {
 	}
 	// 정보수정뷰 뷰 
 	
-	@RequestMapping(value="memForm.do", method=RequestMethod.GET)
-	public String infoView() {
-		return "member/memberModify";
+	@RequestMapping(value="info.do", method=RequestMethod.GET)
+	public String infoView(HttpServletRequest request, Member member) {
+		HttpSession session = request.getSession();
+		int result = service.modifyMember(member);
+		if(result >0) { 
+			session.setAttribute("memberOne", member);
+			return "member/memberUpdate";
+		}else {
+			
+			return "common/errorPage";
+		}
 		
 	
 		
 	}
 	// 사원 정보수정 
 	
-	@RequestMapping(value="memberModify.do", method= {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="memberModify.do", method= RequestMethod.POST)
 	public String modifyMember(@ModelAttribute Member member, @RequestParam(required = false) String post, @RequestParam(required = false) String address1 ,@RequestParam(required = false) String address2 ,
 							 Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println(member.getMemberJob());
+	
 		member.setMemberAddr(post +", "+address1+", "+address2);
 		int result = service.modifyMember(member);
 		

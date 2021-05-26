@@ -55,7 +55,7 @@
                <td><input type="text" name="memberPhone" value="${memberOne.memberPhone }"></td>
             </tr>
             
-            <c:forTokens items="${memberOne.memberAddr }" delims="," var="addr" varStatus="status">
+            <c:forTokens items="${memberOne.MemberAddr }" delims="," var="addr" varStatus="status">
             <c:if test="${status.index eq 0 }">
             <tr>
                <td>우편번호</td>
