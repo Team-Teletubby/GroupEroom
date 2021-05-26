@@ -27,7 +27,7 @@ public interface ApprovalService {
 	 * @return
 	 */
 	public ArrayList<Approval> printAll(PageInfo pi, Approval approval);
-	
+
 	/**
 	 * 게시물 상세 조회
 	 * @param approvalNo
@@ -51,10 +51,10 @@ public interface ApprovalService {
 
 	/**
 	 * 조건에 맞는 글 갯수 가져오기
-	 * @param boardType
+	 * @param approval
 	 * @return
 	 */
-	public int getListCount(String boardType);
+	public int getListCount(Approval approval);
 	
 	/**
 	 * 댓글 등록

@@ -26,14 +26,14 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.insert("approvalMapper.insertApproval", approval);
 	}
 
-	// 글 리스트
+	// 진행함 글 리스트
 	@Override
-	public ArrayList<Approval> selectAllList(PageInfo pi, Approval approval) {
+	public ArrayList<Approval> selectList(PageInfo pi, Approval approval) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectList", approval, rowBounds);
 	}
-
+	
 	// 글 상세보기
 	@Override
 	public Approval selectOne(int approvalNo) {
@@ -48,8 +48,8 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	// 조건에 맞는 글 갯수 가져오기
 	@Override
-	public int selectListCount(String boardType) {
-		return sqlSession.selectOne("approvalMapper.selectListCount", boardType);
+	public int selectListCount(Approval approval) {
+		return sqlSession.selectOne("approvalMapper.selectListCount", approval);
 	}
 	
 	// 글 상태 변경
@@ -89,5 +89,4 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("approvalMapper.insertFile", aFile);
 	}
-
 }

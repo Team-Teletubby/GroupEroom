@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -253,6 +254,11 @@
 							html += "<span class='comment-tile'>";
 							html += data[i].enrollDate;
 							html += "</span>";
+							if(${loginUserId } == data[i].memberId) {
+								html += "<span class='comment-delete'>";
+								html += "삭제";
+								html += "</span>";
+							}
 							html += "</div>";
 							html += "<p class='text'>";
 							html += data[i].cmtContents;
@@ -266,7 +272,7 @@
 					}
 				},
 				error : function() {
-					console.log("댓글 에이잭스 에러");
+	
 				}
 			});
 		}

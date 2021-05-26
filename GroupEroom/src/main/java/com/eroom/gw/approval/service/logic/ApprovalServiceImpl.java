@@ -24,10 +24,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.insertApproval(approval);
 	}
 
-	// 글 리스트
+	// 진행함 글 리스트
 	@Override
 	public ArrayList<Approval> printAll(PageInfo pi, Approval approval) {
-		return approvalStore.selectAllList(pi, approval);
+		return approvalStore.selectList(pi, approval);
 	}
 
 	// 글 상세보기
@@ -50,8 +50,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	// 조건에 맞는 글 갯수 가져오기
 	@Override
-	public int getListCount(String boardType) {
-		return approvalStore.selectListCount(boardType);
+	public int getListCount(Approval approval) {
+		return approvalStore.selectListCount(approval);
 	}
 	
 	//================ 댓글 ================

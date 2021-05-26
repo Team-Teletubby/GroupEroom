@@ -108,52 +108,91 @@ public class ApprovalController {
 
 	// 진행함 List 보기
 	@RequestMapping(value="progressBoard.do", method=RequestMethod.GET)
-	public ModelAndView approvalList(ModelAndView mv, 
+	public ModelAndView progressList(ModelAndView mv, 
 									HttpServletRequest request,
 									@RequestParam(value="page", required=false)Integer page) {
+		// 세션에서 로그인한 정보 가져오기
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("LoginUser");
+		// 결재 객체에 로그인/상태 정보 저장
+		Approval approval = new Approval();
+		approval.setMemberId(member.getMemberId());
+		// 진행함으로 들어가기 위한 문장
+		String state = "progress";
+		approval.setApprovalState(state);
+		System.out.println(approval.getApprovalState());
+		
 		//======================== 글 페이징 ========================
 		// jsp에 page가 존재할 경우, 1로 변경
 		int currentPage = (page != null) ? page : 1;
 		// 진행함 게시판 타입
-		String boardType = "N";
-		int listCount = approvalService.getListCount(boardType);
+		int listCount = approvalService.getListCount(approval);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		//===========================================================
-		
 		//======================== 글 리스트 ========================
-		// 세션에 저장된 멤버객체 가져오기
-		HttpSession session = request.getSession();
-		Member user = (Member)session.getAttribute("LoginUser");
-		// DB에서 사용할 로그인한 ID값을 Approval객체에 저장
-		Approval approval = new Approval();
-		approval.setMemberId(user.getMemberId());
 		System.out.println("로그인한 유저id : " + approval.getMemberId());
 		// 글 목록 가져오기
 		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
 		//===========================================================
 		
-			mv.addObject("aList", aList);
-			mv.addObject("userName", user.getMemberName());
-			mv.addObject("page", page);
-			mv.setViewName("approval/progressListView");
+		mv.addObject("aList", aList);
+		mv.addObject("userName", member.getMemberName());
+		mv.addObject("page", page);
+		mv.setViewName("approval/progressListView");
 		
 		return mv;
 	}
-
+	
+	// 미결함 List 보기
+	@RequestMapping(value="suspenseBoard.do", method=RequestMethod.GET)
+	public ModelAndView suspenseList(ModelAndView mv,
+									HttpServletRequest request,
+									@RequestParam(value="page", required=false)Integer page) {
+		
+		// 세션에서 로그인한 정보 가져오기
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("LoginUser");
+		// 결재 객체에 로그인/상태 정보 저장
+		Approval approval = new Approval();
+		approval.setMemberId(member.getMemberId());
+		// 미결함으로 들어가기 위한 문장
+		String state = "suspense";
+		approval.setApprovalState(state);
+		//======================== 글 페이징 ========================
+		// jsp에 page가 존재할 경우, 1로 변경
+		int currentPage = (page != null) ? page : 1;
+		int listCount = approvalService.getListCount(approval);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		//===========================================================
+		//======================== 글 리스트 ========================
+		// 글 목록 가져오기
+		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
+		//===========================================================
+				
+		mv.addObject("aList", aList);
+		mv.addObject("userName", member.getMemberName());
+		mv.addObject("page", page);
+		mv.setViewName("approval/suspenseListView");
+				
+		return mv;
+	}
+	
 	// 글 상세보기
 	@RequestMapping(value="approvalDetail.do", method=RequestMethod.GET)
 	public ModelAndView approvalDetail(ModelAndView mv, 
 									@RequestParam("approvalNo")int approvalNo,
 									HttpServletRequest request) {
+		System.out.println("디테일 메소드 실행중");
 		// 세션 정보 가져오기
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("LoginUser");
-		// 결제 상태 변경 메소드 사용하기 (조건문 사용)
+		// 글 상세보기 가져오기
 		Approval approval = approvalService.printOne(approvalNo);
 		if(approval != null) {
 			// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
-			approvalState(approval, member);
+			approvalStateChange(approval, member);
 			mv.addObject("approval", approval);
+			mv.addObject("loginUserId", member.getMemberId());
 			mv.setViewName("approval/approvalDetail");
 		}else {
 			System.out.println("글 상세보기 오류");
@@ -161,12 +200,10 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 결재 상태 변경 (진행함에서 결제자가 글을 봤을 경우,
-	// 반려, 승인 버튼을 눌렀을 경우 / 페이지에서 상태값 가져오기(heddin))
-	public void approvalState(Approval approval, Member member) {
+	// 결재 상태 변경 (미결함에서 결제자가 글을 봤을 경우)
+	public void approvalStateChange(Approval approval, Member member) {
 		// 변경할 상태값을 저장하는 변수
 		String changeState = "";
-		
 		if(approval.getApprovalState().equals("N")) {
 			if(approval.getApprovalFirstId() == member.getMemberId() || approval.getApprovalSecondId() == member.getMemberId()) {
 				changeState = "I";
