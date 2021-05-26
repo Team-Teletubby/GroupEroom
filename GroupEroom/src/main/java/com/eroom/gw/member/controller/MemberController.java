@@ -83,7 +83,7 @@ public class MemberController {
 	
 	
 	// 사원등록
-		@RequestMapping(value="memberRegister.do", method=RequestMethod.GET )
+		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
 		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
 		
 			member.setMemberAddr(post+","+address1+","+address2);
