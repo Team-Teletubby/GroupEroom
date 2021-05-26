@@ -18,8 +18,8 @@ public class MemberStoreLogic implements MemberStore {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Member> selectList() {
-		return sqlSession.selectList("memberMapper.memberList");
+	public ArrayList<Member> selectList() {
+		return (ArrayList)sqlSession.selectList("memberMapper.memberList");
 	}
 
 	//검색

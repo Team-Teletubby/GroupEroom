@@ -83,18 +83,18 @@ public class MemberController {
 	
 	
 	// 사원등록
-		@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
-		public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
-		
-			member.setMemberAddr(post+","+address1+","+address2);
-			int result = service.registerMember(member);
-			if(result >0) {
-				return "index";
-				
-			}else {
-				model.addAttribute("msg" , "사원등록실패");
-				return "index";
-			}
+	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
+	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
+		System.out.println(post);
+		member.setMemberAddr(post+","+address1+","+address2);
+		int result = service.registerMember(member);
+		if(result >0) {
+			return "index";
+
+		}else {
+			model.addAttribute("msg" , "사원등록실패");
+			return "index";
+		}
 			
 	}
 	// 정보수정뷰 뷰 
@@ -111,7 +111,7 @@ public class MemberController {
 		}
 	}
 	// 사원 정보수정 
-	@RequestMapping(value="memberModify.do" , method= {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping(value="memberModify.do")
 	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1 ,@RequestParam("address2") String address2 ,
 							 Model model, HttpServletRequest request) {
 		System.out.println("postmapping 들어옴");
@@ -129,8 +129,8 @@ public class MemberController {
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
 	public String memberList(Model model) { 
-		List<Member> list = service.printAll();
-		model.addAttribute("list", list);
+		ArrayList<Member> mlist = service.printAll();
+		model.addAttribute("mlist", mlist);
 		
 		return "member/memberlist";
 	}
@@ -152,9 +152,10 @@ public class MemberController {
 	// 사원 검색 
 	@RequestMapping(value="memberSearch.do", method=RequestMethod.GET)
 	public String memberSearch(@ModelAttribute Search search,Model model) {
+		System.out.println(search);
 		ArrayList<Member> searchList = service.printSearchAll(search);
 		if(!searchList.isEmpty()) {
-			model.addAttribute("list", searchList);
+			model.addAttribute("mlist", searchList);
 			model.addAttribute("search", search);
 			return "member/memberlist";
 		}

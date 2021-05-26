@@ -1,7 +1,7 @@
 package com.eroom.gw.member.service;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +16,7 @@ public interface MemberService {
 	// 정보수정
 	public int modifyMember(Member member);
 	//사원목록조회
-	public List<Member> printAll();
+	public ArrayList<Member> printAll();
 	public ArrayList<Member> printSearchAll(Search search);
 
 	public Member printMemberOne(int mId);

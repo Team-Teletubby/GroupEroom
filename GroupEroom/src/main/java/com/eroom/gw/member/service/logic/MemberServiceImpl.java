@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Member> printAll() {
+	public ArrayList<Member> printAll() {
 		return mStore.selectList();
 	}
 
