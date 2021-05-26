@@ -11,19 +11,21 @@ public class ApprovalReply {
 	private Date enrollDate;
 	private int approvalNo;
 	private int memberId;
+	private String memberName;
 	
 	// 생성자
 	public ApprovalReply() {
 		super();
 	}
 	
-	public ApprovalReply(int cmtNo, String cmtContents, Date enrollDate, int approvalNo, int memberId) {
+	public ApprovalReply(int cmtNo, String cmtContents, Date enrollDate, int approvalNo, int memberId, String memberName) {
 		super();
 		this.cmtNo = cmtNo;
 		this.cmtContents = cmtContents;
 		this.enrollDate = enrollDate;
 		this.approvalNo = approvalNo;
 		this.memberId = memberId;
+		this.memberName = memberName;
 	}
 	
 	// getter/setter
@@ -57,12 +59,18 @@ public class ApprovalReply {
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	
 	// toString
 	@Override
 	public String toString() {
 		return "ApprovalReply [cmtNo=" + cmtNo + ", cmtContents=" + cmtContents + ", enrollDate=" + enrollDate
-				+ ", approvalNo=" + approvalNo + ", memberId=" + memberId + "]";
+				+ ", approvalNo=" + approvalNo + ", memberId=" + memberId +", memberName =" + memberName + "]";
 	}
 
 }

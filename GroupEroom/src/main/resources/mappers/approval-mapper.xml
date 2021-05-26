@@ -29,6 +29,15 @@
 		<result column="APPROVAL_SECOND_CHECK" property="approvalSecondCheck" />
 	</resultMap>
 	
+	<resultMap type="ApprovalReply" id="approvalReplyResultMap">
+		<result column="CMT_NO" property="cmtNo" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="APPROVAL_NO" property="approvalNo" />
+		<result column="CMT_CONTENTS" property="cmtContents" />
+		<result column="ENROLL_DATE" property="enrollDate" />
+		<result column="MEMBER_NAME" property="memberName" />
+	</resultMap>
+	
 	<!-- =============== SELECT =============== -->
 	<!-- 조건에 맞는 글 갯수 구하기  -->
 	<select id="selectListCount" resultType="_int" parameterType="String">
@@ -56,11 +65,26 @@
 		WHERE a.APPROVAL_NO = #{approvalNo }
 	</select>
 	
+	<!-- 댓글 리스트  -->
+	<select id="selectListReply" resultMap="approvalReplyResultMap" parameterType="_int">
+		SELECT a.CMT_NO, a.MEMBER_ID, b.MEMBER_NAME AS MEMBER_NAME, a.APPROVAL_NO, a.CMT_CONTENTS, a.ENROLL_DATE
+		FROM APPROVAL_CMT a
+		INNER JOIN MEMBER b ON a.MEMBER_ID = b.MEMBER_ID
+		WHERE a.APPROVAL_NO = #{approvalNo }
+		ORDER BY a.ENROLL_DATE DESC
+	</select>
+	
 	<!-- =============== INSERT =============== -->
 	<!-- 결재문 등록 -->
 	<insert id="insertApproval" parameterType="Approval">
 		INSERT INTO APPROVAL 
 		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirstId }, NULL, 'N', ${approvalSecondId }, NULL, 'N')
+	</insert>
+	
+	<!-- 댓글 등록  -->
+	<insert id="insertReply" parameterType="ApprovalReply">
+		INSERT INTO APPROVAL_CMT
+		VALUES(APPROVAL_REPLY_SEQ.NEXTVAL, #{memberId }, #{approvalNo }, #{cmtContents }, SYSDATE)
 	</insert>
 	
 	<!-- 파일 등록  -->

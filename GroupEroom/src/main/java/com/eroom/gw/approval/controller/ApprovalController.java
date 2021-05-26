@@ -221,22 +221,34 @@ public class ApprovalController {
 	// ======================================================
 	
 	// 댓글 List 보기
-	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
-	public void replyList(@RequestParam("approvalNo")int approvalNo, HttpServletResponse response) {
-
-		// json으로 보내기
+	@RequestMapping(value="replyList.do", method=RequestMethod.POST)
+	public void replyList(@RequestParam("approvalNo")int approvalNo, HttpServletResponse response) throws JsonIOException, IOException {
+		
+		ArrayList<ApprovalReply> replyList = approvalService.printAllReply(approvalNo);
+		if(replyList != null) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(replyList, response.getWriter());
+		}else {
+			System.out.println("댓글 리스트 못가져옴");
+		}
 	}
 
 	// 댓글 등록
 	@ResponseBody
-	@RequestMapping(value="replyRegister", method=RequestMethod.GET)
+	@RequestMapping(value="replyRegister.do", method=RequestMethod.POST)
 	public String replyRegister(@ModelAttribute ApprovalReply reply, HttpSession session) {
+		// 세션에서 로그인 정보 가져오기
+		Member member = (Member)session.getAttribute("LoginUser");
+		// 댓글 객체에 로그인 ID값 저장
+		reply.setMemberId(member.getMemberId());
+		// 댓글 등록
+		int result = approvalService.registerReply(reply);
 		
 		return "success";
 	}
 	
 	// 댓글 수정
-	@RequestMapping(value="replyModify", method=RequestMethod.GET)
+	@RequestMapping(value="replyModify.do", method=RequestMethod.GET)
 	public void replyModity(@ModelAttribute ApprovalReply reply,
 							HttpServletResponse response) {
 		
