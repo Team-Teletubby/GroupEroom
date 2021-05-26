@@ -152,7 +152,14 @@ public class MemberController {
 	// 사원 검색 
 	@RequestMapping(value="memberSearch.do", method=RequestMethod.GET)
 	public String memberSearch(@ModelAttribute Search search,Model model) {
-		return "";
+		ArrayList<Member> searchList = service.printSearchAll(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("list", searchList);
+			model.addAttribute("search", search);
+			return "member/memberlist";
+		}
+		model.addAttribute("msg", "사원검색 실패");
+		return "common/errorPage";
 	}
 }
 

@@ -22,10 +22,11 @@ public class MemberStoreLogic implements MemberStore {
 		return sqlSession.selectList("memberMapper.memberList");
 	}
 
+	//검색
 	@Override
 	public ArrayList<Member> selectSearchList(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchList", search);
 	}
 
 	//멤버 한명 선택

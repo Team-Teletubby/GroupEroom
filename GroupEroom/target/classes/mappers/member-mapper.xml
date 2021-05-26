@@ -35,7 +35,24 @@
 		SELECT * FROM MEMBER
 		
 	</select>
-	
+	<select id="selectSearchList" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		<if test="searchCondition.toString() == 'name'">
+		 WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'dept'">
+		 WHERE MEMBER_DEPT LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'job'">
+		 WHERE MEMBER_JOB LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'all'">
+		WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%'
+		OR MEMBER_DEPT LIKE '%' || #{searchValue } || '%'
+		OR MEMBER_JOB LIKE '%' || #{searchValue } || '%'
+		</if>
+		
+	</select>
 	
 	<!-- 등록 -->
 	<insert id="insertMember" parameterType="Member">

@@ -68,5 +68,19 @@
 	</div>
 	</form>
 	</table>
+	
+	
+	<div align="center">
+		<form action="memberSearch.do" method="get">
+		<select name="searchCondition">
+		<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
+		<option value="name" <c:if test="${search.searchCondition == 'name' }">selected</c:if>>이름</option>
+		<option value="dept" <c:if test="${search.searchCondition == 'dept' }">selected</c:if>>부서</option>
+		<option value="job" <c:if test="${search.searchCondition == 'job' }">selected</c:if>>직급</option>
+		</select>
+		<input type="text" name="searchValue" value="${search.searchValue }">
+		<input type="submit" value="검색">		
+		</form>
+	</div>
 </body>
 </html>

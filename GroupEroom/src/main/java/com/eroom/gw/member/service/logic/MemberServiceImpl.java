@@ -44,8 +44,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ArrayList<Member> printSearchAll(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Member> searchList = mStore.selectSearchList(search);
+		return searchList;
 	}
 
 	@Override
