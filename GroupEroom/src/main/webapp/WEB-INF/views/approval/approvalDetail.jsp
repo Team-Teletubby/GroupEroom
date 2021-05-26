@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>문서 상세보기</title>
-<link href="css/approvalDetail.css" rel="stylesheet">
+<link href="resources/css/approvalDetail.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -42,15 +42,15 @@
                                                 <h4>기안자 정보</h4>
                                                 <tr>
                                                     <th>성명</th>
-                                                    <td>dasd</td>
+                                                    <td>${approval.memberName }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>부서</th>
-                                                    <td>재무</td>
+                                                    <td>${approval.memberDept }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>직급</th>
-                                                    <td>왕</td>
+                                                    <td>${approval.memberJob }</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -59,14 +59,15 @@
                                                 <h4>문서 정보</h4>
                                                 <tr>
                                                     <th>문서번호</th>
-                                                    <td>2131231</td>
+                                                    <td>${approval.approvalNo }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>문서종류</th>
-                                                    <td>협조문</td>
+                                                    <td>${approval.approvalType }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>작성일</th>
+                                                    <td>${approval.approvalDate }</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -80,15 +81,23 @@
                                                 </tr>
                                                 <tr>
                                                     <th>성명</th>
+                                                    <td>${approval.approvalFirstName }</td>
+                                                    <td>${approval.approvalSecondName }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>부서</th>
+                                                    <td>${approval.approvalFirstDept }</td>
+                                                    <td>${approval.approvalSecondDept }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>직급</th>
+                                                    <td>${approval.approvalFirstJob }</td>
+                                                    <td>${approval.approvalSecondJob }</td>
                                                 </tr>
                                                 <tr>
                                                     <th>승인</th>
+                                                    <td>${approval.approvalFirstCheck }</td>
+                                                    <td>${approval.approvalSecondCheck }</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -97,8 +106,7 @@
                                     <div class="mail-sender">
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <h3>협조 부탁드립니다.</h3>
-                                                <span>내용</span>
+                                                <span>${approval.approvalContents }</span>
                                             </div>
                                         </div>
                                     </div>
@@ -113,6 +121,59 @@
                                     </div>
                                     <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$댓글$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
                                     <!-- 댓글등록 -->
+                                    <div class="comment-wrap">
+                                        <div class="comment-count">
+                                            전체 댓글 1개
+                                        </div>
+                                        <div class="comment-box">
+                                            <ul class="cmt-list">
+                                                <li id="" class="ub-content">
+                                                    <div class="cmt-info-clear">
+                                                        <a class="profile-image">
+                                                            <img src="resources/approvalFiles/uo-danro.jpg">
+                                                        </a>
+                                                        <div class="comment-content">
+                                                            <div class="profile-info">
+                                                                <span class="profile-name">이혜성</span>
+                                                                <span class="comment-time">2021-02-12</span>
+                                                                    <span>수정</span>
+                                                                    <span>삭제</span>
+                                                            </div>
+                                                            <p class="text">123dsadsadad123dsa</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li id="" class="ub-content">
+                                                    <div class="cmt-info-clear">
+                                                        <a class="profile-image">
+                                                            <img src="../ui-danro.jpg">
+                                                        </a>
+                                                        <div class="comment-content">
+                                                            <div class="profile-info">
+                                                                <span class="profile-name">이혜성</span>
+                                                                <spam class="comment-time">2021-02-12</spam>
+                                                            </div>
+                                                            <p class="text">123</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li id="" class="ub-content">
+                                                    <div class="cmt-info-clear">
+                                                        <a class="profile-image">
+                                                            <img src="../ui-danro.jpg">
+                                                        </a>
+                                                        <div class="comment-content">
+                                                            <div class="profile-info">
+                                                                <span class="profile-name">이혜성</span>
+                                                                <spam class="comment-time">2021-02-12</spam>
+                                                            </div>
+                                                            <p class="text">123</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
@@ -131,25 +192,9 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <!-- 댓글조회 -->
-                                        <div>
-                                            <table align="center" width="500" border="1" cellspacing="0" id="cmttb">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="3">
-                                                            <b id="cmtCount"></b>
-                                                        </td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <br>
                                         <div class="bottom-btnbox">
                                             <div class="fl">
-                                                <button onclick="location.href='fBoardListView.do'" class="btn btn-theme03">목록으로</button>
+                                                <button onclick="history.back(-1)" class="btn btn-theme03">목록으로</button>
                                             </div>
                                             <div class="fr">
                                                 <button onclick="location.href='${fModify}'" class="btn btn-theme02">수정</button>

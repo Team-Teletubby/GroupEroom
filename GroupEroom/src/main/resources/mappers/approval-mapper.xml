@@ -7,6 +7,8 @@
 		<id column="APPROVAL_NO" property="approvalNo" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_JOB" property="memberJob" />
+		<result column="MEMBER_DEPT" property="memberDept" />
 		<result column="APPROVAL_TYPE" property="approvalType" />
 		<result column="APPROVAL_TITLE" property="approvalTitle" />
 		<result column="APPROVAL_CONTENTS" property="approvalContents" />
@@ -14,13 +16,17 @@
 		<result column="APPROVAL_DATE" property="approvalDate" />
 		<result column="APPROVAL_STATE" property="approvalState" />
 		<result column="APPROVAL_FIRST_ID" property="approvalFirstId" />
+		<result column="APPROVAL_FIRST_NAME" property="approvalFirstName" />
+		<result column="APPROVAL_FIRST_JOB" property="approvalFirstJob" />
+		<result column="APPROVAL_FIRST_DEPT" property="approvalFirstDept" />
 		<result column="APPROVAL_FIRST_DATE" property="approvalFirstDate" />
 		<result column="APPROVAL_FIRST_CHECK" property="approvalFirstCheck" />
-		<result column="APPROVAL_FIRST_NAME" property="approvalFirstName" />
 		<result column="APPROVAL_SECOND_ID" property="approvalSecondId" />
+		<result column="APPROVAL_SECOND_NAME" property="approvalSecondName" />
+		<result column="APPROVAL_SECOND_JOB" property="approvalSecondJob" />
+		<result column="APPROVAL_SECOND_DEPT" property="approvalSecondDept" />
 		<result column="APPROVAL_SECOND_DATE" property="approvalSecondDate" />
 		<result column="APPROVAL_SECOND_CHECK" property="approvalSecondCheck" />
-		<result column="APPROVAL_SECOND_NAME" property="approvalSecondName" />
 	</resultMap>
 	
 	<!-- =============== SELECT =============== -->
@@ -42,7 +48,12 @@
 	
 	<!-- 글 상세보기  -->
 	<select id="selectOne" resultMap="approvalResultMap" parameterType="Approval">
-		SELECT * FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo }
+		SELECT a.APPROVAL_NO, a.MEMBER_ID, d.MEMBER_NAME AS MEMBER_NAME, d.MEMBER_JOB AS MEMBER_JOB, d.MEMBER_DEPT AS MEMBER_DEPT, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, b.MEMBER_JOB AS APPROVAL_FIRST_JOB, b.MEMBER_DEPT AS APPROVAL_FIRST_DEPT, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, c.MEMBER_JOB AS APPROVAL_SECOND_JOB, c.MEMBER_DEPT AS APPROVAL_SECOND_DEPT, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK 
+		FROM APPROVAL a 
+		INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
+		INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
+		INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
+		WHERE a.APPROVAL_NO = #{approvalNo }
 	</select>
 	
 	<!-- =============== INSERT =============== -->

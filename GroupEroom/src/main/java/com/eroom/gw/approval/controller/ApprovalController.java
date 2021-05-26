@@ -150,8 +150,8 @@ public class ApprovalController {
 		Member member = (Member)session.getAttribute("LoginUser");
 		// 결제 상태 변경 메소드 사용하기 (조건문 사용)
 		Approval approval = approvalService.printOne(approvalNo);
-		// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
 		if(approval != null) {
+			// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
 			approvalState(approval, member);
 			mv.addObject("approval", approval);
 			mv.setViewName("approval/approvalDetail");
