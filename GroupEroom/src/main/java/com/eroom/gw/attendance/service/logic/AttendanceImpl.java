@@ -32,4 +32,9 @@ public class AttendanceImpl implements AttendanceService{
 		return 0;
 	}
 
+	@Override
+	public float usedHolidayCount(int memberId) {
+		return atdStore.usedHolidayCount(memberId);
+	}
+
 }

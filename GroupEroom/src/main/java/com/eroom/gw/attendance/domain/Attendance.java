@@ -10,7 +10,7 @@ public class Attendance {
 	private Date startDate;
 	private Date endDate;
 	private int totalHoliday;
-	private int usedHoliday;
+	private float usedHoliday;
 	private String reason;
 	
 	public Attendance() {}
@@ -51,10 +51,10 @@ public class Attendance {
 	public void setTotalHoliday(int totalHoliday) {
 		this.totalHoliday = totalHoliday;
 	}
-	public int getUsedHoliday() {
+	public float getUsedHoliday() {
 		return usedHoliday;
 	}
-	public void setUsedHoliday(int usedHoliday) {
+	public void setUsedHoliday(float usedHoliday) {
 		this.usedHoliday = usedHoliday;
 	}
 	public String getReason() {
