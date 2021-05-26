@@ -12,5 +12,6 @@ public interface AttendanceStore {
 		public int insertAttendance(Attendance attendance);
 		//연차 취소
 		public int deleteAttendance(int attendanceNo);
+		public float usedHolidayCount(int memberId);
 
 }

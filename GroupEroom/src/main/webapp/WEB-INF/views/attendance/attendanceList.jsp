@@ -17,7 +17,7 @@
 <style>
 	.circle{
 	border-radius:50px;
-	background:#f4f4f4;
+	background:#dcdcdd;
 	width:33%;
 	height:100px;
 	text-align:center;
@@ -32,6 +32,31 @@
 	font-size:20px;
 	}
 </style>
+
+<script>
+$(document).ready(function(){
+	$("#reg-btn").on("click", function () {
+		var restHoliday = "${restHoliday}"		
+		if ($("#category").val()=="--분류--") {
+			alert("연차 분류를 선택해 주세요");
+			return false;
+		} else if($("#startDate").val() ==""){
+			alert("시작일을 설정해주세요.");
+			return false;
+		}else if($("#endDate").val() ==""){
+			alert("종료일을 설정해주세요.");
+			return false;
+		}else if(restHoliday == 0){
+			alert("연차를 모두 사용하셨습니다.");
+			return false;
+		}else if(restHoliday !=0){
+			if(confirm("신청하시겠습니까?")==false){
+				return false;
+			}
+		}
+		});
+	});
+</script>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
@@ -50,11 +75,13 @@
             	부여 연차
             	<p style="font-size:40px">${totalHoliday }</p>
             	</div>
-            	<div class="circle" style="background:#ffc247;" >
+            	<div class="circle" style="background:#ffc247; color:white" >
             	잔여 연차
+            	<p style="font-size:40px; color:white">${restHoliday}</p>
             	</div>
             	<div class="circle">
             	사용 연차
+				<p style="font-size:40px">${usedHoliday }</p>
             	</div>
             </div>	
             	<br><br><br><br><br><br><br>
@@ -62,9 +89,10 @@
             	<h4><i class="fa fa-angle-right"></i>연차 신청</h4>
             	<form action="attendanceRegister.do" method="post">
             	<input type="hidden" value="${LoginUser.memberId }" name="memberId">
+            	<input type="hidden" value="${restHoliday }" name="restHoliday">
             		<table class="table">
             		<tr>
-            			<th>종류</th>
+            			<th>분류</th>
             			<th>시작 일자</th>
             			<th>종료 일자</th>
             			<th>사유</th>
@@ -72,7 +100,8 @@
             		</tr>
             			<tr>
             				<td>
-            					<select class="form-control" name="holidayType">
+            					<select class="form-control" name="holidayType" id="category">
+            						<option value="--분류--">--분류--</option>
 			            			<option value="연차">연차</option>
 			            			<option value="오후 반차">오후 반차</option>
 			            			<option value="오전 반차">오전 반차</option>
@@ -81,7 +110,7 @@
             				</td>
             				<td>
             					<div style="margin: 0 50px 0 0;" data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="${now }" class="input-append date dpYears">
-			                      <input type="text" size="16" class="form-control" name="startDate">
+			                      <input type="text" size="16" class="form-control" name="startDate" id="startDate">
 			                      <span class="input-group-btn add-on">
 			                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
 			                       </span>
@@ -89,7 +118,7 @@
             				</td>
             				<td>
             					<div style="margin: 0 50px 0 0;" data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="${now }" class="input-append date dpYears">
-			                      <input type="text" size="16" class="form-control" name="endDate">
+			                      <input type="text" size="16" class="form-control" name="endDate" id="endDate">
 			                      <span class="input-group-btn add-on">
 			                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
 			                       </span>
@@ -99,7 +128,7 @@
             				<input type="text" placeholder="사유" class="form-control" name="reason">
             				</td>
             				<td>
-            					<input type="submit" class="btn btn-theme02" style="float:left;" value="등록/승인">
+            					<input type="submit" id="reg-btn" class="btn btn-theme02" style="float:left;" value="등록/승인">
             				</td>
             			</tr>
             		</table>

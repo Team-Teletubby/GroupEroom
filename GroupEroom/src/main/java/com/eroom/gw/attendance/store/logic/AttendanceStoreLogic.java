@@ -32,4 +32,9 @@ public class AttendanceStoreLogic implements AttendanceStore{
 		return 0;
 	}
 
+	@Override
+	public float usedHolidayCount(int memberId) {
+		return sqlSession.selectOne("attendanceMapper.usedHolidayCount", memberId);
+	}
+
 }

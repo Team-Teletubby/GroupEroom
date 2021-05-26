@@ -1,11 +1,14 @@
 package com.eroom.gw.attendance.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,7 @@ public class AttendanceController {
 	@RequestMapping(value="attendanceList.do")
 	public String attendanceList(Model model, HttpSession session){
 		Member LoginUser = (Member)session.getAttribute("LoginUser");
+		int memberId = LoginUser.getMemberId();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String now = format.format(new Date()); //달력 용도
 		int totalHoliday = 0;
@@ -45,7 +49,7 @@ public class AttendanceController {
 		long diffDate = calDate / baseDay;
 		long diffMonth = calDate / baseMonth;
 		long diffYear = calDate / baseYear;
-		System.out.println(diffYear);
+				
 		if(diffYear < 1) {
 			totalHoliday = 11;
 		} else if(diffYear <= 2) {
@@ -78,10 +82,13 @@ public class AttendanceController {
 			totalHoliday = 28;
 		} else if(diffYear <= 30) {
 			totalHoliday = 29;
-		} 
+		} //for문으로 어케 바꾸
 		
-		
+		float usedHoliday = atdService.usedHolidayCount(memberId);
+		float restHoliday = totalHoliday-usedHoliday;
+		model.addAttribute("usedHoliday", usedHoliday);
 		model.addAttribute("totalHoliday", totalHoliday);
+		model.addAttribute("restHoliday", restHoliday);
 		model.addAttribute("diffDate", diffDate);
 		model.addAttribute("now", now);
 		return "attendance/attendanceList";
@@ -94,12 +101,15 @@ public class AttendanceController {
 	
 	// 연차 등록
 	@RequestMapping(value="attendanceRegister.do" ,method=RequestMethod.POST)
-	public ModelAndView atdRegister(ModelAndView mv, @ModelAttribute Attendance attendance) {
+	public ModelAndView atdRegister(ModelAndView mv, @ModelAttribute Attendance attendance, @RequestParam("restHoliday")float restHoliday,HttpServletResponse response ) throws IOException {
 		int calDate = (int) (attendance.getEndDate().getTime() - attendance.getStartDate().getTime() );
 		int calDiff = (calDate / (24*60*60*1000))+1;
 		attendance.setUsedHoliday(calDiff);
+		float usedHoliday = attendance.getUsedHoliday();
+		float diff = restHoliday - usedHoliday;
+		System.out.println(diff);
 		int result = atdService.registerAttendance(attendance);
-		if(result>0) {
+		if(result>0 && diff>=0) {
 			mv.setViewName("redirect:attendanceList.do");
 		}else {
 			mv.setViewName("error");
