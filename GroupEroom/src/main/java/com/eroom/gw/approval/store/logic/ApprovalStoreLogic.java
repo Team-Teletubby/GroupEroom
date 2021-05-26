@@ -59,16 +59,16 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 	
 	//================ 댓글 ================
+	// 댓글 등록
 	@Override
 	public int insertReply(ApprovalReply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("approvalMapper.insertReply", reply);
 	}
 
+	// 댓글 리스트
 	@Override
 	public ArrayList<ApprovalReply> selectAllList(int approvalNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectListReply", approvalNo);
 	}
 
 	@Override

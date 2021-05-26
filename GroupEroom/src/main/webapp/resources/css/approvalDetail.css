@@ -39,6 +39,7 @@ tr > th {
 
 .cmt-list {
     padding-left: 20px;
+    padding-right: 20px;
 }
 
 .ub-content:not(:last-child) {
@@ -58,7 +59,7 @@ tr > th {
 }
 
 .text {
-    cursor: pointer;
+    /* cursor: pointer; */
     word-break: break-all;
     overflow: hidden;
 }

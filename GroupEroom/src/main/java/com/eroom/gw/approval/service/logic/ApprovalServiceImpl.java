@@ -55,17 +55,16 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 	
 	//================ 댓글 ================
-	
+	// 댓글 등록
 	@Override
 	public int registerReply(ApprovalReply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+		return approvalStore.insertReply(reply);
 	}
-
+	
+	// 댓글 리스트
 	@Override
 	public ArrayList<ApprovalReply> printAllReply(int approvalNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return approvalStore.selectAllList(approvalNo);
 	}
 
 	@Override
