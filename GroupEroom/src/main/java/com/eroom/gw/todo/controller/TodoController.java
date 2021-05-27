@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +18,9 @@ public class TodoController {
 	private TodoService tdService;
 	
 	// 내 할 일 전체 출력
+	@RequestMapping(value="todoList.do")
 	public ModelAndView todoListView(ModelAndView mv,@RequestParam("")int memberId) {
+		mv.setViewName("todo/todoList");
 		return mv;
 	}
 	

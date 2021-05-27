@@ -168,7 +168,7 @@ $(document).ready(function(){
 							<td>
 							${attendance.usedHoliday }
 							</td>
-							<td>${attendance.reason }${attendance.done}</td>
+							<td>${attendance.reason }</td>
 							<td align="right">
 							<c:if test="${attendance.done eq 'N'}">
 								<c:url var="deleteAttendance" value="deleteAttendance.do">
@@ -177,7 +177,7 @@ $(document).ready(function(){
 								<a href="${deleteAttendance }" class="btn btn-sm btn-theme04" id="cancle-btn">신청취소</a>
 							</c:if>
 							<c:if test="${attendance.done eq 'Y'}">
-								<td></td>
+								
 							</c:if>
 							</td>
 						</tr>
