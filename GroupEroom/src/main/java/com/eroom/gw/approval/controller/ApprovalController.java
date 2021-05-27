@@ -316,9 +316,9 @@ public class ApprovalController {
 	
 	// 결재 삭제
 	@RequestMapping(value="approvalDelete.do", method=RequestMethod.GET)
-	public String approvalDelete(@RequestParam("approvalNo")int approvalNo) {
-
-		return "redirect:approvalList.do";
+	public String approvalDelete(@ModelAttribute Approval approval) {
+		int result = approvalService.changeState(approval);
+		return "redirect:progressBoard.do";
 	}
 	
 	// 특정 부서 멤버 목록 조회

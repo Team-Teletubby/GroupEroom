@@ -27,7 +27,7 @@
 					<div class="col-md-12">
 						<div class="content-panel">
 							<h4>
-								<i class="fa fa-angle-right"></i> 진행함
+								<i class="fa fa-angle-right"></i> 미결함
 							</h4>
 							<hr>
 							<c:if test="${aList != null }">

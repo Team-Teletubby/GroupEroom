@@ -190,9 +190,11 @@
 									</div>
 									<div class="fr">
 										<c:if test="${approval.memberId == loginUserId.toString() && approval.approvalState == 'N' }">
-											<button onclick="location.href='${fModify}'"
-												class="btn btn-theme02">수정</button>
-											<button onclick="location.href='${fDelete}'"
+											<c:url var="deleteBtn" value="approvalDelete.do"> 
+												<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+												<c:param name="approvalState" value="D"></c:param>
+											</c:url>
+											<button onclick="location.href='${deleteBtn}'"
 												class="btn btn-theme04">삭제</button>
 										</c:if>
 									</div>
