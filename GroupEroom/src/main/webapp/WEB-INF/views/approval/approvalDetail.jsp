@@ -31,16 +31,35 @@
 									<span>결재문</span>
 								</div>
 								<div class="fr">
-								<c:if test="${approval.approvalFirstId == loginUserId && approval.approvalFirstCheck == 'N' || approval.approvalSecondId == loginUserId && approval.approvalSecondCheck == 'N'}">
+								<c:if test="${approval.approvalFirstId == loginUserId && approval.approvalFirstCheck == 'N'}">
 									<c:url var="compleBtn" value="compleBtn.do">
 										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
 										<c:param name="approvalFirstId" value="${approval.approvalFirstId }"></c:param>
 										<c:param name="approvalSecondId" value="${approval.approvalSecondId }"></c:param>
 										<c:param name="approvalState" value="C"></c:param>
 									</c:url>
+									<c:url var="compleBtn1" value="compleBtn.do">
+										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+										<c:param name="approvalState" value="R"></c:param>
+									</c:url>
 									<button type="button" onclick="location.href='${compleBtn }'" class="btn btn-success">승인</button>
-									<button type="button" class="btn btn-danger">반려</button>
+									<button type="button" onclick="location.href='${compleBtn1 }'" class="btn btn-danger">반려</button>
 								</c:if>
+								
+								<c:if test="${approval.approvalFirstCheck == 'Y' && approval.approvalSecondId == loginUserId && approval.approvalSecondCheck == 'N' }">
+									<c:url var="compleBtn" value="compleBtn.do">
+										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+										<c:param name="approvalFirstId" value="${approval.approvalFirstId }"></c:param>
+										<c:param name="approvalSecondId" value="${approval.approvalSecondId }"></c:param>
+										<c:param name="approvalState" value="C"></c:param>
+									</c:url>
+									<c:url var="compleBtn1" value="compleBtn.do">
+										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+										<c:param name="approvalState" value="R"></c:param>
+									</c:url>
+									<button type="button" onclick="location.href='${compleBtn }'" class="btn btn-success">승인</button>
+									<button type="button" onclick="location.href='${compleBtn1 }'" class="btn btn-danger">반려</button>
+									</c:if>
 								</div>
 							</div>
 							<div class="mail-header row">
@@ -158,7 +177,9 @@
 											<div></div> <textarea class="form-control" id="cmtContents"
 												rows="3" placeholder="댓글을 입력하세요."></textarea>
 											<div align="right" style="margin-top: 2px">
+												<c:if test="${approval.approvalState == 'N' || approval.approvalState == 'I' }">
 												<button class="btn btn-sm btn-theme03" id="cmtSubmit">등록</button>
+												</c:if>
 											</div>
 										</li>
 									</ul>
