@@ -178,7 +178,7 @@ public class ApprovalController {
 	}
 	
 	// 완료함 List 보기
-	@RequestMapping(value="complete.do", method=RequestMethod.GET)
+	@RequestMapping(value="completeBoard.do", method=RequestMethod.GET)
 	public ModelAndView completeList(ModelAndView mv,
 									HttpServletRequest request,
 									@RequestParam(value="page", required=false)Integer page) {
@@ -212,7 +212,7 @@ public class ApprovalController {
 	}
 	
 	// 반려함 List 보기
-		@RequestMapping(value="reject.do", method=RequestMethod.GET)
+		@RequestMapping(value="rejectBoard.do", method=RequestMethod.GET)
 		public ModelAndView rejectList(ModelAndView mv,
 										HttpServletRequest request,
 										@RequestParam(value="page", required=false)Integer page) {
