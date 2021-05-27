@@ -8,6 +8,7 @@ import com.eroom.gw.mail.domain.Mail;
 public interface MailStore {
 	
 	public int selectListCount();
-	public ArrayList<Mail> selectAllList(PageInfo pi);
+	public int addReadCount(int mailNo);
+	public ArrayList<Mail> selectAllInbox(PageInfo pi, int receiverId);
 
 }

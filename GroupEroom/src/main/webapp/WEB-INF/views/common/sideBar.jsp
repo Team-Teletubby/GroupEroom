@@ -61,14 +61,21 @@
 							<li><a href="rejectBoard.do">반려함</a></li>
 						</ul></li>
 					<!-- 메일 메뉴 -->
-					<li><a href="mailViewList.do"> <i class="fa fa-envelope"></i>
-							<span>메일 </span> <span
-							class="label label-theme pull-right mail-info">2</span>
-					</a></li>
+					<li>
+						<a href="inboxListView.do"> 
+							<i class="fa fa-envelope"></i>
+							<span>메일 </span> 
+							<!-- <span class="label label-theme pull-right mail-info">2</span> -->
+						</a>
+					</li>
 					<!-- 일정관리 메뉴 -->
-					<li><a href="calendarListView.do"> <i class="fa fa-envelope"></i> <span>일정관리
-						</span>
-					</a></li>
+					<li class="sub-menu"><a href="javascript:;">
+					 <i class="fa fa-envelope"></i> <span>일정관리</span></a>
+						<ul class="sub">
+							<li><a href="calendarListView.do">나의 일정</a></li>
+							<li><a href="todoList.do">할 일</a></li>
+						</ul>
+					</li>
 					<!-- 예약 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-cogs"></i> <span>예약관리</span>
@@ -78,13 +85,13 @@
 							<li><a href="calendar.html">회의실 예약하기</a></li>
 						</ul></li>
 					<!-- 근태관리 메뉴 -->
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-comments-o"></i> <span>근태관리</span>
+					<li class="sub-menu"><a href="javascript:;"> 
+					<i class="fa fa-comments-o"></i> <span>근태관리</span>
 					</a>
 						<ul class="sub">
 							<li><a href="attendanceList.do">근태관리 홈</a></li>
-							<li><a href="chat_room.html">연차 신청</a></li>
-						</ul></li>
+						</ul>
+					</li>
 					<!-- 협업 메뉴 -->
 					<li><a href="inbox.html"> <i class="fa fa-envelope"></i> <span>협업관리
 						</span>

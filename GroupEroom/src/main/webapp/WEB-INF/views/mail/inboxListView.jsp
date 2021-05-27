@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="utf-8">
@@ -7,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>메일</title>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -38,11 +41,11 @@
           <div class="col-sm-3">
             <section class="panel">
               <div class="panel-body">
-                <a href='mailComposeView.do'" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
+                <a href="mailComposeView.do" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
                 <ul class="nav nav-pills nav-stacked mail-nav">
-                  <li class="active"><a href="inbox.html"> <i class="fa fa-inbox"></i>받은 편지함<!--<span class="label label-theme pull-right inbox-notification">3</span>--></a></li>
-                  <li><a href="#"> <i class="fa fa-envelope-o"></i>보낸 편지함</a></li>
-                  <li><a href="#"> <i class="fa fa-trash-o"></i>휴지통</a></li>
+                  <li class="active"><a href="inbox.html"> <i class="fa fa-inbox"></i>Inbox <!--<span class="label label-theme pull-right inbox-notification">3</span>--></a></li>
+                  <li><a href="#"> <i class="fa fa-envelope-o"></i>Send Mail</a></li>
+                  <li><a href="#"> <i class="fa fa-trash-o"></i>Trash</a></li>
                 </ul>
               </div>
             </section>
@@ -51,7 +54,7 @@
             <section class="panel">
               <header class="panel-heading wht-bg">
                 <h4 class="gen-case">
-                    ë°ì í¸ì§í¨
+                    Inbox
                     <form action="#" class="pull-right mail-src-position">
                       <div class="input-append">
                         <input type="text" class="form-control " placeholder="Search Mail">
@@ -83,6 +86,7 @@
                         <i class="fa fa-trash-o"></i>
                         </a>
                     </div>
+                    <!-- ################# 페이징 ################# -->
                     <ul class="unstyled inbox-pagination">
                       <li><span>1-50 of 99</span></li>
                       <li>
@@ -93,23 +97,24 @@
                       </li>
                     </ul>
                   </div>
+                    <!-- ################# 페이징 ################# -->
                   <div class="table-inbox-wrap ">
                     <table class="table table-inbox table-hover">
                       <tbody>
                         <c:forEach items="${ mailList }" var="mail">
-                          <c:if test="${mail.readCount} > 0">
+                          <%-- <c:if test="${mail.readCount} > 0"> --%>
                             <tr class="">
                               <td class="inbox-small-cells">
                                 <input type="checkbox" class="mail-checkbox">
                               </td>
                               <!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
-                              <td class="view-message  dont-show" name="" hidden><a> ${mailNo} </a></td>
-                              <td class="view-message  dont-show"><a href="mail_view.html">${senderId}</a></td>
-                              <td class="view-message "><a href="mail_view.html">${mailTitle}</a></td>
+                              <td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
+                              <td class="view-message" name="memberName">${mail.memberName} (${mail.memberDept})</td>
+                              <td class="view-message" name="mailTilte"><a href="mail_view.html">${mail.mailTitle}</a></td>
                               <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                              <td class="view-message  text-right">${sentDate}</td>
+                              <td class="view-message  text-right">${mail.sentDate}</td>
                             </tr>
-                          </c:if>
+                         <%--  </c:if>
                           <c:if test="${mail.readCount} = 0">
                             <tr class="unread">
                               <td class="inbox-small-cells">
@@ -122,7 +127,7 @@
                               <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
                               <td class="view-message  text-right">${sentDate}</td>
                             </tr>
-                          </c:if>
+                          </c:if> --%>
                         </c:forEach>
                       </tbody>
                     </table>
