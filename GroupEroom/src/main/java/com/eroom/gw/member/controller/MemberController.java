@@ -44,7 +44,6 @@ public class MemberController {
 		Member member = new Member(mem.getMemberId(), mem.getMemberPwd());
 		Member selectOne = service.loginMember(member);
 
-		
 		if(selectOne == null) { 
 			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
 			return "login";

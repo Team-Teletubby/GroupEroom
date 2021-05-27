@@ -56,7 +56,7 @@ public class FBoardController {
 			return "fBoard/fBoardSearchList";
 		}else {
 			model.addAttribute("msg", "검색실패!");
-			return "fBoard/errorPage";
+			return "common/errorPage";
 		}
 	}
 	
@@ -75,9 +75,8 @@ public class FBoardController {
 			mv.addObject("pi", pi);
 			mv.setViewName("fBoard/fBoardListView");
 		}else {
-			System.out.println("실패");
 			mv.addObject("msg", "리스트 불러오기 실패");
-			mv.setViewName("fBoard/errorPage");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -97,7 +96,7 @@ public class FBoardController {
 			mv.addObject("fBoard", fBoard).setViewName("fBoard/fBoardDetailView");
 		}else {
 			mv.addObject("msg", "게시글 상세 조회 실패");
-			mv.setViewName("fBoard/errorPage");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -169,7 +168,7 @@ public class FBoardController {
 		if(fBoard != null) {
 			mv.addObject("fBoard", fBoard).setViewName("fBoard/fBoardUpdateView");
 		}else {
-			mv.addObject("msg", "게시글 상세조회 실패").setViewName("fBoard/errorPage");
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -185,7 +184,7 @@ public class FBoardController {
 		if(result > 0) {
 			mv.setViewName("redirect:fBoardListView.do");
 		}else {
-			mv.addObject("msg", "게시글 수정 실패").setViewName("fBoard/errorPage");
+			mv.addObject("msg", "게시글 수정 실패").setViewName("common/errorPage");
 		}
 		//파일수정
 		
@@ -204,7 +203,7 @@ public class FBoardController {
 			return "redirect:fBoardListView.do";
 		}else {
 			model.addAttribute("msg", "게시글 삭제 실패");
-			return "fBoard/errorPage";
+			return "common/errorPage";
 		}
 	}
 	

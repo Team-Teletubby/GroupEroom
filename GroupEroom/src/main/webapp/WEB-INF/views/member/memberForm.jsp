@@ -59,7 +59,7 @@
             </tr>
             <tr>
                <td>도로명 주소</td>
-               <td><input type="text" class="form-control"  name="address1" class="postcodify_address"></td>
+               <td><input type="text" class="form-control" name="address1" class="postcodify_address"></td>
             </tr>
             <tr>
                <td>상세 주소</td>
