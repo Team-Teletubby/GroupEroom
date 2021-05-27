@@ -32,11 +32,26 @@
          <table width="650" cellspacing="5">
             <tr>
                <td>* 부서</td>
-               <td><input class="form-control" type="text" name="memberDept"></td>
+            <!--    <td><input class="form-control" type="text" name="memberDept"></td> -->
+           <td><select name="memberDept">
+								<option value="인사관리">인사관리</option>
+								<option value="IT개발">IT개발</option>
+								<option value="영업">영업</option>
+								<option value="재무" selected="selected">재무</option></td>
             </tr>
             <tr>
                <td>* 직급</td>
-               <td><input class="form-control" type="text" name="memberJob"></td>
+               <!-- <td><input class="form-control" type="text" name="memberJob"></td> -->
+            <td><select name="memberJob" size="1">
+								<option value="사원">사원</option>
+								<option value="주임">주임</option>
+								<option value="대리">대리</option>
+								<option value="과장">과장</option>
+								<option value="차장">차장</option>
+								<option value="부장">부장</option>
+								<option value="전무">전무</option>
+								<option value="대표" selected="selected">대표</option></td>
+							</select>
             </tr>
             <tr>
                <td>* 이름</td>
