@@ -100,22 +100,30 @@ public class MemberController {
 			
 	}
 	// 정보수정뷰 뷰 
-	
 	@RequestMapping(value="info.do", method=RequestMethod.GET)
-	public String infoView() {
-	
-			return "member/memberUpdate";
-		
-	
-		
+	public ModelAndView memberModifyView(ModelAndView mv, @RequestParam("memberId") int memberId) {
+		Member member = service.printMemberOne(memberId);
+		System.out.println(member.toString());
+		if(member != null) { 
+			mv.addObject("memberOne", member).setViewName("member/memberUpdate");
+		}else {
+			mv.addObject("msg", "멤버 상세조회 실패").setViewName("fBoard/errorPage");
+		}
+		return mv;
 	}
 	// 사원 정보수정 
 	
 	@RequestMapping(value="memberModify.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView modifyMember(ModelAndView mv, @ModelAttribute Member member,
-							 Model model, HttpServletRequest request) {
-	
+							 Model model, HttpServletRequest request,
+							 @RequestParam("post") String post,
+							@RequestParam("address1") String addr1,
+							@RequestParam("address2") String addr2) {
+		
+		String addr = post + "," + addr1 + "," + addr2;
+		member.setMemberAddr(addr);
 		int result = service.modifyMember(member);
+		System.out.println(result);
 		if(result > 0) {
 			mv.setViewName("redirect:memberList.do");
 		}else {
