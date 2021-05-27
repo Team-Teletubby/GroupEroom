@@ -31,8 +31,14 @@
 									<span>결재문</span>
 								</div>
 								<div class="fr">
-									<button type="button" class="btn btn-success">승인</button>
+								<c:if test="${approval.approvalFirstId == loginUserId && approval.approvalFirstCheck == 'N' || approval.approvalSecondId == loginUserId && approvalapprovalSecondCheck == 'N'}">
+									<c:url var="stateChange" value="stateChange.do">
+										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+										<c:param name="approvalState" value="C"></c:param>
+									</c:url>
+									<button type="button" onclick="location.href='${stateChange }'" class="btn btn-success">승인</button>
 									<button type="button" class="btn btn-danger">반려</button>
+								</c:if>
 								</div>
 							</div>
 							<div class="mail-header row">
@@ -160,10 +166,12 @@
 										<button onclick="history.back(-1)" class="btn btn-theme03">목록으로</button>
 									</div>
 									<div class="fr">
-										<button onclick="location.href='${fModify}'"
-											class="btn btn-theme02">수정</button>
-										<button onclick="location.href='${fDelete}'"
-											class="btn btn-theme04">삭제</button>
+										<c:if test="${approval.memberId == loginUserId.toString() && approval.approvalState == 'N' }">
+											<button onclick="location.href='${fModify}'"
+												class="btn btn-theme02">수정</button>
+											<button onclick="location.href='${fDelete}'"
+												class="btn btn-theme04">삭제</button>
+										</c:if>
 									</div>
 								</div>
 							</div>

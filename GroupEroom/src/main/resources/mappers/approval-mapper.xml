@@ -47,7 +47,9 @@
 		<if test='approvalState.toString() == "suspense"'>
 			SELECT COUNT(*) FROM APPROVAL WHERE (APPROVAL_FIRST_ID = #{memberId } AND APPROVAL_STATE = 'N') OR (APPROVAL_FIRST_ID = #{memberId } AND APPROVAL_STATE = 'I') OR (APPROVAL_SECOND_ID = #{memberId } AND APPROVAL_STATE = 'N') OR (APPROVAL_SECOND_ID = #{memberId } AND APPROVAL_STATE = 'I')
 		</if>
-		
+		<if test='approvalState.toString() == "complete"'>
+			SELECT COUNT(*) FROM APPROVAL WHERE (MEMBER_ID = #{memberId } AND APPROVAL_STATE = 'C')
+		</if>
 	</select>
 	
 	<!-- 글 리스트  -->
@@ -66,7 +68,15 @@
 			INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
 			INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
 			WHERE (a.APPROVAL_FIRST_ID = #{memberId } AND a.APPROVAL_STATE = 'N') OR (a.APPROVAL_FIRST_ID = #{memberId } AND a.APPROVAL_STATE = 'I') OR (a.APPROVAL_SECOND_ID = #{memberId } AND a.APPROVAL_STATE = 'N') OR (a.APPROVAL_SECOND_ID = #{memberId } AND a.APPROVAL_STATE = 'I')
+			ORDER BY a.APPROVAL_NO DESC
 		</if> 
+		<if test='approvalState.toString() == "complete"'>
+			INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
+			INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
+			INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
+			WHERE (a.MEMBER_ID = #{memberId } AND a.APPROVAL_STATE = 'C')
+			ORDER BY a.APPROVAL_NO DESC
+		</if>
 	</select>
 	
 	<!-- 글 상세보기  -->

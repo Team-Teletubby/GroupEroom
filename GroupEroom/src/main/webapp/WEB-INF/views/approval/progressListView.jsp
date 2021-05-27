@@ -30,20 +30,6 @@
 								<i class="fa fa-angle-right"></i> 진행함
 							</h4>
 							<hr>
-							
-							<div class="form-group" align="right">
-								<form action="cBoardSearch.do" method="get" class="form-inline"
-									role="form">
-									<select class="form-control" name="searchCondition">
-										<option value="ALL">전체</option>
-										<option value="C_BOARD_TITLE">제목</option>
-										<option value="C_BOARD_CONTENTS">내용</option>
-										<option value="MEMBER_NAME">작성자</option>
-									</select> <input type="text" name="searchValue" style="width: 100px"
-										class="form-control"> <input type="submit" value="검색"
-										class="btn btn-theme">
-								</form>
-							</div>
 							<c:if test="${aList != null }">
 							<table class="table table-hover">
 								<thead>

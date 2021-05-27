@@ -177,6 +177,40 @@ public class ApprovalController {
 		return mv;
 	}
 	
+	// 완료함 List 보기
+	@RequestMapping(value="complete.do", method=RequestMethod.GET)
+	public ModelAndView completeList(ModelAndView mv,
+									HttpServletRequest request,
+									@RequestParam(value="page", required=false)Integer page) {
+		
+		// 세션에서 로그인한 정보 가져오기
+				HttpSession session = request.getSession();
+				Member member = (Member)session.getAttribute("LoginUser");
+				// 결재 객체에 로그인/상태 정보 저장
+				Approval approval = new Approval();
+				approval.setMemberId(member.getMemberId());
+				// 미결함으로 들어가기 위한 문장
+				String state = "complete";
+				approval.setApprovalState(state);
+				//======================== 글 페이징 ========================
+				// jsp에 page가 존재할 경우, 1로 변경
+				int currentPage = (page != null) ? page : 1;
+				int listCount = approvalService.getListCount(approval);
+				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				//===========================================================
+				//======================== 글 리스트 ========================
+				// 글 목록 가져오기
+				ArrayList<Approval> aList = approvalService.printAll(pi, approval);
+				//===========================================================
+						
+				mv.addObject("aList", aList);
+				mv.addObject("userName", member.getMemberName());
+				mv.addObject("page", page);
+				mv.setViewName("approval/suspenseListView");
+						
+				return mv;
+	}
+	
 	// 글 상세보기
 	@RequestMapping(value="approvalDetail.do", method=RequestMethod.GET)
 	public ModelAndView approvalDetail(ModelAndView mv, 
@@ -190,8 +224,9 @@ public class ApprovalController {
 		Approval approval = approvalService.printOne(approvalNo);
 		if(approval != null) {
 			// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
-			approvalStateChange(approval, member);
+			viewStateChange(approval, member, null);
 			mv.addObject("approval", approval);
+			System.out.println(approval.getMemberId());
 			mv.addObject("loginUserId", member.getMemberId());
 			mv.setViewName("approval/approvalDetail");
 		}else {
@@ -201,18 +236,27 @@ public class ApprovalController {
 	}
 
 	// 결재 상태 변경 (미결함에서 결제자가 글을 봤을 경우)
-	public void approvalStateChange(Approval approval, Member member) {
+	@RequestMapping(value="stateChange.do")
+	public String viewStateChange(Approval approval, Member member, @RequestParam(value="button", required=false)String button) {
 		// 변경할 상태값을 저장하는 변수
 		String changeState = "";
+		// 미결함에서 결제자가 글을 봤을 경우
 		if(approval.getApprovalState().equals("N")) {
 			if(approval.getApprovalFirstId() == member.getMemberId() || approval.getApprovalSecondId() == member.getMemberId()) {
 				changeState = "I";
 				approval.setApprovalState(changeState);
 				int result = approvalService.changeState(approval);
 			}
+		// 미결함에서 승인을 눌렀을 경우
+		}else if(approval.getApprovalState().equals("C")) {
+			int result = approvalService.changeState(approval);
+			return "redirect:suspenseBoard.do";
+		}else {
+			return "";
 		}
+		return "";
 	}
-
+	
 	// 결재 삭제
 	@RequestMapping(value="approvalDelete.do", method=RequestMethod.GET)
 	public String approvalDelete(@RequestParam("approvalNo")int approvalNo) {
