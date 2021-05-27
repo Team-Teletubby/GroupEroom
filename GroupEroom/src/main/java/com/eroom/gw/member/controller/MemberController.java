@@ -90,11 +90,11 @@ public class MemberController {
 		member.setMemberAddr(post+","+address1+","+address2);
 		int result = service.registerMember(member);
 		if(result >0) {
-			return "index";
+			return "redirect:memberList.do";
 
 		}else {
 			model.addAttribute("msg" , "사원등록실패");
-			return "index";
+			return "common/errorPage";
 		}
 			
 	}
@@ -106,7 +106,7 @@ public class MemberController {
 		if(member != null) { 
 			mv.addObject("memberOne", member).setViewName("member/memberUpdate");
 		}else {
-			mv.addObject("msg", "멤버 상세조회 실패").setViewName("fBoard/errorPage");
+			mv.addObject("msg", "멤버 상세조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -150,7 +150,7 @@ public class MemberController {
 			return "member/memberDetailView";
 		}else {
 			model.addAttribute("msg", "사원상세조회 실패");
-			return "member/errorPage";
+			return "common/errorPage";
 		}
 	}
 	// 사원 검색 

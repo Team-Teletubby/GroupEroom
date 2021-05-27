@@ -178,7 +178,7 @@ public class ApprovalController {
 	}
 	
 	// 완료함 List 보기
-	@RequestMapping(value="complete.do", method=RequestMethod.GET)
+	@RequestMapping(value="completeBoard.do", method=RequestMethod.GET)
 	public ModelAndView completeList(ModelAndView mv,
 									HttpServletRequest request,
 									@RequestParam(value="page", required=false)Integer page) {
@@ -206,10 +206,44 @@ public class ApprovalController {
 				mv.addObject("aList", aList);
 				mv.addObject("userName", member.getMemberName());
 				mv.addObject("page", page);
-				mv.setViewName("approval/suspenseListView");
+				mv.setViewName("approval/completeListView");
 						
 				return mv;
 	}
+	
+	// 반려함 List 보기
+		@RequestMapping(value="rejectBoard.do", method=RequestMethod.GET)
+		public ModelAndView rejectList(ModelAndView mv,
+										HttpServletRequest request,
+										@RequestParam(value="page", required=false)Integer page) {
+			
+			// 세션에서 로그인한 정보 가져오기
+					HttpSession session = request.getSession();
+					Member member = (Member)session.getAttribute("LoginUser");
+					// 결재 객체에 로그인/상태 정보 저장
+					Approval approval = new Approval();
+					approval.setMemberId(member.getMemberId());
+					// 미결함으로 들어가기 위한 문장
+					String state = "reject";
+					approval.setApprovalState(state);
+					//======================== 글 페이징 ========================
+					// jsp에 page가 존재할 경우, 1로 변경
+					int currentPage = (page != null) ? page : 1;
+					int listCount = approvalService.getListCount(approval);
+					PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+					//===========================================================
+					//======================== 글 리스트 ========================
+					// 글 목록 가져오기
+					ArrayList<Approval> aList = approvalService.printAll(pi, approval);
+					//===========================================================
+							
+					mv.addObject("aList", aList);
+					mv.addObject("userName", member.getMemberName());
+					mv.addObject("page", page);
+					mv.setViewName("approval/rejectListView");
+				
+					return mv;
+		}
 	
 	// 글 상세보기
 	@RequestMapping(value="approvalDetail.do", method=RequestMethod.GET)
@@ -260,11 +294,10 @@ public class ApprovalController {
 				int result = approvalService.changeCheck(approval);
 			}
 		// 반려 버튼을 눌렀을 경우
-		}else if(approval.getApprovalState() == "R") {
-			
+		}else if(approval.getApprovalState().equals("R")) {
+			int result = approvalService.changeState(approval);
 		}
-	
-		return "redirect:approvalDetail.do";
+		return "redirect:suspenseBoard.do";
 	}
 	
 	// 결재 상태 변경 (미결함에서 결제자가 글을 봤을 경우)
@@ -283,9 +316,9 @@ public class ApprovalController {
 	
 	// 결재 삭제
 	@RequestMapping(value="approvalDelete.do", method=RequestMethod.GET)
-	public String approvalDelete(@RequestParam("approvalNo")int approvalNo) {
-
-		return "redirect:approvalList.do";
+	public String approvalDelete(@ModelAttribute Approval approval) {
+		int result = approvalService.changeState(approval);
+		return "redirect:progressBoard.do";
 	}
 	
 	// 특정 부서 멤버 목록 조회

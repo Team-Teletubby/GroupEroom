@@ -57,8 +57,8 @@
 							<li><a href="approvalWriteView.do">결재문 작성</a></li>
 							<li><a href="progressBoard.do">진행함</a></li>
 							<li><a href="suspenseBoard.do">미결함</a></li>
-							<li><a href="complete.do">완료함</a></li>
-							<li><a href="font_awesome.html">반려함</a></li>
+							<li><a href="completeBoard.do">완료함</a></li>
+							<li><a href="rejectBoard.do">반려함</a></li>
 						</ul></li>
 					<!-- 메일 메뉴 -->
 					<li><a href="mailViewList.do"> <i class="fa fa-envelope"></i>

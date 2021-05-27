@@ -50,6 +50,9 @@
 		<if test='approvalState.toString() == "complete"'>
 			SELECT COUNT(*) FROM APPROVAL WHERE (MEMBER_ID = #{memberId } AND APPROVAL_STATE = 'C')
 		</if>
+		<if test='approvalState.toString() == "reject"'>
+			SELECT COUNT(*) FROM APPROVAL WHERE (MEMBER_ID = #{memberId } AND APPROVAL_STATE = 'R')
+		</if>
 	</select>
 	
 	<!-- 글 리스트  -->
@@ -75,6 +78,13 @@
 			INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
 			INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
 			WHERE (a.MEMBER_ID = #{memberId } AND a.APPROVAL_STATE = 'C')
+			ORDER BY a.APPROVAL_NO DESC
+		</if>
+		<if test='approvalState.toString() == "reject"'>
+		INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
+			INNER JOIN MEMBER c ON a.APPROVAL_SECOND_ID = c.MEMBER_ID 
+			INNER JOIN MEMBER d ON a.MEMBER_ID = d.MEMBER_ID 
+			WHERE (a.MEMBER_ID = #{memberId } AND a.APPROVAL_STATE = 'R')
 			ORDER BY a.APPROVAL_NO DESC
 		</if>
 	</select>
@@ -132,7 +142,7 @@
 		SET APPROVAL_FIRST_CHECK = 'Y'
 		</if>
 		<if test='approvalState.toString() == "C2"'>
-		SET APPROVAL_SECOND_CHECK = 'Y'
+		SET APPROVAL_SECOND_CHECK = 'Y', APPROVAL_STATE = 'C'
 		</if>
 		WHERE APPROVAL_NO = #{approvalNo }
 	</update>

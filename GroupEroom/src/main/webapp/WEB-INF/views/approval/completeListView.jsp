@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,12 +55,7 @@
 											<td>${approval.memberName }</td>
 											<td>${approval.approvalFirstName }</td>
 											<td>${approval.approvalSecondName }</td>
-											<c:if test="${approval.approvalState == 'N' }">
-												<td>미열람</td>
-											</c:if>
-											<c:if test="${approval.approvalState == 'I' }">
-												<td>검토중</td>
-											</c:if>
+											<td>결재 승인</td>
 											<td>${approval.approvalDate }</td>
 										</tr>
 									</c:forEach>
@@ -68,7 +64,7 @@
 							<div align="center">
 								<div class="btn-group">
 									<!-- 이전 -->
-									<c:url var="before" value="cBoardListView.do">
+									<c:url var="before" value="completeBoard.do">
 										<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 									</c:url>
 									<c:if test="${pi.currentPage <= 1 }">
@@ -80,7 +76,7 @@
 									<!-- 페이지 -->
 									<c:forEach var="p" begin="${pi.startPage }"
 										end="${pi.endPage }">
-										<c:url var="pagination" value="cBoardListView.do">
+										<c:url var="pagination" value="completeBoard.do">
 											<c:param name="page" value="${p }"></c:param>
 										</c:url>
 										<c:if test="${p eq pi.currentPage }">
@@ -92,7 +88,7 @@
 										</c:if>
 									</c:forEach>
 									<!-- 다음 -->
-									<c:url var="after" value="cBoardListView.do">
+									<c:url var="after" value="completeBoard.do">
 										<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 									</c:url>
 									<c:if test="${pi.currentPage >= pi.maxPage }">

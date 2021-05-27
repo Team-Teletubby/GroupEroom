@@ -33,6 +33,7 @@
 	<!-- 사원 목록 -->
 	<select id="memberList" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
+		ORDER BY MEMBER_ID
 		
 	</select>
 	<select id="selectSearchList" resultMap="memberResultMap">
@@ -69,8 +70,8 @@
 	</select>
 	<!-- 수정 -->
 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET MEMBER_DEPT = #{memberDept }, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount } 
-		WHERE MEMBER_ID = #{memberId }
+		UPDATE MEMBER SET MEMBER_DEPT = #{memberDept }, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount }, QUIT_YN = #{quitYn } 
+		WHERE MEMBER_ID = #{memberId}
 		
 	</update>
 	
