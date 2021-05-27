@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.eroom.gw.attendance.domain.Attendance;
 import com.eroom.gw.attendance.service.AttendanceService;
 import com.eroom.gw.attendance.store.AttendanceStore;
+import com.eroom.gw.common.PageInfo;
 
 @Service
 public class AttendanceImpl implements AttendanceService{
@@ -16,9 +17,8 @@ public class AttendanceImpl implements AttendanceService{
 	private AttendanceStore atdStore;
 	
 	@Override
-	public ArrayList<Attendance> selectAllAttendance(int memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Attendance> selectAllAttendance(PageInfo pi,int memberId) {
+		return atdStore.selectAllAttendance(pi,memberId);
 	}
 
 	@Override
@@ -28,13 +28,17 @@ public class AttendanceImpl implements AttendanceService{
 
 	@Override
 	public int removeAttendance(int attendanceNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return atdStore.deleteAttendance(attendanceNo);
 	}
 
 	@Override
 	public float usedHolidayCount(int memberId) {
 		return atdStore.usedHolidayCount(memberId);
+	}
+
+	@Override
+	public int getListCount(int memberId) {
+		return atdStore.getListCount(memberId);
 	}
 
 }

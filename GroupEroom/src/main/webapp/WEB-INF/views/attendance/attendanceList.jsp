@@ -36,7 +36,7 @@
 <script>
 $(document).ready(function(){
 	$("#reg-btn").on("click", function () {
-		var restHoliday = "${restHoliday}"		
+		var restHoliday = "${restHoliday}";
 		if ($("#category").val()=="--분류--") {
 			alert("연차 분류를 선택해 주세요");
 			return false;
@@ -45,6 +45,9 @@ $(document).ready(function(){
 			return false;
 		}else if($("#endDate").val() ==""){
 			alert("종료일을 설정해주세요.");
+			return false;
+		}else if($("#reason").val() ==""){
+			alert("사유를 작성해주세요.");
 			return false;
 		}else if(restHoliday == 0){
 			alert("연차를 모두 사용하셨습니다.");
@@ -55,6 +58,12 @@ $(document).ready(function(){
 			}
 		}
 		});
+	
+	$("#cancle-btn").on("click", function(){
+		if(confirm("취소하시겠습니까?")==false){
+			return false;
+		}
+	});
 	});
 </script>
 </head>
@@ -64,6 +73,7 @@ $(document).ready(function(){
     <section id="main-content">
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>근태관리</h3>
+        <button id="button"></button>
         <div class="row">
           <div class="col-md-12">
             <div class="form-panel">
@@ -85,6 +95,7 @@ $(document).ready(function(){
             	</div>
             </div>	
             	<br><br><br><br><br><br><br>
+<!-- ===========================신청=================================== -->
             	<div>
             	<h4><i class="fa fa-angle-right"></i>연차 신청</h4>
             	<form action="attendanceRegister.do" method="post">
@@ -125,7 +136,7 @@ $(document).ready(function(){
                     			</div>
             				</td>
             				<td>
-            				<input type="text" placeholder="사유" class="form-control" name="reason">
+            				<input type="text" placeholder="사유" class="form-control" name="reason" id="reason">
             				</td>
             				<td>
             					<input type="submit" id="reg-btn" class="btn btn-theme02" style="float:left;" value="등록/승인">
@@ -145,10 +156,75 @@ $(document).ready(function(){
             			<th>종류</th>
             			<th>시작 일자</th>
             			<th>종료 일자</th>
+            			<th>사용 일 수 </th>
             			<th>사유</th>
+            			<th></th>
             		</tr>
+            		
+            		<c:forEach items="${atdList }" var="attendance">
+						<tr>
+							<td>${attendance.holidayType }</td>
+							<td>${attendance.startDate }</td>
+							<td>${attendance.endDate }</td>
+							<td>
+							${attendance.usedHoliday }
+							</td>
+							<td>${attendance.reason }</td>
+							<td align="right">
+								<c:url var="deleteAttendance" value="deleteAttendance.do">
+									<c:param name="attendanceNo" value="${attendance.attendanceNo }"></c:param>
+								</c:url>
+								<a href="${deleteAttendance }" class="btn btn-sm btn-theme04" id="cancle-btn">신청취소</a>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
-	
+				<c:if test="${ empty atdList }">
+					<p align="center">연차 조회 결과가 없습니다. </p>
+				</c:if>
+	<!--================= 페이징 ==============================-->
+	      <c:if test="${pi.currentPage}!=0">
+	        <div align="center">
+            <div class="btn-group">
+						<!-- 이전 -->
+						<c:url var="before" value="attendanceList.do">
+							<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
+						</c:url>
+						<c:if test="${pi.currentPage <= 1 }">
+							<button type="button" class="btn btn-default">이전</button>
+						</c:if>
+						<c:if test="${pi.currentPage > 1 }">
+							<a href="${before }" class="btn btn-default">이전</a>&nbsp;
+						</c:if>
+						
+					<!-- 페이지 -->
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+						<c:url var="pagination" value="attendanceList.do">
+							<c:param name="page" value="${p }"></c:param>
+						</c:url>
+						<c:if test="${p eq pi.currentPage }">
+						<button type="button" class="btn btn-default btn-theme">${p }</button>
+							
+						</c:if>
+						<c:if test="${p ne pi.currentPage }">
+							<a href="${pagination }" class="btn btn-default">${p }</a>&nbsp;
+						</c:if>
+					</c:forEach>
+				
+				
+				<!-- 다음 -->
+				<c:url var="after" value="attendanceList.do">
+					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+				</c:url>
+				<c:if test="${pi.currentPage >= pi.maxPage }">
+					<button type="button" class="btn btn-default">다음</button>
+				</c:if>
+				<c:if test="${pi.currentPage < pi.maxPage }">
+					<a href="${after }" class="btn btn-default">다음</a>&nbsp;
+				</c:if>
+			</div>
+			</div>
+		</c:if>
             </div>
            </div>
          </div>
