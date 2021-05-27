@@ -37,10 +37,26 @@
 			</tr>
       		<tr> 
       			<td>* 부서 </td>
-      			<td><input type="text" name="memberDept" value="${memberOne.memberDept }"></td>
+							<td><select name="memberDept">
+								<option value="인사관리">인사관리</option>
+								<option value="IT개발">IT개발</option>
+								<option value="영업">영업</option>
+								<option value="재무" selected="selected">재무</option></td>
+							</select>
+						<%-- 	<td><input type="text" name="memberDept" value="${memberOne.memberDept }"></td> --%>
             <tr>
                <td>* 직급</td>
-               <td><input type="text" name="memberJob" value="${memberOne.memberJob }"></td>
+               <td><select name="memberJob" size="1">
+								<option value="사원">사원</option>
+								<option value="주임">주임</option>
+								<option value="대리">대리</option>
+								<option value="과장">과장</option>
+								<option value="차장">차장</option>
+								<option value="부장">부장</option>
+								<option value="전무">전무</option>
+								<option value="대표" selected="selected">대표</option></td>
+							</select>
+              <%--  <td><input type="text" name="memberJob" value="${memberOne.memberJob }"></td> --%>
             </tr>
             <tr>
                <td>* 이름</td>
@@ -60,7 +76,7 @@
             <tr>
                <td>우편번호</td>
                <td>
-                  <input type="text" name="post" class="postcodify_postcode5" size="6" value="${addr }">
+                  <input type="text" name="post"  size="6" class="postcodify_postcode5" value="${addr }">
                   <button type="button" id="postcodify_search_button">검색</button>
                </td>
             </tr>
@@ -91,7 +107,10 @@
                <td>이메일</td>
                <td><input type="email" name="memberEmail" value="${memberOne.memberEmail }"></td>
             </tr>
-
+             <tr>
+               <td>퇴사여부</td>
+               <td><input type="radio" name="quitYn" value="Y" checked>Y <input type="radio" name="quitYn" value="N" checked>N</td>
+            </tr>
             <tr>
                <td colspan="2" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
