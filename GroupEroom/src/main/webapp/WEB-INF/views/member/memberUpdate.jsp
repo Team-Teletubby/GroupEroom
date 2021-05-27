@@ -31,13 +31,13 @@
    <div class="centerText">
       <form action="memberModify.do" method="post">
          <table width="650" cellspacing="5">
-         <tr>
+         	<tr>
                <td>* 사번</td>
 				<td><input type="text" name="memberId" value="${memberOne.memberId }" readonly></td>
-            <tr>
-               <td>* 부서</td>
-               <td><input type="text" name="memberDept" value="${memberOne.memberDept}"></td>
-            </tr>
+			</tr>
+      		<tr> 
+      			<td>* 부서 </td>
+      			<td><input type="text" name="memberDept" value="${memberOne.memberDept }"></td>
             <tr>
                <td>* 직급</td>
                <td><input type="text" name="memberJob" value="${memberOne.memberJob }"></td>
@@ -55,7 +55,7 @@
                <td><input type="text" name="memberPhone" value="${memberOne.memberPhone }"></td>
             </tr>
             
-            <c:forTokens items="${memberOne.MemberAddr }" delims="," var="addr" varStatus="status">
+            <c:forTokens items="${memberOne.memberAddr }" delims="," var="addr" varStatus="status">
             <c:if test="${status.index eq 0 }">
             <tr>
                <td>우편번호</td>

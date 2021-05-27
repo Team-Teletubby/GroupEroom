@@ -102,38 +102,26 @@ public class MemberController {
 	// 정보수정뷰 뷰 
 	
 	@RequestMapping(value="info.do", method=RequestMethod.GET)
-	public String infoView(HttpServletRequest request, Member member) {
-		HttpSession session = request.getSession();
-		int result = service.modifyMember(member);
-		if(result >0) { 
-			session.setAttribute("memberOne", member);
+	public String infoView() {
+	
 			return "member/memberUpdate";
-		}else {
-			
-			return "common/errorPage";
-		}
 		
 	
 		
 	}
 	// 사원 정보수정 
 	
-	@RequestMapping(value="memberModify.do", method= RequestMethod.POST)
-	public String modifyMember(@ModelAttribute Member member, @RequestParam(required = false) String post, @RequestParam(required = false) String address1 ,@RequestParam(required = false) String address2 ,
+	@RequestMapping(value="memberModify.do", method= {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView modifyMember(ModelAndView mv, @ModelAttribute Member member,
 							 Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
 	
-		member.setMemberAddr(post +", "+address1+", "+address2);
 		int result = service.modifyMember(member);
-		
 		if(result > 0) {
-			session.setAttribute("memberOne", member);
-			return "redirect:memberList.do";
+			mv.setViewName("redirect:memberList.do");
 		}else {
-			model.addAttribute("msg","정보수정실패");
-			return "common/errorPage";
+			mv.addObject("msg","정보수정실패").setViewName("common/errorPage");
 		}
-		
+		return mv;
 	}
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
