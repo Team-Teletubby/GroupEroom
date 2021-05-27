@@ -7,12 +7,29 @@ public class Notice {
 	
 	private int noticeNo;
 	private String noticeTitle;
+	private String noticeWriter;
 	private String noticeContents;
 	private String noticeFile;
 	private Date enrollDate;
-	private int Hits;
+	private int hits;
+	private String originalFileName;
+	private String renameFileName;
 	
 	public Notice() {}
+
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContents, String noticeFile,
+			Date enrollDate, int hits, String originalFileName, String renameFileName) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
+		this.noticeContents = noticeContents;
+		this.noticeFile = noticeFile;
+		this.enrollDate = enrollDate;
+		this.hits = hits;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
+	}
 
 	public int getNoticeNo() {
 		return noticeNo;
@@ -28,6 +45,14 @@ public class Notice {
 
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
+	}
+
+	public String getNoticeWriter() {
+		return noticeWriter;
+	}
+
+	public void setNoticeWriter(String noticeWriter) {
+		this.noticeWriter = noticeWriter;
 	}
 
 	public String getNoticeContents() {
@@ -55,20 +80,39 @@ public class Notice {
 	}
 
 	public int getHits() {
-		return Hits;
+		return hits;
 	}
 
 	public void setHits(int hits) {
-		Hits = hits;
+		this.hits = hits;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContents=" + noticeContents
-				+ ", noticeFile=" + noticeFile + ", enrollDate=" + enrollDate + ", Hits=" + Hits + "]";
+		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeWriter=" + noticeWriter
+				+ ", noticeContents=" + noticeContents + ", noticeFile=" + noticeFile + ", enrollDate=" + enrollDate
+				+ ", hits=" + hits + ", originalFileName=" + originalFileName + ", renameFileName=" + renameFileName
+				+ "]";
 	}
+
 	
-	
-	
-	
-}
+	}
+
+
+
