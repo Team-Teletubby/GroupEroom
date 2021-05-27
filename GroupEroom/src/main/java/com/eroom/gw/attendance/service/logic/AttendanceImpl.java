@@ -41,4 +41,10 @@ public class AttendanceImpl implements AttendanceService{
 		return atdStore.getListCount(memberId);
 	}
 
+	@Override
+	public int updateDone() {
+		return atdStore.updateDone();
+		
+	}
+
 }

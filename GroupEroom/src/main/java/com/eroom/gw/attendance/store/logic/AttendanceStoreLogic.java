@@ -44,4 +44,9 @@ public class AttendanceStoreLogic implements AttendanceStore{
 		return sqlSession.selectOne("attendanceMapper.listCount", memberId);
 	}
 
+	@Override
+	public int updateDone() {
+		return sqlSession.update("attendanceMapper.updateDone");
+	}
+
 }

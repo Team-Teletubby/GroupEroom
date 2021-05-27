@@ -12,6 +12,7 @@ public class Attendance {
 	private int totalHoliday;
 	private float usedHoliday;
 	private String reason;
+	private String done;
 	
 	public Attendance() {}
 	
@@ -63,14 +64,23 @@ public class Attendance {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
+	public String getDone() {
+		return done;
+	}
+
+	public void setDone(String done) {
+		this.done = done;
+	}
 
 	@Override
 	public String toString() {
 		return "Attendance [attendanceNo=" + attendanceNo + ", memberId=" + memberId + ", holidayType=" + holidayType
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", totalHoliday=" + totalHoliday
-				+ ", usedHoliday=" + usedHoliday + ", reason=" + reason + "]";
+				+ ", usedHoliday=" + usedHoliday + ", reason=" + reason + ", done=" + done + "]";
 	}
-	
+
+
 	
 	
 }

@@ -15,5 +15,6 @@ public interface AttendanceStore {
 		public int deleteAttendance(int attendanceNo);
 		public float usedHolidayCount(int memberId);
 		public int getListCount(int memberId);
+		public int updateDone();
 
 }

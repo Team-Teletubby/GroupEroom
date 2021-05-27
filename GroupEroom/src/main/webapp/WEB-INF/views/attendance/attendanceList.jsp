@@ -73,7 +73,6 @@ $(document).ready(function(){
     <section id="main-content">
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>근태관리</h3>
-        <button id="button"></button>
         <div class="row">
           <div class="col-md-12">
             <div class="form-panel">
@@ -169,12 +168,17 @@ $(document).ready(function(){
 							<td>
 							${attendance.usedHoliday }
 							</td>
-							<td>${attendance.reason }</td>
+							<td>${attendance.reason }${attendance.done}</td>
 							<td align="right">
+							<c:if test="${attendance.done eq 'N'}">
 								<c:url var="deleteAttendance" value="deleteAttendance.do">
 									<c:param name="attendanceNo" value="${attendance.attendanceNo }"></c:param>
 								</c:url>
 								<a href="${deleteAttendance }" class="btn btn-sm btn-theme04" id="cancle-btn">신청취소</a>
+							</c:if>
+							<c:if test="${attendance.done eq 'Y'}">
+								<td></td>
+							</c:if>
 							</td>
 						</tr>
 					</c:forEach>

@@ -10,6 +10,7 @@
 		<result property="endDate" column="END_DATE"></result>
 		<result property="usedHoliday" column="USED_HOLIDAY"></result>
 		<result property="reason" column="REASON"></result>
+		<result property="done" column="DONE"></result>
 	</resultMap>
 	
 	<select id="selectAllList" resultMap="attendanceResultMap">
@@ -22,10 +23,10 @@
 
 	<insert id="insertAttendance">
 		INSERT INTO ATTENDANCE VALUES 
-		<if test="holidayType.toString() == '연차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, #{usedHoliday}, #{reason})</if>
-		<if test="holidayType.toString() == '오후 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason})</if>
-		<if test="holidayType.toString() == '오전 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason})</if>
-		<if test="holidayType.toString() == '경조사'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0, #{reason})</if>
+		<if test="holidayType.toString() == '연차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, #{usedHoliday}, #{reason},'N')</if>
+		<if test="holidayType.toString() == '오후 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason},'N')</if>
+		<if test="holidayType.toString() == '오전 반차'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0.5, #{reason},'N')</if>
+		<if test="holidayType.toString() == '경조사'"> (ATD_SEQ.NEXTVAL, #{memberId}, #{holidayType}, #{startDate}, #{endDate}, 0, #{reason},'N')</if>
 	</insert>
 	
 	<select id="usedHolidayCount" resultType="_float">
@@ -35,5 +36,11 @@
 	<delete id="deleteAttendance">
 		DELETE FROM ATTENDANCE WHERE ATTENDANCE_NO = #{attendanceNo}
 	</delete>
+	
+	<update id="updateDone">
+	<![CDATA[
+		UPDATE ATTENDANCE SET DONE = CASE WHEN START_DATE <= SYSDATE THEN 'Y' ELSE 'N' END
+	]]>
+	</update>
 	
 </mapper>

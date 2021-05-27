@@ -94,6 +94,7 @@ public class AttendanceController {
 			model.addAttribute("atdList",list);
 			model.addAttribute("pi",pi);
 		}
+		atdService.updateDone();
 		float usedHoliday = atdService.usedHolidayCount(memberId); //사용한 연차수
 		float restHoliday = totalHoliday-usedHoliday; // 남은 연차 수 
 		model.addAttribute("usedHoliday", usedHoliday);
