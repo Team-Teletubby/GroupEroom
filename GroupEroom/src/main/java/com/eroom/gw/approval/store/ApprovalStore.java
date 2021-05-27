@@ -46,6 +46,13 @@ public interface ApprovalStore {
 	public int updateState(Approval approval);
 	
 	/**
+	 * 승인/반려 버튼
+	 * @param approval
+	 * @return
+	 */
+	public int updateCheck(Approval approval);
+	
+	/**
 	 * 조건에 맞는 글 갯수 가져오기
 	 * @param approval
 	 * @return
@@ -88,4 +95,5 @@ public interface ApprovalStore {
 	 * @return
 	 */
 	public int insertFile(ApprovalFile file);
+
 }

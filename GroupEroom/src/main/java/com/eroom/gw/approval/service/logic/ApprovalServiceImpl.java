@@ -48,6 +48,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.updateState(approval);
 	}
 
+	// 승인/반려 버튼
+	@Override
+	public int changeCheck(Approval approval) {
+		return approvalStore.updateCheck(approval);
+	}
+	
 	// 조건에 맞는 글 갯수 가져오기
 	@Override
 	public int getListCount(Approval approval) {

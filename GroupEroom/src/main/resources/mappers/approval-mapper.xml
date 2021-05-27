@@ -125,4 +125,15 @@
 		WHERE APPROVAL_NO = #{approvalNo }
 	</update>
 	
+	<!-- 결재자 체크 상태 변경  -->
+	<update id="updateApprovalCheck" parameterType="Approval">
+		UPDATE APPROVAL
+		<if test='approvalState.toString() == "C1"'>
+		SET APPROVAL_FIRST_CHECK = 'Y'
+		</if>
+		<if test='approvalState.toString() == "C2"'>
+		SET APPROVAL_SECOND_CHECK = 'Y'
+		</if>
+		WHERE APPROVAL_NO = #{approvalNo }
+	</update>
 </mapper>

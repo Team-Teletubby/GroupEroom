@@ -57,6 +57,13 @@ public interface ApprovalService {
 	public int getListCount(Approval approval);
 	
 	/**
+	 * 승인버튼
+	 * @param approval
+	 * @return
+	 */
+	public int changeCheck(Approval approval);
+	
+	/**
 	 * 댓글 등록
 	 * @param reply
 	 * @return

@@ -31,12 +31,14 @@
 									<span>결재문</span>
 								</div>
 								<div class="fr">
-								<c:if test="${approval.approvalFirstId == loginUserId && approval.approvalFirstCheck == 'N' || approval.approvalSecondId == loginUserId && approvalapprovalSecondCheck == 'N'}">
-									<c:url var="stateChange" value="stateChange.do">
+								<c:if test="${approval.approvalFirstId == loginUserId && approval.approvalFirstCheck == 'N' || approval.approvalSecondId == loginUserId && approval.approvalSecondCheck == 'N'}">
+									<c:url var="compleBtn" value="compleBtn.do">
 										<c:param name="approvalNo" value="${approval.approvalNo }"></c:param>
+										<c:param name="approvalFirstId" value="${approval.approvalFirstId }"></c:param>
+										<c:param name="approvalSecondId" value="${approval.approvalSecondId }"></c:param>
 										<c:param name="approvalState" value="C"></c:param>
 									</c:url>
-									<button type="button" onclick="location.href='${stateChange }'" class="btn btn-success">승인</button>
+									<button type="button" onclick="location.href='${compleBtn }'" class="btn btn-success">승인</button>
 									<button type="button" class="btn btn-danger">반려</button>
 								</c:if>
 								</div>

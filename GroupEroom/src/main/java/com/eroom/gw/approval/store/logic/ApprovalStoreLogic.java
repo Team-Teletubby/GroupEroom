@@ -58,6 +58,13 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.update("approvalMapper.updateApprovalState", approval);
 	}
 	
+	// 승인/반려 버튼
+	@Override
+	public int updateCheck(Approval approval) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.updateApprovalCheck", approval);
+	}
+	
 	//================ 댓글 ================
 	// 댓글 등록
 	@Override
@@ -89,4 +96,5 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("approvalMapper.insertFile", aFile);
 	}
+
 }

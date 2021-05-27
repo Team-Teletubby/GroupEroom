@@ -224,7 +224,7 @@ public class ApprovalController {
 		Approval approval = approvalService.printOne(approvalNo);
 		if(approval != null) {
 			// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
-			viewStateChange(approval, member, null);
+			viewStateChange(approval, member);
 			mv.addObject("approval", approval);
 			System.out.println(approval.getMemberId());
 			mv.addObject("loginUserId", member.getMemberId());
@@ -234,10 +234,41 @@ public class ApprovalController {
 		}
 		return mv;
 	}
-
+	
+	// 결재자가 버튼을 눌렀을 경우
+	@RequestMapping(value="compleBtn.do")
+	public String completeBtn(HttpSession session, @ModelAttribute Approval approval) {
+		System.out.println("compleBtn 진입");
+		Member member = (Member)session.getAttribute("LoginUser");
+		// 승인 버튼을 눌렀을 경우
+		System.out.println(approval.getApprovalState());
+		if(approval.getApprovalState().equals("C")) {
+			System.out.println("중간 결재자 if문 진입");
+			// 중간 결재자
+			if(member.getMemberId() == approval.getApprovalFirstId()) {
+				System.out.println("중간 결재자 if-if문 진입");
+				approval.setApprovalState("C1");
+				int result = approvalService.changeCheck(approval);
+				if(result > 0) {
+					System.out.println("수정완료");
+				}else {
+					System.out.println("수정 실패");
+				}
+			// 최종 결재자
+			}else if(member.getMemberId() == approval.getApprovalSecondId()) {
+				approval.setApprovalState("C2");
+				int result = approvalService.changeCheck(approval);
+			}
+		// 반려 버튼을 눌렀을 경우
+		}else if(approval.getApprovalState() == "R") {
+			
+		}
+	
+		return "redirect:approvalDetail.do";
+	}
+	
 	// 결재 상태 변경 (미결함에서 결제자가 글을 봤을 경우)
-	@RequestMapping(value="stateChange.do")
-	public String viewStateChange(Approval approval, Member member, @RequestParam(value="button", required=false)String button) {
+	public void viewStateChange(Approval approval, Member member) {
 		// 변경할 상태값을 저장하는 변수
 		String changeState = "";
 		// 미결함에서 결제자가 글을 봤을 경우
@@ -247,14 +278,7 @@ public class ApprovalController {
 				approval.setApprovalState(changeState);
 				int result = approvalService.changeState(approval);
 			}
-		// 미결함에서 승인을 눌렀을 경우
-		}else if(approval.getApprovalState().equals("C")) {
-			int result = approvalService.changeState(approval);
-			return "redirect:suspenseBoard.do";
-		}else {
-			return "";
 		}
-		return "";
 	}
 	
 	// 결재 삭제
