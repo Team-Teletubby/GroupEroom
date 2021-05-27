@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.attendance.domain.Attendance;
+import com.eroom.gw.attendance.domain.Pagination;
 import com.eroom.gw.attendance.service.AttendanceService;
 import com.eroom.gw.calendar.domain.Calendar;
+import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.member.domain.Member;
 
 @Controller
@@ -32,9 +34,9 @@ public class AttendanceController {
 	private AttendanceService atdService;
 	
 	@RequestMapping(value="attendanceList.do")
-	public String attendanceList(Model model, HttpSession session){
+	public String attendanceList(Model model, HttpSession session, @RequestParam(value="page", required=false)Integer page){
 		Member LoginUser = (Member)session.getAttribute("LoginUser");
-		int memberId = LoginUser.getMemberId();
+		int memberId = LoginUser.getMemberId(); //로그인 아이디
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String now = format.format(new Date()); //달력 용도
 		int totalHoliday = 0;
@@ -84,8 +86,16 @@ public class AttendanceController {
 			totalHoliday = 29;
 		} //for문으로 어케 바꾸
 		
-		float usedHoliday = atdService.usedHolidayCount(memberId);
-		float restHoliday = totalHoliday-usedHoliday;
+		int currentPage = (page !=null) ? page : 1;
+		int listCount = atdService.getListCount(memberId);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Attendance> list = atdService.selectAllAttendance(pi,memberId);
+		if(!list.isEmpty()) {
+			model.addAttribute("atdList",list);
+			model.addAttribute("pi",pi);
+		}
+		float usedHoliday = atdService.usedHolidayCount(memberId); //사용한 연차수
+		float restHoliday = totalHoliday-usedHoliday; // 남은 연차 수 
 		model.addAttribute("usedHoliday", usedHoliday);
 		model.addAttribute("totalHoliday", totalHoliday);
 		model.addAttribute("restHoliday", restHoliday);
@@ -118,9 +128,14 @@ public class AttendanceController {
 	}
 	
 	// 연차 삭제(취소)
-	public String atdRemove(Model model, @RequestParam("") int attendanceNo) {
-		return null;
-		
+	@RequestMapping(value="deleteAttendance.do")
+	public String atdRemove(Model model, @RequestParam("attendanceNo") int attendanceNo) {
+		int result = atdService.removeAttendance(attendanceNo);
+		if(result>0) {
+			return "redirect:attendanceList.do";
+		}else {
+			return "";
+		}
 	}
 	
 }

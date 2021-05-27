@@ -11,6 +11,14 @@
 		<result property="usedHoliday" column="USED_HOLIDAY"></result>
 		<result property="reason" column="REASON"></result>
 	</resultMap>
+	
+	<select id="selectAllList" resultMap="attendanceResultMap">
+		SELECT * FROM ATTENDANCE WHERE MEMBER_ID = #{memberId} ORDER BY ATTENDANCE_NO DESC
+	</select>
+	
+	<select id="listCount" resultType="_int">
+		SELECT COUNT(*) FROM ATTENDANCE WHERE MEMBER_ID = #{memberId}
+	</select>
 
 	<insert id="insertAttendance">
 		INSERT INTO ATTENDANCE VALUES 
@@ -23,5 +31,9 @@
 	<select id="usedHolidayCount" resultType="_float">
 		SELECT NVL(SUM(USED_HOLIDAY),0) AS USED_HOLIDAY FROM ATTENDANCE WHERE MEMBER_ID =#{memberId}
 	</select>
+	
+	<delete id="deleteAttendance">
+		DELETE FROM ATTENDANCE WHERE ATTENDANCE_NO = #{attendanceNo}
+	</delete>
 	
 </mapper>
