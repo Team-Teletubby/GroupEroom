@@ -62,6 +62,10 @@
 							<td>계좌번호</td>
 					<td><input type="text" name="bankAccount" value="${memberOne.bankAccount }" readonly></td>
 						</tr>
+							<tr>
+							<td>퇴사여부</td>
+					<td><input type="text" name="quitYn" value="${memberOne.quitYn }" readonly></td>
+						</tr>
 						<tr>
                <td colspan="3" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->

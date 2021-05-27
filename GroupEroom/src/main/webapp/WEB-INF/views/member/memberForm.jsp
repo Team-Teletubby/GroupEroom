@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
    <jsp:include page="../common/sideBar.jsp"></jsp:include>
    
        <section id="main-content">
@@ -53,31 +53,31 @@
             <tr>
                <td>우편번호</td>
                <td>
-                  <input type="text"  name="post" class="postcodify_postcode5" size="6">
-                  <button type="button"  id="postcodify_search_button">검색</button>
+                  <input type="text" name="post"  size="6" class="postcodify_postcode5" value="">
+                  <button type="button" id="postcodify_search_button">검색</button>
                </td>
             </tr>
             <tr>
                <td>도로명 주소</td>
-               <td><input type="text" class="form-control" name="address1" class="postcodify_address"></td>
+               <td><input type="text" name="address1" class="postcodify_address" value="" ></td>
             </tr>
             <tr>
                <td>상세 주소</td>
-               <td><input type="text" class="form-control" name="address2" class="postcodify_extra_info"></td>
-            </tr>
-             <tr>
-               <td>계좌번호</td>
-               <td><input type="text" class="form-control" name="bankAccount"></td>
+               <td><input type="text" name="address2" class="postcodify_extra_info" value="" ></td>
             </tr>
              <tr>
                <td>은행</td>
                <td><input type="text" class="form-control" name="bank"></td>
             </tr>
              <tr>
+               <td>계좌번호</td>
+               <td><input type="text" class="form-control" name="bankAccount" placeholder="-넣고 오류난다고 하지 않기"></td>
+            </tr>
+             <tr>
                <td>이메일</td>
                <td><input type="email" class="form-control" name="memberEmail"></td>
             </tr>
-
+			
             <tr>
                <td colspan="2" align="center">
                   <!-- <button onclick="return validate();">가입하기</button> -->
@@ -90,7 +90,7 @@
    </div>
    </section>
    </section>
-  <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+  	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
     <script>
       $(function() {
          $("#postcodify_search_button").postcodifyPopUp();

@@ -46,12 +46,12 @@ span.error {
 					<table border="1" width="650px" cellspacing="5">
 						<thead>
 							<tr>
-								<th>부서</th>
 								<th>사번</th>
+								<th>부서</th>
 								<th>직급</th>
 								<th>이름</th>
 								<th>폰번호</th>
-
+								
 							</tr>
 						</thead>
 						<tbody>
