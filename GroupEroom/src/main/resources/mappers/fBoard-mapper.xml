@@ -140,10 +140,9 @@
 	</update>
 	
 <!-- 검색리스트 -->
-	<select id="selectSearchList" resultMap="fBoardResultMap">
- 		SELECT a.F_BOARD_NO, a.F_BULLET, a.F_BOARD_TITLE, b.MEMBER_NAME, a.ENROLL_DATE, a.HITS 
- 		FROM FREEBOARD a 
-		JOIN MEMBER b USING(MEMBER_ID) 
+	<select id="fbSelectSearchList" resultMap="fBoardResultMap">
+ 		SELECT a.F_BOARD_NO, a.F_BULLET, a.F_BOARD_TITLE, b.MEMBER_NAME AS "F_WRITER", a.ENROLL_DATE, a.HITS 
+ 		FROM FREEBOARD a JOIN MEMBER b USING(MEMBER_ID) 
 		<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR F_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR F_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
 		<if test="searchCondition.toString() != 'ALL'"> WHERE #{searchCondition} LIKE '%' || #{searchValue } || '%' </if>
 		AND F_STATUS = 'Y' 
@@ -151,8 +150,8 @@
 	</select>
 	
 <!-- 검색된 게시물 수 -->
-		<select id="searchListCount" resultType="_int">
-		SELECT COUNT(*) FROM FREEBOARD JOIN MEMBER USING(MEMBER_ID)
+		<select id="fbSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM FREEBOARD JOIN MEMBER USING(MEMBER_ID) 
 			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR F_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR F_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
 			<if test="searchCondition.toString() != 'ALL'"> WHERE #{searchCondition} LIKE '%' || #{searchValue } || '%'</if>
 		AND F_STATUS = 'Y' 

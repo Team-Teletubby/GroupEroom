@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전자결재 - 미결함</title>
+<title>전자결재 - 완료함</title>
 </head>
 <body>
-	<section id="container">
+<section id="container">
 		<!-- 헤더 시작 -->
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<!--헤더 끝-->
@@ -27,7 +26,7 @@
 					<div class="col-md-12">
 						<div class="content-panel">
 							<h4>
-								<i class="fa fa-angle-right"></i> 진행함
+								<i class="fa fa-angle-right"></i> 완료함
 							</h4>
 							<hr>
 							<c:if test="${aList != null }">
@@ -113,26 +112,5 @@
 				</div>
 			</section>
 		</section>
-		<!-- footer -->
-		<footer class="site-footer">
-			<div class="text-center">
-				<p>
-					&copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
-				</p>
-				<div class="credits">
-					<!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
-					Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
-				</div>
-				<a href="index.html#" class="go-top"> <i class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
-	</section>
 </body>
 </html>

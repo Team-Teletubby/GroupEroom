@@ -108,16 +108,16 @@ public class FBoardStoreLogic implements FBoardStore {
 //////////////////////////////////////////////// 검색 ///////////////////////////////////////////////////
 
 	@Override
-	public ArrayList<Freeboard> printSearchAll(Search search, PageInfo pi) {
+	public ArrayList<Freeboard> printFbSearchAll(Search search, PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("fBoardMapper.selectSearchList", null, rowBounds); 
+		return (ArrayList)sqlSession.selectList("fBoardMapper.fbSelectSearchList", null, rowBounds); 
 	}
 
 	@Override
-	public int searchListCount(Search search) {
+	public int searchFbListCount(Search search) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("fBoardMapper.searchListCount", search);
+		return sqlSession.selectOne("fBoardMapper.fbSearchListCount", search);
 	}
 	
 
