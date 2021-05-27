@@ -46,9 +46,9 @@ public class FBoardController {
 	public String fBoardSearch(@ModelAttribute Search search, 
 								Model model, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
-		int listCount = fService.getSearchListCount(search);
+		int listCount = fService.getFbSearchListCount(search);
 		PageInfo pi = Pagination.getPageInfo(currentPage,  listCount);
-		ArrayList<Freeboard> fSearchList = fService.printSearchAll(search, pi);
+		ArrayList<Freeboard> fSearchList = fService.printFbSearchAll(search, pi);
 		if(!fSearchList.isEmpty()) {
 			model.addAttribute("fBoardList", fSearchList);
 			model.addAttribute("pi",pi);

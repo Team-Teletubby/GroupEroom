@@ -27,8 +27,8 @@ public interface FBoardService {
 	
 	public List<FreeboardFile> printFile(int fBoardNo); //파일 리스트 출력	
 	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize); //파일업로드
-	public ArrayList<Freeboard> printSearchAll(Search search, PageInfo pi); //검색
-	public int getSearchListCount(Search search); //검색 전체 개수
+	public ArrayList<Freeboard> printFbSearchAll(Search search, PageInfo pi); //검색
+	public int getFbSearchListCount(Search search); //검색 전체 개수
 	
 
 }

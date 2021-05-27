@@ -28,7 +28,7 @@ public interface FBoardStore {
 	
 	public List<FreeboardFile> printFile(int fBoardNo); //파일리스트
 	public Object uploadFile(HashMap<String, Object> hmap); //파일업로드
-	public ArrayList<Freeboard> printSearchAll(Search search, PageInfo pi); //검색리스트
-	public int searchListCount(Search search); //검색된 게시물 개수
+	public ArrayList<Freeboard> printFbSearchAll(Search search, PageInfo pi); //검색리스트
+	public int searchFbListCount(Search search); //검색된 게시물 개수
 
 }

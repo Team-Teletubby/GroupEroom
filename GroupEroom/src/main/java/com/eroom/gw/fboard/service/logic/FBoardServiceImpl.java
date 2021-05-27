@@ -120,16 +120,16 @@ public class FBoardServiceImpl implements FBoardService{
 //////////////////////////////////////////////// 검색 ///////////////////////////////////////////////////
 //검색리스트
 	@Override
-	public ArrayList<Freeboard> printSearchAll(Search search, PageInfo pi) {
+	public ArrayList<Freeboard> printFbSearchAll(Search search, PageInfo pi) {
 		// TODO Auto-generated method stub
-		return fStore.printSearchAll(search, pi);
+		return fStore.printFbSearchAll(search, pi);
 	}
 
 //검색 게시물 전체 개수
 	@Override
-	public int getSearchListCount(Search search) {
+	public int getFbSearchListCount(Search search) {
 		// TODO Auto-generated method stub
-		return fStore.searchListCount(search);
+		return fStore.searchFbListCount(search);
 	}
 	
 
