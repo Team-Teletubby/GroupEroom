@@ -29,10 +29,10 @@ public class BookingController {
 	}
 	
 //예약생성 화면
-	@RequestMapping("bkInsertView.do")
-	public ModelAndView bookingInsertView (ModelAndView mv) {
+	@RequestMapping("bkRegisterView.do")
+	public String bkRegisterView() {
 		
-		return mv;
+		return "booking/roomReservation";
 	}
 	
 //예약생성
