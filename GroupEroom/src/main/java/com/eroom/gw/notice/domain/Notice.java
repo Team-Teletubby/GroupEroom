@@ -6,10 +6,10 @@ public class Notice {
 
 	
 	private int noticeNo;
+	private int memberId;
 	private String noticeTitle;
-	private String noticeWriter;
+	private String memberName;
 	private String noticeContents;
-	private String noticeFile;
 	private Date enrollDate;
 	private int hits;
 	private String originalFileName;
@@ -17,14 +17,14 @@ public class Notice {
 	
 	public Notice() {}
 
-	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContents, String noticeFile,
+	public Notice(int noticeNo, int memberId, String noticeTitle, String memberName, String noticeContents,
 			Date enrollDate, int hits, String originalFileName, String renameFileName) {
 		super();
 		this.noticeNo = noticeNo;
+		this.memberId = memberId;
 		this.noticeTitle = noticeTitle;
-		this.noticeWriter = noticeWriter;
+		this.memberName = memberName;
 		this.noticeContents = noticeContents;
-		this.noticeFile = noticeFile;
 		this.enrollDate = enrollDate;
 		this.hits = hits;
 		this.originalFileName = originalFileName;
@@ -39,6 +39,14 @@ public class Notice {
 		this.noticeNo = noticeNo;
 	}
 
+	public int getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
+
 	public String getNoticeTitle() {
 		return noticeTitle;
 	}
@@ -47,12 +55,12 @@ public class Notice {
 		this.noticeTitle = noticeTitle;
 	}
 
-	public String getNoticeWriter() {
-		return noticeWriter;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getNoticeContents() {
@@ -61,14 +69,6 @@ public class Notice {
 
 	public void setNoticeContents(String noticeContents) {
 		this.noticeContents = noticeContents;
-	}
-
-	public String getNoticeFile() {
-		return noticeFile;
-	}
-
-	public void setNoticeFile(String noticeFile) {
-		this.noticeFile = noticeFile;
 	}
 
 	public Date getEnrollDate() {
@@ -105,14 +105,11 @@ public class Notice {
 
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeWriter=" + noticeWriter
-				+ ", noticeContents=" + noticeContents + ", noticeFile=" + noticeFile + ", enrollDate=" + enrollDate
+		return "Notice [noticeNo=" + noticeNo + ", memberId=" + memberId + ", noticeTitle=" + noticeTitle
+				+ ", memberName=" + memberName + ", noticeContents=" + noticeContents + ", enrollDate=" + enrollDate
 				+ ", hits=" + hits + ", originalFileName=" + originalFileName + ", renameFileName=" + renameFileName
 				+ "]";
 	}
 
 	
-	}
-
-
-
+}

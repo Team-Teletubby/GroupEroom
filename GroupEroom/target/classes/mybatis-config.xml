@@ -20,6 +20,7 @@
 		<typeAlias type="com.eroom.gw.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.eroom.gw.attendance.domain.Attendance" alias="Attendance"/>
 		<typeAlias type="com.eroom.gw.todo.domain.Todo" alias="Todo"/>
+		<typeAlias type="com.eroom.gw.notice.domain.Notice" alias="Notice"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/approval-mapper.xml"></mapper>
@@ -29,6 +30,7 @@
 		<mapper resource="mappers/member-mapper.xml"></mapper>
 		<mapper resource="mappers/attendance-mapper.xml"></mapper>
 		<mapper resource="mappers/todo-mapper.xml"></mapper>
+		<mapper resource="mappers/notice-mapper.xml"></mapper>
 	</mappers>
 	
 </configuration>

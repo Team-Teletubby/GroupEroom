@@ -2,11 +2,13 @@ package com.eroom.gw.notice.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.notice.domain.Notice;
 import com.eroom.gw.notice.store.NoticeStore;
 
@@ -24,8 +26,10 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public ArrayList<Notice> selectAllList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectAllList", null, rowBounds); 
+		
 	}
 
 	@Override
@@ -42,8 +46,7 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public int insertNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("noticeMapper.insertNotice" , notice);
 	}
 
 	@Override
@@ -58,4 +61,5 @@ public class NoticeStoreLogic implements NoticeStore {
 		return 0;
 	}
 
+	
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+<resultMap type="Notice" id="noticeResultMap">
+		<id property="noticeNo" column="NOTICE_NO"></id>
+		<result property="memberId" column="MEMBER_ID"></result>
+		<result property="noticeTitle" column="NOTICE_TITLE"></result>
+		<result property="memberName" column="MEMBER_NAME"></result>
+		<result property="noticeContents" column="NOTICE_CONTENTS"></result>
+		<result property="enrollDate" column="ENROLL_DATE"></result>
+		<result property="hits" column="HITS"></result>
+		<result property="originalFileName" column="ORIGINALFILE_NAME"></result>
+		<result property="renameFileName" column="RENAMEFILE_NAME"></result>
+		</resultMap>
+		
+		<!-- 게시판 전체리스트 -->
+			<select id="selectAllList" resultMap="noticeResultMap"> 
+		SELECT NOTICE_NO, MEMBER_ID, MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENTS, ENROLL_DATE, HITS
+		FROM NOTICE JOIN MEMBER USING(MEMBER_ID) ORDER BY NOTICE_NO DESC
+	</select>
+	
+	
+	<!-- 글등록 -->
+	<insert id="insertNotice">
+		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{memberId },#{noticeTitle }, #{noticeContents },SYSDATE,0, #{originalFileName}, #{renameFileName })
+	</insert>
+
+		</mapper>

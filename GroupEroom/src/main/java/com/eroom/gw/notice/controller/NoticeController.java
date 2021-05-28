@@ -1,6 +1,10 @@
 package com.eroom.gw.notice.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.notice.domain.Notice;
 
 import com.eroom.gw.notice.service.NoticeService;
@@ -27,17 +32,33 @@ public class NoticeController {
 	private NoticeService nService;
 	// 리스트 화면
 	
-	@RequestMapping(value="noticeList.do", method=RequestMethod.GET)
-	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+	@RequestMapping(value="noticeListView.do", method=RequestMethod.GET)
+	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value="page", required=false)Integer page) {
 		int currentPage = (page != null) ? page : 1;
 		int listCount = nService.getListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<Notice> nList = nService.printAll(pi);
-		
+		System.out.println(nList.toString());
+		if(!nList.isEmpty()) {
+			mv.addObject("noticeList", nList);
+			mv.addObject("pi", pi);
+			mv.setViewName("notice/noticeListView");
+		}else {
+			mv.addObject("msg", "공지사항 조회 실패");
+			mv.setViewName("common/errorPage");
+		}
 		
 		
 		return mv;
 	}
+	// 공지사항 검색
+	@RequestMapping(value="noticeSearch.do")
+	public String noticeSearch(@ModelAttribute Search search, Model model, @RequestParam(value="page", required=false)Integer page ) {
+		return "";
+		}
+		
+	
+	
 	//상세 페이지, 조회수 화면
 	@RequestMapping(value="noticeDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) { 
@@ -47,21 +68,69 @@ public class NoticeController {
 	
 	@RequestMapping(value="noticeWriteView.do", method=RequestMethod.GET)
 	public String noticeWriteView() {
-		return "";
+		return "notice/noticeWriteForm";
 	}
 	
 	// 공지사항 등록 로직
 	@RequestMapping(value="noticeRegister.do", method=RequestMethod.POST)
 	public ModelAndView noticeRegister(ModelAndView mv, @ModelAttribute Notice notice, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) { 
-		return mv;
-	}
+		//서버에 파일 저장
+				if(!uploadFile.getOriginalFilename().equals("")) {
+					String renameFileName = saveFile(uploadFile, request);
+					if(renameFileName !=null) {
+						notice.setOriginalFileName(uploadFile.getOriginalFilename());
+						notice.setRenameFileName(renameFileName);
+					}
+				}
+				//디비에 파일 저장
+				int result = nService.registerNotice(notice);
+				String path = "";
+				if(result>0) {
+					path = "redirect:noticeListView.do";
+				}else {
+					mv.addObject("msg", "공지등록을 실패하셨습니다!!");
+					path = "common/errorPage";
+				}
+				mv.setViewName(path);
+				return mv;
+			}
+
+			private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
+				// 파일 저장 경로 설정
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\noticeFiles";
+				
+				
+				// 저장 폴더 설정
+				File folder = new File(savePath);
+				// 폴더 없으면 자동 생성
+				if(!folder.exists()) {
+					folder.mkdir();
+				}
+				// 파일명 변경하기
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String originalFileName = uploadFile.getOriginalFilename();
+				String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + 
+													originalFileName.substring(originalFileName.lastIndexOf(".")+1); //거꾸로 위치,=>확장자명
+				String filePath = folder + "\\" + renameFileName;
+				// 파일저장
+				try {
+					uploadFile.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//리턴 꼮!!!!!!!!!!!!!!!!!!!!!!!하기!!!!!!!!
+				return renameFileName;
+			}
 	
-	// 공지사항 파일첨부
-	public String saveFile(MultipartFile file, HttpServletRequest request) { 
+	
 		
-			// 파일저장은 예외처리 
-		return "";
-	}
+	
+	
 	// 공지사항 수정화면
 	@RequestMapping(value="noticeModifyView.do")
 	public ModelAndView noticeModifyView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) { 

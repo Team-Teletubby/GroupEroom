@@ -2,25 +2,31 @@ package com.eroom.gw.notice.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.notice.domain.Notice;
 import com.eroom.gw.notice.service.NoticeService;
+import com.eroom.gw.notice.store.NoticeStore;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
+	@Autowired
+	private NoticeStore nStore;
+	
 	@Override
 	public int getListCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	//전체목록
 	@Override
 	public ArrayList<Notice> printAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return nStore.selectAllList(pi);
 	}
 
 	@Override
@@ -37,8 +43,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public int registerNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nStore.insertNotice(notice);
 	}
 
 	@Override
@@ -52,5 +57,6 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
