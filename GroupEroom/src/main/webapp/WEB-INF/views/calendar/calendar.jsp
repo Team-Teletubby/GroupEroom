@@ -144,6 +144,7 @@
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 10px;
+    background:white;
   }
 
 </style>
@@ -174,7 +175,7 @@
         
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch demo modal </button>
 
-
+<!-- 모달..  -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document"> <div class="modal-content">
 <div class="modal-header"> <h5 class="modal-title" id="exampleModalLabel">일정등록</h5>

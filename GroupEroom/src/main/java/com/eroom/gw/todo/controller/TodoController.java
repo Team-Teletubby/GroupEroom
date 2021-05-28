@@ -19,7 +19,7 @@ public class TodoController {
 	
 	// 내 할 일 전체 출력
 	@RequestMapping(value="todoList.do")
-	public ModelAndView todoListView(ModelAndView mv,@RequestParam("")int memberId) {
+	public ModelAndView todoListView(ModelAndView mv) {
 		mv.setViewName("todo/todoList");
 		return mv;
 	}
