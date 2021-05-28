@@ -82,7 +82,7 @@
 					</a>
 						<ul class="sub">
 							<li><a href="grids.html">예약관리 홈</a></li>
-							<li><a href="calendar.html">회의실 예약하기</a></li>
+							<li><a href="bkRegisterView.do">회의실 예약하기</a></li>
 						</ul></li>
 					<!-- 근태관리 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> 
