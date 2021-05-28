@@ -82,7 +82,7 @@
 					</a>
 						<ul class="sub">
 							<li><a href="grids.html">예약관리 홈</a></li>
-							<li><a href="calendar.html">회의실 예약하기</a></li>
+							<li><a href="bkRegisterView.do">회의실 예약하기</a></li>
 						</ul></li>
 					<!-- 근태관리 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> 
@@ -101,7 +101,7 @@
 							class="fa fa-tasks"></i> <span>게시판</span>
 					</a>
 						<ul class="sub">
-							<li><a href="form_component.html">공지사항</a></li>
+							<li><a href="noticeListView.do">공지사항</a></li>
 							<li><a href="fBoardListView.do">자유게시판</a></li>
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
 						</ul></li>
