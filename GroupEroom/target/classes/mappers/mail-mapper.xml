@@ -13,6 +13,7 @@
 		<result property="sentDate" column="SENT_DATE" />
 		<result property="readDate" column="READ_DATE" />
 		<result property="readCount" column="READ_COUNT" />
+		<result property="trashYn" column="TRASH_YN" />
 	</resultMap>
 	
 <!-- 카운트 출력 -->
@@ -29,11 +30,28 @@
 	
 <!-- 받은편지함 출력 -->
 	<select id="selectAllInbox" parameterType="_int" resultMap="mailResultMap">
-		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, SENT_DATE, READ_DATE, READ_COUNT   
+		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_DATE, READ_COUNT   
 		FROM MAIL JOIN MEMBER ON MAIL.SENDER_ID = MEMBER.MEMBER_ID
-		WHERE RECEIVER_ID = #{value } 
+		WHERE RECEIVER_ID = #{value } OR CC_ID = #{value }
+		AND TRASH_YN = 'N'
 		ORDER BY MAIL_NO DESC
 	</select>
+<!-- 보낸편지함 출력 -->
+	<select id="selectAllSentMail" parameterType="_int" resultMap="mailResultMap">
+		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), TO_CHAR(READ_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_COUNT   
+		FROM MAIL JOIN MEMBER ON MAIL.RECEIVER_ID = MEMBER.MEMBER_ID
+		WHERE SENDER_ID = #{value }
+		AND TRASH_YN = 'N'
+		ORDER BY MAIL_NO DESC
+	</select>
+<!-- 휴지통 출력 -->
+	<select id="selectAllTrash" parameterType="_int" resultMap="mailResultMap">
+		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_DATE, READ_COUNT   
+		FROM MAIL JOIN MEMBER ON MAIL.SENDER_ID = MEMBER.MEMBER_ID
+		WHERE SENDER_ID = #{value } OR RECEIVER_ID = #{value } OR CC_ID = #{value } 
+		AND TRASH_YN = 'Y' 
+		ORDER BY MAIL_NO DESC 
+	</select>	
 	
 <!-- 게시글 상세조회
 	<select id="selectOne" resultMap="boardResultMap">

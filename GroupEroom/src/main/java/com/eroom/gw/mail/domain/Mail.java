@@ -14,12 +14,29 @@ public class Mail {
 	private Date sentDate;
 	private Date reddDate;
 	private int readCount;
+	private String trashYn;
 	
 	public Mail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Mail(int mailNo, int receiverId, int senderId, int ccId, String memberName, String mailTitle,
+			String mailContents, Date sentDate, Date reddDate, int readCount, String trashYn) {
+		super();
+		this.mailNo = mailNo;
+		this.receiverId = receiverId;
+		this.senderId = senderId;
+		this.ccId = ccId;
+		this.memberName = memberName;
+		this.mailTitle = mailTitle;
+		this.mailContents = mailContents;
+		this.sentDate = sentDate;
+		this.reddDate = reddDate;
+		this.readCount = readCount;
+		this.trashYn = trashYn;
+	}
+
 	public int getMailNo() {
 		return mailNo;
 	}
@@ -81,13 +98,21 @@ public class Mail {
 		this.readCount = readCount;
 	}
 	
+	public String getTrashYn() {
+		return trashYn;
+	}
+
+	public void setTrashYn(String trashYn) {
+		this.trashYn = trashYn;
+	}
+
 	@Override
 	public String toString() {
 		return "Mail [mailNo=" + mailNo + ", receiverId=" + receiverId + ", senderId=" + senderId + ", ccId=" + ccId
 				+ ", memberName=" + memberName + ", mailTitle=" + mailTitle + ", mailContents=" + mailContents
-				+ ", sentDate=" + sentDate + ", reddDate=" + reddDate + ", readCount=" + readCount + "]";
+				+ ", sentDate=" + sentDate + ", reddDate=" + reddDate + ", readCount=" + readCount + ", trashYn="
+				+ trashYn + "]";
 	}
-	
 	
 	
 

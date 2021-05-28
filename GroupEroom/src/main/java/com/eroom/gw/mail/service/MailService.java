@@ -8,8 +8,8 @@ import com.eroom.gw.mail.domain.Mail;
 public interface MailService {
 	//메일함 리스트출력
 	public ArrayList<Mail> printAllInbox(PageInfo pi, int receiverId);
-	public ArrayList<Mail> printAllSentMail(PageInfo pi);
-	public ArrayList<Mail> printAllTrash(PageInfo pi);
+	public ArrayList<Mail> printAllSentMail(PageInfo pi, int receiverId);
+	public ArrayList<Mail> printAllTrash(PageInfo pi, int receiverId);
 	
 	//페이징
 	public int getListCount();

@@ -36,6 +36,20 @@ public class MailStoreLogic implements MailStore {
 		return (ArrayList) sqlSession.selectList("mailMapper.selectAllInbox", receiverId, rowBounds);
 	}
 
+	@Override
+	public ArrayList<Mail> selectAllSentMail(PageInfo pi, int senderId) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("mailMapper.selectAllSentMail", senderId, rowBounds);
+	}
+
+	@Override
+	public ArrayList<Mail> selectAllTrash(PageInfo pi, int receiverId) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("mailMapper.selectAllTrash", receiverId, rowBounds);
+	}
+
 
 
 }

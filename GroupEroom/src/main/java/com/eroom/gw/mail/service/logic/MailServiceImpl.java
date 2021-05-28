@@ -32,15 +32,14 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public ArrayList<Mail> printAllSentMail(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Mail> printAllSentMail(PageInfo pi, int senderId) {
+		return mStore.selectAllSentMail(pi, senderId);
 	}
 
 	@Override
-	public ArrayList<Mail> printAllTrash(PageInfo pi) {
+	public ArrayList<Mail> printAllTrash(PageInfo pi, int receiverId) {
 		// TODO Auto-generated method stub
-		return null;
+		return mStore.selectAllTrash(pi, receiverId);
 	}
 
 	@Override

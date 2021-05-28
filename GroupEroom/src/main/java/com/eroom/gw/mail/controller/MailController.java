@@ -24,7 +24,7 @@ public class MailController {
 	@Autowired
 	private MailService mService;
 	
-	//메일 리스트 출력
+	//받은 메일함
 	@RequestMapping(value="inboxListView.do")
 	public ModelAndView inboxListView(ModelAndView mv, @ModelAttribute Mail mail, 
 									HttpServletRequest request, HttpSession session, 
@@ -43,6 +43,56 @@ public class MailController {
 			mv.addObject("mailList", mailList);
 			mv.addObject("pi", pi);
 			mv.setViewName("mail/inboxListView");
+		}else {
+			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	//보낸 메일함
+	@RequestMapping(value="sentListView.do")
+	public ModelAndView sentListView(ModelAndView mv, @ModelAttribute Mail mail, 
+									HttpServletRequest request, HttpSession session, 
+									@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1; //페이지 대응시키기
+		int listCount = mService.getListCount(); //전체 게시글 개수
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		mail.setSenderId(loginUser.getMemberId());
+		int senderId = mail.getSenderId();
+
+		ArrayList<Mail> mailList = mService.printAllSentMail(pi, senderId);
+		if(!mailList.isEmpty()) {
+			mv.addObject("mailList", mailList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mail/sentListView");
+		}else {
+			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	//휴지통
+	@RequestMapping(value="trashListView.do")
+	public ModelAndView trashListView(ModelAndView mv, @ModelAttribute Mail mail, 
+									HttpServletRequest request, HttpSession session, 
+									@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1; //페이지 대응시키기
+		int listCount = mService.getListCount(); //전체 게시글 개수
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		mail.setReceiverId(loginUser.getMemberId());
+		int receiverId = mail.getReceiverId();
+
+		ArrayList<Mail> mailList = mService.printAllTrash(pi, receiverId);
+		if(!mailList.isEmpty()) {
+			mv.addObject("mailList", mailList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mail/trashListView");
 		}else {
 			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
 		}

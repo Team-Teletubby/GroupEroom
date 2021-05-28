@@ -22,6 +22,7 @@
 <link href="resources/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!--external css-->
 <link href="resources/js/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link href="resources/css/style.css" rel="stylesheet">
 <link href="resources/css/style-responsive.css" rel="stylesheet">
@@ -43,11 +44,17 @@
 					<div class="col-sm-3">
 						<section class="panel">
 							<div class="panel-body">
-								<a href="mailComposeView.do" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
+								<a href="mailComposeView.do" class="btn btn-compose"><i
+									class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
-									<li class="active"><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox</a></li>
-									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>Send Mail</a></li>
-									<li><a href="trashListView.do"> <i class="fa fa-trash-o"></i>Trash</a></li>
+									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox
+									</a></li>
+									<li><a href="sentListView.do"> <i
+											class="fa fa-envelope-o"></i>Send Mail
+									</a></li>
+									<li class="active"><a href="trashListView.do"> <i
+											class="fa fa-trash-o"></i>Trash
+									</a></li>
 								</ul>
 							</div>
 						</section>
@@ -59,12 +66,13 @@
 									Inbox
 									<form action="#" class="pull-right mail-src-position">
 										<div class="input-append">
-											<input type="text" class="form-control " placeholder="Search Mail">
+											<input type="text" class="form-control "
+												placeholder="Search Mail">
 										</div>
 									</form>
 								</h4>
 							</header>
-							<form action="inboxListView.do" method="GET">
+							<form action="sentListView.do" method="GET">
 								<div class="panel-body minimal">
 									<div class="mail-option">
 										<div class="chk-all">
@@ -72,7 +80,8 @@
 												<input type="checkbox" class="">
 											</div>
 											<div class="btn-group">
-												<a data-toggle="dropdown" href="#" class="btn mini all"> All <i class="fa fa-angle-down "></i>
+												<a data-toggle="dropdown" href="#" class="btn mini all">
+													All <i class="fa fa-angle-down "></i>
 												</a>
 												<ul class="dropdown-menu">
 													<li><a href="#"> None</a></li>
@@ -82,7 +91,8 @@
 											</div>
 										</div>
 										<div class="btn-group">
-											<a data-original-title="Delete" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+											<a data-original-title="Delete" data-placement="top"
+												data-toggle="dropdown" href="#" class="btn mini tooltips">
 												<i class="fa fa-trash-o"></i>
 											</a>
 										</div>
@@ -90,24 +100,28 @@
 										<ul class="unstyled inbox-pagination">
 											<li><span>${pi.currentPage } / ${pi.maxPage }</span></li>
 											<!-- 이전 -->
-											<c:url var="before" value="inboxListView.do">
+											<c:url var="before" value="trashListView.do">
 												<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 											</c:url>
 											<c:if test="${pi.currentPage <= 1 }">
-												<li><a class="np-btn"><i class="fa fa-angle-left  pagination-left"></i></a></li>
+												<li><a class="np-btn"><i
+														class="fa fa-angle-left  pagination-left"></i></a></li>
 											</c:if>
 											<c:if test="${pi.currentPage > 1 }">
-												<li><a class="np-btn" href="${before }"><i class="fa fa-angle-left  pagination-left"></i></a></li>
+												<li><a class="np-btn" href="${before }"><i
+														class="fa fa-angle-left  pagination-left"></i></a></li>
 											</c:if>
 											<!-- 다음 -->
-											<c:url var="after" value="inboxListView.do">
+											<c:url var="after" value="trashListView.do">
 												<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 											</c:url>
 											<c:if test="${pi.currentPage >= pi.maxPage }">
-												<li><a class="np-btn"><i class="fa fa-angle-right pagination-right"></i></a></li>
+												<li><a class="np-btn"><i
+														class="fa fa-angle-right pagination-right"></i></a></li>
 											</c:if>
 											<c:if test="${pi.currentPage < pi.maxPage }">
-												<li><a class="np-btn" href="${after }"><i class="fa fa-angle-right pagination-right"></i></a></li>
+												<li><a class="np-btn" href="${after }"><i
+														class="fa fa-angle-right pagination-right"></i></a></li>
 											</c:if>
 										</ul>
 										<!-- ################# 본문 ################# -->
@@ -115,28 +129,21 @@
 											<table class="table table-inbox table-hover">
 												<tbody>
 													<c:forEach items="${ mailList }" var="mail">
-														<c:if test="${mail.readCount >= 1}">
-															<tr class="">
-																<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
-																<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
-																<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
-																<td class="view-message" name="memberName">${mail.memberName}</td>
-																<td class="view-message" name="mailTilte"><a href="mail_view.html">${mail.mailTitle}</a></td>
-																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-																<td class="view-message  text-right">${mail.sentDate}</td>
-															</tr>
-														</c:if>
-														<c:if test="${mail.readCount <= 0}">
-															<tr class="unread">
-																<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
-																<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
-																<td class="view-message  dont-show" hidden><a> ${mail.mailNo} </a></td>
-																<td class="view-message  dont-show"><a href="mail_view.html">${mail.memberName}</a></td>
-																<td class="view-message "><a href="mail_view.html">${mail.mailTitle}</a></td>
-																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-																<td class="view-message  text-right">${mail.sentDate}</td>
-															</tr>
-														</c:if>
+														<tr class="">
+															<td class="inbox-small-cells"><input type="checkbox"
+																class="mail-checkbox"></td>
+															<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
+															<c:if test="${mail.readCount >= 1}">
+																<td class="view-message" name="readCount"><i class="fa fa-envelope-open"></i>
+															</c:if>
+															<c:if test="${mail.readCount <= 0}">
+																<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
+															</c:if>
+															<td class="view-message" name="sender">${mail.memberName}</td>
+															<td class="view-message" name="mailTilte"><a href="#">${mail.mailTitle}</a></td>
+															<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+															<td class="view-message  text-right">${mail.sentDate}</td>
+														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
@@ -158,12 +165,12 @@
 					&copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
 				</p>
 				<div class="credits">
-			<!--
+					<!--
             You are NOT allowed to delete the credit link to TemplateMag with free version.
             You can delete the credit link only if you bought the pro version.
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
-          	-->
+          -->
 					Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
 				</div>
 				<a href="inbox.html#" class="go-top"> <i class="fa fa-angle-up"></i>
@@ -175,7 +182,8 @@
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="resources/js/jquery/jquery.min.js"></script>
 	<script src="resources/js/bootstrap/js/bootstrap.min.js"></script>
-	<script class="include" type="text/javascript" src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script class="include" type="text/javascript"
+		src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="resources/js/jquery.scrollTo.min.js"></script>
 	<script src="resources/js/jquery.nicescroll.js" type="text/javascript"></script>
 	<!--common script for all pages-->
@@ -183,4 +191,5 @@
 	<!--script for this page-->
 
 </body>
+
 </html>
