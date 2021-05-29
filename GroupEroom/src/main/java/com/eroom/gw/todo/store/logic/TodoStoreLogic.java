@@ -16,33 +16,28 @@ public class TodoStoreLogic implements TodoStore{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Todo> selelctAllTodo(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Todo> selelctAllTodo(int memberId) {
+		return (ArrayList)sqlSession.selectList("todoMapper.selectAllTodo", memberId);
 	}
 
 	@Override
 	public int insertTodo(Todo todo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("todoMapper.insertTodo", todo);
 	}
 
 	@Override
 	public int updateTodo(Todo todo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("todoMapper.updateTodo",todo);
 	}
 
 	@Override
 	public int deleteTodo(int todoNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("todoMapper.deleteTodo", todoNo);
 	}
 
 	@Override
 	public int updateTodoState(int todoNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("todoMapper.updateState");
 	}
 
 }

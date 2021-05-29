@@ -3,14 +3,31 @@
 
 <mapper namespace="todoMapper">
 	<resultMap type="Todo" id="todoResultMap">
-		<id property="attendanceNo" column="ATTENDANCE_NO"></id>
+		<id property="todoNo" column="TODO_NO"></id>
 		<result property="memberId" column="MEMBER_ID"></result>
-		<result property="holidayType" column="HOLIDAY_TYPE"></result>
-		<result property="startDate" column="START_DATE"></result>
-		<result property="endDate" column="END_DATE"></result>
-		<result property="usedHoliday" column="USED_HOLIDAY"></result>
-		<result property="reason" column="REASON"></result>
-		<result property="done" column="DONE"></result>
+		<result property="todoPriority" column="TODO_PRIORITY"></result>
+		<result property="todoContents" column="TODO_CONTENTS"></result>
+		<result property="todoState" column="TODO_STATE"></result>
 	</resultMap>
 	
+	
+	<insert id="insertTodo">
+		INSERT INTO TODOLIST VALUES (TODO_SEQ.NEXTVAL, #{memberId}, #{todoPriority}, #{todoContents}, 'N')
+	</insert>
+	
+	<select id="selectAllTodo" resultMap="todoResultMap">
+		SELECT * FROM TODOLIST WHERE MEMBER_ID = #{memberId} ORDER BY TODO_PRIORITY
+	</select>
+	
+	<update id="updateTodo">
+		UPDATE TODOLIST SET TODO_CONTENTS = #{todoContents} WHERE TODO_NO = #{todoNo}
+	</update>
+	
+	<update id="updateState">
+		UPDATE TODOLIST SET TODO_STATE = 'Y' WHERE TODO_NO = #{todoNo}
+	</update>
+	
+	<delete id="deleteTodo">
+		DELETE FROM TODOLIST WHERE TODO_NO = #{todoNo}
+	</delete>
 </mapper>

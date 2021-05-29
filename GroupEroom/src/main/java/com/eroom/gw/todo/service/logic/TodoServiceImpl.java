@@ -15,21 +15,18 @@ public class TodoServiceImpl implements TodoService{
 	private TodoStore tdStore;
 	
 	@Override
-	public ArrayList<Todo> selelctAllTodo(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Todo> selelctAllTodo(int memberId) {
+		return tdStore.selelctAllTodo(memberId);
 	}
 
 	@Override
 	public int registerTodo(Todo todo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tdStore.insertTodo(todo);
 	}
 
 	@Override
 	public int modifyTodo(Todo todo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tdStore.updateTodo(todo);
 	}
 
 	@Override
