@@ -179,6 +179,8 @@
 			$("#regTodo").on("click", function() {
 				var todoPriority = $("input:radio[name='todoPriority']:checked").val();
 				var todoContents = $("#todoContents").val();
+				alert(todoPriority);
+				alert(todoContents);
 				$.ajax({
 					url : "todoRegister.do",
 					type : "post",
@@ -186,7 +188,6 @@
 					success : function(data) {
 						if(data == "success") {
 							alert("성공");
-							getTodoList();
 						}else {
 							alert("실패..");
 						}
@@ -206,27 +207,14 @@
 				type : "get",
 				dataType : "json",
 				success : function(data) {
+					alert("getTodoList 들오오");
 					var $ul = $("#ul-todo");
-					//$ul.html(""); 나중에 하자
 					if(data.length>0){
 						for(var i in data) {
-							$li = $("<li>");
-							$div1 = $("<div class='pull-right hidden-phone'>");
-							$priority = $("<span class='badge'>").text(data[i].todoPriority);
-							$contents = $("<span class='task-title-sp'>").text(data[i].todoContents);
-							$div2 = $("<div class='pull-right hidden-phone'>");
-							$btn1 = $("<button class='btn btn-success btn-xs'><i class='fa fa-check'></i>");
-							$btn2 = $("<button class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i>");
-							$btn3 = $("<button class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i>");
-							
-							$li.append($div1);
-							$li.append($priority);
-							$li.append($contents);
-							$li.append($div2);
-							$li.append($btn1);
-							$li.append($btn2);
-							$li.append($btn3);
-							$ul.append($li);
+							$tr = $("<div>");
+							$contents = $("<td>").text(data[i].todoContents);
+							$tr.append($contents);
+							$table.append($tr);
 						}
 					}
 				},

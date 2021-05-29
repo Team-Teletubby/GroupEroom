@@ -30,19 +30,25 @@ public class TodoController {
 	private TodoService tdService;
 	
 	// 내 할 일 전체 출력
-//	@RequestMapping(value="todoList.do")
-//	public void todoListView(HttpSession session,HttpServletResponse response) throws Exception {
-//		Member LoginUser = (Member)session.getAttribute("LoginUser");
-//		int memberId = LoginUser.getMemberId();
-//		ArrayList<Todo> todoList = tdService.selelctAllTodo(memberId);
-//		System.out.println(todoList);
-//		if(!todoList.isEmpty()) {
-//			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); // 날짜 포맷 변경!
-//			gson.toJson(todoList, response.getWriter());
-//		}else {
-//			System.out.println("데이터없음");
-//		}
-//	}
+	
+	@RequestMapping(value="todoList.do")
+	public String todoListView() {
+		return "todo/todoList";
+	}
+	
+	
+	@RequestMapping(value="todoListView.do")
+	public void getTodoList(HttpSession session,HttpServletResponse response) throws Exception {
+		Member LoginUser = (Member)session.getAttribute("LoginUser");
+		int memberId = LoginUser.getMemberId();
+		ArrayList<Todo> todoList = tdService.selelctAllTodo(memberId);
+		if(!todoList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); // 날짜 포맷 변경!
+			gson.toJson(todoList, response.getWriter());
+		}else {
+			System.out.println("데이터없음");
+		}
+	}
 	
 	// 내 할 일 등록
 	@ResponseBody
