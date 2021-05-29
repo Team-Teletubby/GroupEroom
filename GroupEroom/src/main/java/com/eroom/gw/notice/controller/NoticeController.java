@@ -34,8 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 public class NoticeController {
-
-	private final NoticeService nService;
+	
+	@Autowired
+	private NoticeService nService;
 	// 리스트 화면
 	
 	@GetMapping(value="noticeListView.do")

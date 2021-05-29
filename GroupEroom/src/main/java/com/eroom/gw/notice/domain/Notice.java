@@ -26,5 +26,66 @@ public class Notice {
 	private String originalFileName;
 	private String renameFileName;
 	
+	public Notice() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getNoticeNo() {
+		return noticeNo;
+	}
+	public void setNoticeNo(int noticeNo) {
+		this.noticeNo = noticeNo;
+	}
+	public int getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
+	public String getNoticeTitle() {
+		return noticeTitle;
+	}
+	public void setNoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getNoticeContents() {
+		return noticeContents;
+	}
+	public void setNoticeContents(String noticeContents) {
+		this.noticeContents = noticeContents;
+	}
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+	public int getHits() {
+		return hits;
+	}
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
+	}
+	
+	
 	
 }

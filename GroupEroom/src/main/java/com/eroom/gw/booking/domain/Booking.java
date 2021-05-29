@@ -4,88 +4,250 @@ import java.sql.Date;
 
 public class Booking {
 	
-	private int bookingNo;
-	private String bookingDate;
-	private int memberId;
-	private int roomNo;
-	private String joinMember;
-	private String bookingTime;
-	private String bContents;
-	private String bStatus;
+	private int bookingNo; // 예약번호
+	private int roomNo; // 회의실 번호
+	private int memberId; // 예약한 회원의 ID
+	private String memberName; // 예약한 회원의 이름
+	private String bookingTtitle; // 예약 이름
+	private String bContents; // 예약 내용
+	private Date bookingCreateDate; // 생성날짜
+	private Date bookingStartDate; // 회의 시작 날짜
+	private Date bookingEndDate; // 회의 끝나는 날짜
+	private int joinFirstMemberId; // 회의에 참석할 1번째 회원
+	private String joinFirstMemberName;
+	private String joinFirstMemberDept;
+	private String joinFirstMemberCheck; // 참석 여부 체크
+	private int joinSecondMemberId; // 회의에 참석할 2번째 회원
+	private String joinSecondMemberName;
+	private String joinSecondMemberDept;
+	private String joinSecondMemberCheck;
+	private int joinThirdMemberId; // 회의에 참석할 3번째 회원
+	private String joinThirdMemberName;
+	private String joinThirdMemberDept;
+	private String joinThirdMemberCheck;
+	private int joinFourthMemberId; // 회의에 참석할 4번째 회원
+	private String joinFourthMemberName;
+	private String joinFourthMemberDept;
+	private String joinFourthMemberCheck;
 	
 	public Booking() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	public Booking(int bookingNo, String bookingDate, int memberId, int roomNo, String joinMember, String bookingTime,
-			String bContents, String bStatus) {
-		super();
-		this.bookingNo = bookingNo;
-		this.bookingDate = bookingDate;
-		this.memberId = memberId;
-		this.roomNo = roomNo;
-		this.joinMember = joinMember;
-		this.bookingTime = bookingTime;
-		this.bContents = bContents;
-		this.bStatus = bStatus;
-	}
-	
+
 	public int getBookingNo() {
 		return bookingNo;
 	}
+
 	public void setBookingNo(int bookingNo) {
 		this.bookingNo = bookingNo;
 	}
-	public String getBookingDate() {
-		return bookingDate;
-	}
-	public void setBookingDate(String bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-	public int getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
-	}
+
 	public int getRoomNo() {
 		return roomNo;
 	}
+
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
 	}
-	public String getJoinMember() {
-		return joinMember;
+
+	public int getMemberId() {
+		return memberId;
 	}
-	public void setJoinMember(String joinMember) {
-		this.joinMember = joinMember;
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
-	public String getBookingTime() {
-		return bookingTime;
+
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setBookingTime(String bookingTime) {
-		this.bookingTime = bookingTime;
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
+
+	public String getBookingTtitle() {
+		return bookingTtitle;
+	}
+
+	public void setBookingTtitle(String bookingTtitle) {
+		this.bookingTtitle = bookingTtitle;
+	}
+
 	public String getbContents() {
 		return bContents;
 	}
+
 	public void setbContents(String bContents) {
 		this.bContents = bContents;
 	}
-	public String getbStatus() {
-		return bStatus;
+
+	public Date getBookingCreateDate() {
+		return bookingCreateDate;
 	}
-	public void setbStatus(String bStatus) {
-		this.bStatus = bStatus;
+
+	public void setBookingCreateDate(Date bookingCreateDate) {
+		this.bookingCreateDate = bookingCreateDate;
 	}
-	
+
+	public Date getBookingStartDate() {
+		return bookingStartDate;
+	}
+
+	public void setBookingStartDate(Date bookingStartDate) {
+		this.bookingStartDate = bookingStartDate;
+	}
+
+	public Date getBookingEndDate() {
+		return bookingEndDate;
+	}
+
+	public void setBookingEndDate(Date bookingEndDate) {
+		this.bookingEndDate = bookingEndDate;
+	}
+
+	public int getJoinFirstMemberId() {
+		return joinFirstMemberId;
+	}
+
+	public void setJoinFirstMemberId(int joinFirstMemberId) {
+		this.joinFirstMemberId = joinFirstMemberId;
+	}
+
+	public String getJoinFirstMemberName() {
+		return joinFirstMemberName;
+	}
+
+	public void setJoinFirstMemberName(String joinFirstMemberName) {
+		this.joinFirstMemberName = joinFirstMemberName;
+	}
+
+	public String getJoinFirstMemberDept() {
+		return joinFirstMemberDept;
+	}
+
+	public void setJoinFirstMemberDept(String joinFirstMemberDept) {
+		this.joinFirstMemberDept = joinFirstMemberDept;
+	}
+
+	public String getJoinFirstMemberCheck() {
+		return joinFirstMemberCheck;
+	}
+
+	public void setJoinFirstMemberCheck(String joinFirstMemberCheck) {
+		this.joinFirstMemberCheck = joinFirstMemberCheck;
+	}
+
+	public int getJoinSecondMemberId() {
+		return joinSecondMemberId;
+	}
+
+	public void setJoinSecondMemberId(int joinSecondMemberId) {
+		this.joinSecondMemberId = joinSecondMemberId;
+	}
+
+	public String getJoinSecondMemberName() {
+		return joinSecondMemberName;
+	}
+
+	public void setJoinSecondMemberName(String joinSecondMemberName) {
+		this.joinSecondMemberName = joinSecondMemberName;
+	}
+
+	public String getJoinSecondMemberDept() {
+		return joinSecondMemberDept;
+	}
+
+	public void setJoinSecondMemberDept(String joinSecondMemberDept) {
+		this.joinSecondMemberDept = joinSecondMemberDept;
+	}
+
+	public String getJoinSecondMemberCheck() {
+		return joinSecondMemberCheck;
+	}
+
+	public void setJoinSecondMemberCheck(String joinSecondMemberCheck) {
+		this.joinSecondMemberCheck = joinSecondMemberCheck;
+	}
+
+	public int getJoinThirdMemberId() {
+		return joinThirdMemberId;
+	}
+
+	public void setJoinThirdMemberId(int joinThirdMemberId) {
+		this.joinThirdMemberId = joinThirdMemberId;
+	}
+
+	public String getJoinThirdMemberName() {
+		return joinThirdMemberName;
+	}
+
+	public void setJoinThirdMemberName(String joinThirdMemberName) {
+		this.joinThirdMemberName = joinThirdMemberName;
+	}
+
+	public String getJoinThirdMemberDept() {
+		return joinThirdMemberDept;
+	}
+
+	public void setJoinThirdMemberDept(String joinThirdMemberDept) {
+		this.joinThirdMemberDept = joinThirdMemberDept;
+	}
+
+	public String getJoinThirdMemberCheck() {
+		return joinThirdMemberCheck;
+	}
+
+	public void setJoinThirdMemberCheck(String joinThirdMemberCheck) {
+		this.joinThirdMemberCheck = joinThirdMemberCheck;
+	}
+
+	public int getJoinFourthMemberId() {
+		return joinFourthMemberId;
+	}
+
+	public void setJoinFourthMemberId(int joinFourthMemberId) {
+		this.joinFourthMemberId = joinFourthMemberId;
+	}
+
+	public String getJoinFourthMemberName() {
+		return joinFourthMemberName;
+	}
+
+	public void setJoinFourthMemberName(String joinFourthMemberName) {
+		this.joinFourthMemberName = joinFourthMemberName;
+	}
+
+	public String getJoinFourthMemberDept() {
+		return joinFourthMemberDept;
+	}
+
+	public void setJoinFourthMemberDept(String joinFourthMemberDept) {
+		this.joinFourthMemberDept = joinFourthMemberDept;
+	}
+
+	public String getJoinFourthMemberCheck() {
+		return joinFourthMemberCheck;
+	}
+
+	public void setJoinFourthMemberCheck(String joinFourthMemberCheck) {
+		this.joinFourthMemberCheck = joinFourthMemberCheck;
+	}
+
 	@Override
 	public String toString() {
-		return "Booking [bookingNo=" + bookingNo + ", bookingDate=" + bookingDate + ", memberId=" + memberId
-				+ ", roomNo=" + roomNo + ", joinMember=" + joinMember + ", bookingTime=" + bookingTime + ", bContents="
-				+ bContents + ", bStatus=" + bStatus + "]";
+		return "Booking [bookingNo=" + bookingNo + ", roomNo=" + roomNo + ", memberId=" + memberId + ", memberName="
+				+ memberName + ", bookingTtitle=" + bookingTtitle + ", bContents=" + bContents + ", bookingCreateDate="
+				+ bookingCreateDate + ", bookingStartDate=" + bookingStartDate + ", bookingEndDate=" + bookingEndDate
+				+ ", joinFirstMemberId=" + joinFirstMemberId + ", joinFirstMemberName=" + joinFirstMemberName
+				+ ", joinFirstMemberDept=" + joinFirstMemberDept + ", joinFirstMemberCheck=" + joinFirstMemberCheck
+				+ ", joinSecondMemberId=" + joinSecondMemberId + ", joinSecondMemberName=" + joinSecondMemberName
+				+ ", joinSecondMemberDept=" + joinSecondMemberDept + ", joinSecondMemberCheck=" + joinSecondMemberCheck
+				+ ", joinThirdMemberId=" + joinThirdMemberId + ", joinThirdMemberName=" + joinThirdMemberName
+				+ ", joinThirdMemberDept=" + joinThirdMemberDept + ", joinThirdMemberCheck=" + joinThirdMemberCheck
+				+ ", joinFourthMemberId=" + joinFourthMemberId + ", joinFourthMemberName=" + joinFourthMemberName
+				+ ", joinFourthMemberDept=" + joinFourthMemberDept + ", joinFourthMemberCheck=" + joinFourthMemberCheck
+				+ "]";
 	}
-	
-	
+
 }
