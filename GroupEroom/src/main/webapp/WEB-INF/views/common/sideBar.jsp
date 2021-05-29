@@ -106,6 +106,7 @@
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
 						</ul></li>
 							<!-- 인사관리 메뉴 -->
+					<c:if test="${sessionScope.LoginUser.role == 'ADMIN'}">
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>인사관리</span>
 					</a>
@@ -113,7 +114,9 @@
 							<li><a href="memberList.do">사원목록</a></li>
 							<li><a href="enrollView.do">사원등록 </a></li>
 							
-						</ul></li>
+						</ul>
+						</li>
+						</c:if>
 				</ul>
 			</div>
 		</aside>

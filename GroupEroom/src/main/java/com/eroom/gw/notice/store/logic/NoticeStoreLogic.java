@@ -20,8 +20,7 @@ public class NoticeStoreLogic implements NoticeStore {
 	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("noticeMapper.selectListCount");
 	}
 
 	@Override
@@ -34,14 +33,14 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public int addReadCount(int noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.update("noticeMapper.updateCount", noticeNo);
 	}
 
 	@Override
 	public Notice selectOne(int noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return sqlSession.selectOne("noticeMapper.selectOne", noticeNo);
 	}
 
 	@Override
@@ -51,8 +50,8 @@ public class NoticeStoreLogic implements NoticeStore {
 
 	@Override
 	public int updateNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		return sqlSession.update("noticeMapper.updateNotice", notice);
 	}
 
 	@Override

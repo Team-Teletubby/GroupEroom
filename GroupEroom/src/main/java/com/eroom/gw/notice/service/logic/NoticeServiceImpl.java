@@ -17,9 +17,10 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private NoticeStore nStore;
 	
+	//조회수
 	@Override
 	public int getListCount() {
-		return 0;
+		return nStore.selectListCount();
 	}
 	
 	//전체목록
@@ -29,29 +30,30 @@ public class NoticeServiceImpl implements NoticeService {
 		return nStore.selectAllList(pi);
 	}
 
+	//조회수증가
 	@Override
 	public int addReadCount(int noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return nStore.addReadCount(noticeNo);
 	}
-
+	
+	// 상세페이지
 	@Override
 	public Notice printOne(int noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+		return nStore.selectOne(noticeNo);
+	}
+	// 등록
 	@Override
 	public int registerNotice(Notice notice) {
 		return nStore.insertNotice(notice);
 	}
-
+	// 공지 수정 
 	@Override
 	public int modifyNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nStore.updateNotice(notice);
 	}
-
+	//공지삭제
 	@Override
 	public int removeNotice(int noticeNo) {
 		// TODO Auto-generated method stub

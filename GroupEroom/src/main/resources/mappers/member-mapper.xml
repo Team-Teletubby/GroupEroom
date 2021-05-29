@@ -5,19 +5,20 @@
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID"></id>
-		<result property="memberDept" column="MEMBER_DEPT"></result>
-		<result property="memberJob" column="MEMBER_JOB"></result>
-		<result property="memberName" column="MEMBER_NAME"></result>
-		<result property="memberPwd" column="MEMBER_PWD"></result>
-		<result property="memberRrn" column="MEMBER_RRN"></result>
-		<result property="memberPhone" column="MEMBER_PHONE"></result>
-		<result property="memberEmail" column="MEMBER_EMAIL"></result>
-		<result property="memberAddr" column="MEMBER_ADDR"></result>
-		<result property="bank" column="BANK"></result>
-		<result property="bankAccount" column="ACCOUNT"></result>
-		<result property="regDate" column="REG_DATE"></result>
-		<result property="quitYn" column="QUIT_YN"></result>
-		<result property="quitDate" column="QUIT_DATE"></result>
+		<result property="memberDept" column="MEMBER_DEPT"/>
+		<result property="memberJob" column="MEMBER_JOB"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberRrn" column="MEMBER_RRN"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberAddr" column="MEMBER_ADDR"/>
+		<result property="bank" column="BANK"/>
+		<result property="bankAccount" column="ACCOUNT"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="quitYn" column="QUIT_YN"/>
+		<result property="quitDate" column="QUIT_DATE"/>
+		<result property="role" column="ROLE"/>
 	</resultMap>
 
 	<!-- 로그인 -->
