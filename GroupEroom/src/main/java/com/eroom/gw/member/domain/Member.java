@@ -8,11 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Member {
 
 	private int memberId;
@@ -32,11 +27,37 @@ public class Member {
 	private String profileModify;
 	private String role;
 	
+	public Member() {
+			
+	}
+	
 	public Member(int memberId,String memberPwd) {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 	}
 
+	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
+			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, long bankAccount,
+			Date regDate, String quitYn, Date quitDate, String profileModify) {
+		super();
+		this.memberId = memberId;
+		this.memberDept = memberDept;
+		this.memberJob = memberJob;
+		this.memberName = memberName;
+		this.memberPwd = memberPwd;
+		this.memberRrn = memberRrn;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddr = memberAddr;
+		this.bank = bank;
+		this.bankAccount = bankAccount;
+		this.regDate = regDate;
+		this.quitYn = quitYn;
+		this.quitDate = quitDate;
+		this.profileModify = profileModify;
+	}
+	
+	
 	public int getMemberId() {
 		return memberId;
 	}
