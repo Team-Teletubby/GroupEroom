@@ -60,5 +60,15 @@ public class NoticeServiceImpl implements NoticeService {
 		return 0;
 	}
 
+	@Override
+	public ArrayList<Notice> printSearchAll(Search search, PageInfo pi) {
+		return nStore.selectSearchList(search, pi);
+	}
+
+	@Override
+	public int getSearchListCount(Search search) {
+		return nStore.selectSearchListCount(search);
+	}
+
 
 }

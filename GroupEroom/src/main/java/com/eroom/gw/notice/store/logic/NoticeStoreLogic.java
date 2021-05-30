@@ -60,5 +60,17 @@ public class NoticeStoreLogic implements NoticeStore {
 		return 0;
 	}
 
+	@Override
+	public ArrayList<Notice> selectSearchList(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectSearchList", search, rowBounds); 
+	}
+
+	@Override
+	public int selectSearchListCount(Search search) {
+		return sqlSession.selectOne("noticeMapper.selectSearchListCount", search);
+	}
+
 	
 }

@@ -106,7 +106,7 @@
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
 						</ul></li>
 							<!-- 인사관리 메뉴 -->
-					<c:if test="${sessionScope.LoginUser.role == 'ADMIN'}">
+					<c:if test="${sessionScope.LoginUser.memberDept == '인사관리'}">
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>인사관리</span>
 					</a>

@@ -28,6 +28,21 @@
 	<select id="selectListCount" resultType="_int">
 	SELECT COUNT(*) FROM NOTICE
 	</select>
+	<!-- 검색 -->
+	<select id="selectSearchList" resultMap="noticeResultMap">
+			SELECT NOTICE_NO, MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENTS, ENROLL_DATE
+		FROM NOTICE JOIN MEMBER USING(MEMBER_ID)
+			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR NOTICE_TITLE LIKE '%' || #{searchValue } || '%' OR NOTICE_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
+		 ORDER BY NOTICE_NO DESC
+	</select>
+	
+	<select id="selectSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE JOIN MEMBER USING(MEMBER_ID)
+			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR NOTICE_TITLE LIKE '%' || #{searchValue } || '%' OR NOTICE_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
+			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
+		 ORDER BY NOTICE_NO DESC
+	</select>
 	
 	<!-- 글등록 -->
 	<insert id="insertNotice">

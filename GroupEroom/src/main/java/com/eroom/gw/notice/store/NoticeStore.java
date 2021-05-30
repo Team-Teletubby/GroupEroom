@@ -3,6 +3,7 @@ package com.eroom.gw.notice.store;
 import java.util.ArrayList;
 
 import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Search;
 import com.eroom.gw.notice.domain.Notice;
 
 public interface NoticeStore {
@@ -14,5 +15,7 @@ public interface NoticeStore {
 	public int insertNotice(Notice notice);
 	public int updateNotice(Notice notice);
 	public int deleteNotice(int noticeNo);
+	public ArrayList<Notice> selectSearchList(Search search, PageInfo pi);
+	public int selectSearchListCount(Search search);
 
 }

@@ -60,7 +60,19 @@ public class NoticeController {
 	// 공지사항 검색
 	@GetMapping(value="noticeSearch.do")
 	public String noticeSearch(@ModelAttribute Search search, Model model, @RequestParam(value="page", required=false)Integer page ) {
-		return "";
+		int currentPage = (page !=null) ? page : 1;
+		int listCount = nService.getSearchListCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Notice> searchList = nService.printSearchAll(search,pi);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("noticeList",searchList);
+			model.addAttribute("pi", pi);
+			model.addAttribute("search",search);
+			return "notice/noticeSearchList";
+		}else {
+			model.addAttribute("msg", "검색 실패");
+			return "common/errorPage";
+		}
 		}
 		
 	
