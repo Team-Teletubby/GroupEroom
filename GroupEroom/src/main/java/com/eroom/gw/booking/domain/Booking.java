@@ -8,27 +8,12 @@ public class Booking {
 	private int roomNo; // 회의실 번호
 	private int memberId; // 예약한 회원의 ID
 	private String memberName; // 예약한 회원의 이름
-	private String bookingTtitle; // 예약 이름
+	private String bookingTitle; // 예약 이름
 	private String bContents; // 예약 내용
 	private Date bookingCreateDate; // 생성날짜
 	private Date bookingStartDate; // 회의 시작 날짜
 	private Date bookingEndDate; // 회의 끝나는 날짜
-	private int joinFirstMemberId; // 회의에 참석할 1번째 회원
-	private String joinFirstMemberName;
-	private String joinFirstMemberDept;
-	private String joinFirstMemberCheck; // 참석 여부 체크
-	private int joinSecondMemberId; // 회의에 참석할 2번째 회원
-	private String joinSecondMemberName;
-	private String joinSecondMemberDept;
-	private String joinSecondMemberCheck;
-	private int joinThirdMemberId; // 회의에 참석할 3번째 회원
-	private String joinThirdMemberName;
-	private String joinThirdMemberDept;
-	private String joinThirdMemberCheck;
-	private int joinFourthMemberId; // 회의에 참석할 4번째 회원
-	private String joinFourthMemberName;
-	private String joinFourthMemberDept;
-	private String joinFourthMemberCheck;
+	
 	
 	public Booking() {
 		super();
@@ -66,12 +51,12 @@ public class Booking {
 		this.memberName = memberName;
 	}
 
-	public String getBookingTtitle() {
-		return bookingTtitle;
+	public String getBookingTitle() {
+		return bookingTitle;
 	}
 
-	public void setBookingTtitle(String bookingTtitle) {
-		this.bookingTtitle = bookingTtitle;
+	public void setBookingTitle(String bookingTitle) {
+		this.bookingTitle = bookingTitle;
 	}
 
 	public String getbContents() {
@@ -237,7 +222,7 @@ public class Booking {
 	@Override
 	public String toString() {
 		return "Booking [bookingNo=" + bookingNo + ", roomNo=" + roomNo + ", memberId=" + memberId + ", memberName="
-				+ memberName + ", bookingTtitle=" + bookingTtitle + ", bContents=" + bContents + ", bookingCreateDate="
+				+ memberName + ", bookingTitle=" + bookingTitle + ", bContents=" + bContents + ", bookingCreateDate="
 				+ bookingCreateDate + ", bookingStartDate=" + bookingStartDate + ", bookingEndDate=" + bookingEndDate
 				+ ", joinFirstMemberId=" + joinFirstMemberId + ", joinFirstMemberName=" + joinFirstMemberName
 				+ ", joinFirstMemberDept=" + joinFirstMemberDept + ", joinFirstMemberCheck=" + joinFirstMemberCheck

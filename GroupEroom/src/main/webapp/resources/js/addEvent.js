@@ -2,13 +2,15 @@ var eventModal = $('#eventModal');
 // 입력 값 받아옴
 var modalTitle = $('.modal-title');
 var editAllDay = $('#edit-allDay');
-var editTitle = $('#edit-title');
-console.log(editTitle);
 var editStart = $('#edit-start');
 var editEnd = $('#edit-end');
 var editType = $('#edit-type');
 var editColor = $('#edit-color');
-var editDesc = $('#edit-desc');
+
+
+var editTitle = $('#edit-title'); // 방이름(201room... 202room..) (1)
+var bookingTitle = $('#bookingTitle'); // 예약명
+var editDesc = $('#edit-desc'); // 설명 (2)
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -42,6 +44,7 @@ var newEvent = function (start, end, eventType) {
     $('#save-event').unbind();
     $('#save-event').on('click', function () {
         // 입력 값 저장하는 곳
+
 
         
         var eventData = {
@@ -86,16 +89,25 @@ var newEvent = function (start, end, eventType) {
         $('.time-set-wrap').hide();
         $('.contents-wrap').hide();
         //새로운 일정 저장
+     
         $.ajax({
-            type: "get",
-            url: "",
+            url: "bkRegister.do",
+            type: "post",
             data: {
-                //.....
+                "roomNo" : editTitle.val(), 
+                "bookingTitle" : bookingTitle.val(),
+                "bContents" : editDesc.val(),
+                "bookingStartDate" : start,
+                "bookingEndDate" : end
             },
-            success: function (response) {
+            success: function (success) {
+            	alert("성공");
                 //DB연동시 중복이벤트 방지를 위한
                 //$('#calendar').fullCalendar('removeEvents');
                 //$('#calendar').fullCalendar('refetchEvents');
+            },
+            error: function() {
+            console.log("오류");
             }
         });
     });
