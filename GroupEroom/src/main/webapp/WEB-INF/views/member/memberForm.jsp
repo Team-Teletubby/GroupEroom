@@ -33,11 +33,19 @@
             <tr>
                <td>* 부서</td>
             <!--    <td><input class="form-control" type="text" name="memberDept"></td> -->
-           <td><select name="memberDept">
+           <td><select name="memberDept" class="selectpicker">
 								<option value="인사관리">인사관리</option>
 								<option value="IT개발">IT개발</option>
 								<option value="영업">영업</option>
 								<option value="재무" selected="selected">재무</option></td>
+								<select class="form-control">
+               
+               	<
+               	option value="인사관리">인사관리</option>
+								<option value="IT개발">IT개발</option>
+								<option value="영업">영업</option>
+								<option value="재무" selected="selected">재무</option></td>
+                </select>
             </tr>
             <tr>
                <td>* 직급</td>

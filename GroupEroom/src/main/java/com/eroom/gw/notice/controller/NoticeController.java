@@ -31,9 +31,7 @@ import com.eroom.gw.notice.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Controller
-@RequiredArgsConstructor
+
 public class NoticeController {
 	
 	@Autowired
@@ -164,7 +162,7 @@ public class NoticeController {
 	@GetMapping(value="noticeModifyView.do")
 	public String noticeModifyView(@RequestParam("noticeNo")int noticeNo, Model model) {
 		
-		log.info("noticeNo = {}", noticeNo);
+		
 		
 		Notice notice = nService.printOne(noticeNo);
 		if (notice != null)  { 
