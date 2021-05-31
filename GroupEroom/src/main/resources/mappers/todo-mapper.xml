@@ -24,7 +24,7 @@
 	</update>
 	
 	<update id="updateState">
-		UPDATE TODOLIST SET TODO_STATE = 'Y' WHERE TODO_NO = #{todoNo}
+		UPDATE TODOLIST SET TODO_STATE = CASE WHEN TODO_STATE = 'Y' THEN 'N' WHEN TODO_STATE = 'N' THEN 'Y' END WHERE TODO_NO = #{todoNo}
 	</update>
 	
 	<delete id="deleteTodo">

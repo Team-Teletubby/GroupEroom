@@ -37,7 +37,7 @@ public class TodoStoreLogic implements TodoStore{
 
 	@Override
 	public int updateTodoState(int todoNo) {
-		return sqlSession.update("todoMapper.updateState");
+		return sqlSession.update("todoMapper.updateState", todoNo);
 	}
 
 }

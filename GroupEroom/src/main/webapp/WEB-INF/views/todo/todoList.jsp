@@ -43,97 +43,6 @@
 							<div class="task-content">
 								<ul class="task-list" id="ul-todo">
 									<!-- =============== -->
-									<li>
-										<div class="task-title">
-											<span class="badge bg-theme">보통</span> <span
-												class="task-title-sp">Dashio - Admin Panel &
-												Front-end Theme</span>
-											<div class="pull-right hidden-phone">
-												<button class="btn btn-success btn-xs">
-													<i class=" fa fa-check"></i>
-												</button>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button class="btn btn-danger btn-xs">
-													<i class="fa fa-trash-o "></i>
-												</button>
-											</div>
-										</div>
-									</li>
-									<!-- =============== -->
-									<li>
-										<div class="task-title">
-											<span class="badge bg-warning">높음</span>
-											<span class="task-title-sp">할 일 1</span>
-											<div class="pull-right hidden-phone">
-												<button class="btn btn-success btn-xs">
-													<i class=" fa fa-check"></i>
-												</button>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button class="btn btn-danger btn-xs">
-													<i class="fa fa-trash-o "></i>
-												</button>
-											</div>
-										</div>
-									</li>
-									<!-- =============== -->
-									<li>
-										<div class="task-title">
-											<span class="badge" style="background: yellowgreen">낮음</span>
-											<span class="task-title-sp">할일 2</span>
-											<div class="pull-right hidden-phone">
-												<button class="btn btn-success btn-xs">
-													<i class=" fa fa-check"></i>
-												</button>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button class="btn btn-danger btn-xs">
-													<i class="fa fa-trash-o "></i>
-												</button>
-											</div>
-										</div>
-									</li>
-									<!-- =============== -->
-									<li>
-										<div class="task-title">
-											<span class="badge bg-theme">보통</span>
-											<span class="task-title-sp">할 일 3</span>
-											<div class="pull-right hidden-phone">
-												<button class="btn btn-success btn-xs">
-													<i class=" fa fa-check"></i>
-												</button>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button class="btn btn-danger btn-xs">
-													<i class="fa fa-trash-o "></i>
-												</button>
-											</div>
-										</div>
-									</li>
-									<!-- =============== -->
-									<li>
-										<div class="task-title">
-											<span class="badge bg-important">매우 높음</span>
-											<span class="task-title-sp">할일 4</span>
-											<div class="pull-right">
-												<button class="btn btn-success btn-xs">
-													<i class=" fa fa-check"></i>
-												</button>
-												<button class="btn btn-primary btn-xs">
-													<i class="fa fa-pencil"></i>
-												</button>
-												<button class="btn btn-danger btn-xs">
-													<i class="fa fa-trash-o "></i>
-												</button>
-											</div>
-										</div>
-									</li>
-									<!-- =============== -->
 								</ul>
 							</div>
 							<hr>
@@ -185,7 +94,6 @@
 					data : { "todoContents" : todoContents , "todoPriority" : todoPriority},
 					success : function(data) {
 						if(data == "success") {
-							alert("성공");
 							getTodoList();
 						}else {
 							alert("실패..");
@@ -207,31 +115,117 @@
 				dataType : "json",
 				success : function(data) {
 					var $ul = $("#ul-todo");
-					//$ul.html(""); 나중에 하자
+					$ul.html("");
 					if(data.length>0){
 						for(var i in data) {
 							$li = $("<li>");
-							$div1 = $("<div class='pull-right hidden-phone'>");
-							$priority = $("<span class='badge'>").text(data[i].todoPriority);
-							$contents = $("<span class='task-title-sp'>").text(data[i].todoContents);
+							
+							$div1 = $("<div class='task-title'>");
+							
+							if(data[i].todoPriority == 1){
+								$priority = $("<span style='margin:0 5px 0 0' class='badge bg-important'>").text("매우 높음 ");
+							}else if(data[i].todoPriority == 2){
+								$priority = $("<span style='margin:0 5px 0 0' class='badge bg-warning'>").text("높음 ");
+							}else if(data[i].todoPriority == 3){
+								$priority = $("<span style='margin:0 5px 0 0' class='badge bg-theme'>").text("보통 ");
+							}else if(data[i].todoPriority == 4){
+								$priority = $("<span class='badge' style='background: yellowgreen; margin:0 5px 0 0'>").text("낮음 ");
+							}
+							
+							if(data[i].todoState == 'Y'){
+								$contents = $("<span style='color:lightgray; text-decoration:line-through' class='task-title-sp'>").text(data[i].todoContents);
+							}else {
+								$contents = $("<span class='task-title-sp'>").text(data[i].todoContents);
+							}
+							
 							$div2 = $("<div class='pull-right hidden-phone'>");
-							$btn1 = $("<button class='btn btn-success btn-xs'><i class='fa fa-check'></i>");
-							$btn2 = $("<button class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i>");
-							$btn3 = $("<button class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i>");
+							$btn1 = $("<button onclick='updateState("+data[i].todoNo+")'class='btn btn-success btn-xs' style='margin:2px'><i class='fa fa-check'></i>");
+							$btn2 = $("<button onclick='modifyForm(this,"+data[i].todoNo+","+data[i].todoPriority+","+"\""+data[i].todoContents+"\")'class='btn btn-primary btn-xs'style='margin:2px'><i class='fa fa-pencil'></i>");
+							$btn3 = $("<button onclick='removeTodo("+data[i].todoNo+")' class='btn btn-danger btn-xs'style='margin:2px'><i class='fa fa-trash-o'></i>");
 							
 							$li.append($div1);
-							$li.append($priority);
-							$li.append($contents);
-							$li.append($div2);
-							$li.append($btn1);
-							$li.append($btn2);
-							$li.append($btn3);
+							$div1.append($priority);
+							$div1.append($contents);
+							$div1.append($div2);
+							$div2.append($btn1);
+							$div2.append($btn2);
+							$div2.append($btn3);
 							$ul.append($li);
 						}
 					}
 				},
 				error : function() {
 					
+				}
+			});
+		}
+		
+		/* 삭제=============  */
+		function removeTodo(todoNo){
+			$.ajax({
+				url : "removeTodo.do",
+				type : "get",
+				data : {"todoNo" : todoNo },
+				success : function(data) {
+					if(data == "success") {
+						getTodoList();
+					}else {
+						alert("삭제실패");
+					}
+				},
+				error : function() {
+					
+				}
+				
+			});
+		}
+		
+		
+		/* 완료로 업데이트=============  */
+		function updateState(todoNo) {
+ 			$.ajax({
+				url : "updateState.do",
+				type : "get",
+				data : {"todoNo" : todoNo },
+				success : function(data) {
+					if(data == "success") {
+						getTodoList();
+					}else {
+						alert("완료실패");
+					}
+				},
+				error : function() {
+					
+				}
+			});
+		}
+		
+		
+		/* 수정 폼 나오기=============  */
+		function modifyForm(obj,todoNo, todoPriority, todoContents){
+			$contents = $("<input id='modifyText' onblur='modifyTodo("+todoNo+","+"\""+todoContents+"\")' style='width:80%; border:0px; outline-style: none;' type='text' value='"+todoContents+"'>");
+			$(obj).parent().after($contents);
+			$(obj).parent().parent().children().eq(1).remove();
+			$(obj).parent().remove();
+		}
+		
+		/* 수정 하기=============  */
+		function modifyTodo(todoNo, todoContents){
+			todoContents = $("#modifyText").val();
+			$.ajax({
+				url : "updateTodo.do",
+				type : "post",
+				data : {
+						"todoNo" : todoNo,
+						"todoContents" : todoContents
+						/* "todoPriority": todoPriority, */
+						},
+				success : function(data) {
+					if(data == "success"){
+						getTodoList();
+					}else if(data =="fail"){
+						alert("실패");
+					}
 				}
 			});
 		}

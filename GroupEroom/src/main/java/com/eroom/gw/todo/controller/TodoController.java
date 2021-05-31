@@ -36,7 +36,7 @@ public class TodoController {
 		return "todo/todoList";
 	}
 	
-	
+	// 할일 전체 출력
 	@RequestMapping(value="todoListView.do")
 	public void getTodoList(HttpSession session,HttpServletResponse response) throws Exception {
 		Member LoginUser = (Member)session.getAttribute("LoginUser");
@@ -45,6 +45,8 @@ public class TodoController {
 		if(!todoList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); // 날짜 포맷 변경!
 			gson.toJson(todoList, response.getWriter());
+			
+			
 		}else {
 			System.out.println("데이터없음");
 		}
@@ -65,18 +67,41 @@ public class TodoController {
 	}
 	
 	// 내 할 일 수정
-	public ModelAndView todoModify(ModelAndView mv, @ModelAttribute Todo todo) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="updateTodo.do", method=RequestMethod.POST)
+	public String todoModify(@ModelAttribute Todo todo) {
+		int result = tdService.modifyTodo(todo);
+		if (result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 	// 할 일 상태 업데이트
-	public ModelAndView todoModifyState(ModelAndView mv, @RequestParam("")int todoNo) {
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="updateState.do")
+	public String updateState(@RequestParam("todoNo") int todoNo) {
+		System.out.println(todoNo);
+		int result = tdService.modifyState(todoNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
+	
 	// 내 할 일 삭제
-	public String todoRemove(Model model, @RequestParam("") int todoNo) {
-		return null;
+	@ResponseBody
+	@RequestMapping(value="removeTodo.do")
+	public String todoRemove(@RequestParam("todoNo") int todoNo) {
+		int result = tdService.removeTodo(todoNo);
 		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 }

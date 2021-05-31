@@ -31,14 +31,12 @@ public class TodoServiceImpl implements TodoService{
 
 	@Override
 	public int removeTodo(int todoNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tdStore.deleteTodo(todoNo);
 	}
 
 	@Override
 	public int modifyState(int todoNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tdStore.updateTodoState(todoNo);
 	}
 
 }
