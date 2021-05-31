@@ -120,8 +120,12 @@
 																<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
 																<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
 																<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
-																<td class="view-message" name="memberName">${mail.memberName}</td>
-																<td class="view-message" name="mailTilte"><a href="mail_view.html">${mail.mailTitle}</a></td>
+																<td class="view-message" name="senderName">${mail.senderName}</td>
+																<td class="view-message" name="mailTilte">
+																	<c:url var="mailDetail" value="mailDetailView.do">
+																		<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																	</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
+																</td>
 																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																<td class="view-message  text-right">${mail.sentDate}</td>
 															</tr>
@@ -131,8 +135,12 @@
 																<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
 																<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
 																<td class="view-message  dont-show" hidden><a> ${mail.mailNo} </a></td>
-																<td class="view-message  dont-show"><a href="mail_view.html">${mail.memberName}</a></td>
-																<td class="view-message "><a href="mail_view.html">${mail.mailTitle}</a></td>
+																<td class="view-message  dont-show">${mail.senderName}</a></td>
+																<td class="view-message" name="mailTilte">
+																	<c:url var="mailDetail" value="mailDetailView.do">
+																		<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																	</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
+																</td>
 																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																<td class="view-message  text-right">${mail.sentDate}</td>
 															</tr>

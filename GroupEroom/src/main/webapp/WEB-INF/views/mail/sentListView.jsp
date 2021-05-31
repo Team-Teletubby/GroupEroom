@@ -125,8 +125,12 @@
 															<c:if test="${mail.readCount <= 0}">
 																<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
 															</c:if>
-															<td class="view-message" name="sender">${mail.memberName}</td>
-															<td class="view-message" name="mailTilte"><a href="#">${mail.mailTitle}</a></td>
+															<td class="view-message" name="senderName">${mail.senderName}</td>
+															<td class="view-message" name="mailTilte">
+																<c:url var="mailDetail" value="mailDetailView.do">
+																	<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
+															</td>
 															<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 															<td class="view-message  text-right">${mail.sentDate}</td>
 														</tr>

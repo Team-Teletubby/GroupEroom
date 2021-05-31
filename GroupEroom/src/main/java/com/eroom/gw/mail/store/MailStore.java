@@ -12,5 +12,6 @@ public interface MailStore {
 	public ArrayList<Mail> selectAllInbox(PageInfo pi, int receiverId);
 	public ArrayList<Mail> selectAllSentMail(PageInfo pi, int senderId);
 	public ArrayList<Mail> selectAllTrash(PageInfo pi, int receiverId);
+	public Mail selectOneMail(int mailNo);
 
 }

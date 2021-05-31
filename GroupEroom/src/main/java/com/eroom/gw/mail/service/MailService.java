@@ -16,9 +16,7 @@ public interface MailService {
 	public int addReadCount(int mailNo);
 
 	//상세보기
-	public Mail selectOneInbox(int mailNo);
-	public Mail selectOneSentMail(int mailNo);
-	public Mail selectOneTrash(int mailNo);
+	public Mail printOne(int mailNo);
 	
 	//메일쓰기&지우기&옮기기
 	public int ComposeMail(Mail mail); //메일쓰기

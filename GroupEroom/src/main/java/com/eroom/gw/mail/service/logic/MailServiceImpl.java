@@ -43,21 +43,9 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public Mail selectOneInbox(int mailNo) {
+	public Mail printOne(int mailNo) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Mail selectOneSentMail(int mailNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Mail selectOneTrash(int mailNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mStore.selectOneMail(mailNo);
 	}
 
 	@Override
@@ -83,6 +71,7 @@ public class MailServiceImpl implements MailService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	
 }

@@ -5,9 +5,11 @@
 	<resultMap type="Mail" id="mailResultMap">
 		<id property="mailNo" column="MAIL_NO" />
 		<result property="receiverId" column="RECEIVER_ID" />
+		<result property="receiverName" column="RECEIVER_NAME" />
 		<result property="senderId" column="SENDER_ID" />
+		<result property="senderName" column="SENDER_NAME" />
 		<result property="ccId" column="CC_ID" />
-		<result property="memberName" column="MEMBER_NAME" />
+		<result property="ccName" column="CC_NAME" />
 		<result property="mailTitle" column="MAIL_TITLE" />
 		<result property="mailContents" column="MAIL_CONTENTS" />
 		<result property="sentDate" column="SENT_DATE" />
@@ -21,42 +23,49 @@
 		SELECT COUNT(*) FROM MAIL
 	</select>
 	
-<!-- 조회수 -->
+<!-- 조회수 및 읽음확인 -->
 	<update id="updateCount">
 		UPDATE MAIL
-		SET MAIL_COUNT = MAIL_COUNT + 1
+		SET READ_COUNT = READ_COUNT + 1, READ_DATE = SYSDATE
 		WHERE MAIL_NO = #{mailNo}
 	</update>
 	
 <!-- 받은편지함 출력 -->
 	<select id="selectAllInbox" parameterType="_int" resultMap="mailResultMap">
-		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_DATE, READ_COUNT   
-		FROM MAIL JOIN MEMBER ON MAIL.SENDER_ID = MEMBER.MEMBER_ID
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS SENDER_NAME, b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT  
+		FROM MAIL a 
+		JOIN MEMBER b ON a.SENDER_ID = b.MEMBER_ID
 		WHERE RECEIVER_ID = #{value } OR CC_ID = #{value }
 		AND TRASH_YN = 'N'
 		ORDER BY MAIL_NO DESC
 	</select>
 <!-- 보낸편지함 출력 -->
 	<select id="selectAllSentMail" parameterType="_int" resultMap="mailResultMap">
-		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), TO_CHAR(READ_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_COUNT   
-		FROM MAIL JOIN MEMBER ON MAIL.RECEIVER_ID = MEMBER.MEMBER_ID
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT   
+		FROM MAIL a 
+		JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID
 		WHERE SENDER_ID = #{value }
 		AND TRASH_YN = 'N'
 		ORDER BY MAIL_NO DESC
 	</select>
 <!-- 휴지통 출력 -->
 	<select id="selectAllTrash" parameterType="_int" resultMap="mailResultMap">
-		SELECT MAIL_NO, RECEIVER_ID, SENDER_ID, MEMBER_NAME, MEMBER_DEPT, MAIL_TITLE, MAIL_CONTENTS, TO_CHAR(SENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), READ_DATE, READ_COUNT   
-		FROM MAIL JOIN MEMBER ON MAIL.SENDER_ID = MEMBER.MEMBER_ID
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "SENDER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT   
+		FROM MAIL a 
+		JOIN MEMBER b ON a.SENDER_ID = b.MEMBER_ID
 		WHERE SENDER_ID = #{value } OR RECEIVER_ID = #{value } OR CC_ID = #{value } 
 		AND TRASH_YN = 'Y' 
 		ORDER BY MAIL_NO DESC 
 	</select>	
 	
-<!-- 게시글 상세조회
-	<select id="selectOne" resultMap="boardResultMap">
-		SELECT * FROM BOARD WHERE BOARD_NO = #{boardNo} AND B_STATUS = 'Y'
-	</select> -->
+<!-- 게시글 상세조회  -->
+	<select id="selectOneMail" resultMap="mailResultMap">
+		SELECT a.MAIL_NO, a.RECEIVER_ID, b.MEMBER_NAME AS RECEIVER_NAME, a.SENDER_ID, c.MEMBER_NAME AS SENDER_NAME, a.CC_ID, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE
+		FROM MAIL a 
+		INNER JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID 
+		INNER JOIN MEMBER c ON a.SENDER_ID = c.MEMBER_ID 
+		WHERE MAIL_NO = #{mailNo}
+	</select>
 	
 <!-- 게시글 작성
 	<insert id="insertBoard">
