@@ -31,7 +31,7 @@ import com.eroom.gw.notice.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
+@Controller
 public class NoticeController {
 	
 	@Autowired
