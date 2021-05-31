@@ -22,10 +22,10 @@ public class BookingServiceImpl implements BookingService {
 		return null;
 	}
 
+	// 예약 등록
 	@Override
 	public int RegisterBooking(Booking booking) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bStore.insertBooking(booking);
 	}
 
 	@Override

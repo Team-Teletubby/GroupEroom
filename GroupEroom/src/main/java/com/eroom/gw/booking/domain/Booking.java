@@ -14,7 +14,6 @@ public class Booking {
 	private Date bookingStartDate; // 회의 시작 날짜
 	private Date bookingEndDate; // 회의 끝나는 날짜
 	
-	
 	public Booking() {
 		super();
 	}
@@ -91,147 +90,11 @@ public class Booking {
 		this.bookingEndDate = bookingEndDate;
 	}
 
-	public int getJoinFirstMemberId() {
-		return joinFirstMemberId;
-	}
-
-	public void setJoinFirstMemberId(int joinFirstMemberId) {
-		this.joinFirstMemberId = joinFirstMemberId;
-	}
-
-	public String getJoinFirstMemberName() {
-		return joinFirstMemberName;
-	}
-
-	public void setJoinFirstMemberName(String joinFirstMemberName) {
-		this.joinFirstMemberName = joinFirstMemberName;
-	}
-
-	public String getJoinFirstMemberDept() {
-		return joinFirstMemberDept;
-	}
-
-	public void setJoinFirstMemberDept(String joinFirstMemberDept) {
-		this.joinFirstMemberDept = joinFirstMemberDept;
-	}
-
-	public String getJoinFirstMemberCheck() {
-		return joinFirstMemberCheck;
-	}
-
-	public void setJoinFirstMemberCheck(String joinFirstMemberCheck) {
-		this.joinFirstMemberCheck = joinFirstMemberCheck;
-	}
-
-	public int getJoinSecondMemberId() {
-		return joinSecondMemberId;
-	}
-
-	public void setJoinSecondMemberId(int joinSecondMemberId) {
-		this.joinSecondMemberId = joinSecondMemberId;
-	}
-
-	public String getJoinSecondMemberName() {
-		return joinSecondMemberName;
-	}
-
-	public void setJoinSecondMemberName(String joinSecondMemberName) {
-		this.joinSecondMemberName = joinSecondMemberName;
-	}
-
-	public String getJoinSecondMemberDept() {
-		return joinSecondMemberDept;
-	}
-
-	public void setJoinSecondMemberDept(String joinSecondMemberDept) {
-		this.joinSecondMemberDept = joinSecondMemberDept;
-	}
-
-	public String getJoinSecondMemberCheck() {
-		return joinSecondMemberCheck;
-	}
-
-	public void setJoinSecondMemberCheck(String joinSecondMemberCheck) {
-		this.joinSecondMemberCheck = joinSecondMemberCheck;
-	}
-
-	public int getJoinThirdMemberId() {
-		return joinThirdMemberId;
-	}
-
-	public void setJoinThirdMemberId(int joinThirdMemberId) {
-		this.joinThirdMemberId = joinThirdMemberId;
-	}
-
-	public String getJoinThirdMemberName() {
-		return joinThirdMemberName;
-	}
-
-	public void setJoinThirdMemberName(String joinThirdMemberName) {
-		this.joinThirdMemberName = joinThirdMemberName;
-	}
-
-	public String getJoinThirdMemberDept() {
-		return joinThirdMemberDept;
-	}
-
-	public void setJoinThirdMemberDept(String joinThirdMemberDept) {
-		this.joinThirdMemberDept = joinThirdMemberDept;
-	}
-
-	public String getJoinThirdMemberCheck() {
-		return joinThirdMemberCheck;
-	}
-
-	public void setJoinThirdMemberCheck(String joinThirdMemberCheck) {
-		this.joinThirdMemberCheck = joinThirdMemberCheck;
-	}
-
-	public int getJoinFourthMemberId() {
-		return joinFourthMemberId;
-	}
-
-	public void setJoinFourthMemberId(int joinFourthMemberId) {
-		this.joinFourthMemberId = joinFourthMemberId;
-	}
-
-	public String getJoinFourthMemberName() {
-		return joinFourthMemberName;
-	}
-
-	public void setJoinFourthMemberName(String joinFourthMemberName) {
-		this.joinFourthMemberName = joinFourthMemberName;
-	}
-
-	public String getJoinFourthMemberDept() {
-		return joinFourthMemberDept;
-	}
-
-	public void setJoinFourthMemberDept(String joinFourthMemberDept) {
-		this.joinFourthMemberDept = joinFourthMemberDept;
-	}
-
-	public String getJoinFourthMemberCheck() {
-		return joinFourthMemberCheck;
-	}
-
-	public void setJoinFourthMemberCheck(String joinFourthMemberCheck) {
-		this.joinFourthMemberCheck = joinFourthMemberCheck;
-	}
-
 	@Override
 	public String toString() {
 		return "Booking [bookingNo=" + bookingNo + ", roomNo=" + roomNo + ", memberId=" + memberId + ", memberName="
 				+ memberName + ", bookingTitle=" + bookingTitle + ", bContents=" + bContents + ", bookingCreateDate="
 				+ bookingCreateDate + ", bookingStartDate=" + bookingStartDate + ", bookingEndDate=" + bookingEndDate
-				+ ", joinFirstMemberId=" + joinFirstMemberId + ", joinFirstMemberName=" + joinFirstMemberName
-				+ ", joinFirstMemberDept=" + joinFirstMemberDept + ", joinFirstMemberCheck=" + joinFirstMemberCheck
-				+ ", joinSecondMemberId=" + joinSecondMemberId + ", joinSecondMemberName=" + joinSecondMemberName
-				+ ", joinSecondMemberDept=" + joinSecondMemberDept + ", joinSecondMemberCheck=" + joinSecondMemberCheck
-				+ ", joinThirdMemberId=" + joinThirdMemberId + ", joinThirdMemberName=" + joinThirdMemberName
-				+ ", joinThirdMemberDept=" + joinThirdMemberDept + ", joinThirdMemberCheck=" + joinThirdMemberCheck
-				+ ", joinFourthMemberId=" + joinFourthMemberId + ", joinFourthMemberName=" + joinFourthMemberName
-				+ ", joinFourthMemberDept=" + joinFourthMemberDept + ", joinFourthMemberCheck=" + joinFourthMemberCheck
 				+ "]";
 	}
 

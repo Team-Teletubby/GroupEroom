@@ -22,9 +22,9 @@ public class BookingStoreLogic implements BookingStore {
 		return null;
 	}
 
+	// 예약 등록
 	@Override
 	public int insertBooking(Booking booking) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
