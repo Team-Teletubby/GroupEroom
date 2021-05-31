@@ -56,8 +56,8 @@ public class NoticeServiceImpl implements NoticeService {
 	//공지삭제
 	@Override
 	public int removeNotice(int noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return nStore.deleteNotice(noticeNo);
 	}
 
 	@Override
