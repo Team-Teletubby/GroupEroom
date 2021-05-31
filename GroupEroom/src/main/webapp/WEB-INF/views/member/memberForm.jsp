@@ -10,22 +10,18 @@
 .centerText table {
 	margin: auto;
 }
-
 span.guide {
 	display: none;
 	font-size: 12px;
 	top: 12px;
 	right: 10px;
 }
-
 span.ok {
 	color: green
 }
-
 span.error {
 	color: red
 }
-
 #form-panel {
 	background: #ffffff;
 	margin: 10px;
@@ -52,7 +48,7 @@ span.error {
 				<div class="form-panel">
 					<div class="form" style="margin: 20px 200px 0px 200px">
 						<form class="cmxform form-horizontal style-form" id="signupForm"
-							method="get" action="memberRegister.do">
+							method="post" action="memberRegister.do">
 							<div class="form-group ">
 								<label for="firstname" class="control-label col-lg-2">*
 									부서</label>
@@ -183,12 +179,26 @@ span.error {
 							</div>
 							<div class="form-group ">
 								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
+									프로필사진 </label>
+								<div class="col-lg-10 col-sm-9">
+							<!-- 첨부파일(이미지파일만 업로드가능) -->
+							<input type="file" id="profileModify" name="profileModify" accept="image/*">
+
+							<!-- 이미지 미리보기 영역 -->
+							<div id="imgViewArea" style="margin-top: 10px; display: none;">
+								<img id="imgArea" style="width: 200px; height: 100px;"
+									onerror="imgAreaError()" />
+							</div>
+							</div>
+							</div>
+							<!-- 	<div class="form-group ">
+								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
 									사진 </label>
 								<div class="col-lg-10 col-sm-9">
 									<input type="file" id="real-input"
 											class="image_inputType_file" accept="img/*" required multiple>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<div align="center">
 										<br>
@@ -216,17 +226,33 @@ span.error {
 
 
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-	<script>
+	<script type="text/javascript">
       $(function() {
          $("#postcodify_search_button").postcodifyPopUp();
       });
-      
-      const browseBtn = document.querySelector('.browse-btn');
-      const realInput = document.querySelector('#real-input');
+      function readURL(input) {
+  		if (input.files && input.files[0]) {
+  			var reader = new FileReader();
+  			reader.onload = function(e) {
+  				$('#imgArea').attr('src', e.target.result); 
+  			}
+  			reader.readAsDataURL(input.files[0]);
+  		}
+  	}
 
-      browseBtn.addEventListener('click',()=>{
-      	realInput.click();
-      });
+  	$(":input[name='profileModify']").change(function() {
+  		if( $(":input[name='profileModify']").val() == '' ) {
+  			$('#imgArea').attr('src' , '');  
+  		}
+  		$('#imgViewArea').css({ 'display' : '' });
+  		readURL(this);
+  	});
+
+  	// 이미지 에러 시 미리보기영역 미노출
+  	function imgAreaError(){
+  		$('#imgViewArea').css({ 'display' : 'none' });
+  	}
+  	
      /*  $("#userId").on("blur", function() {
          var userId = $("#userId").val();
          $.ajax({
