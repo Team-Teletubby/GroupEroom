@@ -85,9 +85,10 @@ public class MemberController {
 	
 	// 사원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
-	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, Model model ) { 
+	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, @RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model ) { 
 	
 		member.setMemberAddr(post+","+address1+","+address2);
+		member.setMemberEmail(email1+"@"+email2);
 		int result = service.registerMember(member);
 		if(result >0) {
 			return "redirect:memberList.do";
