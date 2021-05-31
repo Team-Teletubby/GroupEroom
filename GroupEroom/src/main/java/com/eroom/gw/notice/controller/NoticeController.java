@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,9 +31,7 @@ import com.eroom.gw.notice.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
-@RequiredArgsConstructor
 public class NoticeController {
 	
 	@Autowired
@@ -163,7 +162,7 @@ public class NoticeController {
 	@GetMapping(value="noticeModifyView.do")
 	public String noticeModifyView(@RequestParam("noticeNo")int noticeNo, Model model) {
 		
-		log.info("noticeNo = {}", noticeNo);
+		
 		
 		Notice notice = nService.printOne(noticeNo);
 		if (notice != null)  { 
@@ -209,11 +208,28 @@ public class NoticeController {
 	//공지사항 삭제 (실제는 업데이트)
 	
 	@GetMapping(value="noticeDelete.do")
-	public String noticeDelete(Model model, @RequestParam("noticeNo") int noticeNo, @RequestParam("renameFilename") String renameFilename, HttpServletRequest request) { 
-		 return "";
+	public String noticeDelete(Model model, @RequestParam("noticeNo") int noticeNo, @RequestParam("renameFileName") String renameFileName, HttpServletRequest request) { 
+		if(renameFileName != "") { 
+			deleteFile(renameFileName, request); 
+				
+	
+		}
+		int result = nService.removeNotice(noticeNo);
+		if(result>0) { 
+			return "redirect:noticeListView.do";
+		}else { 
+			model.addAttribute("msg","글 삭제 실패!");
+			
+			return "common/errorPage";
+		}
 	}
 	// 파일삭제 
 	public void deleteFile(String fileName, HttpServletRequest request) { 
-		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\noticeFiles";
+		File file = new File(savePath + "\\" + fileName);
+		if(file.exists()) {
+			file.delete();
 	}
+}
 }
