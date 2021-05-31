@@ -35,9 +35,8 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public ArrayList<Booking> selectAllBk(int MemberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Booking> selectAllBk() {
+		return bStore.selectAllBooking();
 	}
 
 	@Override

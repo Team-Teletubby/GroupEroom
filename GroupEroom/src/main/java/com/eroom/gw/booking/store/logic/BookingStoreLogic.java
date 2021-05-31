@@ -25,7 +25,7 @@ public class BookingStoreLogic implements BookingStore {
 	// 예약 등록
 	@Override
 	public int insertBooking(Booking booking) {
-		return 0;
+		return session.insert("bookingMapper.insertBooking", booking);
 	}
 
 	@Override
@@ -35,9 +35,8 @@ public class BookingStoreLogic implements BookingStore {
 	}
 
 	@Override
-	public ArrayList<Booking> selectAllBooking(int memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Booking> selectAllBooking() {
+		return (ArrayList)session.selectList("bookingMapper.selectListBooking");
 	}
 
 	@Override

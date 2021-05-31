@@ -10,7 +10,7 @@ public interface BookingStore {
 	public ArrayList<HashMap<Integer, String>> selectRoom();
 	public int insertBooking(Booking booking);
 	public ArrayList<String> bookingSelectDate(HashMap<String, Object> map);
-	public ArrayList<Booking> selectAllBooking(int memberId);
+	public ArrayList<Booking> selectAllBooking();
 	public int updateBooking(Booking booking);
 
 

@@ -2,13 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bookingMapper">
+	<resultMap type="booking"  id="bookingResultMap">
+		<result column="BOOKING_NO" property="_id" />
+		<result column="ROOM_NO" property="roomNo" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_NAME" property="username" />
+		<result column="BOOKING_TITLE" property="title" />
+		<result column="BOOKING_CONTENTS" property="description" />
+		<result column="BOOKING_CREATE_DATE" property="bookingCreateDate" />
+		<result column="BOOKING_START_DATE" property="start" />
+		<result column="BOOKING_END_DATE" property="end" />
+	</resultMap>
+	
+	<!-- ======== SELECT ======== -->
+	<select id="selectListBooking" resultMap="bookingResultMap" parameterType="Booking">
+		SELECT * FROM BOOKING
+	</select>
 	
 	<!-- ======== INSERT ======== -->
 	<!-- 예약 등록  -->
 	<insert id="insertBooking" parameterType="Booking">
 		INSERT INTO BOOKING 
-		VALUES()
+		VALUES(BOOKING_SEQ.NEXTVAL, #{memberId }, #{roomNo }, #{username }, #{title }, #{description }, SYSDATE, #{start }, #{end })
 	</insert>
-
-
 </mapper>

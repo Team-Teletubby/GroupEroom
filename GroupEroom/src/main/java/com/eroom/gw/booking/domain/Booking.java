@@ -1,29 +1,29 @@
 package com.eroom.gw.booking.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Booking {
 	
-	private int bookingNo; // 예약번호
+	private int _id; // 예약번호
 	private int roomNo; // 회의실 번호
 	private int memberId; // 예약한 회원의 ID
-	private String memberName; // 예약한 회원의 이름
-	private String bookingTitle; // 예약 이름
-	private String bContents; // 예약 내용
-	private Date bookingCreateDate; // 생성날짜
-	private Date bookingStartDate; // 회의 시작 날짜
-	private Date bookingEndDate; // 회의 끝나는 날짜
+	private String username; // 예약한 회원의 이름
+	private String title; // 예약 이름
+	private String description; // 예약 내용
+	private String bookingCreateDate; // 생성날짜
+	private String start; // 회의 시작 날짜
+	private String end; // 회의 끝나는 날짜
 	
 	public Booking() {
 		super();
 	}
 
-	public int getBookingNo() {
-		return bookingNo;
+	public int get_id() {
+		return _id;
 	}
 
-	public void setBookingNo(int bookingNo) {
-		this.bookingNo = bookingNo;
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 
 	public int getRoomNo() {
@@ -42,60 +42,59 @@ public class Booking {
 		this.memberId = memberId;
 	}
 
-	public String getMemberName() {
-		return memberName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getBookingTitle() {
-		return bookingTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setBookingTitle(String bookingTitle) {
-		this.bookingTitle = bookingTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getbContents() {
-		return bContents;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setbContents(String bContents) {
-		this.bContents = bContents;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Date getBookingCreateDate() {
+	public String getBookingCreateDate() {
 		return bookingCreateDate;
 	}
 
-	public void setBookingCreateDate(Date bookingCreateDate) {
+	public void setBookingCreateDate(String bookingCreateDate) {
 		this.bookingCreateDate = bookingCreateDate;
 	}
 
-	public Date getBookingStartDate() {
-		return bookingStartDate;
+	public String getStart() {
+		return start;
 	}
 
-	public void setBookingStartDate(Date bookingStartDate) {
-		this.bookingStartDate = bookingStartDate;
+	public void setStart(String start) {
+		this.start = start;
 	}
 
-	public Date getBookingEndDate() {
-		return bookingEndDate;
+	public String getEnd() {
+		return end;
 	}
 
-	public void setBookingEndDate(Date bookingEndDate) {
-		this.bookingEndDate = bookingEndDate;
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	@Override
 	public String toString() {
-		return "Booking [bookingNo=" + bookingNo + ", roomNo=" + roomNo + ", memberId=" + memberId + ", memberName="
-				+ memberName + ", bookingTitle=" + bookingTitle + ", bContents=" + bContents + ", bookingCreateDate="
-				+ bookingCreateDate + ", bookingStartDate=" + bookingStartDate + ", bookingEndDate=" + bookingEndDate
-				+ "]";
+		return "Booking [_id=" + _id + ", roomNo=" + roomNo + ", memberId=" + memberId + ", username=" + username
+				+ ", title=" + title + ", description=" + description + ", bookingCreateDate=" + bookingCreateDate
+				+ ", start=" + start + ", end=" + end + "]";
 	}
-
+	
 }

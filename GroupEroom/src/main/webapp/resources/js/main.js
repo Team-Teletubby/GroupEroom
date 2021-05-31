@@ -18,7 +18,7 @@ var calendar = $('#calendar').fullCalendar({
   weekNumberCalculation     : "ISO",
   eventLimit                : true,
   views                     : { 
-                                month : { eventLimit : 2 } // 한 날짜에 최대 이벤트 12개, 나머지는 + 처리됨
+                                month : { eventLimit : 5 } // 한 날짜에 최대 이벤트 12개, 나머지는 + 처리됨
                               },
   eventLimitClick           : 'week', //popover
   navLinks                  : true,
@@ -107,14 +107,20 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
     $.ajax({
       type: "get",
-      url: "resources/data.json",
+      url: "bkSelectDate.do",
+      dataType: "json",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
         //startDate : moment(start).format('YYYY-MM-DD'),
         //endDate   : moment(end).format('YYYY-MM-DD')
       },
       success: function (response) {
+
+      	console.log("데이터 들어옴");
+      	console.log(response);
+      	
         var fixedDate = response.map(function (array) {
+       
           if (array.allDay && array.start !== array.end) {
             array.end = moment(array.end).add(1, 'days'); // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
           }
