@@ -2,7 +2,6 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
-
     $('#deleteEvent').data('id', event._id); //클릭한 이벤트 ID
 
     $('.popover.fade.top').remove();
@@ -24,10 +23,10 @@ var editEvent = function (event, element, view) {
         editEnd.val(event.end.format('YYYY-MM-DD HH:mm'));
     }
 
-    modalTitle.html('일정 수정');
+    modalTitle.html('일정 상세보기');
     editTitle.val(event.title);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
-    editType.val(event.type);
+    editType.val(event.roomNo + '호');
     editDesc.val(event.description);
     editColor.val(event.backgroundColor).css('color', event.backgroundColor);
 
@@ -91,21 +90,20 @@ var editEvent = function (event, element, view) {
         });
 
     });
-};
-
 // 삭제버튼
 $('#deleteEvent').on('click', function () {
     
     $('#deleteEvent').unbind();
     $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
     eventModal.modal('hide');
-
+    console.log(event.memberId);
+	console.log(event._id);
     //삭제시
     $.ajax({
         type: "get",
-        url: "",
+        url: "bkDelete.do",
         data: {
-            //...
+        	"bookingNo" : event._id
         },
         success: function (response) {
             alert('삭제되었습니다.');
@@ -115,3 +113,4 @@ $('#deleteEvent').on('click', function () {
     });
 
 });
+};

@@ -12,6 +12,6 @@ public interface BookingStore {
 	public ArrayList<String> bookingSelectDate(HashMap<String, Object> map);
 	public ArrayList<Booking> selectAllBooking();
 	public int updateBooking(Booking booking);
-
+	public int deleteBooking(int bookingNo);
 
 }

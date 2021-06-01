@@ -38,7 +38,7 @@ var calendar = $('#calendar').fullCalendar({
   header                    : {
                                 left   : 'today',
                                 center : 'title',
-                                right  : 'agendaWeek, agendaDay, listWeek'
+                                right  : 'month, agendaWeek, agendaDay, listWeek'
                               },
   views                     : {
                                 month : {
@@ -107,7 +107,7 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
     $.ajax({
       type: "get",
-      url: "bkSelectDate.do",
+      url: "",
       dataType: "json",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
@@ -115,9 +115,6 @@ var calendar = $('#calendar').fullCalendar({
         //endDate   : moment(end).format('YYYY-MM-DD')
       },
       success: function (response) {
-
-      	console.log("데이터 들어옴");
-      	console.log(response);
       	
         var fixedDate = response.map(function (array) {
        

@@ -25,7 +25,7 @@ var calendar = $('#calendar').fullCalendar({
   defaultDate               : moment(), //실제 사용시 현재 날짜로 수정
   timeFormat                : 'HH시',
   defaultTimedEventDuration : '01:00:00',
-  editable                  : true,
+  editable                  : false,
   minTime                   : '00:00:00',
   maxTime                   : '24:00:00',
   slotLabelFormat           : 'HH',
@@ -38,7 +38,7 @@ var calendar = $('#calendar').fullCalendar({
   header                    : {
                                 left   : 'today',
                                 center : 'title',
-                                right  : 'agendaWeek, agendaDay, listWeek'
+                                right  : 'month, agendaWeek, agendaDay, listWeek'
                               },
   views                     : {
                                 month : {
@@ -85,7 +85,7 @@ var calendar = $('#calendar').fullCalendar({
           class: 'popoverInfoCalendar'
         }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
         .append('<p><strong>부서:</strong> ' + event.userDept + '</p>')
-        .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
+        .append('<p><strong>회의실:</strong> ' + event.roomNo + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
         show: "800",
@@ -131,66 +131,7 @@ var calendar = $('#calendar').fullCalendar({
     });
   },
 
-  eventAfterAllRender: function (view) {
-    if (view.name == "month") $(".fc-content").css('height', 'auto');
-  },
-
-  //일정 리사이즈
-  eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-    $('.popover.fade.top').remove();
-
-    /** 리사이즈시 수정된 날짜반영
-     * 하루를 빼야 정상적으로 반영됨. */
-    var newDates = calDateWhenResize(event);
-
-    //리사이즈한 일정 업데이트
-    $.ajax({
-      type: "get",
-      url: "",
-      data: {
-        //id: event._id,
-        //....
-      },
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
-    });
-
-  },
-
-  eventDragStart: function (event, jsEvent, ui, view) {
-    draggedEventIsAllDay = event.allDay;
-  },
-
-  //일정 드래그앤드롭
-  eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-    $('.popover.fade.top').remove();
-
-    //주,일 view일때 종일 <-> 시간 변경불가
-    if (view.type === 'agendaWeek' || view.type === 'agendaDay') {
-      if (draggedEventIsAllDay !== event.allDay) {
-        alert('드래그앤드롭으로 종일<->시간 변경은 불가합니다.');
-        location.reload();
-        return false;
-      }
-    }
-
-    // 드랍시 수정된 날짜반영
-    var newDates = calDateWhenDragnDrop(event);
-
-    //드롭한 일정 업데이트
-    $.ajax({
-      type: "get",
-      url: "",
-      data: {
-        //...
-      },
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
-    });
-
-  },
+ 
 
 
   // 캘린더에서 날짜 클릭 시,
@@ -360,23 +301,3 @@ function calDateWhenResize(event) {
   return newDates;
 }
 
-function calDateWhenDragnDrop(event) {
-  // 드랍시 수정된 날짜반영
-  var newDates = {
-    startDate: '',
-    endDate: ''
-  }
-
-  // 날짜 & 시간이 모두 같은 경우
-  if(!event.end) {
-    event.end = event.start;
-  }
-
-  //하루짜리 all day
-  if (event.allDay && event.end === event.start) {
-    console.log('1111')
-    newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
-    newDates.endDate = newDates.startDate;
-  }
-  return newDates;
-}

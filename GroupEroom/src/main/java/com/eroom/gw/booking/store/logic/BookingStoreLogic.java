@@ -41,8 +41,13 @@ public class BookingStoreLogic implements BookingStore {
 
 	@Override
 	public int updateBooking(Booking booking) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public int deleteBooking(int bookingNo) {
+		return session.delete("bookingMapper.deleteBooking", bookingNo);
+		
 	}
 
 }

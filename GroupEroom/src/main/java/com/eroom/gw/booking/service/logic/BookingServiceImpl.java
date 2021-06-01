@@ -41,8 +41,12 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public int modifyBooking(Booking booking) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bStore.updateBooking(booking);
+	}
+	
+	@Override
+	public int deleteBooking(int bookingNo) {
+		return bStore.deleteBooking(bookingNo);
 	}
 
 }

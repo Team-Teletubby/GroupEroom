@@ -26,4 +26,10 @@
 		INSERT INTO BOOKING 
 		VALUES(BOOKING_SEQ.NEXTVAL, #{memberId }, #{roomNo }, #{username }, #{title }, #{description }, SYSDATE, #{start }, #{end }, #{userDept })
 	</insert>
+	
+	<!-- ======== DELETE ======== -->
+	<!-- 예약 삭제(수정)  -->
+	<delete id="deleteBooking" parameterType="Booking">
+		DELETE FROM BOOKING WHERE BOOKING_NO = #{bookingNo }
+	</delete>
 </mapper>

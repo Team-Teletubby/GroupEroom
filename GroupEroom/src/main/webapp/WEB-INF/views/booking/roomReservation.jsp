@@ -83,7 +83,7 @@
 						<div class="contents-body">
 							<div>
 								<span>회의실 </span> <select id="edit-title" name="roomNo">
-									<option>--회의실 선택--</option>
+									<option selected>--회의실 선택--</option>
 									<option value="101">101호 회의실</option>
 									<option value="102">102호 회의실</option>
 									<option value="103">103호 회의실</option>

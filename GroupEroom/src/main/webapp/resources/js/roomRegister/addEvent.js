@@ -101,13 +101,22 @@ var newEvent = function (start, end, eventType) {
                 "bookingEndDate" : end
             },
             success: function (success) {
-            	alert("성공");
+            	if(success === 'bookingError') {
+            		alert('이미 예약된 회의실입니다.');
+            		bookingTitle.val("");
+            	}else if(success === 'success') {
+            		alert('예약이 등록 되었습니다.');
+            		  location.href = "bkListView.do";
+            	}else if(success === 'dayError') {
+            		alert('이미 지난 날은 예약을 할 수 없습니다.');
+            		bookingTitle.val("");
+            	}
+            
                 //DB연동시 중복이벤트 방지를 위한
                 //$('#calendar').fullCalendar('removeEvents');
                 //$('#calendar').fullCalendar('refetchEvents');
             },
             error: function() {
-            console.log("오류");
             }
         });
     });
