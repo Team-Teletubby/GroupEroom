@@ -129,9 +129,6 @@ public class BookingController {
 // 예약 삭제
 	@RequestMapping("bkDelete.do")
 	public String bookingDelete(@RequestParam("bookingNo")String no) {
-		System.out.println("삭제 들어옴");
-		System.out.println(no);
-		
 		int bookingNo = Integer.parseInt(no);
 		int result = bService.deleteBooking(bookingNo);
 		String resultStr = "";
