@@ -48,7 +48,7 @@ span.error {
 				<div class="form-panel">
 					<div class="form" style="margin: 20px 200px 0px 200px">
 						<form class="cmxform form-horizontal style-form" id="signupForm"
-							method="post" action="memberRegister.do">
+							method="post" action="memberRegister.do" enctype="multipart/form-data">
 							<div class="form-group ">
 								<label for="firstname" class="control-label col-lg-2">*
 									부서</label>
@@ -178,12 +178,11 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
+								<label for="formFile" class="control-label col-lg-2 col-sm-3">
 									프로필사진 </label>
+									<input type="file" id=formFile name="uploadFile">
 								<div class="col-lg-10 col-sm-9">
-							<!-- 첨부파일(이미지파일만 업로드가능) -->
-							<input type="file" id="profileModify" name="profileModify" accept="image/*">
-
+								
 							<!-- 이미지 미리보기 영역 -->
 							<div id="imgViewArea" style="margin-top: 10px; display: none;">
 								<img id="imgArea" style="width: 200px; height: 100px;"
@@ -240,8 +239,8 @@ span.error {
   		}
   	}
 
-  	$(":input[name='profileModify']").change(function() {
-  		if( $(":input[name='profileModify']").val() == '' ) {
+  	$(":input[name='uploadFile']").change(function() {
+  		if( $(":input[name='uploadFile']").val() == '' ) {
   			$('#imgArea').attr('src' , '');  
   		}
   		$('#imgViewArea').css({ 'display' : '' });

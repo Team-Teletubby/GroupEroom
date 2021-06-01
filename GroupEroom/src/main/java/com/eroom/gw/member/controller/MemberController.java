@@ -1,6 +1,10 @@
 package com.eroom.gw.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
@@ -38,6 +43,7 @@ public class MemberController {
 	private MemberService service;
 	
 //로그인 
+	
 	@RequestMapping(value="login.do" , method=RequestMethod.POST)
 	public String memberLogin(Model model , @ModelAttribute Member mem , HttpServletRequest request ) {
 		
@@ -85,11 +91,21 @@ public class MemberController {
 	
 	// 사원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
-	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, @RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model ) { 
-	
+	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, 
+			@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) { 
+		
+		if(!uploadFile.getOriginalFilename().equals("")) { 
+			String renameFileName = saveFile(uploadFile, request);
+			if(renameFileName !=null) {
+				member.setOriginalFileName(uploadFile.getOriginalFilename());
+				member.setRenameFileName(renameFileName);
+			}
+		}
+		
 		member.setMemberAddr(post+","+address1+","+address2);
 		member.setMemberEmail(email1+"@"+email2);
 		int result = service.registerMember(member);
+		String path = "";
 		if(result >0) {
 			return "redirect:memberList.do";
 
@@ -99,6 +115,39 @@ public class MemberController {
 		}
 			
 	}
+	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
+		 //경로 설정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\memberproFile";
+		System.out.println(savePath);
+		
+		// 폴더생성
+		File folder = new File(savePath); 
+		
+		if (!folder.exists()) { 
+			folder.mkdir();
+		}
+		// 파일명 변경 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originalFileName = uploadFile.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1); 
+		String filePath = folder + "\\" + renameFileName;
+				//  저장
+		try {
+			uploadFile.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return renameFileName;
+	}
+
+
+
+
 	// 정보수정뷰 뷰 
 	@RequestMapping(value="info.do", method=RequestMethod.GET)
 	public ModelAndView memberModifyView(ModelAndView mv, @RequestParam("memberId") int memberId) {
@@ -118,7 +167,21 @@ public class MemberController {
 							 Model model, HttpServletRequest request,
 							 @RequestParam("post") String post,
 							@RequestParam("address1") String addr1,
-							@RequestParam("address2") String addr2) {
+							@RequestParam("address2") String addr2, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+		System.out.println("테스트"+member.getRenameFileName());
+		// 프로필 수정 
+		if (reloadFile != null && !reloadFile.isEmpty()) { 
+			if(member.getRenameFileName() != "") {
+				deleteFile(member.getRenameFileName(), request);
+			}
+			//다시 업로드
+			String renameFileName = saveFile(reloadFile, request);
+			if(renameFileName != null) {
+				member.setOriginalFileName(reloadFile.getOriginalFilename());
+				member.setRenameFileName(renameFileName);
+			}
+		}
+		
 		
 		String addr = post + "," + addr1 + "," + addr2;
 		member.setMemberAddr(addr);
@@ -131,6 +194,21 @@ public class MemberController {
 		}
 		return mv;
 	}
+	//프로필 사진 삭제
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\memberproFile";
+		System.out.println(savePath);
+		File file = new File(savePath + "\\" + fileName);
+		if(file.exists()) { 
+			file.delete();
+		}
+		
+	}
+
+
+
+
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
 	public String memberList(Model model) { 

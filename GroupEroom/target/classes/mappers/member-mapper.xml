@@ -18,7 +18,8 @@
 		<result property="regDate" column="REG_DATE"/>
 		<result property="quitYn" column="QUIT_YN"/>
 		<result property="quitDate" column="QUIT_DATE"/>
-		<result property="role" column="ROLE"/>
+		<result property="originalFileName" column="ORIGINALFILE_NAME"/>
+		<result property="renameFileName" column="RENAMEFILE_NAME"/>
 	</resultMap>
 
 	<!-- 로그인 -->
@@ -59,9 +60,9 @@
 	<!-- 등록 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER (MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, 
-		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE, QUIT_YN, QUIT_DATE, ACCOUNT, PROFILE_MODIFY) 
+		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE, QUIT_YN, QUIT_DATE, ACCOUNT, ORIGINALFILE_NAME, RENAMEFILE_NAME) 
 		VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName }, DEFAULT, #{memberRrn }, 
-		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{bankAccount }, 'Y')
+		#{memberPhone }, #{memberEmail }, #{memberAddr }, #{bank }, SYSDATE,'N', DEFAULT, #{bankAccount }, #{originalFileName }, #{renameFileName })
 
 </insert>
 
@@ -71,7 +72,7 @@
 	</select>
 	<!-- 수정 -->
 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET MEMBER_DEPT = #{memberDept }, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount }, QUIT_YN = #{quitYn } 
+		UPDATE MEMBER SET MEMBER_DEPT = #{memberDept }, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount }, QUIT_YN = #{quitYn }, RENAMEFILE_NAME = #{renameFileName }, ORIGINALFILE_NAME = #{originalFileName } 
 		WHERE MEMBER_ID = #{memberId}
 		
 	</update>

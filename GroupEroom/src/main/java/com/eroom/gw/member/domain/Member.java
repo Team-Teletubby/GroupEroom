@@ -24,13 +24,14 @@ public class Member {
 	private Date regDate;
 	private String quitYn;
 	private Date quitDate;
-	private String profileModify;
 	private String role;
+	private String originalFileName;
+	private String renameFileName;
 	
 	public Member() {
 			
 	}
-	
+
 	public Member(int memberId,String memberPwd) {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -38,7 +39,7 @@ public class Member {
 
 	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
 			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, long bankAccount,
-			Date regDate, String quitYn, Date quitDate, String profileModify) {
+			Date regDate, String quitYn, Date quitDate, String role, String originalFileName, String renameFileName) {
 		super();
 		this.memberId = memberId;
 		this.memberDept = memberDept;
@@ -54,10 +55,11 @@ public class Member {
 		this.regDate = regDate;
 		this.quitYn = quitYn;
 		this.quitDate = quitDate;
-		this.profileModify = profileModify;
+		this.role = role;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
 	}
-	
-	
+
 	public int getMemberId() {
 		return memberId;
 	}
@@ -170,14 +172,6 @@ public class Member {
 		this.quitDate = quitDate;
 	}
 
-	public String getProfileModify() {
-		return profileModify;
-	}
-
-	public void setProfileModify(String profileModify) {
-		this.profileModify = profileModify;
-	}
-
 	public String getRole() {
 		return role;
 	}
@@ -185,8 +179,34 @@ public class Member {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberDept=" + memberDept + ", memberJob=" + memberJob
+				+ ", memberName=" + memberName + ", memberPwd=" + memberPwd + ", memberRrn=" + memberRrn
+				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddr=" + memberAddr
+				+ ", bank=" + bank + ", bankAccount=" + bankAccount + ", regDate=" + regDate + ", quitYn=" + quitYn
+				+ ", quitDate=" + quitDate + ", role=" + role + ", originalFileName=" + originalFileName
+				+ ", renameFileName=" + renameFileName + "]";
+	}
+
 	
-	
-	
+
 	
 }
