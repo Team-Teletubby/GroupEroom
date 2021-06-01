@@ -37,8 +37,8 @@ var calendar = $('#calendar').fullCalendar({
   selectLongPressDelay      : 0,  
   header                    : {
                                 left   : 'today',
-                                center : 'prev, title, next',
-                                right  : 'month,  listWeek'
+                                center : 'title',
+                                right  : 'agendaWeek, agendaDay, listWeek'
                               },
   views                     : {
                                 month : {
@@ -84,7 +84,7 @@ var calendar = $('#calendar').fullCalendar({
       content: $('<div />', {
           class: 'popoverInfoCalendar'
         }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
-        .append('<p><strong>구분:</strong> ' + event.type + '</p>')
+        .append('<p><strong>부서:</strong> ' + event.userDept + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {

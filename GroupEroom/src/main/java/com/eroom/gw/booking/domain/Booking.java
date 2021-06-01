@@ -8,6 +8,7 @@ public class Booking {
 	private int roomNo; // 회의실 번호
 	private int memberId; // 예약한 회원의 ID
 	private String username; // 예약한 회원의 이름
+	private String userDept;
 	private String title; // 예약 이름
 	private String description; // 예약 내용
 	private String bookingCreateDate; // 생성날짜
@@ -90,11 +91,20 @@ public class Booking {
 		this.end = end;
 	}
 
+	public String getUserDept() {
+		return userDept;
+	}
+
+	public void setUserDept(String userDept) {
+		this.userDept = userDept;
+	}
+
 	@Override
 	public String toString() {
 		return "Booking [_id=" + _id + ", roomNo=" + roomNo + ", memberId=" + memberId + ", username=" + username
-				+ ", title=" + title + ", description=" + description + ", bookingCreateDate=" + bookingCreateDate
-				+ ", start=" + start + ", end=" + end + "]";
+				+ ", userDept=" + userDept + ", title=" + title + ", description=" + description
+				+ ", bookingCreateDate=" + bookingCreateDate + ", start=" + start + ", end=" + end + "]";
 	}
+
 	
 }

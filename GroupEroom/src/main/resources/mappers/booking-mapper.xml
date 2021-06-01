@@ -12,6 +12,7 @@
 		<result column="BOOKING_CREATE_DATE" property="bookingCreateDate" />
 		<result column="BOOKING_START_DATE" property="start" />
 		<result column="BOOKING_END_DATE" property="end" />
+		<result column="MEMBER_DEPT" property="userDept" />
 	</resultMap>
 	
 	<!-- ======== SELECT ======== -->
@@ -23,6 +24,6 @@
 	<!-- 예약 등록  -->
 	<insert id="insertBooking" parameterType="Booking">
 		INSERT INTO BOOKING 
-		VALUES(BOOKING_SEQ.NEXTVAL, #{memberId }, #{roomNo }, #{username }, #{title }, #{description }, SYSDATE, #{start }, #{end })
+		VALUES(BOOKING_SEQ.NEXTVAL, #{memberId }, #{roomNo }, #{username }, #{title }, #{description }, SYSDATE, #{start }, #{end }, #{userDept })
 	</insert>
 </mapper>

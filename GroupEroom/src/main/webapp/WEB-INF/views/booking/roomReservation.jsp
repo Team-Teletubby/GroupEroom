@@ -128,11 +128,11 @@
 				<script src="resources/vendor/js/ko.js"></script>
 				<script src="resources/vendor/js/select2.min.js"></script>
 				<script src="resources/vendor/js/bootstrap-datetimepicker.min.js"></script>
-				<script src="resources/js/main.js"></script>
-				<script src="resources/js/addEvent.js"></script>
-				<script src="resources/js/editEvent.js"></script>
-				<script src="resources/js/etcSetting.js"></script>
-				<script src="resources/js/focus.js"></script>
+				<script src="resources/js/roomRegister/main.js"></script>
+				<script src="resources/js/roomRegister/addEvent.js"></script>
+				<script src="resources/js/roomRegister/editEvent.js"></script>
+				<script src="resources/js/roomRegister/etcSetting.js"></script>
+				<script src="resources/js/roomRegister/focus.js"></script>
 			</section>
 		</section>
 		<!-- footer -->

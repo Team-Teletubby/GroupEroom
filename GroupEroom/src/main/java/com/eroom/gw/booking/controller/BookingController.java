@@ -62,6 +62,7 @@ public class BookingController {
 		Booking booking = new Booking();
 		booking.setMemberId(member.getMemberId());
 		booking.setUsername(member.getMemberName());
+		booking.setUserDept(member.getMemberDept());
 		booking.setRoomNo(roomNo);
 		booking.setTitle(bookingTitle);
 		booking.setDescription(bContents);

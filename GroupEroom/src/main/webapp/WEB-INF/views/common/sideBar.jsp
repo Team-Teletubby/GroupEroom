@@ -81,7 +81,7 @@
 							class="fa fa-cogs"></i> <span>예약관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="grids.html">예약관리 홈</a></li>
+							<li><a href="bkListView.do">예약관리 홈</a></li>
 							<li><a href="bkRegisterView.do">회의실 예약하기</a></li>
 						</ul></li>
 					<!-- 근태관리 메뉴 -->
