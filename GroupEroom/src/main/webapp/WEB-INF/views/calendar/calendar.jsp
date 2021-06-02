@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="resources/css/style-responsive.css" rel="stylesheet">
+<link href="resources/css/style2.css" rel="stylesheet">
+  
 <link href='resources/calendar/main.css' rel='stylesheet' />
 <script src='resources/calendar/main.js'></script>
 <script src='resources/calendar/locales-all.js'></script>
@@ -26,7 +30,7 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
-      initialDate: '2021-05-22',
+      initialDate: '2021-06-01',
       locale: initialLocaleCode,
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
@@ -34,16 +38,11 @@
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       selectable: true,
-      dateClick: function(){
-    	  alert("!!!!!!");
-      },
-      select:function(info){
-    	  calendar.addEvent({
-    		  start: info.startStr,
-    		  end: info.endStr,
-    		  allDay: true
-    	  });
-      },
+      
+       select: function(info) {
+    	 alert('selected ' + info.startStr + ' to ' + info.endStr);
+    	} ,
+       
       events: [
         {
           title: 'All Day Event',
@@ -74,51 +73,9 @@
           start: '2020-09-12T10:30:00',
           end: '2020-09-12T12:30:00'
         },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
       ]
     });
-
     calendar.render();
-
-    // build the locale selector's options
-    calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
-      var optionEl = document.createElement('option');
-      optionEl.value = localeCode;
-      optionEl.selected = localeCode == initialLocaleCode;
-      optionEl.innerText = localeCode;
-      localeSelectorEl.appendChild(optionEl);
-    });
-
-    // when the selected option changes, dynamically change the calendar option
-    localeSelectorEl.addEventListener('change', function() {
-      if (this.value) {
-        calendar.setOption('locale', this.value);
-      }
-    });
 
   });
 
@@ -142,8 +99,7 @@
 
   #calendar {
     max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 10px;
+    margin : 0px 200px 10px 200px;
     background:white;
   }
 
@@ -153,49 +109,66 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 	
+	
+<!-- 모달..  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header"> <h3 class="modal-title" id="exampleModalLabel">일정등록</h3>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span> </button>
+</div>
+<form action="registerCal.do" method="post">
+<div class="modal-body">
+	일정 : <input type="text" class="form-control" name="calTitle">
+	시작 일자 :  <input type="datetime-local" class="form-control" name="startDate">
+	종료 일자 :  <input type="datetime-local" class="form-control" name="endDate">
+	메모 : <textarea name="calInfo" class="form-control"></textarea>	
+</div>
+<div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<input type="submit" class="btn btn-theme">일정등록
+</div>
+</form>
+
+</div>
+</div>
+</div>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<section id="main-content">	
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>일정관리</h3>
         <div class="row">
           <div class="col-md-12">
-            <div class="content-panel">
+            <div class="form-panel">
               <h4><i class="fa fa-angle-right"></i>나의 일정</h4>
                 <hr>
-					<div id='top'>
-					
-					    Locales:
-					    <select id='locale-selector'></select>
-					
-					 </div>
-					
-					 <div id='calendar'></div>
+                <div align="center">
+				<div id='calendar'></div>
+		        <button class="btn btn-theme02" data-toggle="modal" data-target="#exampleModal">일정추가</button>
+				</div>
             </div>
           </div>
         </div>
         
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch demo modal </button>
 
-<!-- 모달..  -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document"> <div class="modal-content">
-<div class="modal-header"> <h5 class="modal-title" id="exampleModalLabel">일정등록</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span> </button> </div>
-<div class="modal-body">
-일정 : <input type="text"><br>
-메모 : <input type="text">
-</div>
-<div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Save changes</button>
-</div>
-</div>
-</div>
-</div>
+
        </section>
        </section>
-
-
-
-
 </body>
 </html>

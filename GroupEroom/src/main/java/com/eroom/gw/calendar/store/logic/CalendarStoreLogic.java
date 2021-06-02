@@ -29,8 +29,7 @@ public class CalendarStoreLogic implements CalendarStore{
 
 	@Override
 	public int insertCal(Calendar calendar) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("calMapper.insertCal", calendar);
 	}
 
 	@Override

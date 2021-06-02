@@ -29,8 +29,7 @@ public class CalendarServiceImpl implements CalendarService{
 
 	@Override
 	public int registerCal(Calendar calendar) {
-		// TODO Auto-generated method stub
-		return 0;
+		return calStore.insertCal(calendar);
 	}
 
 	@Override

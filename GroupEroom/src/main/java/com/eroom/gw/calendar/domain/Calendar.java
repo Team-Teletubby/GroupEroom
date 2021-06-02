@@ -10,8 +10,8 @@ public class Calendar {
 	private String calType;
 	private String calTitle;
 	private String calInfo;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	
 	public Calendar() {}
 
@@ -63,19 +63,19 @@ public class Calendar {
 		this.calInfo = calInfo;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -84,9 +84,7 @@ public class Calendar {
 		return "Calendar [calNo=" + calNo + ", memberId=" + memberId + ", memberName=" + memberName + ", calType="
 				+ calType + ", calTitle=" + calTitle + ", calInfo=" + calInfo + ", startDate=" + startDate
 				+ ", endDate=" + endDate + "]";
-	};
-	
-	
-	
+	}
 
+	
 }

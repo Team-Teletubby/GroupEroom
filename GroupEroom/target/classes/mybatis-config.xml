@@ -22,6 +22,7 @@
 		<typeAlias type="com.eroom.gw.todo.domain.Todo" alias="Todo"/>
 		<typeAlias type="com.eroom.gw.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.eroom.gw.booking.domain.Booking" alias="Booking" />
+		<typeAlias type="com.eroom.gw.calendar.domain.Calendar" alias="Calendar" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/approval-mapper.xml"></mapper>
@@ -33,6 +34,7 @@
 		<mapper resource="mappers/todo-mapper.xml"></mapper>
 		<mapper resource="mappers/notice-mapper.xml"></mapper>
 		<mapper resource="mappers/booking-mapper.xml"></mapper>
+		<mapper resource="mappers/calendar-mapper.xml"></mapper>
 	</mappers>
 	
 </configuration>
