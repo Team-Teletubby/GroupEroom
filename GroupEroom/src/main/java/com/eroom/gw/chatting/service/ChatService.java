@@ -1,4 +1,4 @@
-package com.eroom.gw.chatting.controller;
+package com.eroom.gw.chatting.service;
 
 import java.util.ArrayList;
 

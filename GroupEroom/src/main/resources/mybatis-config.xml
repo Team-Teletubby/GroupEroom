@@ -7,6 +7,8 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.eroom.gw.chatting.domain.Room" alias="ChatRoom"/>
+		<typeAlias type="com.eroom.gw.chatting.domain.Chat" alias="Chat"/>
 		<typeAlias type="com.eroom.gw.approval.domain.Approval" alias="Approval" />
 		<typeAlias type="com.eroom.gw.approval.domain.ApprovalFile" alias="ApprovalFile" />
 		<typeAlias type="com.eroom.gw.approval.domain.ApprovalReply" alias="ApprovalReply" />
@@ -24,7 +26,9 @@
 		<typeAlias type="com.eroom.gw.booking.domain.Booking" alias="Booking" />
 		<typeAlias type="com.eroom.gw.calendar.domain.Calendar" alias="Calendar" />
 	</typeAliases>
+	
 	<mappers>
+	<mapper resource="mappers/chat-mapper.xml"></mapper>
 		<mapper resource="mappers/approval-mapper.xml"></mapper>
 		<mapper resource="mappers/mail-mapper.xml"></mapper>
 		<mapper resource="mappers/fBoard-mapper.xml"></mapper>

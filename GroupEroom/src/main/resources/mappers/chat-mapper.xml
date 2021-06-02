@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chatMapper">
+	<resultMap type="ChatRoom" id="chatRoomResultMap">
+		<result column="ROOM_NUMBER" property="roomNumber"/>
+		<result column="ROOM_NAME" property="roomName"/>
+	</resultMap>
+	
+	<resultMap type="Chat" id="chatResultMap">
+		<result column="CHAT_NO" property="chatNo" />
+		<result column="USER_ID" property="userId" />
+		<result column="USER_NAME" property="userName" />
+		<result column="ROOM_NUMBER" property="roomNumber" />
+		<result column="TYPE" property="type" />
+		<result column="MSG" property="msg" />
+		<result column="CHAT_CREATE_DATE" property="chatCreateDate" />
+	</resultMap>
+	
+<!-- =============== SELECT =============== -->
+	<!-- 방 리스트  -->
+	<select id="selectChatRoom" resultMap="chatRoomResultMap">
+		SELECT * FROM CHAT_ROOM
+	</select>
+	
+	<!-- 채팅내역 가져오기  -->
+	<select id="selectChat" parameterType="_int" resultMap="chatResultMap">
+		SELECT * FROM CHAT WHERE ROOM_NUMBER = #{roomNumber }
+	</select>
+	
+<!-- =============== INSERT =============== -->
+	<!-- 방 등록  -->
+	<insert id="insertChatRoom" parameterType="ChatRoom">
+		INSERT INTO CHAT_ROOM VALUES(#{roomNumber}, #{roomName })
+	</insert>
+	
+	<!-- 채팅내역 저장  -->
+	<insert id="insertChat" parameterType="Chat">
+		INSERT INTO CHAT VALUES(CHAT_SEQ.NEXTVAL, #{userId }, #{userName }, #{roomNumber }, #{type }, #{msg }, SYSTIMESTAMP)
+	</insert>
+</mapper>
