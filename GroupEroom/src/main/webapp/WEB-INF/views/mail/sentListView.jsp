@@ -57,7 +57,7 @@
 						<section class="panel">
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
-									Inbox
+									Inbox 
 									<form action="#" class="pull-right mail-src-position">
 										<div class="input-append">
 											<input type="text" class="form-control " placeholder="Search Mail">
