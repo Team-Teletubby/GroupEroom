@@ -32,33 +32,35 @@
 	
 <!-- 받은편지함 출력 -->
 	<select id="selectAllInbox" parameterType="_int" resultMap="mailResultMap">
-		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS SENDER_NAME, b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT  
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS SENDER_NAME, b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD hh:mm:ss') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD hh:mm:ss') AS READ_DATE, a.READ_COUNT  
 		FROM MAIL a 
 		JOIN MEMBER b ON a.SENDER_ID = b.MEMBER_ID
-		WHERE RECEIVER_ID = #{value } OR CC_ID = #{value }
-		AND TRASH_YN = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE (RECEIVER_ID = #{value } OR CC_ID = #{value })
+		AND TRASH_YN = 'N' 
+		AND MOD(MAIL_NO, 2) = 1
+		ORDER BY SENT_DATE DESC
 	</select>
 <!-- 보낸편지함 출력 -->
 	<select id="selectAllSentMail" parameterType="_int" resultMap="mailResultMap">
-		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT   
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD hh:mm:ss') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD hh:mm:ss') AS READ_DATE, a.READ_COUNT 
 		FROM MAIL a 
 		JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID
 		WHERE SENDER_ID = #{value }
 		AND TRASH_YN = 'N'
-		ORDER BY MAIL_NO DESC
+		AND MOD(MAIL_NO, 3) = 1 
+		ORDER BY SENT_DATE DESC
 	</select>
 <!-- 휴지통 출력 -->
 	<select id="selectAllTrash" parameterType="_int" resultMap="mailResultMap">
 		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "SENDER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT   
 		FROM MAIL a 
 		JOIN MEMBER b ON a.SENDER_ID = b.MEMBER_ID
-		WHERE SENDER_ID = #{value } OR RECEIVER_ID = #{value } OR CC_ID = #{value } 
-		AND TRASH_YN = 'Y' 
+		WHERE (SENDER_ID = #{value } OR RECEIVER_ID = #{value } OR CC_ID = #{value })
+		AND TRASH_YN = 'Y'
 		ORDER BY MAIL_NO DESC 
 	</select>	
 	
-<!-- 게시글 상세조회  -->
+<!-- 메일 상세조회  -->
 	<select id="selectOneMail" resultMap="mailResultMap">
 		SELECT a.MAIL_NO, a.RECEIVER_ID, b.MEMBER_NAME AS RECEIVER_NAME, a.SENDER_ID, c.MEMBER_NAME AS SENDER_NAME, a.CC_ID, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE
 		FROM MAIL a 
@@ -67,11 +69,16 @@
 		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
-<!-- 게시글 작성
-	<insert id="insertBoard">
-		INSERT INTO BOARD
-		VALUES(SEQ_BOARDID.NEXTVAL, #{boardTitle }, #{boardContent }, #{boardWriter }, #{originalFilename }, #{renameFilename }, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
-	</insert> -->
+<!-- 보내는사람 메일생성 -->
+	<insert id="composeMailSend">
+		INSERT INTO MAIL
+		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+<!-- 받는사람 메일생성 -->
+	<insert id="composeMailReceive">
+		INSERT INTO MAIL
+		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
 	
 <!-- 게시글 수정
 	<update id="updateBoard">

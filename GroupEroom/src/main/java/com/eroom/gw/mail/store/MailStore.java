@@ -13,5 +13,7 @@ public interface MailStore {
 	public ArrayList<Mail> selectAllSentMail(PageInfo pi, int senderId);
 	public ArrayList<Mail> selectAllTrash(PageInfo pi, int receiverId);
 	public Mail selectOneMail(int mailNo);
+	public int composeMailSender(Mail mail);
+	public int composeMailReceiver(Mail mail);
 
 }

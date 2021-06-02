@@ -52,6 +52,17 @@ public class MailStoreLogic implements MailStore {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("mailMapper.selectOneMail", mailNo);
 	}
+	
+///////////////////////////////////////////메일쓰기////////////////////////////////////////////////
+	@Override
+	public int composeMailSender(Mail mail) {
+		return sqlSession.insert("mailMapper.composeMailSend", mail);
+	}
+	@Override
+	public int composeMailReceiver(Mail mail) {
+		return sqlSession.insert("mailMapper.composeMailReceive", mail);
+	}
+
 
 
 

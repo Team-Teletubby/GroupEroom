@@ -18,10 +18,9 @@ public interface MailService {
 	//상세보기
 	public Mail printOne(int mailNo);
 	
-	//메일쓰기&지우기&옮기기
-	public int ComposeMail(Mail mail); //메일쓰기
-	public int moveTrash(int mailNo); //휴지통으로
-	public int deleteMail(int mailNo); //휴지통비우기
+	//메일쓰기
+	public int composeMailSend(Mail mail);
+	public int composeMailReceive(Mail mail);
 	
 	//파일
 	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize); //업로드

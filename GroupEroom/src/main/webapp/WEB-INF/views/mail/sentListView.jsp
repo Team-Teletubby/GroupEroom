@@ -125,7 +125,7 @@
 															<c:if test="${mail.readCount <= 0}">
 																<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
 															</c:if>
-															<td class="view-message" name="senderName">${mail.senderName}</td>
+															<td class="view-message" name="receiverName">${mail.receiverName}</td>
 															<td class="view-message" name="mailTilte">
 																<c:url var="mailDetail" value="mailDetailView.do">
 																	<c:param name="mailNo" value="${mail.mailNo }"></c:param>

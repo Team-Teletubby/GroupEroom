@@ -43,7 +43,7 @@
 					<div class="col-sm-3">
 						<section class="panel">
 							<div class="panel-body">
-								<a href="mailComposeView.do" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
+								<a href="ComposeMailView.do" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
 									<li class="active"><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox</a></li>
 									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>Send Mail</a></li>

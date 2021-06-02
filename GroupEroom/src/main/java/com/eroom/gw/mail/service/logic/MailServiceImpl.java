@@ -47,31 +47,27 @@ public class MailServiceImpl implements MailService {
 		// TODO Auto-generated method stub
 		return mStore.selectOneMail(mailNo);
 	}
-
+	
+//메일쓰기
 	@Override
-	public int ComposeMail(Mail mail) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int composeMailSend(Mail mail) {
+		return mStore.composeMailSender(mail);
+	}
+	@Override
+	public int composeMailReceive(Mail mail) {
+		return mStore.composeMailReceiver(mail);
 	}
 
-	@Override
-	public int moveTrash(int mailNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteMail(int mailNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
+	
+	
+	
+	
 	@Override
 	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
+	
 	
 }

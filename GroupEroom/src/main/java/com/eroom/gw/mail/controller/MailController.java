@@ -1,7 +1,8 @@
 package com.eroom.gw.mail.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
 import com.eroom.gw.mail.domain.Mail;
-import com.eroom.gw.mail.domain.MailFile;
 import com.eroom.gw.mail.service.MailService;
 import com.eroom.gw.member.domain.Member;
 
@@ -119,6 +119,36 @@ public class MailController {
 			mv.addObject("msg", "메일 상세조회 실패");
 			mv.setViewName("common/errorPage");
 		}
+		return mv;
+	}
+	
+//게시글 등록화면단
+	@RequestMapping(value="ComposeMailView.do")
+	public String fBoardWriteView() {
+		return "mail/composeMailView";
+	}
+		
+//메일쓰기
+	@RequestMapping(value="composeMail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView composeMail(ModelAndView mv, @ModelAttribute Mail mail,
+									HttpServletRequest request, HttpSession session) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		mail.setSenderId(loginUser.getMemberId());
+		
+		int receiveResult = 0;
+		int sendResult = 0;
+		String path = "";
+		receiveResult = mService.composeMailReceive(mail);
+		sendResult = mService.composeMailSend(mail);
+		if(receiveResult > 0 && sendResult > 0) {
+			path = "redirect:inboxListView.do";
+		}else {
+			mv.addObject("msg", "메일발송 실패");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
 		return mv;
 	}
 	
