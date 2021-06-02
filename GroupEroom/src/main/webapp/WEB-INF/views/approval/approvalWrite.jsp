@@ -12,6 +12,7 @@
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>GER</title>
 <link href="resources/css/approvalWrite.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
 	<section id="container">
@@ -27,7 +28,7 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<div class="row">
-					<div class="col-lg-12 main-chart">
+					<div class="col-lg-11 main-chart" id="main-chart" style="margin-left:70px">
 						<div class="border-head"></div>
 						<div class="col-md-11 mb">
 							<div class="write-Wrap">
@@ -51,12 +52,14 @@
 												</tr>
 											</table>
 										</div>
-										<span class="approval-line-title">결재선</span>
-										<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
-                                        모달 창 전체를 감싸는 div의 id 이름을 지정하면 된다. -->
-										<button type="button" data-toggle="modal"
-											data-target=".bd-example-modal-lg">모달 창 열기</button>
-
+										<div id="approval-line-title">
+											<span>결재선</span>
+											<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
+                                        	모달 창 전체를 감싸는 div의 id 이름을 지정하면 된다. -->
+											<a type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
+												<i class="xi-plus-circle-o xi-2x"></i>
+											</a>
+										</div>
 										<table class="table">
 											<tr>
 												<th>구분</th>
