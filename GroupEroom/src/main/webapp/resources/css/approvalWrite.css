@@ -1,88 +1,201 @@
+#main-content {
+	color: black;
+}
+
 #main-chart {
 	margin: 0px auto;
 }
 
-.xi-plus{
-	font-size : 50px;
+.xi-plus {
+	font-size: 50px;
 }
 
 .write-form {
-    padding : 30px;
-    border: 1px solid rgb(199, 198, 198);
-    background-color: white;
+	padding: 30px;
+	border: 1px solid rgb(199, 198, 198);
+	background-color: white;
+	box-shadow: 0px 0px 10px #cacaca;
 }
 
-.write-Wrap > p {
-    font-size: 20px;
-    font-weight: 600;
+.write-Wrap>p {
+	font-size: 20px;
+	font-weight: 600;
+	color: black;
 }
 
-.write-form > p:first-child {
-    font-size: 15px;
-    font-weight: 600;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgb(138, 138, 138);
+.write-form>p:first-child {
+	font-size: 15px;
+	font-weight: 600;
+	margin-bottom: 0px;
+	padding-bottom: 10px;
 }
 
-#Document-type {
-    width: 100%;
-    height: 10%;
-    background-color:beige;
-    margin-bottom: 70px;
+#document-type {
+	width: 100%;
+	height: 10%;
+	margin-bottom: 40px;
+}
+.css-top-line {
+	border-top: 1px solid #cecece;
 }
 
-#table {
-    width: 100%;
+.css-bottom-line {
+	border-bottom: 1px solid #cecece;
 }
+
+.table1 {
+	border-left: 3px solid #4ECDC4;
+	border-right: 1px solid #cecece;
+	padding-top: 1px;
+	padding-left: 1px;
+	width: 100%;
+
+	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	 box-sizing: border-box;
+}
+
+.table1 .tr-1st {
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.table1 .tr-1st>th {
+	width: 20%;
+	padding-left: 10px;
+
+	text-align: center;
+}
+
+.table1 .tr-1st>td {
+	padding-left: 15px;
+}
+
+#tr-2st > td {
+	padding-left: 0px;
+}
+
+.tr-1st .input-box { 
+	text-align:center;
+	width: 65%;
+	height: 25px;
+	border: 1px solid #999;
+}
+
+.tr-1st .input-box:focus{
+	outline: none;
+}
+	
 
 #document-text {
-    font-size: 20px;
-    font-weight: 600;
+	font-size: 20px;
+	font-weight: 600;
 }
 
-td > select {
-    font-size: 14px;
-    width: 50%;
-    height: 35px;
-    text-align-last: center; 
+td>select {
+	font-size: 14px;
+	width: 20%;
+	height: 25px;
+	text-align-last: center;
 }
 
-td > select > option {
-    padding: 10px;
+td>select>option {
+	padding: 10px;
 }
 
-tr > th {
-    padding: 10px; 
-    text-align: center;
+tr>th {
+	padding: 10px;
+	vertical-align: middle;
 }
 
 .document-select {
-    width : 200px;
+	width: 200px;
 }
 
 #approval-line-title {
-   display:flex;
-   align-items: center;
-   margin-bottom: 5px;
+	display: flex;
+	align-items: center;
 }
 
-#approval-line-title > span {
+#approval-line-title>span {
 	display: inline-block;
 	padding-right: 3px;
 	font-weight: 600;
-	font-size : 16px;
+	font-size: 16px;
 }
 
-.modal-body > ul {
+#document-approval-line {
+	margin-bottom: 40px;
+}
+.modal-body>ul {
 	display: inline-block;
 	width: 60px;
 }
 
-.modal-body > ul > li {
-	list-style:none;
+.modal-body>ul>li {
+	list-style: none;
 }
 
-.modeal-title > .table > tr > td {
-	padding : 0px;
-	width : 120px;
+.modeal-title>.table>tr>td {
+	padding: 0px;
+	width: 120px;
+}
+
+.document-select>select {
+	background-color: white;
+}
+
+select {
+	width: 200px;
+	padding: 3px 30px 0px 0px; font-family : inherit;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 1px solid #999;
+	border-radius: 0px;
+	font-family: inherit;
+}
+
+select::-ms-expand { /* for IE 11 */
+	display: none;
+}
+
+select:focus {
+	outline: none;
+}
+#summerNote-title {
+	border-top: 3px solid #4ECDC4;
+	border-right: 1px solid #cecece;
+	border-bottom: 1px solid #cecece;
+	margin-bottom: 20px;
+}
+
+#summerNote-title > div {
+	display: inline-block;
+}
+
+#summerNote-title >div > span {
+	display: inline-block;
+	width: 150px;
+	height: 48px;
+	font-size: 16px;
+	font-weight: 600;
+	padding-top: 10px;
+	text-align: center;
+	color: white;
+	background-color:#4ECDC4;
+}
+#title-input-box {
+	width: 66%;
+	padding-left: 10px;
+	padding-bottom: 8px;
+}
+#title-input-box > input {
+	padding-left: 5px;
+	width: 100%;
+	 line-height: 25px;
+	display: inline-block;
+	border: 1px solid #999;
 }

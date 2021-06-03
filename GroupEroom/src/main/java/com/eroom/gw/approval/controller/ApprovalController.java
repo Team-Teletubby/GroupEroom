@@ -53,8 +53,13 @@ public class ApprovalController {
 
 	// 결재 페이지로 이동
 	@RequestMapping(value = "approvalWriteView.do", method=RequestMethod.GET)
-	public String approvalWriteView() {
-		return "approval/approvalWrite";
+	public ModelAndView approvalWriteView(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("LoginUser");
+		mv.addObject("loginUser", member);
+		mv.setViewName("approval/approvalWrite");
+		
+		return mv;
 	}
 
 	// 결재 등록
