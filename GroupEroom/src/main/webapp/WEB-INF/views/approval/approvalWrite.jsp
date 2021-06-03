@@ -28,7 +28,7 @@
         메인 콘텐츠
         *********************************************************************************************************************************************************** -->
 		<!-- 메인 콘텐츠 -->
-		<section id="main-content"> 
+		<section id="main-content">
 			<section class="wrapper">
 				<div class="row">
 					<div class="col-lg-11 main-chart" id="main-chart"
@@ -46,11 +46,9 @@
 												<tr class="tr-1st">
 													<th class="css-top-line">문서 종류</th>
 													<td class="document-select css-top-line">
-														<select name="approvalType">
+														<select id="approvalType" name="approvalType">
 															<option value="">문서 선택</option>
 															<optgroup label="기안문서">
-															
-															
 																<option value="Cooperation">협조문</option>
 															</optgroup>
 															<option value=""></option>
@@ -65,66 +63,72 @@
 											</table>
 										</div>
 										<div id="document-approval-line">
-										<div id="approval-line-title">
-											<span>결재선</span>
-											<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
+											<div id="approval-line-title">
+												<span>결재선</span>
+												<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
                                         	모달 창 전체를 감싸는 div의 id 이름을 지정하면 된다. -->
-											<a type="button" data-toggle="modal"
-												data-target=".bd-example-modal-lg"> <i
-												class="xi-plus-circle-o xi-2x"></i>
-											</a>
-										</div>
-										<table class="table1">
-											<tr class="tr-1st">
-												<th class="css-top-line">구분</th>
-												<th class="css-top-line">사번</th>
-												<th class="css-top-line">성명</th>
-												<th class="css-top-line">직급</th>
-												<th class="css-top-line">부서</th>
-											</tr>
-											<tr class="tr-1st" id="tr-2st">
-												<th>중간 결재자</th>
-												<td align="center">
-													<input type="number" class="input-box" id="midApprovalId" name="approvalFirstId" readOnly>
-												</td>
-												<td align="center">
-													<input type="text" class="input-box" id="midApprovalName" name="midApprovalName" readOnly>
-												</td>
-												<td align="center">
-													<input type="text" class="input-box" id="midApprovalJob" name="midApprovalJob" readOnly>
-												</td>
-												<td align="center">
-													<input type="text" class="input-box" id="midApprovalDept" name="midApprovalDept" readOnly>
-												</td>
-											</tr>
-											<tr class="tr-1st" id="tr-2st">
-												<th class="css-bottom-line">최종 결재자</th>
-												<td align="center" class="css-bottom-line">
-													<input type="number" class="input-box" id="finApprovalId" name="approvalSecondId" readOnly>
-												</td>
-												<td align="center" class="css-bottom-line">
-													<input type="text" class="input-box" id="finApprovalName" name="finApprovalName" readOnly>
-												</td>
-												<td align="center" class="css-bottom-line">
-													<input type="text" class="input-box" id="finApprovalJob" name="finApprovalJob" readOnly> 
-												</td>
-												<td align="center" class="css-bottom-line">
-													<input type="text" class="input-box" id="finApprovalDept" name="finApprovalDept" readOnly>
-												</td>
-											</tr>
-										</table>
+												<a type="button" data-toggle="modal"
+													data-target=".bd-example-modal-lg"> <i
+													class="xi-plus-circle-o xi-2x"></i>
+												</a>
+											</div>
+											<table class="table1">
+												<tr class="tr-1st tr-2st">
+													<th class="css-top-line">구분</th>
+													<th class="css-top-line">사번</th>
+													<th class="css-top-line">성명</th>
+													<th class="css-top-line">직급</th>
+													<th class="css-top-line">부서</th>
+												</tr>
+												<tr class="tr-1st" id="tr-2st">
+													<th>중간 결재자</th>
+													<td align="center"><input type="number"
+														class="input-box" id="midApprovalId"
+														name="approvalFirstId" readOnly></td>
+													<td align="center"><input type="text"
+														class="input-box" id="midApprovalName"
+														name="midApprovalName" readOnly></td>
+													<td align="center"><input type="text"
+														class="input-box" id="midApprovalJob"
+														name="midApprovalJob" readOnly></td>
+													<td align="center"><input type="text"
+														class="input-box" id="midApprovalDept"
+														name="midApprovalDept" readOnly></td>
+												</tr>
+												<tr class="tr-1st" id="tr-2st">
+													<th class="css-bottom-line">최종 결재자</th>
+													<td align="center" class="css-bottom-line"><input
+														type="number" class="input-box" id="finApprovalId"
+														name="approvalSecondId" readOnly></td>
+													<td align="center" class="css-bottom-line"><input
+														type="text" class="input-box" id="finApprovalName"
+														name="finApprovalName" readOnly></td>
+													<td align="center" class="css-bottom-line"><input
+														type="text" class="input-box" id="finApprovalJob"
+														name="finApprovalJob" readOnly></td>
+													<td align="center" class="css-bottom-line"><input
+														type="text" class="input-box" id="finApprovalDept"
+														name="finApprovalDept" readOnly></td>
+												</tr>
+											</table>
 										</div>
 										<div id="summerNote-title">
 											<div>
-												<span>제목</span> 
+												<span>제목</span>
 											</div>
 											<div id="title-input-box">
 												<input type="text" name="approvalTitle">
 											</div>
 										</div>
 										<textarea id="summernote" name="approvalContents"></textarea>
-										<input type="file" name="uploadFile" multiple="multiple" />
-										<input type="submit" value="기안 제출하기">
+										 <div class="form-group files">
+                							<label>파일첨부 </label>
+											<input type="file" id="file-upload" class="file-upload-input" name="uploadFile" multiple="multiple" />
+										</div> 
+										<div id="submit-input-form">
+										<button type="submit" class="submit-btn" id="submit">작성완료</button>
+										<!-- 	<input type="submit" id="submit-input" value="기안 제출하기">						 -->				
+										</div>
 									</div>
 								</form>
 							</div>
@@ -164,20 +168,47 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">×</button>
 					<!-- 모달 title -->
-					<h4 class="modal-title">모달 창 타이틀</h4>
+					<h4 class="modal-title">조직도</h4>
 				</div>
 				<div class="modal-body">
 					<!-- ======= 부서 목록 ======= -->
-					<table class="table">
+					<div class="department-select-form">
+						<table>
+							<tr>
+								<th>부서 목록</th>
+							</tr>
+							<tr>
+								<td>
+									<a href="#">
+										<li value="1" class="DepartmentName">인사관리부서</li>									
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="#">								
+										<li value="2" class="DepartmentName">IT개발부서</li>	
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="#">
+										<li value="3" class="DepartmentName">재무부서</li>									
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="#">
+										<li value="4" class="DepartmentName">영업부서</li>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<table class="departmember-table">
 						<tr>
-							<td>
-								<ul>
-									<span>부서 이름</span>
-									<li value="1" class="DepartmentName">인사관리팀</li>
-									<li value="2" class="DepartmentName">IT개발팀</li>
-									<li value="3" class="DepartmentName">재무팀</li>
-								</ul>
-							</td>
 							<td>
 								<table align="center" width="350" border="1" cellspacing="0"
 									id="rtb">
@@ -193,7 +224,6 @@
 									<tbody></tbody>
 								</table>
 							</td>
-
 							<td>
 								<ul>
 									<li><sapn class="midApproval"> 중간결재자 </sapn></li>
@@ -209,7 +239,6 @@
 							</td>
 						</tr>
 						<tr>
-
 						</tr>
 					</table>
 					<!-- 사용자 지정 부분③ : 텍스트 메시지 -->
@@ -224,23 +253,15 @@
 		</div>
 	</div>
 	<!-- 썸머노트 CDN -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script>
-	// =============== 시간 ====================
-   $(document).ready(function(){
-	$('.flipTimer').flipTimer({ direction: 'up' });
-});
-
 		// =============== 썸머 노트 ====================
 		// 불러오기
 		$('#summernote')
 				.summernote(
-						'code');
+						'code',"ㅇdasdsa");
 
 		// 초기화
 		$('#summernote').summernote({
@@ -252,8 +273,17 @@
 		});
 		
         $(document).ready(function() {
-        	
+        	// =============== 문서 종류 ====================
+        	$("#approvalType").change(function() {
+        		// 협조문
+        		if($(this).val() == "Cooperation") {
+        			$(".note-editable").html('<h2 style="text-align: center; "><b>업무 협조문</b></h2><h5 style="text-align: center; "><br></h5><p style="text-align: left; margin-left: 50px;">1. 귀 부서의 무궁한 발전을 기원합니다.</p><p style="text-align: left; margin-left: 50px;">2. 오래과 같이 업무 협조를 요청하오니 적극 협조하여 주시기 바랍니다.</p><p style="text-align: left; margin-left: 50px;"><br></p><p style="text-align: center; margin-left: 50px;">- 아&nbsp; &nbsp; 래 -</p><p style="text-align: center; margin-left: 50px;"><br></p><h5 style="text-align: left; margin-left: 50px;"><b>1. 취 지&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>2. 협조사항&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>3. 협조 불이행 조치사항</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>4. 시행일</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: lef;margin-left: 50px;"><b>5. 문의</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5>^');
+        		}
+        	});
+			// =============== 시간 ====================
+        	$('.flipTimer').flipTimer({ direction: 'up' });
       
+			// =============== 결재선  ===============
         	$("li.DepartmentName").each(function() {
         		$(this).click(function() {
         			const depType = $(this).val();
@@ -371,8 +401,6 @@
         		}
         	}
         });
-        
 	</script>
-	<script src="resources/js/timer/jquery.flipTimer.js"></script>
 </body>
 </html>
