@@ -15,6 +15,10 @@
 	</resultMap>
 	
 	<insert id="insertCal">
-		INSERT INTO CALENDAR VALUES(CAL_SEQ.NEXTVAL,#{memberId}, null, #{calTitle}, #{calInfo}, #{startDate}, #{endDate})
+		INSERT INTO CALENDAR VALUES(CAL_SEQ.NEXTVAL,#{memberId}, null, #{calTitle}, #{calInfo}, #{startDate}, #{endDate}, #{color})
 	</insert>
+	
+	<select id="selectAllCal" resultMap="calendarResultMap">
+		SELECT * FROM CALENDAR WHERE MEMBER_ID = #{memberId}
+	</select>
 </mapper>

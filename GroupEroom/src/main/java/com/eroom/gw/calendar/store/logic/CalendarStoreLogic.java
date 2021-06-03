@@ -16,9 +16,8 @@ public class CalendarStoreLogic implements CalendarStore{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Calendar> selectAllCal(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Calendar> selectAllCal(int memberId) {
+		return (ArrayList)sqlSession.selectList("calMapper.selectAllCal",memberId);
 	}
 
 	@Override

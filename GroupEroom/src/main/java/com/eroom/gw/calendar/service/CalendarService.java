@@ -6,7 +6,7 @@ import com.eroom.gw.calendar.domain.Calendar;
 
 public interface CalendarService {
 	
-	public ArrayList<Calendar> selelctAllCal(String memberId);
+	public ArrayList<Calendar> selelctAllCal(int memberId);
 	public Calendar selectOneCal(int calNo);
 	public int registerCal(Calendar calendar);
 	public int modifyCal(Calendar calendar);

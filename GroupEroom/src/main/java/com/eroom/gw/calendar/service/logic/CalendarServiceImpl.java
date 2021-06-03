@@ -16,9 +16,8 @@ public class CalendarServiceImpl implements CalendarService{
 	private CalendarStore calStore;
 	
 	@Override
-	public ArrayList<Calendar> selelctAllCal(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Calendar> selelctAllCal(int memberId) {
+		return calStore.selectAllCal(memberId);
 	}
 
 	@Override

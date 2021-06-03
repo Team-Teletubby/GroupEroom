@@ -3,6 +3,7 @@ package com.eroom.gw.calendar.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -26,15 +27,24 @@ public class CalendarController {
 	@Autowired
 	private CalendarService calService;
 	
-	@RequestMapping(value="calendarListView.do")
-	public String calendarView() {
-		return "calendar/calendar";
-		
-	}
+//	@RequestMapping(value="calendarListView.do")
+//	public String calendarView() {
+//		return "calendar/calendar";
+//		
+//	}
 	
 	// 내 일정 전체 출력
-	public ModelAndView calListView(ModelAndView mv,@RequestParam("")int memberId) {
-		return mv;
+	@RequestMapping(value="calendarListView.do")
+	public String calListView(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("LoginUser");
+		int memberId = member.getMemberId();
+		ArrayList<Calendar> calList = calService.selelctAllCal(memberId);
+		model.addAttribute("calList",calList);
+		return "calendar/calendar";
+		/*
+		 * if(!calList.isEmpty()) { }else { return ""; }
+		 */
+		
 	}
 	
 	// 일정 상세보기
@@ -48,25 +58,28 @@ public class CalendarController {
 								@RequestParam(value="calTitle") String calTitle,
 								@RequestParam(value="startDate")String startDate,
 								@RequestParam(value="endDate")String endDate,
-								@RequestParam(value="calInfo")String calInfo){
+								@RequestParam(value="calInfo")String calInfo,
+								@RequestParam(value="startTime")String startTime,
+								@RequestParam(value="endTime")String endTime,
+								@RequestParam(value="color")String color
+								){
 		Member member = (Member)session.getAttribute("LoginUser");
-		
-		
-		System.out.println(startDate);
-		System.out.println(endDate);
-		startDate = startDate.replace("T", " ");
-		endDate = startDate.replace("T", " ");
-		
-		
 		Calendar calendar = new Calendar();
+		if(!(startTime =="")) {
+			startDate = startDate + "T" + startTime;
+		}
+		if(!(endTime =="")) {
+			endDate = endDate + "T" + endTime;
+		}
 		calendar.setMemberId(member.getMemberId());
 		calendar.setCalTitle(calTitle);
 		calendar.setCalInfo(calInfo);
 		calendar.setStartDate(startDate);
 		calendar.setEndDate(endDate);
+		calendar.setColor(color);
 		int result = calService.registerCal(calendar);
 		if(result>0) {
-			return "calendar/calendar";
+			return "redirect:calendarListView.do";
 		}else {
 			return "";
 		}

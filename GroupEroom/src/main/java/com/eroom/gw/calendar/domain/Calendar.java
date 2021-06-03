@@ -12,6 +12,7 @@ public class Calendar {
 	private String calInfo;
 	private String startDate;
 	private String endDate;
+	private String color;
 	
 	public Calendar() {}
 
@@ -79,12 +80,21 @@ public class Calendar {
 		this.endDate = endDate;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	@Override
 	public String toString() {
 		return "Calendar [calNo=" + calNo + ", memberId=" + memberId + ", memberName=" + memberName + ", calType="
 				+ calType + ", calTitle=" + calTitle + ", calInfo=" + calInfo + ", startDate=" + startDate
-				+ ", endDate=" + endDate + "]";
+				+ ", endDate=" + endDate + ", color=" + color + "]";
 	}
 
+	
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <link href="resources/css/style2.css" rel="stylesheet">
   
 <link href='resources/calendar/main.css' rel='stylesheet' />
+<link href="resources/calendar/colorpick.css" rel="stylesheet">
 <script src='resources/calendar/main.js'></script>
 <script src='resources/calendar/locales-all.js'></script>
 <script>
@@ -38,7 +40,7 @@
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       selectable: true,
-      
+      events: 'https://fullcalendar.io/demo-events.json?overload-day',
        select: function(info) {
     	 alert('selected ' + info.startStr + ' to ' + info.endStr);
     	} ,
@@ -73,10 +75,26 @@
           start: '2020-09-12T10:30:00',
           end: '2020-09-12T12:30:00'
         },
+        
+         <c:forEach var ='i' items='${calList}'>
+    	 { 
+    		no:'${i.calNo}',
+    	  	title: '${i.calTitle}',
+    		start:'${i.startDate}',
+    		end:'${i.endDate}',
+    		info:'${i.calInfo}',
+    		backgroundColor : '${i.color}',
+    		borderColor : '${i.color}'
+    	},
+		</c:forEach>
+    	{
+            title: '종강',
+            start: '2021-06-13',
+            end: '2021-06-13',
+         }
       ]
     });
     calendar.render();
-
   });
 
 </script>
@@ -120,13 +138,49 @@
 </div>
 <form action="registerCal.do" method="post">
 <div class="modal-body">
-	일정 : <input type="text" class="form-control" name="calTitle">
-	시작 일자 :  <input type="datetime-local" class="form-control" name="startDate">
-	종료 일자 :  <input type="datetime-local" class="form-control" name="endDate">
+	일정 : <input type="text" class="form-control" name="calTitle"><br>
+	색상 : 
+	<div>
+			<input value="#db2828" type="radio" name="color" id="red" value="red" />
+			<label for="red"><span class="red"></span></label>
+			
+			<input value="#f2711c" type="radio" name="color" id="orange" />
+			<label for="orange"><span class="orange"></span></label>
+			
+			
+			<input value="#fbbd08" type="radio" name="color" id="yellow" />
+			<label for="yellow"><span class="yellow"></span></label>
+			
+			<input value="#b5cc18" type="radio" name="color" id="olive" />
+			<label for="olive"><span class="olive"></span></label>
+			
+			<input value="#21ba45" type="radio" name="color" id="green" />
+			<label for="green"><span class="green"></span></label>
+			
+			<input value="#00b5ad" type="radio" name="color" id="teal" />
+			<label for="teal"><span class="teal"></span></label>
+			
+			<input value="#2185d0" type="radio" name="color" id="blue" />
+			<label for="blue"><span class="blue"></span></label>
+			
+			<input value="#6435c9" type="radio" name="color" id="violet" />
+			<label for="violet"><span class="violet"></span></label>
+			
+			<input value="#a333c8" type="radio" name="color" id="purple" />
+			<label for="purple"><span class="purple"></span></label>
+			
+			<input value="#e03997" type="radio" name="color" id="pink" />
+			<label for="pink"><span class="pink"></span></label>
+	</div>
+	시작 일자 :  <input type="date" class="form-control" name="startDate">
+	시작 시간 : <input type="time" class="form-control" name="startTime">
+	<hr style="border:1px solid lightgray;">
+	종료 일자 :  <input type="date" class="form-control" name="endDate">
+	종료 시간 : <input type="time" class="form-control" name="endTime">
 	메모 : <textarea name="calInfo" class="form-control"></textarea>	
 </div>
 <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<input type="submit" class="btn btn-theme">일정등록
+<input type="submit" class="btn btn-theme" value="일정등록">
 </div>
 </form>
 
@@ -136,20 +190,7 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<section id="main-content">	
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>일정관리</h3>
@@ -165,10 +206,9 @@
             </div>
           </div>
         </div>
-        
-
-
-       </section>
-       </section>
+      </section>
+   </section>
+   
+   
 </body>
 </html>
