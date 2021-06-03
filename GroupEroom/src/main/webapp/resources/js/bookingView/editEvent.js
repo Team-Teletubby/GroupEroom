@@ -33,7 +33,8 @@ var editEvent = function (event, element, view) {
     addBtnContainer.hide();
     modifyBtnContainer.show();
     eventModal.modal('show');
-
+   
+   
     //업데이트 버튼 클릭시
     $('#updateEvent').unbind();
     $('#updateEvent').on('click', function () {

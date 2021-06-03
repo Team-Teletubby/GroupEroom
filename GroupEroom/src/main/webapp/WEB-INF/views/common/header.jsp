@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
 	<section id="container">
@@ -74,6 +75,11 @@
 					</li>
 				</ul>
 			</div>
+			<div class="flipTimer">
+														<div class="hours"></div>
+														<div class="minutes"></div>
+														<div class="seconds"></div>
+													</div>
 		</header>
 	</section>
 </body>

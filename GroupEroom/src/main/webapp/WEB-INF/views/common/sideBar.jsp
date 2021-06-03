@@ -120,11 +120,6 @@
 						</li>
 						</c:if>
 				</ul>
-				<div class="flipTimer">
-														<div class="hours"></div>
-														<div class="minutes"></div>
-														<div class="seconds"></div>
-													</div>
 			</div>
 		</aside>
 	</section>

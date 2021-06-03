@@ -55,12 +55,15 @@
     transform: perspective(400px) rotateX(0deg); } }
 
 .flipTimer {
+  display: inline-block;
+  margin: 12px 40px 0px 0px;
   color: #FFF;
+  float: right;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
-  line-height: 30px;
-  height: 30px; }
+  line-height: 33px;
+  height: 35px; }
   .flipTimer .seperator {
     vertical-align: top;
     margin: 0 -20px;
@@ -159,3 +162,10 @@
       -ms-animation: flipBottom 0.3s 0.3s ease-out both;
       transform-origin: 50% 0%;
       animation: flipBottom 0.3s 0.3s ease-out both; }
+
+      
+ @media (max-width:570px) {
+ .flipTimer {
+ 	display: none;
+ }
+ }
