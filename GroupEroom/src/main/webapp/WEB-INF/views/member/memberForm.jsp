@@ -221,15 +221,6 @@ span.error {
 
 		</section>
 	</section>
-
-
-
-
-
-
-
-
-
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	<script type="text/javascript">
       $(function() {
@@ -285,8 +276,10 @@ span.error {
       
 
 
+         
+      }); 
+       // 왜 위에 있는 이메일 메소드 안에서 작성하신 거죠...
          $('#memberPhone').blur(function(){
-        	 alert("테스트");
      		if(phoneJ.test($(this).val())){
      			console.log(nameJ.test($(this).val()));
      			$("#phone_check").text('');
@@ -295,8 +288,6 @@ span.error {
      			$('#phone_check').css('color', 'red');
      		}
      	});  
-         
-      }); 
    </script>
 </body>
 </html>
