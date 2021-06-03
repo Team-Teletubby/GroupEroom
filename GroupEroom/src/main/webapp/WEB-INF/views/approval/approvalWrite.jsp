@@ -12,9 +12,12 @@
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <title>GER</title>
 <link href="resources/css/approvalWrite.css" rel="stylesheet">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="resources/css/timer/flipTimer.css">
+<link rel="stylesheet" href="resources/css/timer/demo.css">
 </head>
-<body>
+<body onload="getTime()">
 	<section id="container">
 		<!-- 헤더 시작 -->
 		<jsp:include page="../common/header.jsp"></jsp:include>
@@ -28,20 +31,28 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<div class="row">
-					<div class="col-lg-11 main-chart" id="main-chart" style="margin-left:70px">
+					<div class="col-lg-11 main-chart" id="main-chart"
+						style="margin-left: 70px">
 						<div class="border-head"></div>
 						<div class="col-md-11 mb">
 							<div class="write-Wrap">
 								<p>결재 기안하기</p>
-								<form action="approvalRegister.do" method="post" enctype="multipart/form-data">
+								<form action="approvalRegister.do" method="post"
+									enctype="multipart/form-data">
 									<div class="write-form">
+									<div class="flipTimer">
+														<div class="hours"></div>
+														<div class="minutes"></div>
+														<div class="seconds"></div>
+													</div>
 										<p>기본 설정</p>
 										<div id="Document-type">
 											<table id="table">
 												<tr>
+													
 													<th>문서 종류</th>
-													<td class="document-select" >
-													<select name="approvalType">
+													<td class="document-select"><select
+														name="approvalType">
 															<option value="">문서 선택</option>
 															<option value="Cooperation">협조문</option>
 															<option value="">양식2</option>
@@ -56,8 +67,9 @@
 											<span>결재선</span>
 											<!-- 아래에서 data-toggle과 data-target 속성에서 data-toggle에는 modal 값을 data-target속성에는
                                         	모달 창 전체를 감싸는 div의 id 이름을 지정하면 된다. -->
-											<a type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
-												<i class="xi-plus-circle-o xi-2x"></i>
+											<a type="button" data-toggle="modal"
+												data-target=".bd-example-modal-lg"> <i
+												class="xi-plus-circle-o xi-2x"></i>
 											</a>
 										</div>
 										<table class="table">
@@ -70,41 +82,33 @@
 											</tr>
 											<tr>
 												<th>결재자1</th>
-												<td align="center">
-													<input align="center" type="number" readOnly id="midApprovalId" name="approvalFirstId" >
+												<td align="center"><input align="center" type="number"
+													readOnly id="midApprovalId" name="approvalFirstId">
 												</td>
-												<td align="center">
-													<input type="text" readOnly id="midApprovalName" name="midApprovalName">
-												</td>
-												<td align="center">
-													<input type="text" readOnly id="midApprovalJob" name="midApprovalJob">
-												</td>
-												<td align="center">
-													<input type="text" readOnly id ="midApprovalDept" name="midApprovalDept">
-												</td>
+												<td align="center"><input type="text" readOnly
+													id="midApprovalName" name="midApprovalName"></td>
+												<td align="center"><input type="text" readOnly
+													id="midApprovalJob" name="midApprovalJob"></td>
+												<td align="center"><input type="text" readOnly
+													id="midApprovalDept" name="midApprovalDept"></td>
 											</tr>
 											<tr>
 												<th>결재자2</th>
-												<td align="center">
-													<input type="number" readOnly id="finApprovalId" name="approvalSecondId">
-												</td>
-												<td align="center">
-													<input type="text" readOnly id="finApprovalName" name="finApprovalName">
-												</td>
-												<td align="center">
-													<input type="text" readOnly id="finApprovalJob" name="finApprovalJob">
-												</td>
-												<td align="center">
-													<input type="text" readOnly id="finApprovalDept" name="finApprovalDept">
-												</td>
+												<td align="center"><input type="number" readOnly
+													id="finApprovalId" name="approvalSecondId"></td>
+												<td align="center"><input type="text" readOnly
+													id="finApprovalName" name="finApprovalName"></td>
+												<td align="center"><input type="text" readOnly
+													id="finApprovalJob" name="finApprovalJob"></td>
+												<td align="center"><input type="text" readOnly
+													id="finApprovalDept" name="finApprovalDept"></td>
 											</tr>
 										</table>
-										<span>제목</span> 
-										<input type="text" name="approvalTitle">
+										<span>제목</span> <input type="text" name="approvalTitle">
 										<textarea id="summernote" name="approvalContents"></textarea>
-										<input type="file" name="uploadFile" multiple="multiple" />
-										<input type="text" name="src" />
-										<input type="submit" value="기안 제출하기">
+										<input type="file" name="uploadFile" multiple="multiple" /> <input
+											type="text" name="src" /> <input type="submit"
+											value="기안 제출하기">
 									</div>
 								</form>
 							</div>
@@ -196,7 +200,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary save" data-dismiss="modal">Save changes</button>
+					<button type="button" class="btn btn-primary save"
+						data-dismiss="modal">Save changes</button>
 
 				</div>
 			</div>
@@ -210,6 +215,11 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script>
+	// =============== 시간 ====================
+   $(document).ready(function(){
+	$('.flipTimer').flipTimer({ direction: 'up' });
+});
+
 		// =============== 썸머 노트 ====================
 		// 불러오기
 		$('#summernote')
@@ -348,5 +358,6 @@
         });
         
 	</script>
+	<script src="resources/js/timer/jquery.flipTimer.js"></script>
 </body>
 </html>
