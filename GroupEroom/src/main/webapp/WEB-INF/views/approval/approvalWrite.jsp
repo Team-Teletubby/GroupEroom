@@ -40,11 +40,6 @@
 								<form action="approvalRegister.do" method="post"
 									enctype="multipart/form-data">
 									<div class="write-form">
-									<div class="flipTimer">
-														<div class="hours"></div>
-														<div class="minutes"></div>
-														<div class="seconds"></div>
-													</div>
 										<p>기본 설정</p>
 										<div id="Document-type">
 											<table id="table">

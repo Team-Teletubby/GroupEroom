@@ -18,6 +18,8 @@
 <!-- Style css  -->
 <link href="resources/css/style.css" rel="stylesheet">
 <link href="resources/css/style-responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="resources/css/timer/flipTimer.css">
+<link rel="stylesheet" href="resources/css/timer/demo.css">
 
 <!-- SummerNote CDN  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
@@ -118,11 +120,22 @@
 						</li>
 						</c:if>
 				</ul>
+				<div class="flipTimer">
+														<div class="hours"></div>
+														<div class="minutes"></div>
+														<div class="seconds"></div>
+													</div>
 			</div>
 		</aside>
 	</section>
-	
+	<script>
+	// =============== 시간 ====================
+	   $(document).ready(function(){
+		$('.flipTimer').flipTimer({ direction: 'up' });
+	});
+	</script>
 	<!-- 스크롤, 사이드바 등 설정  -->
+	<script src="resources/js/timer/jquery.flipTimer.js"></script>
 	<script class="include" type="text/javascript"
 		src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="resources/js/jquery.scrollTo.min.js"></script>
