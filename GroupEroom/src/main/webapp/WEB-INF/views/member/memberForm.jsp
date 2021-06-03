@@ -271,17 +271,18 @@ span.error {
             }
          });  
    
-         var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-         var nameJ = /^[가-힣]{2,6}$/;
       
 
 
          
       }); 
-       // 왜 위에 있는 이메일 메소드 안에서 작성하신 거죠...
+         var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+         
+ 
          $('#memberPhone').blur(function(){
+        	 
      		if(phoneJ.test($(this).val())){
-     			console.log(nameJ.test($(this).val()));
+     			console.log(phoneJ.test($(this).val()));
      			$("#phone_check").text('');
      		} else {
      			$('#phone_check').text('휴대폰번호를 확인해주세요 :)');
