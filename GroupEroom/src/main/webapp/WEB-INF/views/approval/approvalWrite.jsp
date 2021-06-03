@@ -76,7 +76,7 @@
 												<th>부서</th>
 											</tr>
 											<tr>
-												<th>결재자1</th>
+												<th>중간 결재자</th>
 												<td align="center"><input align="center" type="number"
 													readOnly id="midApprovalId" name="approvalFirstId">
 												</td>
@@ -88,7 +88,7 @@
 													id="midApprovalDept" name="midApprovalDept"></td>
 											</tr>
 											<tr>
-												<th>결재자2</th>
+												<th>최종 결재자</th>
 												<td align="center"><input type="number" readOnly
 													id="finApprovalId" name="approvalSecondId"></td>
 												<td align="center"><input type="text" readOnly

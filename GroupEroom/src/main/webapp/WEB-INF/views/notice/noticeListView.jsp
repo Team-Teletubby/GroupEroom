@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 <link href="resources/css/style-responsive.css" rel="stylesheet">
 <link href="resources/css/style2.css" rel="stylesheet">
 <meta charset="UTF-8">
