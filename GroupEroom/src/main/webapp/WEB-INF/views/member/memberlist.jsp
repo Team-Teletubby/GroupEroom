@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>사원 목록 조회</title>
 <style type="text/css">
@@ -35,6 +37,9 @@ span.error {
 	<!-- 사이드바 시작 -->
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 	<!-- 사이드바 끝  -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"><font></font>
+ <font></font>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script><font></font>
 
 	<section id="main-content">
 		<section class="wrapper">
@@ -92,5 +97,11 @@ span.error {
 								value="검색">
 						</form>
 					</div>
+					
+					
+					<script type="text/javascript">
+					npm install datatables.net    # Core library<font></font>
+					npm install datatables.net-dt # Styling<font></font>
+					</script>
 </body>
 </html>

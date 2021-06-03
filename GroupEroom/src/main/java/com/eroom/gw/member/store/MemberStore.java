@@ -15,4 +15,6 @@ public interface MemberStore {
 	public ArrayList<Member> selectDepartMentMember(String depName);
 	public Member selectOneById(int memberId);
 	public Member detailMember(int memberId);
+
+	public int checkemId(String memberEmail);
 }

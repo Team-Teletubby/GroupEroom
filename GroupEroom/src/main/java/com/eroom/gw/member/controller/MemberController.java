@@ -2,6 +2,7 @@ package com.eroom.gw.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -245,5 +247,15 @@ public class MemberController {
 		model.addAttribute("msg", "사원검색 실패");
 		return "common/errorPage";
 	}
+	
+	// 이메일 중복체크
+	@ResponseBody
+	@RequestMapping(value="emChk.do", method=RequestMethod.GET)
+	public String idDuplicateCheck(@RequestParam("memberEmail")String memberEmail) {
+		memberEmail= memberEmail +"@teletubby.co.kr"; 
+		return String.valueOf(service.checkemId(memberEmail));
+		
+	}
+	
 }
 

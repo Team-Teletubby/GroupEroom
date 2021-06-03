@@ -56,6 +56,11 @@
 		</if>
 		
 	</select>
+	<!-- 이메일아이디 중복 -->
+	<select id="checkemId" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = #{memberEmail }
+		
+	</select>
 	
 	<!-- 등록 -->
 	<insert id="insertMember" parameterType="Member">

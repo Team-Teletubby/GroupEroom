@@ -68,8 +68,8 @@ span.error {
 
 										<option value="인사관리">인사관리</option>
 										<option value="IT개발">IT개발</option>
-										<option value="영업">영업</option>
-										<option value="재무" selected="selected">재무</option>
+										<option value="재무">재무</option>
+										<option value="영업" selected="selected">영업</option>
 									</select>
 								</div>
 							</div>
@@ -80,14 +80,14 @@ span.error {
 
 									<select class="form-control" name="memberJob"
 										style="width: 95%;">
-											<option value="사원">사원</option>
+											<option value="대표">대표</option>
 											<option value="주임">주임</option>
 											<option value="대리">대리</option>
 											<option value="과장">과장</option>
 											<option value="차장">차장</option>
 											<option value="부장">부장</option>
 											<option value="전무">전무</option>
-											<option value="대표" selected="selected">대표</option></select>
+											<option value="사원" selected="selected">사원</option></select>
 								</div>
 							</div>
 							<div class="form-group ">
@@ -104,7 +104,7 @@ span.error {
 								<div class="col-lg-10">
 									
 										<input class="form-control" type="text"
-											name="memberRrn" style="width: 95%; background-color: white" value="${memberOne.memberRrn }" readonly>
+											name="memberRrn" style="width: 95%;  background-color: white" placeholder="(-)포함 형식에 맞게 입력해주세요" value="${memberOne.memberRrn }" readonly>
 
 									
 								</div>
@@ -114,7 +114,7 @@ span.error {
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text"
-										name="memberPhone" style="width: 95%;" placeholder="-포함 11자입력" value="${memberOne.memberPhone }">
+										name="memberPhone" style="width: 95%;" placeholder="숫자 11자리 입력 (-) 포함, xxx-xxxx-xxxx" value="${memberOne.memberPhone }">
 								</div>
 							</div>
 							<c:forTokens items="${memberOne.memberAddr }" delims="," var="addr" varStatus="status">
@@ -162,15 +162,15 @@ span.error {
 										<select class="form-control" name="bank"
 											style="width: 95%;">
 
-												<option value="국민">국민</option>
-												<option value="우리">우리</option>
-												<option value="하나">하나</option>
+												<option value="국민은행">국민은행</option>
+												<option value="우리은행">우리은행</option>
+												<option value="하나은행">하나은행</option>
 												<option value="농협">농협</option>
-												<option value="신한">신한</option>
-												<option value="축협">축협</option>
-												<option value="신협">신협</option>
-												<option value="제일">제일</option>
-												<option value="카카오뱅크" selected="selected">카카오뱅크</option>
+												<option value="신한은행">신한은행</option>
+												<option value="카카오뱅크">카카오뱅크</option>
+												<option value="신협은행">신협은행</option>
+												<option value="케이뱅크">케이뱅크</option>
+												<option value="기업은행" selected="selected">기업은행</option>
 										</select>
 								</div>
 							</div>

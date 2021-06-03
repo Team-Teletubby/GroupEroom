@@ -95,7 +95,7 @@ span.error {
 								<div class="col-lg-10">
 									
 										<input class="form-control" type="text"
-											name="memberRrn" style="width: 95%;">
+											name="memberRrn" style="width: 95%;" placeholder="(-)포함 형식에 맞게 입력해주세요">
 
 									
 								</div>
@@ -105,7 +105,7 @@ span.error {
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text"
-										name="memberPhone" style="width: 95%;" placeholder="-빼고 입력">
+										name="memberPhone" style="width: 95%;" placeholder="숫자 11자리 입력 (-) 포함, xxx-xxxx-xxxx">
 								</div>
 							</div>
 							<div class="form-group ">
@@ -145,15 +145,16 @@ span.error {
 										<select class="form-control" name="bank"
 											style="width: 95%;">
 
-												<option value="국민">국민</option>
-												<option value="우리">우리</option>
-												<option value="하나">하나</option>
+											
+												<option value="국민은행">국민은행</option>
+												<option value="우리은행">우리은행</option>
+												<option value="하나은행">하나은행</option>
 												<option value="농협">농협</option>
-												<option value="신한">신한</option>
-												<option value="축협">축협</option>
-												<option value="신협">신협</option>
-												<option value="제일">제일</option>
-												<option value="카카오뱅크" selected="selected">카카오뱅크</option>
+												<option value="신한은행">신한은행</option>
+												<option value="카카오뱅크">카카오뱅크</option>
+												<option value="신협은행">신협은행</option>
+												<option value="케이뱅크">케이뱅크</option>
+												<option value="기업은행" selected="selected">기업은행</option>
 										</select>
 								</div>
 							</div>
@@ -170,11 +171,14 @@ span.error {
 								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
 									이메일 </label>
 								<div class="col-lg-10 col-sm-9">
-										<input type="text" class="form-control" name="email1"
+										<input type="text" class="form-control" id="memberEmail" name="email1"
 											style="width: 300px; display: inline;">@<input
 											type="text" class="form-control" value="teletubby.co.kr"
 											readonly name="email2"
 											style="width: 300px; display: inline; background-color: white">
+											<br>
+										<span class="guide ok">이 이메일은 사용 가능 합니다.</span>
+										<span class="guide error">이 이메일은 사용 할 수 없습니다.</span>
 								</div>
 							</div>
 							<div class="form-group ">
@@ -252,11 +256,13 @@ span.error {
   		$('#imgViewArea').css({ 'display' : 'none' });
   	}
   	
-     /*  $("#userId").on("blur", function() {
-         var userId = $("#userId").val();
+  		
+       $("#memberEmail").on("keyup", function() {
+    	  
+          var memberEmail = $("#memberEmail").val();
          $.ajax({
-            url : "dupId.kh",
-            data : { "userId" : userId },
+            url : "emChk.do",
+            data : { "memberEmail" : memberEmail },
             success : function(result) {
                //console.log(result);
                if(result != 0) {
@@ -270,9 +276,9 @@ span.error {
             error : function() {
                console.log("전송 실패");
             }
-         });
+         });  
          
-      }); */
+      }); 
    </script>
 </body>
 </html>

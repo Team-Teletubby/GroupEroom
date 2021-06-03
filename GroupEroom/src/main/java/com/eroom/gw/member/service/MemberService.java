@@ -24,6 +24,10 @@ public interface MemberService {
 	// 특정 부서 사원 목록 
 	public ArrayList<Member> printdepartMentMemberAll(String depName);
 	
+	// 이메일 중복체크
+	public int checkemId(String memberEmail);
+
+
 	}
 	
 

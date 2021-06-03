@@ -1,5 +1,7 @@
 package com.eroom.gw.cooperation.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cooperation.domain.Cooperation;
 import com.eroom.gw.cooperation.domain.CooperationCmt;
 import com.eroom.gw.cooperation.service.CooperationService;
-
+import com.eroom.gw.notice.domain.Notice;
+@RestController
 @Controller
 public class CooperationController {
 
@@ -28,6 +32,14 @@ public class CooperationController {
 //게시글리스트 조회
 	@RequestMapping(value="coList.do")
 	public ModelAndView coopListView(ModelAndView mv) {	
+		ArrayList<Cooperation> coList = coService.printAll();
+		if(!coList.isEmpty()) {
+			mv.addObject("coList", coList);
+			mv.setViewName("cooperation/coList");
+		}else {
+			mv.addObject("msg", "게시글 조회 실패 !");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

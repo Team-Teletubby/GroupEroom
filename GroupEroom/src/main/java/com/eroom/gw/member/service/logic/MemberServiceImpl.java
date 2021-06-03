@@ -58,6 +58,12 @@ public class MemberServiceImpl implements MemberService {
 		return mStore.selectDepartMentMember(depName);
 	}
 
+	@Override
+	public int checkemId(String memberEmail) {
+		return mStore.checkemId(memberEmail);
+	}
+
+
 
 	}
 
