@@ -8,13 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.service.MemberService;
 import com.eroom.gw.member.store.MemberStore;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public  class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberStore mStore;
@@ -38,13 +39,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Member> printAll() {
-		return mStore.selectList();
+	public ArrayList<Member> printAll(PageInfo pi) {
+		return mStore.selectList(pi);
 	}
 
 	@Override
-	public ArrayList<Member> printSearchAll(Search search) {
-		ArrayList<Member> searchList = mStore.selectSearchList(search);
+	public ArrayList<Member> printSearchAll(Search search, PageInfo pi) {
+		ArrayList<Member> searchList = mStore.selectSearchList(search, pi);
 		return searchList;
 	}
 
@@ -62,6 +63,16 @@ public class MemberServiceImpl implements MemberService {
 	public int checkemId(String memberEmail) {
 		return mStore.checkemId(memberEmail);
 	}
+
+	@Override
+	public int getListCount() {
+		return mStore.selectListCount();
+	}
+	@Override
+	public int getSearchListCount(Search search) {
+		return mStore.selectSearchListCount(search);
+	}
+
 
 
 

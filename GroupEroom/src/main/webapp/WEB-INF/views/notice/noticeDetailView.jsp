@@ -40,8 +40,7 @@ $(document).ready(function(){
 					</div>
 					<div style="padding:50px; border:1px solid lightgrey; font-size:15px">${notice.noticeContents }</div>
 					<i class="fa fa-paperclip"></i>첨부 파일 : <a href="/resources/noticeFiles/${notice.renameFileName }" download>${notice.originalFileName}</a><br><br>
-					<div style="padding:10px; border:1px solid lightgrey; font-size:15px">
-					</div><br>
+					
 					
 				
 				<br><br><br>

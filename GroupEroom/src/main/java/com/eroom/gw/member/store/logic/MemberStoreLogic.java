@@ -3,10 +3,12 @@ package com.eroom.gw.member.store.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.store.MemberStore;
@@ -18,15 +20,18 @@ public class MemberStoreLogic implements MemberStore {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public ArrayList<Member> selectList() {
-		return (ArrayList)sqlSession.selectList("memberMapper.memberList");
+	public ArrayList<Member> selectList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.memberList", null, rowBounds);
 	}
 
 	//검색
 	@Override
-	public ArrayList<Member> selectSearchList(Search search) {
-
-		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchList", search);
+	public ArrayList<Member> selectSearchList(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchList", search, rowBounds);
 	}
 
 	//멤버 한명 선택
@@ -67,6 +72,21 @@ public class MemberStoreLogic implements MemberStore {
 	@Override
 	public int checkemId(String memberEmail) {
 		return sqlSession.selectOne("memberMapper.checkemId", memberEmail);
+	}
+
+
+	@Override
+	public int selectListCount() {
+	
+		return sqlSession.selectOne("memberMapper.selectListCount");
+	}
+
+
+	
+
+	@Override
+	public int selectSearchListCount(Search search) {
+		return sqlSession.selectOne("memberMapper.selectSearchListCount", search);
 	}
 
 	

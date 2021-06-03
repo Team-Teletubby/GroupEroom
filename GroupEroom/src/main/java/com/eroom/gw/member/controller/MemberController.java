@@ -31,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cboard.domain.CBoard;
+import com.eroom.gw.common.PageInfo;
+import com.eroom.gw.common.Pagination;
 import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
@@ -213,10 +215,13 @@ public class MemberController {
 
 	//사원 목록조회
 	@RequestMapping(value="memberList.do", method=RequestMethod.GET)
-	public String memberList(Model model) { 
-		ArrayList<Member> mlist = service.printAll();
+	public String memberList(Model model, @RequestParam(value="page", required=false)Integer page) { 
+		int currentPage = (page != null) ? page : 1;
+		int listCount = service.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Member> mlist = service.printAll(pi);
 		model.addAttribute("mlist", mlist);
-		
+		model.addAttribute("pi",pi);
 		return "member/memberlist";
 	}
 	
@@ -236,11 +241,15 @@ public class MemberController {
 	}
 	// 사원 검색 
 	@RequestMapping(value="memberSearch.do", method=RequestMethod.GET)
-	public String memberSearch(@ModelAttribute Search search,Model model) {
+	public String memberSearch(@ModelAttribute Search search,Model model, @RequestParam(value="page", required=false)Integer page) {
 		System.out.println(search);
-		ArrayList<Member> searchList = service.printSearchAll(search);
+		int currentPage = (page != null) ? page : 1;
+		int listCount = service.getSearchListCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Member> searchList = service.printSearchAll(search,pi);
 		if(!searchList.isEmpty()) {
 			model.addAttribute("mlist", searchList);
+			model.addAttribute("pi",pi);
 			model.addAttribute("search", search);
 			return "member/memberlist";
 		}

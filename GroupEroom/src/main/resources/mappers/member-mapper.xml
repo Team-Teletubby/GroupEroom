@@ -54,7 +54,7 @@
 		OR MEMBER_DEPT LIKE '%' || #{searchValue } || '%'
 		OR MEMBER_JOB LIKE '%' || #{searchValue } || '%'
 		</if>
-		
+		ORDER BY MEMBER_ID DESC
 	</select>
 	<!-- 이메일아이디 중복 -->
 	<select id="checkemId" resultType="_int">
@@ -62,6 +62,27 @@
 		
 	</select>
 	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	<select id="selectSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		<if test="searchCondition.toString() == 'name'">
+		 WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'dept'">
+		 WHERE MEMBER_DEPT LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'job'">
+		 WHERE MEMBER_JOB LIKE '%' || #{searchValue } || '%'
+		</if>	
+		<if test="searchCondition.toString() == 'all'">
+		WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%'
+		OR MEMBER_DEPT LIKE '%' || #{searchValue } || '%'
+		OR MEMBER_JOB LIKE '%' || #{searchValue } || '%'
+		</if>
+		ORDER BY MEMBER_ID DESC
+	</select>
 	<!-- 등록 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER (MEMBER_ID, MEMBER_DEPT, MEMBER_JOB, MEMBER_NAME, MEMBER_PWD, MEMBER_RRN, 

@@ -105,7 +105,7 @@ span.error {
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text"
-										name="memberPhone" style="width: 95%;" placeholder="숫자 11자리 입력 (-) 포함, xxx-xxxx-xxxx">
+										name="memberPhone" style="width: 95%;" id="memberPhone" placeholder="숫자 11자리 입력 (-) 포함, xxx-xxxx-xxxx">
 								</div>
 							</div>
 							<div class="form-group ">
@@ -163,7 +163,7 @@ span.error {
 									계좌번호 </label>
 								<div class="col-lg-10 col-sm-9">
 										<input type="text" class="form-control"
-											name="bankAccount" placeholder="-넣고 오류난다고 하지 않기"
+											name="bankAccount" placeholder="(-) 빼고 입력해주세요"
 											style="width: 95%;">
 								</div>
 							</div>
@@ -277,7 +277,16 @@ span.error {
                console.log("전송 실패");
             }
          });  
+         $("#memberPhone").bind("keyup", function() {
+      
+         var memberPhone = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+         var temp = $("#memberPhone").val();
+   
          
+         if(!memberPhone.test(temp)) {
+        	 alert("핸드폰 번호를 확인 해주세요!");
+			$("#memberPhone").val(temp.replace(/[^0-9]/g,""));
+         }
       }); 
    </script>
 </body>

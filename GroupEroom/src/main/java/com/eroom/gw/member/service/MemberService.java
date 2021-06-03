@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 
@@ -16,8 +17,8 @@ public interface MemberService {
 	// 정보수정
 	public int modifyMember(Member member);
 	//사원목록조회
-	public ArrayList<Member> printAll();
-	public ArrayList<Member> printSearchAll(Search search);
+	public ArrayList<Member> printAll(PageInfo pi);
+	public ArrayList<Member> printSearchAll(Search search, PageInfo pi);
 
 	public Member printMemberOne(int memberId);
 
@@ -26,6 +27,9 @@ public interface MemberService {
 	
 	// 이메일 중복체크
 	public int checkemId(String memberEmail);
+	//페이징
+	public int getListCount();
+	public int getSearchListCount(Search search);
 
 
 	}
