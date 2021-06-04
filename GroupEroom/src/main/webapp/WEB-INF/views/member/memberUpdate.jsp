@@ -199,6 +199,7 @@ span.error {
                <input type="radio" name="quitYn" value="Y" checked>Y <input type="radio" name="quitYn" value="N" checked>N
            				</div>
            				</div>
+           				
 							<div class="form-group ">
 								<label for="formFile" class="control-label col-lg-2 col-sm-3">
 									프로필사진 </label>

@@ -49,7 +49,13 @@
 					<c:forEach items="${noticeList }" var="Notice">
 						<tr>
 							<td>${Notice.noticeNo }</td>
-							<td>${Notice.noticeTitle }</td>
+							<td>
+								<c:url var="noticeDetail" value="noticeDetail.do">
+									<c:param name="noticeNo" value="${Notice.noticeNo }"></c:param>
+								</c:url>
+								<a href="${noticeDetail}">${Notice.noticeTitle }</a>
+							</td>
+							
 							<td>${Notice.memberName }</td>
 							<td>${Notice.enrollDate }</td>
 							<td>${Notice.hits }</td>
