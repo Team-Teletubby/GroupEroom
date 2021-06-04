@@ -95,7 +95,7 @@
 
 td>select {
 	font-size: 14px;
-	width: 20%;
+	width: 25%;
 	height: 25px;
 	text-align-last: center;
 }
@@ -107,6 +107,7 @@ td>select>option {
 tr>th {
 	padding: 10px;
 	vertical-align: middle;
+	text-align: center;
 }
 
 .document-select {
@@ -290,23 +291,52 @@ select:focus {
 
 .submit-btn {
 	width: 70px;
-	height: 43px;
+	height: 37px;
 	color: white;
 	font-weight: 600;
 	background-color: #4ECDC4;
 	border: none;
-	box-shadow: 0px 0px 5px #cacaca;
+	box-shadow: 0px 0px 2px #cacaca;
 }
 
 .modal-body {
 	height: 100%;
+	display: flex;
 	
 }
+
+.departmember-table {
+	margin-left: 5px;
+	text-align: center;
+	algin-items: center;
+}
+#rtb {
+	border-left: 3px solid #4ECDC4;
+	border-right: 1px solid #f7f7f7;
+}
+#rtb .rtb-tr-1st > th {
+	width: 100px;
+	background-color: #f7f7f7;
+}
+
+#rtb tbody tr {
+	border-bottom: 1px solid #f7f7f7;
+}
+
+#rtb tbody tr:hover {
+	background-color: #f3f3f3;
+}
+
+#rtb input {
+	width : 15px;
+	height: 15px;
+}
+
+
 .department-select-form  {
 	height: 100%;
-	display: inline-block;
+	display: block;
 	margin: 0px 30px 0px 30px;
-	float: left;
 }
 
 .department-select-form > table li {
@@ -316,3 +346,44 @@ select:focus {
 .departmember-table {
 	display: inline-block;
 }
+
+.approval-add-form {
+	width: 100px;
+	height: 100%;
+	margin: 60px 10px 0px 20px;
+}
+
+.approval-add-form li {
+	display: block;
+	margin-bottom: 50px;
+	text-align: center;
+	width: 100px;
+	height: 35px;
+	algin-items: center;
+	padding-top: 8px;
+	background-color: #4ECDC4;
+	color: white;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: 0px 0px 3px #d7d7d7;
+}
+
+.approval-add-form li:hover {
+	background-color: #34b6ac;
+}
+
+.approval-text-form {
+	width: 120px;
+	margin-left: 10px;
+}
+
+.midApprovalTextArea {
+	margin: 60px 10px 40px 10px;
+	resize: none;
+}
+
+.finApprovalTextArea {
+	margin-left: 10px;
+	resize: none;
+}
+

@@ -51,8 +51,10 @@
 															<optgroup label="기안문서">
 																<option value="Cooperation">협조문</option>
 															</optgroup>
-															<option value=""></option>
-															<option value="">양식3</option>
+															<optgroup label="신청서">
+																<option value="overtime">연장근무신청서</option>
+																<option value="costs">교통비지출결의서</option>
+															</optgroup>
 														</select>
 													</td>
 												</tr>
@@ -210,10 +212,10 @@
 					<table class="departmember-table">
 						<tr>
 							<td>
-								<table align="center" width="350" border="1" cellspacing="0"
+								<table align="center" width="400" cellspacing="0"
 									id="rtb">
 									<thead>
-										<tr>
+										<tr class="rtb-tr-1st">
 											<th>선택</th>
 											<th width="100">사번</th>
 											<th width="100">사원명</th>
@@ -225,27 +227,29 @@
 								</table>
 							</td>
 							<td>
-								<ul>
-									<li><sapn class="midApproval"> 중간결재자 </sapn></li>
-									<li><span class="finApproval"> 최종결재자 </span></li>
-								</ul>
-							</td>
-							<td>
-								<div>
-									<textarea class="midApprovalTextArea">1</textarea>
-								</div>
-								</div> <textarea class="finApprovalTextArea">2</textarea>
-								</div>
+								
 							</td>
 						</tr>
 						<tr>
 						</tr>
 					</table>
+					<div class="approval-add-form">
+						<a href="#">
+							<li class="midApproval">중간결재자</li>
+						</a>
+						<a href="#">
+							<li class="finApproval">최종결재자</li>
+						</a>
+					</div>
+					<div class="approval-text-form">
+						<textarea class="midApprovalTextArea"></textarea>
+						<textarea class="finApprovalTextArea"></textarea>
+					</div>
 					<!-- 사용자 지정 부분③ : 텍스트 메시지 -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary save"
+					<button type="button" id="save-btn" class="btn btn-primary save"
 						data-dismiss="modal">Save changes</button>
 
 				</div>
@@ -261,7 +265,7 @@
 		// 불러오기
 		$('#summernote')
 				.summernote(
-						'code',"ㅇdasdsa");
+						'code');
 
 		// 초기화
 		$('#summernote').summernote({
@@ -277,7 +281,11 @@
         	$("#approvalType").change(function() {
         		// 협조문
         		if($(this).val() == "Cooperation") {
-        			$(".note-editable").html('<h2 style="text-align: center; "><b>업무 협조문</b></h2><h5 style="text-align: center; "><br></h5><p style="text-align: left; margin-left: 50px;">1. 귀 부서의 무궁한 발전을 기원합니다.</p><p style="text-align: left; margin-left: 50px;">2. 오래과 같이 업무 협조를 요청하오니 적극 협조하여 주시기 바랍니다.</p><p style="text-align: left; margin-left: 50px;"><br></p><p style="text-align: center; margin-left: 50px;">- 아&nbsp; &nbsp; 래 -</p><p style="text-align: center; margin-left: 50px;"><br></p><h5 style="text-align: left; margin-left: 50px;"><b>1. 취 지&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>2. 협조사항&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>3. 협조 불이행 조치사항</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>4. 시행일</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: lef;margin-left: 50px;"><b>5. 문의</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5>^');
+        			$(".note-editable").html('<h2 style="text-align: center; "><b>업무 협조문</b></h2><h5 style="text-align: center; "><br></h5><p style="text-align: left; margin-left: 50px;">1. 귀 부서의 무궁한 발전을 기원합니다.</p><p style="text-align: left; margin-left: 50px;">2. 오래과 같이 업무 협조를 요청하오니 적극 협조하여 주시기 바랍니다.</p><p style="text-align: left; margin-left: 50px;"><br></p><p style="text-align: center; margin-left: 50px;">- 아&nbsp; &nbsp; 래 -</p><p style="text-align: center; margin-left: 50px;"><br></p><h5 style="text-align: left; margin-left: 50px;"><b>1. 취 지&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>2. 협조사항&nbsp;</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>3. 협조 불이행 조치사항</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b>4. 시행일</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: lef;margin-left: 50px;"><b>5. 문의</b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5><h5 style="text-align: left; margin-left: 50px;"><b><br></b></h5>');
+        		}else if($(this).val() == "overtime") {
+        			$(".note-editable").html('<h2 style="text-align: center; "><b>연장근무 신청서</b></h2><h2 style="text-align: center; "><b><br></b></h2><h2 style="text-align: center; "><b><br></b></h2><h2 style="text-align: center; "></h2><h2 style="text-align: center; "><table class="table table-bordered" style="text-align: left; background-color: rgb(255, 255, 255); font-size: 13px;"><tbody><tr><td style="text-align: center;"><b>신청부서(팀)</b></td><td style="text-align: center;">부서(팀)</td><td style="text-align: center;"><b>연장근무신청일</b></td><td style="text-align: center;">2021년 00월 00일 (요일)</td></tr><tr><td style="text-align: center;"><b>신청자</b></td><td style="text-align: center;"><br></td><td style="text-align: center;"><b>인원</b></td><td style="text-align: center;">0명</td></tr></tbody></table></h2><ul><li style="text-align: left;"><b><br></b></li></ul><h4><ul><li style="text-align: left;"><b><span style="font-family: &quot;Arial Black&quot;;">근무자 명단</span></b></li></ul></h4><table class="table table-bordered"><tbody><tr><td style="text-align: center;"><b>성 명</b></td><td style="text-align: center;"><b>구분</b></td><td style="text-align: center;"><b>근무일자</b></td><td style="text-align: center;"><b>근무시간</b></td><td style="text-align: center;"><b>사유</b></td><td style="text-align: center;"><b>근무장소</b></td></tr><tr><td><br></td><td><br></td><td><br></td><td style="text-align: center;">18:00 ~ 00:00</td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr></tbody></table><ul><li style="text-align: left;"><b><br></b></li><li style="text-align: left;"><b><br></b></li><li style="text-align: left;"><b><br></b></li><li style="text-align: left;"><b><br></b></li><li style="text-align: left;"><b><br></b></li><li style="text-align: center;"><b>위와 같이 연장근무를 신청함.</b></li></ul>');
+        		}else if($(this).val() == "costs") {
+        			$(".note-editable").html('<h2 style="text-align: center; "><b>교통비청구서</b></h2><h2 style="text-align: center; "><b><br></b></h2><h2 style="text-align: center; "><br></h2><table class="table table-bordered"><tbody><tr><td style="text-align: center;"><b>일자</b></td><td style="text-align: center;"><b>시간</b></td><td style="text-align: center;"><b>사용자</b></td><td style="text-align: center;"><b>출발지</b></td><td style="text-align: center;"><b>목적지</b></td><td style="text-align: center;"><b>거리(km)</b></td><td style="text-align: center;"><b>용무</b></td><td style="text-align: center;"><b>금액</b></td><td style="text-align: center;"><b>교통편</b></td><td style="text-align: center;"><b>증빙유무</b></td></tr><tr><td style="text-align: center;">2021-06-04(금)</td><td style="text-align: center;">08시 00분</td><td style="text-align: center;">000</td><td style="text-align: center;">서울</td><td style="text-align: center;">부산</td><td style="text-align: center;">400</td><td style="text-align: center;">출장</td><td style="text-align: center;">200,000</td><td style="text-align: center;">KTX</td><td style="text-align: center;">O</td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr></tbody></table><br><table class="table table-bordered"><tbody><tr><td style="text-align: center;"><b>총 금액</b></td><td>0원</td></tr></tbody></table><span style="color: rgb(32, 33, 36); font-family: &quot;Apple SD Gothic Neo&quot;, arial, sans-serif; font-size: 16px;"><div style="text-align: center;">※ 유류대 계산 기준 : 주행거리(km)&nbsp;<span style="text-align: center;">÷ 연비(km/L)&nbsp;</span><span style="color: rgb(77, 81, 86); font-size: 14px;">×</span><span style="text-align: center;">&nbsp;(L당 연료비/보통 휘발유)&nbsp;</span><span style="text-align: center; color: rgb(77, 81, 86); font-size: 14px;">× 150% (10원 미만 절사)</span></div></span><p style="text-align: center;"><br><br></p><p style="text-align: center;"><br><br><b>위와 같이 교통비를 지출하였음으로 상기금액을 청구함.</b></p><p style="text-align: center;"><br></p>');
         		}
         	});
 			// =============== 시간 ====================
