@@ -21,26 +21,18 @@ public class CalendarStoreLogic implements CalendarStore{
 	}
 
 	@Override
-	public Calendar selectOneCal(Calendar calendar) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int insertCal(Calendar calendar) {
 		return sqlSession.insert("calMapper.insertCal", calendar);
 	}
 
 	@Override
 	public int updateCal(Calendar calendar) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("calMapper.updateCal", calendar);
 	}
 
 	@Override
 	public int deleteCal(int calNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("calMapper.deleteCal", calNo);
 	}
 
 }

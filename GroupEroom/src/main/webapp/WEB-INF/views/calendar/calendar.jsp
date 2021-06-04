@@ -39,14 +39,23 @@
       selectable: true,
       events: 'https://fullcalendar.io/demo-events.json?overload-day',
       dateClick: function(info) {
-          alert('clicked ' + info.dateStr);
-      
+          $('#regStartDate').val(info.dateStr);
+          $('#regCal').modal('show');
       },
+      
+      select: function(info) {
+          $('#regStartDate').val(info.startStr);
+          $('#regEndDate').val(info.endStr);
+          $('#regCal').modal('show');
+      },
+      
       eventClick: function(info){
-    	  var detailModal = $('#regCal');
+    	  $("#delete-btn").html("");
+    	  var detailModal = $('#modifyCal');
     	  var eventObj = info.event;
-    	  
-    	  alert(eventObj.backgroundColor);
+    	  alert(eventObj.id);
+    	  $('#calNo').val(eventObj.id);
+    	  $('#deleteCalNo').val(eventObj.id);
     	  $('#title').val(eventObj.title);
     	  $('#startDate').val(moment(eventObj.start).format('YYYY-MM-DD'));
     	  $('#startTime').val(moment(eventObj.start).format('HH:mm'));
@@ -54,6 +63,7 @@
     	  $('#endTime').val(moment(eventObj.end).format('HH:mm'));
     	  $('#calInfo').val(eventObj.groupId);
     	  $("input:radio[name=color]:radio[value='"+eventObj.backgroundColor+"']").prop('checked', true);
+    	  $("#delete-btn").append("<a id='deletebtn' class='btn btn-theme04' href='deleteCal.do?calNo="+eventObj.id+"'>삭제</a>");
     	  detailModal.modal('show');
       },
       
@@ -111,7 +121,7 @@
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 	
 	
-<!-- 모달..  -->
+<!-- 등록 모달..  -->
 <div class="modal fade" id="regCal" tabindex="-1" role="dialog" aria-labelledby="regCalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
@@ -121,6 +131,70 @@
 <span aria-hidden="true">&times;</span> </button>
 </div>
 <form action="registerCal.do" method="post">
+<div class="modal-body">
+	일정 : <input type="text" class="form-control" name="calTitle" ><br>
+	색상 : 
+	<div>
+			<input value="#db2828" type="radio" name="color" />
+			<label for="red"><span class="red"></span></label>
+			
+			<input value="#f2711c" type="radio" name="color" />
+			<label for="orange"><span class="orange"></span></label>
+			
+			
+			<input value="#fbbd08" type="radio" name="color" />
+			<label for="yellow"><span class="yellow"></span></label>
+			
+			<input value="#b5cc18" type="radio" name="color"  />
+			<label for="olive"><span class="olive"></span></label>
+			
+			<input value="#21ba45" type="radio" name="color" checked/>
+			<label for="green"><span class="green"></span></label>
+			
+			<input value="#00b5ad" type="radio" name="color" />
+			<label for="teal"><span class="teal"></span></label>
+			
+			<input value="#2185d0" type="radio" name="color"  />
+			<label for="blue"><span class="blue"></span></label>
+			
+			<input value="#6435c9" type="radio" name="color"/>
+			<label for="violet"><span class="violet"></span></label>
+			
+			<input value="#a333c8" type="radio" name="color" />
+			<label for="purple"><span class="purple"></span></label>
+			
+			<input value="#e03997" type="radio" name="color" />
+			<label for="pink"><span class="pink"></span></label>
+	</div>
+	시작 일자 :  <input type="date" class="form-control" name="startDate" id="regStartDate" >
+	시작 시간 : <input type="time" class="form-control" name="startTime" >
+	<hr style="border:1px solid lightgray;">
+	종료 일자 :  <input type="date" class="form-control" name="endDate" id="regEndDate" >
+	종료 시간 : <input type="time" class="form-control" name="endTime" >
+	메모 : <textarea name="calInfo" class="form-control"></textarea>	
+</div>
+<div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<input type="submit" class="btn btn-theme" value="일정등록">
+</div>
+</form>
+
+</div>
+</div>
+</div>	
+
+
+
+
+<!-- 수정모달 -->
+<div class="modal fade" id="modifyCal" tabindex="-1" role="dialog" aria-labelledby="modifyCalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="modal-title" id="modifyCalLabel">일정등록</h3>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span> </button>
+</div>
+<form action="modifyCal.do" method="post">
 <div class="modal-body">
 	일정 : <input type="text" class="form-control" name="calTitle" id="title"><br>
 	색상 : 
@@ -163,15 +237,27 @@
 	종료 시간 : <input type="time" class="form-control" name="endTime" id="endTime">
 	메모 : <textarea name="calInfo" class="form-control" id="calInfo"></textarea>	
 </div>
-<div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<div class="modal-footer" id="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 <input type="hidden" name="calNo" id="calNo">
-<input type="submit" class="btn btn-theme" value="일정등록">
+<input type="submit" class="btn btn-theme02" value="수정">
+<span id="delete-btn"></span>
 </div>
 </form>
+</div>
 
 </div>
 </div>
-</div>	
+
+
+
+
+
+
+
+
+
+
+
 
 	<section id="main-content">	
       <section class="wrapper">

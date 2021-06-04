@@ -26,67 +26,29 @@ public class CalendarController {
 
 	@Autowired
 	private CalendarService calService;
-	
-//	@RequestMapping(value="calendarListView.do")
-//	public String calendarView() {
-//		return "calendar/calendar";
-//		
-//	}
-	
-//	// 내 일정 전체 출력
-//	@RequestMapping(value="calendarListView.do")
-//	public String calListView(HttpSession session, Model model) {
-//		Member member = (Member)session.getAttribute("LoginUser");
-//		int memberId = member.getMemberId();
-//		ArrayList<Calendar> calList = calService.selelctAllCal(memberId);
-//		model.addAttribute("calList",calList);
-//		return "calendar/calendar";
-//		/*
-//		 * if(!calList.isEmpty()) { }else { return ""; }
-//		 */
-//		
-//	}
-	
-	
+
 	// 내 일정 전체 출력
-	@RequestMapping(value="calendarListView.do")
+	@RequestMapping(value = "calendarListView.do")
 	public String calListView(HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("LoginUser");
+		Member member = (Member) session.getAttribute("LoginUser");
 		int memberId = member.getMemberId();
 		ArrayList<Calendar> calList = calService.selelctAllCal(memberId);
-		System.out.println(calList);
-		model.addAttribute("calList",calList);
+		model.addAttribute("calList", calList);
 		return "calendar/calendar";
-		/*
-		 * if(!calList.isEmpty()) { }else { return ""; }
-		 */
-		
 	}
-	
-	
-	
-	// 일정 상세보기
-	public ModelAndView calDetailView(ModelAndView mv, @RequestParam("")int calNo) {
-		return mv;
-	}
-	
+
 	// 일정 등록
-	@RequestMapping(value="registerCal.do", method=RequestMethod.POST)
-	public String calRegister(HttpSession session,
-								@RequestParam(value="calTitle") String calTitle,
-								@RequestParam(value="startDate")String startDate,
-								@RequestParam(value="endDate")String endDate,
-								@RequestParam(value="calInfo")String calInfo,
-								@RequestParam(value="startTime")String startTime,
-								@RequestParam(value="endTime")String endTime,
-								@RequestParam(value="color")String color
-								){
-		Member member = (Member)session.getAttribute("LoginUser");
+	@RequestMapping(value = "registerCal.do", method = RequestMethod.POST)
+	public String calRegister(HttpSession session, @RequestParam(value = "calTitle") String calTitle,
+			@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate,
+			@RequestParam(value = "calInfo") String calInfo, @RequestParam(value = "startTime") String startTime,
+			@RequestParam(value = "endTime") String endTime, @RequestParam(value = "color") String color) {
+		Member member = (Member) session.getAttribute("LoginUser");
 		Calendar calendar = new Calendar();
-		if(!(startTime =="")) {
+		if (!(startTime == "")) {
 			startDate = startDate + "T" + startTime;
 		}
-		if(!(endTime =="")) {
+		if (!(endTime == "")) {
 			endDate = endDate + "T" + endTime;
 		}
 		calendar.setMemberId(member.getMemberId());
@@ -96,23 +58,53 @@ public class CalendarController {
 		calendar.setEndDate(endDate);
 		calendar.setColor(color);
 		int result = calService.registerCal(calendar);
+		if (result > 0) {
+			return "redirect:calendarListView.do";
+		} else {
+			return "";
+		}
+	}
+
+	// 일정 수정
+	@RequestMapping(value = "modifyCal.do", method = RequestMethod.POST)
+	public String calModify(@RequestParam(value = "calTitle") String calTitle, @RequestParam(value="calNo") String calNum,
+			@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate,
+			@RequestParam(value = "calInfo") String calInfo, @RequestParam(value = "startTime") String startTime,
+			@RequestParam(value = "endTime") String endTime, @RequestParam(value = "color") String color) {
+		
+		Calendar calendar = new Calendar();
+		if (!(startTime == "")) {
+			startDate = startDate + "T" + startTime;
+		}
+		if (!(endTime == "")) {
+			endDate = endDate + "T" + endTime;
+		}
+		int calNo = Integer.parseInt(calNum);
+		calendar.setCalNo(calNo);
+		calendar.setCalTitle(calTitle);
+		calendar.setCalInfo(calInfo);
+		calendar.setStartDate(startDate);
+		calendar.setEndDate(endDate);
+		calendar.setColor(color);
+		int result = calService.modifyCal(calendar);
+		if (result > 0) {
+			return "redirect:calendarListView.do";
+		} else {
+			return "";
+		}
+	}
+
+	// 일정 삭제
+	@RequestMapping(value = "deleteCal.do")
+	public String calRemove(Model model, @RequestParam("calNo") String calNum) {
+		int calNo = Integer.parseInt(calNum);
+		int result = calService.removeCal(calNo);
 		if(result>0) {
 			return "redirect:calendarListView.do";
 		}else {
 			return "";
 		}
+
 	}
-	
-	// 일정 수정
-	public ModelAndView calModify(ModelAndView mv, @ModelAttribute Calendar calendar) {
-		return mv;
-	}
-	
-	// 일정 삭제
-	public String calRemove(Model model, @RequestParam("") int calNo) {
-		return null;
-		
-	}
-//	주석을 잘 달자..
-	
+
 }

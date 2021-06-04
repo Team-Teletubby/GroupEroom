@@ -21,26 +21,18 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public Calendar selectOneCal(int calNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int registerCal(Calendar calendar) {
 		return calStore.insertCal(calendar);
 	}
 
 	@Override
 	public int modifyCal(Calendar calendar) {
-		// TODO Auto-generated method stub
-		return 0;
+		return calStore.updateCal(calendar);
 	}
 
 	@Override
 	public int removeCal(int calNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return calStore.deleteCal(calNo);
 	}
 
 }
