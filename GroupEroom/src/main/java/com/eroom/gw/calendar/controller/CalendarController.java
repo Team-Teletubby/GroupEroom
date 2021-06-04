@@ -33,12 +33,28 @@ public class CalendarController {
 //		
 //	}
 	
+//	// 내 일정 전체 출력
+//	@RequestMapping(value="calendarListView.do")
+//	public String calListView(HttpSession session, Model model) {
+//		Member member = (Member)session.getAttribute("LoginUser");
+//		int memberId = member.getMemberId();
+//		ArrayList<Calendar> calList = calService.selelctAllCal(memberId);
+//		model.addAttribute("calList",calList);
+//		return "calendar/calendar";
+//		/*
+//		 * if(!calList.isEmpty()) { }else { return ""; }
+//		 */
+//		
+//	}
+	
+	
 	// 내 일정 전체 출력
 	@RequestMapping(value="calendarListView.do")
 	public String calListView(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("LoginUser");
 		int memberId = member.getMemberId();
 		ArrayList<Calendar> calList = calService.selelctAllCal(memberId);
+		System.out.println(calList);
 		model.addAttribute("calList",calList);
 		return "calendar/calendar";
 		/*
@@ -46,6 +62,8 @@ public class CalendarController {
 		 */
 		
 	}
+	
+	
 	
 	// 일정 상세보기
 	public ModelAndView calDetailView(ModelAndView mv, @RequestParam("")int calNo) {

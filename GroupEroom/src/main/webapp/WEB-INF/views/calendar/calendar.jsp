@@ -14,17 +14,14 @@
 <link href="resources/calendar/colorpick.css" rel="stylesheet">
 <script src='resources/calendar/main.js'></script>
 <script src='resources/calendar/locales-all.js'></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
     var initialLocaleCode = 'ko';
     var localeSelectorEl = document.getElementById('locale-selector');
     var calendarEl = document.getElementById('calendar');
-    var today = new Date();
-   /*  var t = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate(); */
-    var t = String(today.getFullYear()) + "-" + String(today.getMonth()+1) + "-" + String(today.getDate());
-
-   console.log(t)
+	var today = moment(new Date()).format('YYYY-MM-DD');
    
     var calendar = new FullCalendar.Calendar(calendarEl, {
     	headerToolbar: {
@@ -32,7 +29,7 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
-      initialDate: '2021-06-01',
+      initialDate: today,
       locale: initialLocaleCode,
       buttonIcons: false, // show the prev/next text
       weekNumbers: true,
@@ -41,48 +38,34 @@
       dayMaxEvents: true, // allow "more" link when too many events
       selectable: true,
       events: 'https://fullcalendar.io/demo-events.json?overload-day',
-       select: function(info) {
-    	 alert('selected ' + info.startStr + ' to ' + info.endStr);
-    	} ,
-       
+      dateClick: function(info) {
+          alert('clicked ' + info.dateStr);
+      
+      },
+      eventClick: function(info){
+    	  var detailModal = $('#regCal');
+    	  var eventObj = info.event;
+    	  
+    	  alert(eventObj.backgroundColor);
+    	  $('#title').val(eventObj.title);
+    	  $('#startDate').val(moment(eventObj.start).format('YYYY-MM-DD'));
+    	  $('#startTime').val(moment(eventObj.start).format('HH:mm'));
+    	  $('#endDate').val(moment(eventObj.end).format('YYYY-MM-DD'));
+    	  $('#endTime').val(moment(eventObj.end).format('HH:mm'));
+    	  $('#calInfo').val(eventObj.groupId);
+    	  $("input:radio[name=color]:radio[value='"+eventObj.backgroundColor+"']").prop('checked', true);
+    	  detailModal.modal('show');
+      },
+      
+      
       events: [
-        {
-          title: 'All Day Event',
-          start: '2020-09-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        
-         <c:forEach var ='i' items='${calList}'>
+        <c:forEach var ='i' items='${calList}'>
     	 { 
-    		no:'${i.calNo}',
+    		id:'${i.calNo}',
     	  	title: '${i.calTitle}',
     		start:'${i.startDate}',
     		end:'${i.endDate}',
-    		info:'${i.calInfo}',
+    		groupId : '${i.calInfo}',
     		backgroundColor : '${i.color}',
     		borderColor : '${i.color}'
     	},
@@ -129,19 +112,20 @@
 	
 	
 <!-- 모달..  -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="regCal" tabindex="-1" role="dialog" aria-labelledby="regCalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
-<div class="modal-header"> <h3 class="modal-title" id="exampleModalLabel">일정등록</h3>
+<div class="modal-header">
+<h3 class="modal-title" id="regCalLabel">일정등록</h3>
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 <span aria-hidden="true">&times;</span> </button>
 </div>
 <form action="registerCal.do" method="post">
 <div class="modal-body">
-	일정 : <input type="text" class="form-control" name="calTitle"><br>
+	일정 : <input type="text" class="form-control" name="calTitle" id="title"><br>
 	색상 : 
 	<div>
-			<input value="#db2828" type="radio" name="color" id="red" value="red" />
+			<input value="#db2828" type="radio" name="color" id="red" />
 			<label for="red"><span class="red"></span></label>
 			
 			<input value="#f2711c" type="radio" name="color" id="orange" />
@@ -154,7 +138,7 @@
 			<input value="#b5cc18" type="radio" name="color" id="olive" />
 			<label for="olive"><span class="olive"></span></label>
 			
-			<input value="#21ba45" type="radio" name="color" id="green" />
+			<input value="#21ba45" type="radio" name="color" id="green" checked/>
 			<label for="green"><span class="green"></span></label>
 			
 			<input value="#00b5ad" type="radio" name="color" id="teal" />
@@ -172,14 +156,15 @@
 			<input value="#e03997" type="radio" name="color" id="pink" />
 			<label for="pink"><span class="pink"></span></label>
 	</div>
-	시작 일자 :  <input type="date" class="form-control" name="startDate">
-	시작 시간 : <input type="time" class="form-control" name="startTime">
+	시작 일자 :  <input type="date" class="form-control" name="startDate" id="startDate">
+	시작 시간 : <input type="time" class="form-control" name="startTime" id="startTime">
 	<hr style="border:1px solid lightgray;">
-	종료 일자 :  <input type="date" class="form-control" name="endDate">
-	종료 시간 : <input type="time" class="form-control" name="endTime">
-	메모 : <textarea name="calInfo" class="form-control"></textarea>	
+	종료 일자 :  <input type="date" class="form-control" name="endDate" id="endDate">
+	종료 시간 : <input type="time" class="form-control" name="endTime" id="endTime">
+	메모 : <textarea name="calInfo" class="form-control" id="calInfo"></textarea>	
 </div>
 <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<input type="hidden" name="calNo" id="calNo">
 <input type="submit" class="btn btn-theme" value="일정등록">
 </div>
 </form>
@@ -187,9 +172,6 @@
 </div>
 </div>
 </div>	
-	
-	
-	
 
 	<section id="main-content">	
       <section class="wrapper">
@@ -201,7 +183,7 @@
                 <hr>
                 <div align="center">
 				<div id='calendar'></div>
-		        <button class="btn btn-theme02" data-toggle="modal" data-target="#exampleModal">일정추가</button>
+		        <button class="btn btn-theme02" data-toggle="modal" data-target="#regCal">일정추가</button>
 				</div>
             </div>
           </div>
