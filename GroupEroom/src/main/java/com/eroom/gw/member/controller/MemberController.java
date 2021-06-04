@@ -96,7 +96,7 @@ public class MemberController {
 	// 사원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST )
 	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2") String address2, 
-			@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) { 
+			@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request, @RequestParam("Rrn1") String Rrn1, @RequestParam("Rrn2") String Rrn2) { 
 		
 		if(!uploadFile.getOriginalFilename().equals("")) { 
 			String renameFileName = saveFile(uploadFile, request);
@@ -108,6 +108,7 @@ public class MemberController {
 		
 		member.setMemberAddr(post+","+address1+","+address2);
 		member.setMemberEmail(email1+"@"+email2);
+		member.setMemberRrn(Rrn1 + "-" + Rrn2);
 		int result = service.registerMember(member);
 		String path = "";
 		if(result >0) {
@@ -172,7 +173,8 @@ public class MemberController {
 							 @RequestParam("post") String post,
 							@RequestParam("address1") String addr1,
 							@RequestParam("address2") String addr2, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
-		System.out.println("테스트"+member.getRenameFileName());
+		
+		System.out.println("test"+member.getMemberId());
 		// 프로필 수정 
 		if (reloadFile != null && !reloadFile.isEmpty()) { 
 			if(member.getRenameFileName() != "") {

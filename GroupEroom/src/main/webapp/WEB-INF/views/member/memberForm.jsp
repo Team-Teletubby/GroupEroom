@@ -95,8 +95,10 @@ span.error {
 								<div class="col-lg-10">
 									
 										<input class="form-control" type="text"
-											name="memberRrn" style="width: 95%;" placeholder="(-)포함 형식에 맞게 입력해주세요">
-
+											name="Rrn1" style="width: 300px; display: inline;" id=MemberRrn placeholder="앞자리 6자리" maxlength="6"/>
+											-<input class="form-control" type="text"
+											name="Rrn2" style="width: 300px; display: inline;" id=MemberRrn placeholder="뒷자리 7자리" >
+										<div class="check_font" id="memberRrn"></div>
 									
 								</div>
 							</div>
@@ -105,7 +107,7 @@ span.error {
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text"
-										name="memberPhone" style="width: 95%;" id="memberPhone" placeholder="숫자 11자리 입력 (-) 포함, xxx-xxxx-xxxx">
+										name="memberPhone" style="width: 95%;" id="memberPhone" placeholder="숫자 11자리 입력 (-) 미포함">
 										<div class="check_font" id="phone_check"></div>
 
 								</div>
@@ -271,10 +273,6 @@ span.error {
             }
          });  
    
-      
-
-
-         
       }); 
          var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
          
@@ -288,7 +286,16 @@ span.error {
      			$('#phone_check').text('휴대폰번호를 확인해주세요 :)');
      			$('#phone_check').css('color', 'red');
      		}
+     		
      	});  
+   
+     	 function sendit() {
+     		 var Rrn1 = document.getElementById("Rrn1");
+             var Rrn2 = document.getElementById("Rrn2");
+             var mJuminNumber = Rrn1.value + Rrn2.value;
+
+     	 }
+     	
    </script>
 </body>
 </html>
