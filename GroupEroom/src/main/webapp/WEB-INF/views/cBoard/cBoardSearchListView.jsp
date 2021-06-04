@@ -49,7 +49,12 @@
 					<c:forEach items="${cBoardList }" var="cBoard">
 						<tr>
 							<td>${cBoard.cBoardNo }</td>
-							<td>${cBoard.cBoardTitle }</td>
+							<td>
+							<c:url var="cBoardDetail" value="cBoardDetail.do">
+								<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
+							</c:url>
+							<a href="${cBoardDetail}">${cBoard.cBoardTitle }</a>
+							</td>
 							<td>${cBoard.memberName }</td>
 							<td>${cBoard.enrollDate }</td>
 							<td>${cBoard.hits }</td>
