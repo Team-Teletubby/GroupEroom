@@ -1,7 +1,6 @@
 package com.eroom.gw.mail.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,7 +100,6 @@ public class MailController {
 		}
 		return mv;
 	}
-	
 //메일상세조회
 	@RequestMapping(value="mailDetailView.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView mailDetailView(ModelAndView mv, @RequestParam("mailNo") int mailNo) {
@@ -112,7 +110,10 @@ public class MailController {
 		//상세조회 불러오기
 		Mail mail = mService.printOne(mailNo);
 		System.out.println(mail.toString());
-		if(mail != null) {
+		if(mail != null && "Y".equals(mail.getTrashYn())) { //휴지통인 경우
+			mv.addObject("mail", mail);
+			mv.setViewName("mail/trashmailDetailView");
+		}else if(mail != null && "N".equals(mail.getTrashYn())) { //휴지통이 아닌 경우
 			mv.addObject("mail", mail);
 			mv.setViewName("mail/mailDetailView");
 		}else {
@@ -121,9 +122,40 @@ public class MailController {
 		}
 		return mv;
 	}
+
+//메일함 to 휴지통
+	@RequestMapping(value="moveToTrash.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView moveTrash(ModelAndView mv, HttpServletRequest request, @RequestParam("mailNo") int mailNo,
+								@ModelAttribute Mail mail) {
+		mail.setMailNo(mailNo);
+		int result = mService.moveToTrash(mail);
+		if(result > 0 && mailNo % 2 == 1) {
+			mv.setViewName("redirect:inboxListView.do");
+		}else if(result > 0 && mailNo % 3 == 1){
+			mv.setViewName("redirect:sentListView.do");
+		}else {
+			mv.addObject("msg", "휴지통으로 이동 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
 	
-//게시글 등록화면단
-	@RequestMapping(value="ComposeMailView.do")
+//휴지통 to 메일함
+	@RequestMapping(value="returnToMailbox.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView returnToMailbox(ModelAndView mv, HttpServletRequest request, @RequestParam("mailNo") int mailNo,
+								@ModelAttribute Mail mail) {
+		mail.setMailNo(mailNo);
+		int result = mService.returnToMailbox(mail);
+		if(result > 0) {
+			mv.setViewName("redirect:inboxListView.do");
+		}else {
+			mv.addObject("msg", "휴지통으로 이동 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	
+//메일 등록화면단
+	@RequestMapping(value="mailComposeView.do")
 	public String fBoardWriteView() {
 		return "mail/composeMailView";
 	}
@@ -140,8 +172,8 @@ public class MailController {
 		int receiveResult = 0;
 		int sendResult = 0;
 		String path = "";
-		receiveResult = mService.composeMailReceive(mail);
-		sendResult = mService.composeMailSend(mail);
+		receiveResult = mService.composeMailReceive(mail); //홀수
+		sendResult = mService.composeMailSend(mail); //짝수
 		if(receiveResult > 0 && sendResult > 0) {
 			path = "redirect:inboxListView.do";
 		}else {

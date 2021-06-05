@@ -12,7 +12,7 @@
 <meta name="author" content="Dashboard">
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>메일</title>
+<title>휴지통</title>
 
 <!-- Favicons -->
 <link href="img/favicon.png" rel="icon">
@@ -79,15 +79,16 @@
 									<div class="mail-header row">
 										<div class="col-md-8">
 											<h4 class="pull-left" name="mailTitle">${mail.mailTitle }</h4>
-											<a id=mailNo name="mailNo" hidden>${mail.mailNo }</a>
+											<a name="mailNo" value="${mail.mailNo }" hidden></a>
 										</div>
 										<div class="col-md-4">
 											<div class="compose-btn pull-right">
-												<a href="mail_compose.html" class="btn btn-sm btn-theme"><i
-													class="fa fa-reply"></i> Reply</a>
+												<a onclick="moveMailbox(${mail.mailNo})" class="btn btn-sm btn-warning">
+													<i class="fa fa-reply"></i> 메일함으로
+												</a>
 												<button class="btn btn-sm tooltips"
 													data-original-title="Trash" data-toggle="tooltip"
-													data-placement="top" onclick="moveTrash(${mail.mailNo})">
+													data-placement="top">
 													<i class="fa fa-trash-o"></i>
 												</button>
 											</div>
@@ -98,7 +99,7 @@
 											<div class="col-md-8">
 												<div>
 													보낸 사람 : <strong name="senderName">${mail.senderName }</strong><br>
-													받는 사람 : <strong name="receiverName">${mail.receiverName }</strong>&nbsp;(참조 : <a name="ccId">${mail.ccId }</a>)
+													받는 사람 : <strong name="receiverName">${mail.receiverName }</strong>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -132,17 +133,15 @@
 											</ul>
 										</div>
 										<div class="compose-btn pull-left">
-											<a href="mail_compose.html" class="btn btn-sm btn-theme"><i
-												class="fa fa-reply"></i> Reply</a>
-											<button class="btn btn-sm ">
-												<i class="fa fa-arrow-right"></i> Forward
-											</button>
+											<a onclick="moveMailbox(${mail.mailNo})" class="btn btn-sm btn-warning">
+												<i class="fa fa-reply"></i> 메일함으로
+											</a>
 											<button class="btn btn-sm tooltips"
 												data-original-title="Trash" data-toggle="tooltip"
-												data-placement="top" onclick="moveTrash(${mail.mailNo})">
+												data-placement="top" onclick="location.href='#'">
 												<i class="fa fa-trash-o"></i>
 											</button>
-											<button class="btn btn-sm btn-theme" onclick="history.back()">Mail List</button>
+											<button class="btn btn-sm btn-theme" onclick="location.href='trashListView.do'">Mail List</button>
 										</div>
 									</div>
 							</form>
@@ -186,16 +185,15 @@
 	<!--common script for all pages-->
 	<script src="lib/common-scripts.js"></script>
 	<!--script for this page-->
-	
 	<script>
-		function moveTrash(mailNo) {
-			var chk = confirm("휴지통으로 이동하시겠습니까?");
+		function moveMailbox(mailNo) {
+			var chk = confirm("메일함으로 옮기시겠습니까?");
 			if (chk) {
-				location.href='moveToTrash.do?mailNo='+${mail.mailNo};
+				location.href='returnToMailbox.do?mailNo='+${mail.mailNo};
 			}
 		}
 	</script>
-
+	
 	<script>
 		if (window.self == window.top) {
 			(function(i, s, o, g, r, a, m) {

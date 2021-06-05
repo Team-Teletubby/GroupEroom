@@ -18,6 +18,7 @@ public class Mail {
 	private Timestamp readDate;
 	private int readCount;
 	private String trashYn;
+	private int[] deleteYn;
 	
 	public Mail() {
 		super();
@@ -43,6 +44,14 @@ public class Mail {
 		this.trashYn = trashYn;
 	}
 	
+	public int[] getDeleteYn() {
+		return deleteYn;
+	}
+
+	public void setDeleteYn(int[] deleteYn) {
+		this.deleteYn = deleteYn;
+	}
+
 	public int getMailNo() {
 		return mailNo;
 	}

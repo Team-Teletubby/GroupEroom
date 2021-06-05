@@ -3,19 +3,19 @@
 <mapper namespace="mailMapper">
 
 	<resultMap type="Mail" id="mailResultMap">
-		<id property="mailNo" column="MAIL_NO" />
-		<result property="receiverId" column="RECEIVER_ID" />
+		<id property="mailNo" 			column="MAIL_NO" />
+		<result property="receiverId" 	column="RECEIVER_ID" />
 		<result property="receiverName" column="RECEIVER_NAME" />
-		<result property="senderId" column="SENDER_ID" />
-		<result property="senderName" column="SENDER_NAME" />
-		<result property="ccId" column="CC_ID" />
-		<result property="ccName" column="CC_NAME" />
-		<result property="mailTitle" column="MAIL_TITLE" />
+		<result property="senderId" 	column="SENDER_ID" />
+		<result property="senderName" 	column="SENDER_NAME" />
+		<result property="ccId" 			column="CC_ID" />
+		<result property="ccName" 		column="CC_NAME" />
+		<result property="mailTitle" 	column="MAIL_TITLE" />
 		<result property="mailContents" column="MAIL_CONTENTS" />
-		<result property="sentDate" column="SENT_DATE" />
-		<result property="readDate" column="READ_DATE" />
-		<result property="readCount" column="READ_COUNT" />
-		<result property="trashYn" column="TRASH_YN" />
+		<result property="sentDate" 	column="SENT_DATE" />
+		<result property="readDate" 	column="READ_DATE" />
+		<result property="readCount" 	column="READ_COUNT" />
+		<result property="trashYn" 		column="TRASH_YN" />
 	</resultMap>
 	
 <!-- 카운트 출력 -->
@@ -62,7 +62,7 @@
 	
 <!-- 메일 상세조회  -->
 	<select id="selectOneMail" resultMap="mailResultMap">
-		SELECT a.MAIL_NO, a.RECEIVER_ID, b.MEMBER_NAME AS RECEIVER_NAME, a.SENDER_ID, c.MEMBER_NAME AS SENDER_NAME, a.CC_ID, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE
+		SELECT a.MAIL_NO, a.RECEIVER_ID, b.MEMBER_NAME AS RECEIVER_NAME, a.SENDER_ID, c.MEMBER_NAME AS SENDER_NAME, a.CC_ID,  a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.TRASH_YN 
 		FROM MAIL a 
 		INNER JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID 
 		INNER JOIN MEMBER c ON a.SENDER_ID = c.MEMBER_ID 
@@ -71,21 +71,34 @@
 	
 <!-- 보내는사람 메일생성 -->
 	<insert id="composeMailSend">
-		INSERT INTO MAIL
+		INSERT INTO MAIL 
 		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 <!-- 받는사람 메일생성 -->
 	<insert id="composeMailReceive">
-		INSERT INTO MAIL
+		INSERT INTO MAIL 
 		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-<!-- 게시글 수정
-	<update id="updateBoard">
-		UPDATE BOARD
-		SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, ORIGINAL_FILENAME = #{originalFilename}, B_UPDATE_DATE = #{bUpdateDate}
-		WHERE BOARD_NO = #{boardNo}
-	</update> -->
+<!-- 메일 삭제 -->
+	<delete id="deleteMail" parameterType="_int">
+		DELETE FROM MAIL 
+		WHERE MAIL_NO = #{mailNo}
+	</delete>
+	
+<!-- 휴지통으로 이동 -->
+	<update id="updateTrashY">
+		UPDATE MAIL 
+		SET TRASH_YN = 'Y'
+		WHERE MAIL_NO = #{mailNo}
+	</update> 
+	
+<!-- 원래 편지함으로 이동 -->
+	<update id="updateTrashN">
+		UPDATE MAIL 
+		SET TRASH_YN = 'N'
+		WHERE MAIL_NO = #{mailNo}
+	</update> 
 
 <!-- 게시글 삭제
 	<delete id="deleteBoard" parameterType="_int">

@@ -47,13 +47,9 @@
 								<a href="mailComposeView.do" class="btn btn-compose"><i
 									class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
-									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox
-									</a></li>
-									<li><a href="sentListView.do"> <i
-											class="fa fa-envelope-o"></i>Send Mail
-									</a></li>
-									<li class="active"><a href="trashListView.do"> <i
-											class="fa fa-trash-o"></i>Trash
+									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox</a></li>
+									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>Send Mail </a></li>
+									<li class="active"><a href="trashListView.do"> <i class="fa fa-trash-o"></i>Trash
 									</a></li>
 								</ul>
 							</div>
@@ -72,28 +68,14 @@
 									</form>
 								</h4>
 							</header>
-							<form action="sentListView.do" method="GET">
+							<form action="trashListView.do" method="GET">
 								<div class="panel-body minimal">
 									<div class="mail-option">
-										<div class="chk-all">
-											<div class="pull-left mail-checkbox">
-												<input type="checkbox" class="">
-											</div>
-											<div class="btn-group">
-												<a data-toggle="dropdown" href="#" class="btn mini all">
-													All <i class="fa fa-angle-down "></i>
-												</a>
-												<ul class="dropdown-menu">
-													<li><a href="#"> None</a></li>
-													<li><a href="#"> Read</a></li>
-													<li><a href="#"> Unread</a></li>
-												</ul>
-											</div>
-										</div>
+										<!-- 리스트 상단버튼 -->
 										<div class="btn-group">
 											<a data-original-title="Delete" data-placement="top"
-												data-toggle="dropdown" href="#" class="btn mini tooltips">
-												<i class="fa fa-trash-o"></i>
+												data-toggle="dropdown" class="btn mini tooltips" id="chkDelete" onclick="deleteValue();">
+												 <i class="fa fa-trash-o"></i>
 											</a>
 										</div>
 										<!-- ################# 페이징 ################# -->
@@ -130,8 +112,9 @@
 												<tbody>
 													<c:forEach items="${ mailList }" var="mail">
 														<tr class="">
-															<td class="inbox-small-cells"><input type="checkbox"
-																class="mail-checkbox"></td>
+															<td class="inbox-small-cells">
+																<input type="checkbox" class="mail-checkbox" name="deleteYn" value="${mail.mailNo}">
+															</td>
 															<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
 															<c:if test="${mail.readCount >= 1}">
 																<td class="view-message" name="readCount"><i class="fa fa-envelope-open"></i>
@@ -193,6 +176,39 @@
 	<!--common script for all pages-->
 	<script src="resources/js/common-scripts.js"></script>
 	<!--script for this page-->
+	
+	<!-- 체크박스로 삭제하기 -->
+	<script>
+		function deleteValue() {
+			var cnt = $("input[name='deleteYn']:checked").length;
+			var arr = new Array();
+			$("input[name='deleteYn']:checked").each(function() {
+				arr.push($(this).attr('value'));
+			});
+			if(cnt == 0) {
+				alert("선택된 메일이 없습니다.");
+			}
+			else{
+				$.ajax = {
+						type: "POST",
+						url: "deleteSelectedMail.do",
+						data: "mailNo=" + arr + "&CNT=" + cnt,
+						dataType: "json",
+						success: function(jdata){
+							if(jdata != 1) {
+								alert("삭제 오류");
+							}
+							else {
+								alert("삭제 성공");
+							}
+						},
+						error:function(){alert("서버통신 오류")};
+				};
+			}
+		}
+	</script>
+
+
 
 </body>
 

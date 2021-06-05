@@ -1,6 +1,7 @@
 package com.eroom.gw.mail.service.logic;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class MailServiceImpl implements MailService {
 	public int getListCount() {
 		return mStore.selectListCount();
 	}
-	
 	@Override
 	public int addReadCount(int mailNo) {
 		return mStore.addReadCount(mailNo);
@@ -57,17 +57,25 @@ public class MailServiceImpl implements MailService {
 	public int composeMailReceive(Mail mail) {
 		return mStore.composeMailReceiver(mail);
 	}
-
-	
-	
-	
-	
-	
+//파일 
 	@Override
 	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+		
+//메일이동 및 삭제
+	@Override
+	public int moveToTrash(Mail mail) {
+		return mStore.updateTrashY(mail);
+	}
+	@Override
+	public int returnToMailbox(Mail mail) {
+		return mStore.updateTrashN(mail);
+	}
 	
+
+
+
 	
 }

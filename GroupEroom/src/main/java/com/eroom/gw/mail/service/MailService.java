@@ -1,6 +1,7 @@
 package com.eroom.gw.mail.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.mail.domain.Mail;
@@ -10,6 +11,10 @@ public interface MailService {
 	public ArrayList<Mail> printAllInbox(PageInfo pi, int receiverId);
 	public ArrayList<Mail> printAllSentMail(PageInfo pi, int receiverId);
 	public ArrayList<Mail> printAllTrash(PageInfo pi, int receiverId);
+
+	//이동 및 삭제
+	public int moveToTrash(Mail mail); //휴지통으로 이동
+	public int returnToMailbox(Mail mail); //메일함으로 리턴
 	
 	//페이징
 	public int getListCount();
@@ -24,5 +29,6 @@ public interface MailService {
 	
 	//파일
 	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize); //업로드
+	
 
 }
