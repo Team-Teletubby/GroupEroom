@@ -95,6 +95,12 @@
                       <input class="form-control " id="curl" type="url" name="quitYn" value="${memberOne.quitYn }" readonly>
                     </div>
                   </div>
+                  <div class="form-group ">
+                    <label for="curl" class="control-label col-lg-2">퇴사날짜</label>
+                    <div class="col-lg-10">
+                      <input class="form-control " id="quitdate" type="date" name="quitDate" value="${memberOne.quitDate }" readonly>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                        <c:url var="mModify" value="info.do">

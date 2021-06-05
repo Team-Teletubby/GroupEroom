@@ -98,9 +98,20 @@
 	</select>
 	<!-- 수정 -->
 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET MEMBER_DEPT = #{memberDept }, MEMBER_JOB = #{memberJob }, MEMBER_PHONE = #{memberPhone } , MEMBER_EMAIL = #{memberEmail} , MEMBER_ADDR = #{memberAddr } , BANK = #{bank }, ACCOUNT = #{bankAccount }, QUIT_YN = #{quitYn }, RENAMEFILE_NAME = #{renameFileName }, ORIGINALFILE_NAME = #{originalFileName } 
+		UPDATE MEMBER
+		<if test='quitYn.toString() == "Y"'>
+		 SET MEMBER_DEPT=#{memberDept },MEMBER_JOB=#{memberJob },MEMBER_PHONE=#{memberPhone },
+		  MEMBER_EMAIL=#{memberEmail},MEMBER_ADDR=#{memberAddr },BANK=#{bank }, 
+		  ACCOUNT=#{bankAccount },QUIT_YN = #{quitYn },RENAMEFILE_NAME = #{renameFileName }, 
+		  ORIGINALFILE_NAME=#{originalFileName },QUIT_DATE=SYSDATE 
+		</if>
+		<if test='quitYn.toString() == "N"'>
+		SET MEMBER_DEPT=#{memberDept },MEMBER_JOB=#{memberJob },MEMBER_PHONE=#{memberPhone },
+		  MEMBER_EMAIL=#{memberEmail},MEMBER_ADDR=#{memberAddr },BANK=#{bank },
+		   ACCOUNT=#{bankAccount },QUIT_YN=#{quitYn },RENAMEFILE_NAME=#{renameFileName },
+		    ORIGINALFILE_NAME=#{originalFileName },QUIT_DATE=NULL
+		</if>
 		WHERE MEMBER_ID = #{memberId}
-		
 	</update>
 	
 	

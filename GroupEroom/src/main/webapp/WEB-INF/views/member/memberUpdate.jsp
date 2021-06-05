@@ -187,19 +187,30 @@ span.error {
 								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
 									이메일 </label>
 								<div class="col-lg-10 col-sm-9">
-										<input type="text" class="form-control" name="memberEmail"
-											style="width: 300px; display: inline;" value="${memberOne.memberEmail }">
-											
+									<input type="text" class="form-control" name="memberEmail"
+										style="width: 300px; display: inline;"
+										value="${memberOne.memberEmail }">
+
 								</div>
 							</div>
-					<div class="form-group ">
+							<div class="form-group ">
 								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
 									퇴사여부 </label>
 								<div class="col-lg-10 col-sm-9">
-               <input type="radio" name="quitYn" value="Y" checked>Y <input type="radio" name="quitYn" value="N" checked>N
-           				</div>
-           				</div>
-           				
+									<input type="radio" name="quitYn" value="Y" id="quitY" checked>Y
+									<input type="radio" name="quitYn" value="N" id="quitN" checked>N
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
+									퇴사날짜 </label>
+								<div class="col-lg-10 col-sm-9">
+									<input type="date" class="form-control" name="quitDate"
+										id="quitDate" style="width: 300px; display: inline;"
+										value="${memberOne.quitDate }">
+
+								</div>
+							</div>
 							<div class="form-group ">
 								<label for="formFile" class="control-label col-lg-2 col-sm-3">
 									프로필사진 </label>
@@ -296,6 +307,30 @@ span.error {
          });
          
       }); */
+      v
+     $("#quitY").on('change',function(){	 
+    	$("#quitY").val();
+    	 var value=this.val();
+    	 var quitY =
+    	if(value=="Y"){
+    		console.log(quitYn);
+    			$('input[name="quitDate"]').val(getFormatDate(new Date()));
+    			
+    		}
+    	});
+     
+     
+     function getFormatDate(date){
+    	 var year =date.getFullYear();
+    	 var month = (1+ date.getMonth());
+    	 month = month >= 10? month : '0' + month; 
+    	 var day = date.getDate();
+    	 day = day >= 10? day:'0'+day;
+    	 return year+'-'+month+'-'+day;
+    	 
+     }
+    		 
+      
    </script>
 </body>
 </html>

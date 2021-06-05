@@ -56,10 +56,10 @@ span.error {
 					<table class="table">
 						<thead>
 							<tr>
-								<th>이름</th>
+								<th>사번</th>
 								<th>부서</th>
 								<th>직급</th>
-								<th>사번</th>
+								<th>이름</th>
 								<th>폰번호</th>
 							</tr>
 						</thead>
@@ -68,10 +68,10 @@ span.error {
 								<tr>
 									<td><c:url var="memberDetailView" value="memberDetail.do">
 											<c:param name="memberId" value="${row.memberId}"></c:param>
-										</c:url> <a href="${memberDetailView }">${row.memberName}</a></td>
+										</c:url> <a href="${memberDetailView }">${row.memberId}</a></td>
 									<td>${ row.memberDept }</td>
 									<td>${row.memberJob }</td>
-									<td>${row.memberId }</td>
+									<td>${row.memberName }</td>
 									<td>${row.memberPhone }</td>
 								</tr>
 						</tbody>
