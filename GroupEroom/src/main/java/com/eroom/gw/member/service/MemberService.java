@@ -30,7 +30,9 @@ public interface MemberService {
 	//페이징
 	public int getListCount();
 	public int getSearchListCount(Search search);
-
+	
+	// 비밀번호 변경
+	public int modifymemberPwd (Member member);
 
 	}
 	

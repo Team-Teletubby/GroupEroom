@@ -98,7 +98,7 @@ span.error {
 						
 					<!-- 페이지 -->
 					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-						<c:url var="pagination" value="memberList.do">
+						<c:url var="pagination" value="memberSearch.do">
 							<c:param name="page" value="${p }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -114,7 +114,7 @@ span.error {
 				
 				
 				<!-- 다음 -->
-				<c:url var="after" value="memberList.do">
+				<c:url var="after" value="memberSearch.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 					<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -128,7 +128,7 @@ span.error {
 			</div>
 			</div>
 			<div align="center">
-				<form action="memberList.do" method="get">
+				<form action="memberSearch.do" method="get">
 					<select name="searchCondition">
 						<option value="all"
 							<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>

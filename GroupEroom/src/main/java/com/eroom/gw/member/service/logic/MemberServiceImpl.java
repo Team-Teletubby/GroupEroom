@@ -73,6 +73,13 @@ public  class MemberServiceImpl implements MemberService {
 		return mStore.selectSearchListCount(search);
 	}
 
+	@Override
+	public int modifymemberPwd(Member member) {
+
+		int result= mStore.updatememberPwd(member);
+		return result;
+	}
+
 
 
 

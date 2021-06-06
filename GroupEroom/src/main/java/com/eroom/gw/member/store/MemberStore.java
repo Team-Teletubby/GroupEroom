@@ -22,4 +22,5 @@ public interface MemberStore {
 	public int selectListCount();
 	public int selectSearchListCount(Search search);
 	
+	public int updatememberPwd(Member member);
 }
