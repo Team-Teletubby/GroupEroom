@@ -92,7 +92,7 @@
 			console.log("createRoom 에서 방 생성한 이름 :" + msg.roomName);
 		
 			commonAjax('/createRoom.do', msg, 'post', function(result){
-				console.log("스프링에서 받아온 값 : " + result.roomName);
+				console.log("스프링에서 받아온 값 : " + result.toString());
 				createChatingRoom(result);
 			});
 

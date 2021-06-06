@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전자결재 - 진행함</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="resources/css/approvalProgressList.css"/>
 </head>
 <body>
 	<section id="container">
@@ -24,17 +26,17 @@
 					<i class="fa fa-angle-right"></i> 전자결재
 				</h3>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12 table-wrap">
 						<div class="content-panel">
 							<h4>
 								<i class="fa fa-angle-right"></i> 진행함
 							</h4>
-							<hr>
 							<c:if test="${aList != null }">
 							<table class="table table-hover">
 								<thead>
 									<tr>
-										<th width="8%">문서번호</th>
+										<th width="80px">문서번호</th>
+										<th width="80px">파일</th>
 										<th width="8%">유형</th>
 										<th>문서제목</th>
 										<th width="8%">기안자</th>
@@ -48,8 +50,20 @@
 									<c:forEach items="${aList }" var="approval">
 										<tr>
 											<td>${approval.approvalNo }</td>
+											<c:if test="${approval.approvalFileCheck == 'Y' }">
+												<td><i class="xi-paperclip"></i></td>
+											</c:if>
+											<c:if test="${approval.approvalFileCheck == 'N' }">
+												<td></td>
+											</c:if>
 											<c:if test="${approval.approvalType == 'Cooperation' }">
 												<td>협조문</td>
+											</c:if>
+											<c:if test="${approval.approvalType == 'overtime' }">
+												<td>연장근무신청서</td>
+											</c:if>
+											<c:if test="${approval.approvalType == 'costs' }">
+												<td>교통비지출결의서</td>
 											</c:if>
 											<td><a href="approvalDetail.do?approvalNo=${approval.approvalNo }">${approval.approvalTitle }</a></td>
 											<td>${approval.memberName }</td>

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전자결재 - 미결함</title>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="resources/css/approvalProgressList.css"/>
 </head>
 <body>
 	<section id="container">
@@ -29,7 +31,6 @@
 							<h4>
 								<i class="fa fa-angle-right"></i> 미결함
 							</h4>
-							<hr>
 							<c:if test="${aList != null }">
 							<table class="table table-hover">
 								<thead>

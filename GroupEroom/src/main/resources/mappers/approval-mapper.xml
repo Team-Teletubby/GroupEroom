@@ -27,6 +27,7 @@
 		<result column="APPROVAL_SECOND_DEPT" property="approvalSecondDept" />
 		<result column="APPROVAL_SECOND_DATE" property="approvalSecondDate" />
 		<result column="APPROVAL_SECOND_CHECK" property="approvalSecondCheck" />
+		<result column="APPROVAL_FILE_CHECK" property="approvalFileCheck" />
 	</resultMap>
 	
 	<resultMap type="ApprovalReply" id="approvalReplyResultMap">
@@ -57,7 +58,7 @@
 	
 	<!-- 글 리스트  -->
 	<select id="selectList" resultMap="approvalResultMap" parameterType="Approval">
-			SELECT a.APPROVAL_NO, a.MEMBER_ID, d.MEMBER_NAME AS MEMBER_NAME, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK 
+			SELECT a.APPROVAL_NO, a.MEMBER_ID, d.MEMBER_NAME AS MEMBER_NAME, a.APPROVAL_TYPE, a.APPROVAL_TITLE, a.APPROVAL_CONTENTS, a.APPROVAL_CC, a.APPROVAL_DATE, a.APPROVAL_STATE, b.MEMBER_NAME AS APPROVAL_FIRST_NAME, a.APPROVAL_FIRST_DATE, a.APPROVAL_FIRST_CHECK, c.MEMBER_NAME AS APPROVAL_SECOND_NAME, a.APPROVAL_SECOND_DATE, a.APPROVAL_SECOND_CHECK, a.APPROVAL_FILE_CHECK
 			FROM APPROVAL a 
 		<if test='approvalState.toString() == "progress"'>
 			INNER JOIN MEMBER b ON a.APPROVAL_FIRST_ID = b.MEMBER_ID 
@@ -112,7 +113,7 @@
 	<!-- 결재문 등록 -->
 	<insert id="insertApproval" parameterType="Approval">
 		INSERT INTO APPROVAL 
-		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirstId }, NULL, 'N', ${approvalSecondId }, NULL, 'N')
+		VALUES(APPROVAL_SEQ.NEXTVAL, #{memberId }, #{approvalType }, #{approvalTitle }, #{approvalContents }, 'N', SYSDATE, 'N', #{approvalFirstId }, NULL, 'N', #{approvalSecondId }, NULL, 'N', #{approvalFileCheck })
 	</insert>
 	
 	<!-- 댓글 등록  -->

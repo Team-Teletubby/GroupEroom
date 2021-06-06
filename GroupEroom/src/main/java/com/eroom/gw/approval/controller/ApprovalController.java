@@ -72,8 +72,6 @@ public class ApprovalController {
 		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
 		Member loginUser = (Member)session.getAttribute("LoginUser"); 		// 멤버 객체에 세션 저장
 		approval.setMemberId(loginUser.getMemberId());		// 세션에 저장된 멤버ID값 결재 객체에 저장
-
-		int resultApproval = approvalService.registerApproval(approval); 		// DB에 결재글 등록
 		
 		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
 		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
@@ -86,19 +84,26 @@ public class ApprovalController {
 		List<MultipartFile> multFileList = mtfRequest.getFiles("uploadFile");
 		
 		for(MultipartFile mf : multFileList) {
-			aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
-			aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
-			aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
-			aFile.setApprovalFilePath(folder + "\\" + aFile.getReNameFileName());
-			int resultFile = approvalService.registerFile(aFile); // DB에 파일 정보 등록
-			
-			if(resultFile > 0) {
-				System.out.println("파일 저장 성공");
+			if(mf.getOriginalFilename().equals("")) {
+				approval.setApprovalFileCheck("N");
 			}else {
-				System.out.println("파일 저장 실패");
+				approval.setApprovalFileCheck("Y");
+				
+				aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
+				aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
+				aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
+				aFile.setApprovalFilePath(folder + "\\" + aFile.getReNameFileName());
+				int resultFile = approvalService.registerFile(aFile); // DB에 파일 정보 등록
+				
+				if(resultFile > 0) {
+					System.out.println("파일 저장 성공");
+				}else {
+					System.out.println("파일 저장 실패");
+				}
 			}
-			
 		}
+		
+		int resultApproval = approvalService.registerApproval(approval); // DB에 결재글 등록
 		
 		String path = ""; 		
 		if(resultApproval > 0) { // DB 저장여부 확인 후, 페이지 이동
@@ -108,6 +113,7 @@ public class ApprovalController {
 			path = "common/errorPage";
 		}
 		mv.setViewName(path);
+		
 		return mv;
 	}
 
@@ -173,7 +179,8 @@ public class ApprovalController {
 		// 글 목록 가져오기
 		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
 		//===========================================================
-				
+		
+	
 		mv.addObject("aList", aList);
 		mv.addObject("userName", member.getMemberName());
 		mv.addObject("page", page);

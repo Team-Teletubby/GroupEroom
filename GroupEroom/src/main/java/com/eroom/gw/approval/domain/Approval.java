@@ -29,9 +29,9 @@ public class Approval {
 	private String approvalSecondDept;
 	private Date approvalScondDate;
 	private String approvalSecondCheck;
+	private String approvalFileCheck; 
 	private ApprovalFile file;
 	private ApprovalReply reply;
-	
 	// 생성자
 	public Approval() {
 		super();
@@ -238,6 +238,14 @@ public class Approval {
 		this.reply = reply;
 	}
 
+	public String getApprovalFileCheck() {
+		return approvalFileCheck;
+	}
+
+	public void setApprovalFileCheck(String approvalFileCheck) {
+		this.approvalFileCheck = approvalFileCheck;
+	}
+
 	@Override
 	public String toString() {
 		return "Approval [approvalNo=" + approvalNo + ", memberId=" + memberId + ", memberName=" + memberName
@@ -250,6 +258,6 @@ public class Approval {
 				+ ", approvalSecondId=" + approvalSecondId + ", approvalSecondName=" + approvalSecondName
 				+ ", approvalSecondJob=" + approvalSecondJob + ", approvalSecondDept=" + approvalSecondDept
 				+ ", approvalScondDate=" + approvalScondDate + ", approvalSecondCheck=" + approvalSecondCheck
-				+ ", file=" + file + ", reply=" + reply + "]";
+				+ ", file=" + file + ", reply=" + reply + "approvalFileCheck" + approvalFileCheck + "]";
 	}
 }
