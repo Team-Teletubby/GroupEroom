@@ -35,8 +35,9 @@
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th width="8%">문서번호</th>
-											<th width="8%">유형</th>
+											<th width="80px">문서번호</th>
+											<th width="80px">파일</th>
+											<th width="12%">유형</th>
 											<th>문서제목</th>
 											<th width="8%">기안자</th>
 											<th width="8%">중간 결재자</th>
@@ -49,11 +50,24 @@
 										<c:forEach items="${aList }" var="approval">
 											<tr>
 												<td>${approval.approvalNo }</td>
+												<c:if test="${approval.approvalFileCheck == 'Y' }">
+													<td><i class="xi-paperclip"></i></td>
+												</c:if>
+												<c:if test="${approval.approvalFileCheck == 'N' }">
+													<td></td>
+												</c:if>
 												<c:if test="${approval.approvalType == 'Cooperation' }">
 													<td>협조문</td>
 												</c:if>
-												<td><a
-													href="approvalDetail.do?approvalNo=${approval.approvalNo }">${approval.approvalTitle }</a></td>
+												<c:if test="${approval.approvalType == 'overtime' }">
+													<td>연장근무신청서</td>
+												</c:if>
+												<c:if test="${approval.approvalType == 'costs' }">
+													<td>교통비지출결의서</td>
+												</c:if>
+												<td>
+													<a href="approvalDetail.do?approvalNo=${approval.approvalNo }">${approval.approvalTitle }</a>
+												</td>
 												<td>${approval.memberName }</td>
 												<td>${approval.approvalFirstName }</td>
 												<td>${approval.approvalSecondName }</td>

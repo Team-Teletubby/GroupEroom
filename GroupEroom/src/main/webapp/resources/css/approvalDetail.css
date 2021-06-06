@@ -16,6 +16,14 @@ tr > th {
     border-bottom: 1px solid rgb(204, 204, 204);
 }
 
+.mail-header {
+	text-align: center;
+}
+
+.mail-sender {
+	text-align: center;
+}
+
 .header-title > .fl {
     float: left;
 }

@@ -37,7 +37,7 @@
 									<tr>
 										<th width="80px">문서번호</th>
 										<th width="80px">파일</th>
-										<th width="8%">유형</th>
+										<th width="12%">유형</th>
 										<th>문서제목</th>
 										<th width="8%">기안자</th>
 										<th width="8%">중간 결재자</th>

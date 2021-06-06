@@ -80,8 +80,11 @@
 					</div>
 
 					<div class="contents-wrap">
+						<div class="contents-title">
+							상세 입력
+						</div>
 						<div class="contents-body">
-							<div>
+							<div class="select-box">
 								<span>회의실 </span> <select id="edit-title" name="roomNo">
 									<option selected>--회의실 선택--</option>
 									<option value="101">101호 회의실</option>
@@ -99,13 +102,13 @@
                         required="required"
                         placeholder="일정명을 입력해주세요"/> -->
 							</div>
-							<div class="row">
-								<div class="col-xs-4">
-									<label class="col-xs-4" for="bookingTitle">
-									예약명</label> 
-									<input type="text"
-										name="bookingTitle" class="" id="bookingTitle"> <label class="col-xs-4"
-										for="edit-desc">설명</label>
+							<div>
+								<div class="booking-box">
+									<label for="bookingTitle">예약명</label> 
+									<input type="text" name="bookingTitle" class="" id="bookingTitle"> 
+								</div>
+								<div class="contents-box">
+									<label for="edit-desc">설명</label>
 									<textarea rows="4" cols="50" class="inputModal"
 										name="bContents" id="edit-desc"></textarea>
 								</div>

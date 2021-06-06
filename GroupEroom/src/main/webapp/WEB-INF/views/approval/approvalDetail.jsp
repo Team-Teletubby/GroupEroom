@@ -13,7 +13,7 @@
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 
 	<section id="main-content">
-		<section class="wrapper site-min-height">
+		<section class="wrapper site-min-height detail-wrapper">
 			<h3>
 				<i class="fa fa-angle-right"></i> 문서 상세보기
 			</h3>
@@ -64,7 +64,7 @@
 							</div>
 							<div class="mail-header row">
 								<div class="col-md-4">
-									<table>
+									<table class="table">
 										<h4>기안자 정보</h4>
 										<tr>
 											<th>성명</th>
@@ -81,7 +81,7 @@
 									</table>
 								</div>
 								<div class="col-md-4">
-									<table>
+									<table class="table">
 										<h4>문서 정보</h4>
 										<tr>
 											<th>문서번호</th>
@@ -89,7 +89,15 @@
 										</tr>
 										<tr>
 											<th>문서종류</th>
-											<td>${approval.approvalType }</td>
+											<c:if test="${approval.approvalType == 'Cooperation' }">
+												<td>협조문</td>
+											</c:if>
+											<c:if test="${approval.approvalType == 'costs' }">
+												<td>교통비지출내역서</td>
+											</c:if>
+											<c:if test="${approval.approvalType == 'overtime' }">
+												<td>연장근무신청서</td>
+											</c:if>
 										</tr>
 										<tr>
 											<th>작성일</th>
@@ -98,7 +106,7 @@
 									</table>
 								</div>
 								<div class="col-md-4">
-									<table>
+									<table class="table">
 										<h4>결재 정보</h4>
 										<tr>
 											<th></th>
