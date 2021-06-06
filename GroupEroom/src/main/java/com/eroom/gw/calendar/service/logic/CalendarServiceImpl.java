@@ -35,4 +35,9 @@ public class CalendarServiceImpl implements CalendarService{
 		return calStore.deleteCal(calNo);
 	}
 
+	@Override
+	public int updateDate(Calendar calendar) {
+		return calStore.updateDate(calendar);
+	}
+
 }

@@ -35,4 +35,9 @@ public class CalendarStoreLogic implements CalendarStore{
 		return sqlSession.delete("calMapper.deleteCal", calNo);
 	}
 
+	@Override
+	public int updateDate(Calendar calendar) {
+		return sqlSession.update("calMapper.updateDate", calendar);
+	}
+
 }

@@ -30,4 +30,8 @@
 	<delete id="deleteCal">
 		DELETE FROM CALENDAR WHERE CAL_NO = #{calNo}
 	</delete>
+	
+	<update id="updateDate">
+		UPDATE CALENDAR SET START_DATE = #{startDate}, END_DATE = #{endDate} WHERE CAL_NO = #{calNo}
+	</update>
 </mapper>

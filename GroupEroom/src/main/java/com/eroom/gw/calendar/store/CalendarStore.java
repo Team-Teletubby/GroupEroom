@@ -10,5 +10,6 @@ public interface CalendarStore {
 	public int insertCal(Calendar calendar);
 	public int updateCal(Calendar calendar);
 	public int deleteCal(int calNo);
+	public int updateDate(Calendar calendar);
 
 }

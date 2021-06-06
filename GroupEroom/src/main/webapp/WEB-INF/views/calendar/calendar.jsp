@@ -43,6 +43,32 @@
           $('#regCal').modal('show');
       },
       
+       eventDrop: function(info) {
+		/* alert(moment(info.event.start).format('YYYY-MM-DD'));
+		alert(moment(info.event.end).format('YYYY-MM-DD')); */
+		var startDate = moment(info.event.start).format('YYYY-MM-DD');
+		var endDate = moment(info.event.end).format('YYYY-MM-DD');
+		var calNo = info.event.id;
+		$.ajax({
+			url : "updateDate.do",
+			type : "post",
+			data : {"startDate" : startDate, "endDate" : endDate, "calNo" : calNo},
+			success : function(data) {
+				if(data == "success") {
+					alert("수정완료");
+				}else {
+					alert("수정실패");
+				}
+			},
+			error: function() {
+				alert("서버 통신 실패!");
+			}
+			
+		});
+		 
+      },
+
+      
       select: function(info) {
           $('#regStartDate').val(info.startStr);
           $('#regEndDate').val(info.endStr);
@@ -53,7 +79,6 @@
     	  $("#delete-btn").html("");
     	  var detailModal = $('#modifyCal');
     	  var eventObj = info.event;
-    	  alert(eventObj.id);
     	  $('#calNo').val(eventObj.id);
     	  $('#deleteCalNo').val(eventObj.id);
     	  $('#title').val(eventObj.title);
@@ -135,36 +160,35 @@
 	일정 : <input type="text" class="form-control" name="calTitle" ><br>
 	색상 : 
 	<div>
-			<input value="#db2828" type="radio" name="color" />
-			<label for="red"><span class="red"></span></label>
+			<input value="#db2828" type="radio" name="colors" id="regRed"/>
+			<label for="regRed"><span class="red"></span></label>
 			
-			<input value="#f2711c" type="radio" name="color" />
-			<label for="orange"><span class="orange"></span></label>
+			<input value="#f2711c" type="radio" name="colors" id="regOrange" />
+			<label for="regOrange"><span class="orange"></span></label>
 			
+			<input value="#fbbd08" type="radio" name="colors" id="regYellow"/>
+			<label for="regYellow"><span class="yellow"></span></label>
 			
-			<input value="#fbbd08" type="radio" name="color" />
-			<label for="yellow"><span class="yellow"></span></label>
+			<input value="#b5cc18" type="radio" name="colors" id="regOlive" />
+			<label for="regOlive"><span class="olive"></span></label>
 			
-			<input value="#b5cc18" type="radio" name="color"  />
-			<label for="olive"><span class="olive"></span></label>
+			<input value="#21ba45" type="radio" name="colors" id="regGreen" checked/>
+			<label for="regGreen"><span class="green"></span></label>
 			
-			<input value="#21ba45" type="radio" name="color" checked/>
-			<label for="green"><span class="green"></span></label>
+			<input value="#00b5ad" type="radio" name="colors"  id="regTeal"/>
+			<label for="regTeal"><span class="teal"></span></label>
 			
-			<input value="#00b5ad" type="radio" name="color" />
-			<label for="teal"><span class="teal"></span></label>
+			<input value="#2185d0" type="radio" name="colors"  id="regBlue"/>
+			<label for="regBlue"><span class="blue"></span></label>
 			
-			<input value="#2185d0" type="radio" name="color"  />
-			<label for="blue"><span class="blue"></span></label>
+			<input value="#6435c9" type="radio" name="colors" id="regViolet"/>
+			<label for="regViolet"><span class="violet"></span></label>
 			
-			<input value="#6435c9" type="radio" name="color"/>
-			<label for="violet"><span class="violet"></span></label>
+			<input value="#a333c8" type="radio" name="colors" id="regPurple"/>
+			<label for="regPurple"><span class="purple"></span></label>
 			
-			<input value="#a333c8" type="radio" name="color" />
-			<label for="purple"><span class="purple"></span></label>
-			
-			<input value="#e03997" type="radio" name="color" />
-			<label for="pink"><span class="pink"></span></label>
+			<input value="#e03997" type="radio" name="colors" id="regPink"/>
+			<label for="regPink"><span class="pink"></span></label>
 	</div>
 	시작 일자 :  <input type="date" class="form-control" name="startDate" id="regStartDate" >
 	시작 시간 : <input type="time" class="form-control" name="startTime" >

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.calendar.domain.Calendar;
@@ -42,7 +43,7 @@ public class CalendarController {
 	public String calRegister(HttpSession session, @RequestParam(value = "calTitle") String calTitle,
 			@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate,
 			@RequestParam(value = "calInfo") String calInfo, @RequestParam(value = "startTime") String startTime,
-			@RequestParam(value = "endTime") String endTime, @RequestParam(value = "color") String color) {
+			@RequestParam(value = "endTime") String endTime, @RequestParam(value = "colors") String color) {
 		Member member = (Member) session.getAttribute("LoginUser");
 		Calendar calendar = new Calendar();
 		if (!(startTime == "")) {
@@ -105,6 +106,25 @@ public class CalendarController {
 			return "";
 		}
 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateDate.do", method = RequestMethod.POST)
+	public String updateDate(Model model, @RequestParam("startDate")String startDate, @RequestParam("endDate")String endDate, @RequestParam("calNo") String calNum) {
+		int calNo = Integer.parseInt(calNum);
+		Calendar calendar = new Calendar();
+		calendar.setStartDate(startDate);
+		calendar.setEndDate(endDate);
+		calendar.setCalNo(calNo);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		int result = calService.updateDate(calendar);
+		if( result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		
 	}
 
 }
