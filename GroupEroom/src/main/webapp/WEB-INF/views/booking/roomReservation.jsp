@@ -86,7 +86,7 @@
 						<div class="contents-body">
 							<div class="select-box">
 								<span>회의실 </span> <select id="edit-title" name="roomNo">
-									<option selected>--회의실 선택--</option>
+									<option value="" selected>--회의실 선택--</option>
 									<option value="101">101호 회의실</option>
 									<option value="102">102호 회의실</option>
 									<option value="103">103호 회의실</option>
@@ -94,35 +94,23 @@
 									<option value="202">202호 회의실</option>
 									<option value="203">203호 회의실</option>
 								</select>
-								<!-- <input
-                        class="inputModal"
-                        type="text"
-                        name="edit-title"
-                        id="edit-title"
-                        required="required"
-                        placeholder="일정명을 입력해주세요"/> -->
 							</div>
 							<div>
 								<div class="booking-box">
-									<label for="bookingTitle">예약명</label> 
-									<input type="text" name="bookingTitle" class="" id="bookingTitle"> 
+									<label for="bookingTitle">일정명</label> 
+									<input type="text" name="bookingTitle" class="" id="bookingTitle" placeholder="일정명을 입력해주세요"> 
 								</div>
 								<div class="contents-box">
 									<label for="edit-desc">설명</label>
 									<textarea rows="4" cols="50" class="inputModal"
-										name="bContents" id="edit-desc"></textarea>
+										name="bContents" id="edit-desc" placeholder="설명을 입력해주세요"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer modalBtnContainer-addEvent">
-							<button type="button">취소</button>
-							<button type="button" id="save-event">저장</button>
+							<button type="button" id="save-event" >저장</button>
 						</div>
-						<div class="modal-footer modalBtnContainer-modifyEvent">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-						</div>
+						
 					</div>
 				<!-- <script src="resources/vendor/js/jquery.min.js"></script> -->
 				<script src="resources/vendor/js/bootstrap.min.js"></script>
@@ -159,10 +147,8 @@
 	</section>
 	<script>
 		$('.time-set').click(function() {
-
 			$('.time-set').removeClass('click')
 			$(this).addClass('click');
-
 		});
 	</script>
 </body>

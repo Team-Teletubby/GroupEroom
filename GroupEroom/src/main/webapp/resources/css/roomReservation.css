@@ -344,6 +344,8 @@ select.filter {
 .time-set-title {
   padding: 10px 5px 10px 10px; 
   background-color: #efefef;
+  font-weight: 600;
+  color: black;
 
 }
 
@@ -365,7 +367,12 @@ select.filter {
   box-shadow: 0px 0px 5px 0px #c5c5c5;
   margin-right: 2px;
   margin-left: 2px;
+  
+  
 }
+
+a:link { color:black; }
+a:visited { color:black; }
 
 #time-09s:focus {
   background-color: red;
@@ -390,6 +397,8 @@ select.filter {
 .contents-wrap > .contents-title {
 	padding: 10px 5px 10px 10px;
 	background-color: #efefef;
+	font-weight: 600;
+	color: black;
 }
 
 .contents-body {
@@ -408,6 +417,16 @@ select.filter {
 #bookingTitle {
 	width: 90%;
 	height: 28px;
+	border: 1px solid #d7d7d7;
+	padding: 0px 0px 0px 8px;
+}
+
+#bookingTitle::placeholder {
+	color: #c7c7c7;
+}
+
+#bookingTitle:focus {
+	outline: none;
 }
 
 .contents-box > label{
@@ -418,8 +437,19 @@ select.filter {
 	margin-left: 15px;
 	height: 172px;
 	width: 646px;
-	 resize:none;
+	resize:none;
+	border: 1px solid #d7d7d7;
+	padding: 8px;
 }	
+
+#edit-desc::placeholder {
+	color: #c7c7c7;
+}
+
+#edit-desc:focus {
+	outline: none;
+	
+}
 
 .modalBtnContainer-modifyEvent {
   display: none;
@@ -428,11 +458,31 @@ select.filter {
 #edit-title {
 	width: 120px;
 	height: 30px;
+	border: 1px solid #d7d7d7;
+}
+
+#edit-title:focus {
+	outline: none;
 }
 
 
 .click {
 	background-color: #e4e4e4;
+}
+
+#save-event {
+	width: 100px;
+	height: 32px;
+	border: none;
+	background-color: #757575;
+	color: white;
+	box-shadow: 0px 0px 4px 0px #c5c5c5;
+	margin-right: 14px;
+	font-weight: 600;
+}
+
+#save-event:focus {
+	background-color: #9c9c9c;
 }
 
 @keyframes fadein {
