@@ -115,19 +115,29 @@
 						<ul class="sub">
 							<li><a href="memberList.do">사원목록</a></li>
 							<li><a href="enrollView.do">사원등록 </a></li>
-							
 						</ul>
 						</li>
 						</c:if>
+						<!-- 채팅  -->
+					<li>
+						<a onclick="javascript:openWin();"> 
+							<i class="fa fa-envelope"></i>
+							<span>메신저 </span> 
+						</a>
+					</li>
 				</ul>
 			</div>
 		</aside>
 	</section>
 	<script>
 	// =============== 시간 ====================
-	   $(document).ready(function(){
-		$('.flipTimer').flipTimer({ direction: 'up' });
-	});
+	   	$(document).ready(function(){
+			$('.flipTimer').flipTimer({ direction: 'up' });
+		});
+	
+	   	function openWin(){ 
+		  	window.open("room.do", "네이버새창", "width=700, height=700, toolbar=no, menubar=yes, scrollbars=no, resizable=yes" ); 
+		}
 	</script>
 	<!-- 스크롤, 사이드바 등 설정  -->
 	<script src="resources/js/timer/jquery.flipTimer.js"></script>
