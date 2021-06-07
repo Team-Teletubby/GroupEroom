@@ -72,7 +72,7 @@
 					</li>
 					<!-- 일정관리 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;">
-					 <i class="fa fa-envelope"></i> <span>일정관리</span></a>
+					 <i class="fa fa-calendar"></i> <span>일정관리</span></a>
 						<ul class="sub">
 							<li><a href="calendarListView.do">나의 일정</a></li>
 							<li><a href="todoList.do">할 일</a></li>
@@ -80,7 +80,7 @@
 					</li>
 					<!-- 예약 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>예약관리</span>
+							class="fa fa-clock-o"></i> <span>예약관리</span>
 					</a>
 						<ul class="sub">
 							<li><a href="bkListView.do">예약관리 홈</a></li>
@@ -88,19 +88,19 @@
 						</ul></li>
 					<!-- 근태관리 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> 
-					<i class="fa fa-comments-o"></i> <span>근태관리</span>
+					<i class="fa fa-suitcase"></i> <span>근태관리</span>
 					</a>
 						<ul class="sub">
 							<li><a href="attendanceList.do">근태관리 홈</a></li>
 						</ul>
 					</li>
 					<!-- 협업 메뉴 -->
-					<li><a href="inbox.html"> <i class="fa fa-envelope"></i> <span>협업관리
+					<li><a href="inbox.html"> <i class="fa fa-puzzle-piece"></i> <span>협업관리
 						</span>
 					</a></li>
 					<!-- 게시판 메뉴 -->
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-tasks"></i> <span>게시판</span>
+							class="fa fa-list-alt"></i> <span>게시판</span>
 					</a>
 						<ul class="sub">
 							<li><a href="noticeListView.do">공지사항</a></li>
@@ -110,7 +110,7 @@
 							<!-- 인사관리 메뉴 -->
 					<c:if test="${sessionScope.LoginUser.memberDept == '인사관리'}">
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-tasks"></i> <span>인사관리</span>
+							class="fa fa-users"></i> <span>인사관리</span>
 					</a>
 						<ul class="sub">
 							<li><a href="memberList.do">사원목록</a></li>
@@ -121,8 +121,15 @@
 						<!-- 채팅  -->
 					<li>
 						<a href="#" onclick="javascript:openWin();"> 
-							<i class="fa fa-envelope"></i>
+							<i class="fa fa-comments-o"></i>
 							<span>메신저 </span> 
+						</a>
+					</li>
+					<!-- 설문조사 -->
+					<li>
+						<a href="surveyList.do" onclick="javascript:;"> 
+							<i class="fa fa-tasks"></i>
+							<span>설문조사 </span> 
 						</a>
 					</li>
 				</ul>
