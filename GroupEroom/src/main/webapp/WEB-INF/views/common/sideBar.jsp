@@ -120,7 +120,7 @@
 						</c:if>
 						<!-- 채팅  -->
 					<li>
-						<a onclick="javascript:openWin();"> 
+						<a href="#" onclick="javascript:openWin();"> 
 							<i class="fa fa-envelope"></i>
 							<span>메신저 </span> 
 						</a>
