@@ -279,5 +279,13 @@ public class MemberController {
 
 		}
 	}
+		//  비밀번호 중복
+		@ResponseBody
+		@RequestMapping(value ="pwdCheck.do", method=RequestMethod.POST)
+		public String pwdCheck(@RequestParam("memberPwd")String memberPwd ) { 
+			
+			return "";
+		}
+	}
 
-}
+

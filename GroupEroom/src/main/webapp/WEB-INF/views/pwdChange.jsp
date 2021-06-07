@@ -31,14 +31,14 @@
 					<font color="red">${message }</font>
 					<div class="password_Out_Box">
 						<div class="inputBox">
-							<input type="password" name="memberPwd" class="text-field" id="Password">
+							<input type="password" name="memberPwd" class="text-field" id="Password1">
 							<label for="id">비밀번호</label>
 						</div>
 					</div>
 					<div class="password_Out_Box">
 						<div class="inputBox">
 							<input type="password" class="text-field"
-								id="Password"> <label for="password">비밀번호확인</label>
+								id="Password2"> <label for="password">비밀번호확인</label>
 						</div>
 					</div>
 	
