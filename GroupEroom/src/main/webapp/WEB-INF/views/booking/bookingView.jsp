@@ -24,7 +24,9 @@
 		<!--헤더 끝-->
 		<!--사이드바 시작-->
 		<jsp:include page="../common/sideBar.jsp"></jsp:include>
-
+		<script>
+			$("#nav-accordion > li:nth-child(7) > a").addClass("active");
+		</script>
 		<section id="main-content">
 			<section class="wrapper site-min-height">
 				<div id="wrapper">

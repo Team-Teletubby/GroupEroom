@@ -47,7 +47,7 @@
 					<!-- 프로필 이름 -->
 					<h5 class="centered">이혜성 사원</h5>
 					<!-- 홈 메뉴 -->
-					<li class="mt"><a class="active" href="index.html"> <i
+					<li class="mt"><a class="" href="index.html"> <i
 							class="fa fa-dashboard"></i> <span>홈</span>
 					</a></li>
 					<!-- 전자결재 메뉴 -->
