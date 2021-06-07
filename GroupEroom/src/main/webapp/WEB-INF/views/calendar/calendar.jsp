@@ -32,7 +32,7 @@
       initialDate: today,
       locale: initialLocaleCode,
       buttonIcons: false, // show the prev/next text
-      weekNumbers: true,
+      weekNumbers: false,
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
@@ -43,9 +43,7 @@
           $('#regCal').modal('show');
       },
       
-       eventDrop: function(info) {
-		/* alert(moment(info.event.start).format('YYYY-MM-DD'));
-		alert(moment(info.event.end).format('YYYY-MM-DD')); */
+      eventDrop: function(info) {
 		var startDate = moment(info.event.start).format('YYYY-MM-DD');
 		var endDate = moment(info.event.end).format('YYYY-MM-DD');
 		var calNo = info.event.id;
@@ -107,14 +105,26 @@
 		</c:forEach>
     	{
             title: '종강',
-            start: '2021-06-13',
-            end: '2021-06-13',
+            start: '2021-06-15',
+            display : 'background',
+            backgroundColor : 'red'
          }
       ]
     });
     calendar.render();
   });
-
+  
+  
+  $(document).ready(function(){
+	  
+	  $("#reg-btn").on("click", function(){
+			$("#regStartDate").val("");
+			$("#regEndDate").val("");
+			$("#regStartTime").val("");
+			$("#regEndTime").val("");
+		});
+	  
+	});
 </script>
 <style>
 
@@ -157,7 +167,7 @@
 </div>
 <form action="registerCal.do" method="post">
 <div class="modal-body">
-	일정 : <input type="text" class="form-control" name="calTitle" ><br>
+	일정 : <input type="text" class="form-control" name="regCalTitle" id="calTitle"><br>
 	색상 : 
 	<div>
 			<input value="#db2828" type="radio" name="colors" id="regRed"/>
@@ -190,12 +200,12 @@
 			<input value="#e03997" type="radio" name="colors" id="regPink"/>
 			<label for="regPink"><span class="pink"></span></label>
 	</div>
-	시작 일자 :  <input type="date" class="form-control" name="startDate" id="regStartDate" >
-	시작 시간 : <input type="time" class="form-control" name="startTime" >
+	시작 일자 :  <input type="date" class="form-control" name="regStartDate" id="regStartDate" >
+	시작 시간 : <input type="time" class="form-control" name="regStartTime" id="regStartTime">
 	<hr style="border:1px solid lightgray;">
-	종료 일자 :  <input type="date" class="form-control" name="endDate" id="regEndDate" >
-	종료 시간 : <input type="time" class="form-control" name="endTime" >
-	메모 : <textarea name="calInfo" class="form-control"></textarea>	
+	종료 일자 :  <input type="date" class="form-control" name="regEndDate" id="regEndDate" >
+	종료 시간 : <input type="time" class="form-control" name="regEndTime" id="regEndTime">
+	메모 : <textarea name="regCalInfo" class="form-control"></textarea>	
 </div>
 <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 <input type="submit" class="btn btn-theme" value="일정등록">
@@ -293,7 +303,7 @@
                 <hr>
                 <div align="center">
 				<div id='calendar'></div>
-		        <button class="btn btn-theme02" data-toggle="modal" data-target="#regCal">일정추가</button>
+		        <button id="reg-btn" class="btn btn-theme02" data-toggle="modal" data-target="#regCal">일정추가</button>
 				</div>
             </div>
           </div>
