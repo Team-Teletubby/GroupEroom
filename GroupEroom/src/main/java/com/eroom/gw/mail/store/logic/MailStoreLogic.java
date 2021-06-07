@@ -1,6 +1,7 @@
 package com.eroom.gw.mail.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -71,6 +72,11 @@ public class MailStoreLogic implements MailStore {
 	public int composeMailReceiver(Mail mail) { //받은편지함에 띄울 메일
 		return sqlSession.insert("mailMapper.composeMailReceive", mail);
 	}
+//파일첨부
+	@Override
+	public Object uploadFile(HashMap<String, Object> hmap) {
+		return sqlSession.insert("mailMapper.uploadFile", hmap);
+	}
 
 //메일함=>휴지통 이동
 	@Override
@@ -83,5 +89,6 @@ public class MailStoreLogic implements MailStore {
 	public int updateTrashN(Mail mail) {
 		return sqlSession.update("mailMapper.updateTrashN", mail);
 	}
+
 
 }

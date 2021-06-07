@@ -1,9 +1,14 @@
 package com.eroom.gw.mail.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.common.PageInfo;
@@ -19,12 +26,18 @@ import com.eroom.gw.common.Pagination;
 import com.eroom.gw.mail.domain.Mail;
 import com.eroom.gw.mail.service.MailService;
 import com.eroom.gw.member.domain.Member;
+import com.eroom.gw.member.service.MemberService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 
 @Controller
 public class MailController {
 	
 	@Autowired
 	private MailService mService;
+	@Autowired
+	private MemberService memberService;
 	
 //받은 메일함
 	@RequestMapping(value="inboxListView.do")
@@ -163,7 +176,8 @@ public class MailController {
 //메일쓰기
 	@RequestMapping(value="composeMail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView composeMail(ModelAndView mv, @ModelAttribute Mail mail,
-									HttpServletRequest request, HttpSession session) throws IOException {
+									MultipartHttpServletRequest mhsq,
+									HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("LoginUser");
@@ -180,9 +194,70 @@ public class MailController {
 			mv.addObject("msg", "메일발송 실패");
 			path = "common/errorPage";
 		}
+		
+		//멀티파일
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/mailUploadFiles";
+		//저장폴더
+		File folder = new File(savePath);
+		//폴더가 없으면 자동생성
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")	) {
+			
+		} else {
+			for (int i=0 ; i < mf.size(); i++ ) {
+				//파일 중복명 처리
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				//원파일명
+				String originalFilename = mf.get(i).getOriginalFilename();
+				//파일명 재설정
+				String renameFilename = sdf.format(new Date(System.currentTimeMillis()))
+											+ "." + originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+				//파일경로&사이즈
+				String filePath = folder + "/" + renameFilename;
+				long fileSize = mf.get(i).getSize();
+				//파일저장
+				mf.get(i).transferTo(new File(filePath));
+				mService.fileUpload(originalFilename, renameFilename, filePath, fileSize);
+			}
+		}
+		
 		mv.setViewName(path);
 		return mv;
 	}
+//메일작성 시 멤버목록 조회하기(멤버이용)
+	@RequestMapping(value="deptMember.do", method=RequestMethod.POST)
+	public void deptMember(@RequestParam("depType") int depType,
+							HttpServletResponse response) throws JsonIOException, IOException {
+		//1.인사관리, 2.영업, 3.재무, 4.IT개발
+		String deptName = "";
+		switch(depType) {
+			case 1: 
+				deptName = "인사관리";
+				break;
+			case 2:
+				deptName = "영업";
+				break;
+			case 3:
+				deptName = "재무";
+				break;
+			case 4:
+				deptName = "IT개발";
+				break;
+		}
+		ArrayList<Member> mList = memberService.printMemberUsedDept(deptName);
+		if(!mList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(mList, response.getWriter());
+		}else {
+			System.out.println("데이터 조회 실패");
+		}
+	}
+	
 	
 
 }

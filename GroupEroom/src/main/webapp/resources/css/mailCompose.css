@@ -1,0 +1,169 @@
+
+.modal-body>ul {
+	display: inline-block;
+	width: 60px;
+}
+
+.modal-body>ul>li {
+	list-style: none;
+}
+
+.modeal-title>.table>tr>td {
+	padding: 0px;
+	width: 120px;
+}
+
+.file-upload-input {
+	border: 1px solid #cecece;
+}
+
+.files input {
+	outline: 2px dashed #92b0b3;
+	outline-offset: -10px;
+	-webkit-transition: outline-offset .15s ease-in-out, background-color
+		.15s linear;
+	transition: outline-offset .15s ease-in-out, background-color .15s
+		linear;
+	padding: 20px 0px 20px 30px;
+	text-align: center !important;
+	margin: 0;
+	width: 100% !important;
+}
+
+.files input:focus {
+	outline: 2px dashed #92b0b3;
+	outline-offset: -10px;
+	-webkit-transition: outline-offset .15s ease-in-out, background-color
+		.15s linear;
+	transition: outline-offset .15s ease-in-out, background-color .15s
+		linear;
+	border: 1px solid #92b0b3;
+}
+
+.files {
+	position: relative
+}
+
+.files:after {
+	pointer-events: none;
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 50px;
+	right: 0;
+	height: 56px;
+	content: "";
+	display: block;
+	margin: 0 auto;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.color input {
+	background-color: #f1f1f1;
+}
+
+.files:before {
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	pointer-events: none;
+	width: 100%;
+	right: 0;
+	height: 57px;
+	display: block;
+	margin: 0 auto;
+	color: #2ea591;
+	font-weight: 600;
+	text-transform: capitalize;
+	text-align: center;
+}
+
+.modal-body {
+	height: 100%;
+	display: flex;
+	
+}
+
+.deptMember-table {
+	margin-left: 5px;
+	text-align: center;
+	algin-items: center;
+}
+#rtb {
+	border-left: 3px solid #4ECDC4;
+	border-right: 1px solid #f7f7f7;
+}
+#rtb .rtb-tr-1st > th {
+	width: 100px;
+	background-color: #f7f7f7;
+}
+
+#rtb tbody tr {
+	border-bottom: 1px solid #f7f7f7;
+}
+
+#rtb tbody tr:hover {
+	background-color: #f3f3f3;
+}
+
+#rtb input {
+	width : 15px;
+	height: 15px;
+}
+
+
+.department-select-form  {
+	height: 100%;
+	display: block;
+	margin: 0px 30px 0px 30px;
+}
+
+.department-select-form > table li {
+	padding: 10px 0px 0px 10px;
+}
+
+.departmember-table {
+	display: inline-block;
+}
+
+.mail-add-form {
+	width: 100px;
+	height: 100%;
+	margin: 60px 10px 0px 20px;
+}
+
+.mail-add-form li {
+	display: block;
+	margin-bottom: 50px;
+	text-align: center;
+	width: 100px;
+	height: 35px;
+	algin-items: center;
+	padding-top: 8px;
+	background-color: #4ECDC4;
+	color: white;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: 0px 0px 3px #d7d7d7;
+}
+
+.mail-add-form li:hover {
+	background-color: #34b6ac;
+}
+
+.mail-text-form {
+	width: 120px;
+	margin-left: 10px;
+}
+
+.receiverTextArea {
+	margin: 60px 10px 40px 10px;
+	resize: none;
+}
+
+.ccTextArea {
+	margin-left: 10px;
+	resize: none;
+}
+

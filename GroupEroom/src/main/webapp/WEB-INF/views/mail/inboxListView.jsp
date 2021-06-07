@@ -57,11 +57,11 @@
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
 									Inbox
-									<form action="#" class="pull-right mail-src-position">
+									<!-- <form action="#" class="pull-right mail-src-position">
 										<div class="input-append">
 											<input type="text" class="form-control " placeholder="Search Mail">
 										</div>
-									</form>
+									</form> -->
 								</h4>
 							</header>
 							<form action="inboxListView.do" method="GET">

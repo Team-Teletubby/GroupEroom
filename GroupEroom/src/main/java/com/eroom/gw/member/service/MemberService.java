@@ -23,7 +23,8 @@ public interface MemberService {
 	public Member printMemberOne(int memberId);
 
 	// 특정 부서 사원 목록 
-	public ArrayList<Member> printdepartMentMemberAll(String depName);
+	public ArrayList<Member> printdepartMentMemberAll(String depName); //전자결재
+	public ArrayList<Member> printMemberUsedDept(String deptName); //메일
 	
 	// 이메일 중복체크
 	public int checkemId(String memberEmail);

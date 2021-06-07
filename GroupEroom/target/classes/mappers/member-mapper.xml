@@ -92,10 +92,16 @@
 
 </insert>
 
+<!-- 부서조회키(전자결재, 메일) -->
 	<select id="selectDepMemberList" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_DEPT = #{depName }
 	</select>
+	<select id="selectDeptMemberList" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_DEPT = #{deptName }
+	</select>
+	
 	<!-- 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER

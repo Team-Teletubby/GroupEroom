@@ -56,7 +56,11 @@ public class MemberStoreLogic implements MemberStore {
 	// 특정부서의 멤버목록
 	@Override
 	public ArrayList<Member> selectDepartMentMember(String depName) {
-		return (ArrayList)sqlSession.selectList("memberMapper.selectDepMemberList", depName);
+		return (ArrayList)sqlSession.selectList("memberMapper.selectDepMemberList", depName); //전자결재
+	}
+	@Override
+	public ArrayList<Member> selectMemberUsedDept(String deptName) { 
+		return (ArrayList)sqlSession.selectList("memberMapper.selectDeptMemberList", deptName); //메일
 	}
 
 	@Override
@@ -95,6 +99,7 @@ public class MemberStoreLogic implements MemberStore {
 		int result=  sqlSession.update("memberMapper.updatememberPwd", member);
 		return result;
 	}
+
 
 	
 	
