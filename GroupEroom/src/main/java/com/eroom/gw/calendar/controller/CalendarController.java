@@ -40,10 +40,10 @@ public class CalendarController {
 
 	// 일정 등록
 	@RequestMapping(value = "registerCal.do", method = RequestMethod.POST)
-	public String calRegister(HttpSession session, @RequestParam(value = "calTitle") String calTitle,
-			@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate,
-			@RequestParam(value = "calInfo") String calInfo, @RequestParam(value = "startTime") String startTime,
-			@RequestParam(value = "endTime") String endTime, @RequestParam(value = "colors") String color) {
+	public String calRegister(HttpSession session, @RequestParam(value = "regCalTitle") String calTitle,
+			@RequestParam(value = "regStartDate") String startDate, @RequestParam(value = "regEndDate") String endDate,
+			@RequestParam(value = "regCalInfo") String calInfo, @RequestParam(value = "regStartTime") String startTime,
+			@RequestParam(value = "regEndTime") String endTime, @RequestParam(value = "colors") String color) {
 		Member member = (Member) session.getAttribute("LoginUser");
 		Calendar calendar = new Calendar();
 		if (!(startTime == "")) {
