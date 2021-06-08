@@ -100,11 +100,11 @@ public class MemberStoreLogic implements MemberStore {
 		return result;
 	}
 
+
 	@Override
 	public int pwdcheck(String memberPwd) {
 		return sqlSession.selectOne("memberMapper.pwdcheck", memberPwd);
 	}
 
-	
 	
 }
