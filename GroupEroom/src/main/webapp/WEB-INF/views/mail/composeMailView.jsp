@@ -76,15 +76,15 @@
 						  </header>
 						  <div class="panel-body">
 							<div class="compose-mail">
-							  <form role="form-horizontal" action="composeMail.do" method="post" enctype="multipart/form-data">
+							  <form action="composeMail.do" method="post" enctype="multipart/form-data">
 							  <!-- 받는사람(클릭 시 모달창 오픈) -->
 								<div class="form-group">
-								 <label for="to" class="receiver" name="receiver">To:</label><a name="receiverId" id="receiverId" hidden></a>
+								 <label for="to" class="receiver" name="receiver">To:</label><input type="hidden" name="receiverId" id="receiverId">
 								 <input type="text" tabindex="1" id="receiverName" name="receiverName" class="form-control" data-toggle="modal" data-target="#myModal">
 								 </div>
 							  <!-- 참조자(모달창에서 값 같이 받아옴 -->
 								<div class="form-group">
-			                      <label for="cc" class="">Cc:</label><a name="ccId" id="ccId" hidden></a>
+			                      <label for="cc" class="cc">Cc:</label><input type="hidden" name="ccId" id="ccId">
 			                      <input type="text" tabindex="2" id="ccName" name="ccName" class="form-control" data-toggle="modal" data-target="#myModal">
 			                    </div>
 			                  <!-- 제목 -->
@@ -97,17 +97,16 @@
 									<textarea id="summernote" name="mailContents"></textarea>
 									<input type="file" multiple="true" class="form-control" id="formFile" name="uploadFile">
 								</div>
-								</div>
 								<div class="compose-btn right">
 								  <button type="submit" class="btn btn-theme btn-sm"><i class="fa fa-check"></i> 보내기</button>
 								  <button type="reset" class="btn btn-sm" onclick="location.href='inboxListView.do'"><i class="fa fa-times"></i> 취소</button>
 								</div>
 							  </form>
 							</div>
-						  </div>
+								</div>
 						</section>
+						  </div>
 					  </div>
-				</div>
 			</section>
 			<!-- /wrapper -->
 		</section>
@@ -207,7 +206,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary save" data-dismiss="modal">선택완료</button>
+					<button type="button" id="save-btn" class="btn btn-primary save" data-dismiss="modal">선택완료</button>
 				</div>
 			</div>
 		</div>
@@ -338,17 +337,13 @@
 			
 			//각 id에 선택값 넣어주기
 			$("#receiverName").val(mailMembers.receive.name);
-			$("#recieverId").val(mailMembers.receive.id);
+			$("#receiverId").val(mailMembers.receive.id);
 			$("#ccName").val(mailMembers.cc.name);
 			$("#ccId").val(mailMembers.cc.id);
-			console.log(("#receiverName").val());
-			console.log(("#receiverId").val());
-			console.log(("#ccName").val());
-			console.log(("#ccId").val());
 			
 			//배열 내부요소 삭제
-			approvalMembers.pop();
-			approvalMembers.pop();
+			mailMembers.pop();
+			mailMembers.pop();
 			
 			$("#modal").modal('hide');
 		});

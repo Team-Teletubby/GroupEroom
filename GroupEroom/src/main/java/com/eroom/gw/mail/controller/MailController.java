@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -175,16 +176,15 @@ public class MailController {
 		
 //메일쓰기
 	@RequestMapping(value="composeMail.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView composeMail(ModelAndView mv, @ModelAttribute Mail mail,
-									MultipartHttpServletRequest mhsq,
-									@RequestParam("ccId") int ccId, @RequestParam("receiverId") int receiverId,
+	public ModelAndView composeMail(ModelAndView mv, @ModelAttribute Mail mail, MultipartHttpServletRequest mhsq, 
+									@RequestParam("receiverId") String receiverId, @RequestParam(value="ccId", required=false) String ccId,
 									HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("LoginUser");
 		mail.setSenderId(loginUser.getMemberId());
-		mail.setCcId(ccId);
-		mail.setReceiverId(receiverId);
+		mail.setCcId(Integer.parseInt(ccId));
+		mail.setReceiverId(Integer.parseInt(receiverId));
 		
 		int receiveResult = 0;
 		int sendResult = 0;

@@ -8,7 +8,7 @@
 		<result property="receiverName" column="RECEIVER_NAME" />
 		<result property="senderId" 	column="SENDER_ID" />
 		<result property="senderName" 	column="SENDER_NAME" />
-		<result property="ccId" 			column="CC_ID" />
+		<result property="ccId" 		column="CC_ID" />
 		<result property="ccName" 		column="CC_NAME" />
 		<result property="mailTitle" 	column="MAIL_TITLE" />
 		<result property="mailContents" column="MAIL_CONTENTS" />
@@ -71,13 +71,25 @@
 	
 <!-- 보내는사람 메일생성 -->
 	<insert id="composeMailSend">
-		INSERT INTO MAIL 
-		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		<if test="ccId != null">
+			INSERT INTO MAIL 
+			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		</if>
+		<if test="ccId == null">
+			INSERT INTO MAIL 
+			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, DEFAULT, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		</if>
 	</insert>
 <!-- 받는사람 메일생성 -->
 	<insert id="composeMailReceive">
-		INSERT INTO MAIL 
-		VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		<if test="ccId != null">
+			INSERT INTO MAIL 
+			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		</if>
+		<if test="ccId == null">
+			INSERT INTO MAIL 
+			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, DEFAULT, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+		</if>
 	</insert>
 	
 <!-- 메일 삭제 -->
