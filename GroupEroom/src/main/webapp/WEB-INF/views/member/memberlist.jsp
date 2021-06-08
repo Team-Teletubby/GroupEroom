@@ -74,7 +74,7 @@ span.error {
 									<td>${row.memberName }</td>
 									<td>${row.memberPhone }</td>
 								</tr>
-						</tbody>
+						
 						</c:forEach>
 						</tbody>
 					</table>
