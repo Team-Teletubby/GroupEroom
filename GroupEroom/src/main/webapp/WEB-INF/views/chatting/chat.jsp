@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="resources/css/chat/chat.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <meta charset="UTF-8">
 <title>Chating</title>
 <style>
@@ -85,7 +87,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + data[i].msg;
 						html += "</p>";
-						html += "<p class='meta'>" + data[i].chatCreateDate;
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -100,6 +102,9 @@ input {
 						html += "</div>";
 						html += "<div class='media-body'>";
 						html += "<p>" + data[i].msg;
+						html += "</p>";
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "</p>";
 						html += "</div>";
 						html += "</div>";
 						
@@ -142,7 +147,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
 						html += "</p>";
-						html += "<p class='meta'>" + d.chatCreateDate;
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -157,6 +162,9 @@ input {
 						html += "</div>";
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
+						html += "</p>";
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "</p>";
 						html += "</div>";
 						html += "</div>";
 						
@@ -164,7 +172,7 @@ input {
 					}
 						
 				}else{
-					console.warn("unknown type!")
+					console.warn("unknown type!");
 				}
 			}
 		}
@@ -213,6 +221,10 @@ input {
 		})
 		$('#chatting').val("");
 	}
+	
+	function goBack() {
+		location.href='/room.do'; 
+	}
 </script>
 <body>
 <input type="hidden" id="sessionId" value=""> 
@@ -224,6 +236,7 @@ input {
                     <div class="card card-bordered">
                         <div class="card-header">
                             <h4 class="card-title"><strong>${roomName}</strong></h4>
+                            <button onclick="goBack()">나가기</button>
                         </div>
                         <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:700px !important;">
                             

@@ -143,7 +143,7 @@
 		});
 	
 	   	function openWin(){ 
-		  	window.open("room.do", "채팅", "width=500, height=517, toolbar=no, menubar=yes, scrollbars=no, resizable=no" ); 
+		  	window.open("room.do", "채팅", "width=419, height=840, toolbar=no, menubar=yes, scrollbars=no, resizable=no" ); 
 		}
 	</script>
 	<!-- 스크롤, 사이드바 등 설정  -->

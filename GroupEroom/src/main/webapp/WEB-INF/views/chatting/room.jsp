@@ -11,23 +11,63 @@
 			margin:0;
 			padding:0;
 		}
+		
+		a:link { color: red; text-decoration: none;}
+		a:visited { color: black; text-decoration: none;}
+ 		a:hover { text-decoration: none;}
+
+
+
 		.container{
 			width: 500px;
-			margin: 0 auto;
-			padding: 25px
+			
 		}
-		.container h1{
+		.container .wrap-title{
 			text-align: left;
-			padding: 5px 5px 5px 15px;
+			padding: 16px 5px 5px 30px;
 			color: #FFBB00;
-			border-left: 3px solid #FFBB00;
-			margin-bottom: 20px;
+			background-color: #4ECDC4;
+			color: white;
+			height: 50px;
+			font-size: 25px;
+			font-weight: 600;
 		}
+		
+		.room-area {
+		width: 100%;
+		height: 90px;
+		margin-bottom: 6px;
+		background-color: white;
+		}
+		
+		.room-area:hover {
+			background-color: #cff1ef;
+			
+		}
+		
+		.room-area  div {
+			padding: 17px 0px 15px 30px;
+		}
+	
+		.room-area .room-no {
+			margin-bottom: 10px;
+			font-size: 14px;
+			font-weight: 600;
+			color: #d2d2d2;
+		}
+		
+		.room-area .room-name {
+			font-size: 17px;
+			font-weight: 700;
+			color: #797979;
+		}
+		
 		.roomContainer{
 			background-color: #F6F6F6;
 			width: 500px;
-			height: 500px;
+			height: 690px;
 			overflow: auto;
+			padding-top: 10px;
 		}
 		.roomList{
 			border: none;
@@ -106,19 +146,27 @@
 
 	function createChatingRoom(res){
 		console.log("결과값" + res.roomName);
+		var tag = $('#roomContainer');
 		if(res != null){
-			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
 			res.forEach(function(d, idx){
+				var html = "";
 				var rn = d.roomName.trim();
 				var roomNumber = d.roomNumber;
 				console.log("roomNumber: " + roomNumber);
-				tag += "<tr>"+
-							"<td class='num'>"+(idx+1)+"</td>"+
-							"<td class='room'>"+ rn +"</td>"+
-							"<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>" +
-						"</tr>";	
+				html += "<div class='room-area' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>";
+				html += "<a href='#'>";
+				html += "<div>";
+				html += "<p class='room-no'>" + (idx+1) + "번 방";
+				html += "</p>";
+				html += "<p class='room-name'>" + rn;
+				html += "</p>";
+				html += "</div>";
+				html += "</a>";
+				html += "</div>";
+				
+				$('#roomContainer').append(html);
 			});
-			$("#roomList").empty().append(tag);
+			
 		}
 	}
 
@@ -140,9 +188,8 @@
 </script>
 <body>
 	<div class="container">
-		<h1>채팅방</h1>
+		<p class="wrap-title">채팅방</p>
 		<div id="roomContainer" class="roomContainer">
-			<table id="roomList" class="roomList"></table>
 		</div>
 		<div>
 			<table class="inputTable">
