@@ -4,27 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="resources/css/chat/chat.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<<<<<<< HEAD
 	
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-=======
-	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-	<link rel="stylesheet" href="resources/css/chat/chat.css"/>
-	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
-	<link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 <meta charset="UTF-8">
 <title>Chating</title>
 <style>
-* {
+/* * {
 	margin: 0;
 	padding: 0;
 }
 
 .container {
 	width: 500px;
+	margin: 0 auto;
+	padding: 25px
 }
 
 .container h1 {
@@ -59,7 +55,7 @@ input {
 
 #yourMsg {
 	display: show;
-}
+} */
 </style>
 </head>
 
@@ -83,12 +79,10 @@ input {
 			dataType : "json",
 			success : function(data) {
 				const $chatingTag = $("#chating");
-				const html = "";
 				console.log(data);
 				for(var i in data) {
-					
+					var html = "";
 					if(data[i].userId == userId ){
-<<<<<<< HEAD
 						html += "<div class='media media-chat media-chat-reverse'>";
 						html += "<div class='media-body'>";
 						html += "<p>" + data[i].msg;
@@ -97,12 +91,9 @@ input {
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
-=======
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 						
-						$("#chating").append("<p class='me'>나 :" + data[i].msg + "</p>");
+						$("#chat-content").append(html);	
 					}else {
-<<<<<<< HEAD
 						html += "<div class='media media-chat'>";
 						html += "<div class='flex-div'>";
 						html += "<img class='avatar' src='https://img.icons8.com/color/36/000000/administrator-male.png' alt='프로필 이미지'>";
@@ -118,9 +109,6 @@ input {
 						html += "</div>";
 						
 						$("#chat-content").append(html);
-=======
-						$("#chating").append("<p class='others'>" + data[i].userName + " :" + data[i].msg + "</p>");
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 					}
 					
 				}
@@ -153,8 +141,8 @@ input {
 						$("#sessionId").val(si); 
 					}
 				}else if(d.type == "message"){
+					var html = ""
 					if(d.userId == ${userId }){
-<<<<<<< HEAD
 						html += "<div class='media media-chat media-chat-reverse'>";
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
@@ -165,11 +153,7 @@ input {
 						html += "</div>";
 						
 						$("#chat-content").append(html);	
-=======
-						$("#chating").append("<p class='me'>나 :" + d.msg + "</p>");	
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 					}else{
-<<<<<<< HEAD
 						html += "<div class='media media-chat'>";
 						html += "<div class='flex-div'>";
 						html += "<img class='avatar' src='https://img.icons8.com/color/36/000000/administrator-male.png' alt='프로필 이미지'>";
@@ -185,9 +169,6 @@ input {
 						html += "</div>";
 						
 						$("#chat-content").append(html);
-=======
-						$("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 					}
 						
 				}else{
@@ -246,8 +227,9 @@ input {
 	}
 </script>
 <body>
+<input type="hidden" id="sessionId" value=""> 
+<input type="hidden" id="roomNumber" value='${roomNumber}'>
 <div class="page-content page-container" id="page-content">
-<<<<<<< HEAD
         <div>
             <div class="row container d-flex justify-content-center">
                 <div class="col-md-6">
@@ -263,92 +245,29 @@ input {
                             </div>
                             <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
                                 <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
-=======
-    <div>
-        <div class="row container d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="card card-bordered">
-                    <div class="card-header">
-                        <h4 class="card-title"><strong>Chat</strong></h4> <a class="btn btn-xs btn-secondary" href="#" data-abc="true">Let's Chat App</a>
-                    </div>
-                    <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
-                        <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                            <div class="media-body">
-                                <p>Hi</p>
-                                <p>How are you ...???</p>
-                                <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
-                                <p class="meta"><time datetime="2018">23:58</time></p>
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
                             </div>
                         </div>
-                        <div class="media media-meta-day">Today</div>
-                        <div class="media media-chat media-chat-reverse">
-                            <div class="media-body">
-                                <p>Hiii, I'm good.</p>
-                                <p>How are you doing?</p>
-                                <p>Long time no see! Tomorrow office. will be free on sunday.</p>
-                                <p class="meta"><time datetime="2018">00:06</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                            <div class="media-body">
-                                <p>Okay</p>
-                                <p>We will go on sunday? </p>
-                                <p class="meta"><time datetime="2018">00:07</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat media-chat-reverse">
-                            <div class="media-body">
-                                <p>That's awesome!</p>
-                                <p>I will meet you Sandon Square sharp at 10 AM</p>
-                                <p>Is that okay?</p>
-                                <p class="meta"><time datetime="2018">00:09</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                            <div class="media-body">
-                                <p>Okay i will meet you on Sandon Square </p>
-                                <p class="meta"><time datetime="2018">00:10</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat media-chat-reverse">
-                            <div class="media-body">
-                                <p>Do you have pictures of Matley Marriage?</p>
-                                <p class="meta"><time datetime="2018">00:10</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                            <div class="media-body">
-                                <p>Sorry I don't have. i changed my phone.</p>
-                                <p class="meta"><time datetime="2018">00:12</time></p>
-                            </div>
-                        </div>
-                        <div class="media media-chat media-chat-reverse">
-                            <div class="media-body">
-                                <p>Okay then see you on sunday!!</p>
-                                <p class="meta"><time datetime="2018">00:12</time></p>
-                            </div>
-                        </div>
-                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-                            <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                        </div>
-                        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
-                            <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+                        <div class="publisher bt-1 border-light"> 
+                        	<img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> 
+                        	<input id="chatting" class="publisher-input" type="text" placeholder="메시지를 입력하세요.."> 
+                        	<span class="publisher-btn file-group"> </span> 
+                        		<i class="fa fa-smile"></i>
+                        	<button class="publisher-btn"  onclick="send()" id="sendBtn"></button> 
+                        	<a class="publisher-btn text-info" href="#" data-abc="true">
+                        		<i class="fa fa-paper-plane"></i>
+                        	</a> 
                         </div>
                     </div>
-                    <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="..."> <input class="publisher-input" type="text" placeholder="Write something"> <span class="publisher-btn file-group"> <i class="fa fa-paperclip file-browser"></i> <input type="file"> </span> <a class="publisher-btn" href="#" data-abc="true"><i class="fa fa-smile"></i></a> <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-	<%-- <div id="container" class="container">
-		<h1>${roomName}의채팅방</h1>
-		<input type="hidden" id="sessionId" value=""> 
-		<input type="hidden" id="roomNumber" value='${roomNumber}'>
-
-		<div id="chating" class="chating"></div>
-
+	<!-- <div id="container" class="container">
+		<h1>${roomName}의채팅방</h1> -->
+		
+		<!-- <div id="chating" class="chating"></div> -->
+		
+	
 		<!-- <div id="yourName">
 			<table class="inputTable">
 				<tr>
@@ -358,7 +277,8 @@ input {
 				</tr>
 			</table>
 		</div> -->
-		<div id="yourMsg">
+		<!-- //////////////////////////////////////////// -->
+		<!-- <div id="yourMsg">
 			<table class="inputTable">
 				<tr>
 					<th>메시지</th>
@@ -366,7 +286,7 @@ input {
 					<th><button onclick="send()" id="sendBtn">보내기</button></th>
 				</tr>
 			</table>
-		</div>
-	</div> --%>
+		</div> -->
+	</div>
 </body>
 </html>

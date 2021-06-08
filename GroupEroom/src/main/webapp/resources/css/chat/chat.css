@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .card-bordered {
     border: 1px solid #ebebeb
 }
@@ -15,7 +14,8 @@
 
 
 body {
-    background-color: #f9f9fa
+    background-color: #f9f9fa;
+    margin: 0px;
 }
 
 .card-header:first-child {
@@ -69,6 +69,15 @@ h4.card-title {
     color: #fff !important
 }
 
+.flex-div {
+	display: flex;
+    align-items: center;
+}
+
+..flex-div > span {
+	padding-left: 5px;
+}
+
 .card-title {
     font-family: Roboto, sans-serif;
     font-weight: 300;
@@ -101,9 +110,13 @@ h4.card-title {
 }
 
 .media .avatar {
-    flex-shrink: 0
+    flex-shrink: 0;
 }
 
+.media-meta-day {
+    width: 100%;
+    text-align: center;
+}
 .avatar {
     position: relative;
     display: inline-block;
@@ -120,11 +133,7 @@ h4.card-title {
 .media-chat .media-body {
     -webkit-box-flex: initial;
     flex: initial;
-<<<<<<< HEAD
     display: contents;
-=======
-    display: table
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 }
 
 .media-body {
@@ -198,21 +207,14 @@ h4.card-title {
 }
 
 .media-chat.media-chat-reverse {
-<<<<<<< HEAD
     text-align: right;
     padding: 10px 0px;
-=======
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
     padding-right: 12px;
     padding-left: 64px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
-<<<<<<< HEAD
     flex-direction: row-reverse;
     
-=======
-    flex-direction: row-reverse
->>>>>>> branch 'master' of https://github.com/Team-Teletubby/GroupEroom.git
 }
 
 .media-chat {
@@ -223,7 +225,7 @@ h4.card-title {
 .media {
     padding: 16px 12px;
     -webkit-transition: background-color .2s linear;
-    transition: background-color .2s linear
+    transition: background-color .2s linear;
 }
 
 .media-chat.media-chat-reverse .media-body p {
@@ -238,7 +240,8 @@ h4.card-title {
     padding: 6px 8px;
     margin: 4px 0;
     background-color: #f5f6f7;
-    border-radius: 3px
+    border-radius: 3px;
+    display: inline-block;
 }
 
 .border-light {
@@ -297,7 +300,7 @@ textarea {
 
 .file-group {
     position: relative;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .publisher-btn {
@@ -320,4 +323,3 @@ textarea {
 
 .text-info {
     color: #48b0f7 !important
-}
