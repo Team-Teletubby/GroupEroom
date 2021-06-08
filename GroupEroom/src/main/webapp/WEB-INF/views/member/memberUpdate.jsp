@@ -224,7 +224,7 @@ span.error {
 								</div>
 							</div>
 
-							<div class="form-group" id="retired-date" class="formdate">
+							<div class="" id="retired-date" class="formdate">
 								<c:if test="${memberOne.quitDate ne null }">
 									<label for="newsletter" class="control-label col-lg-2 col-sm-3">
 										퇴사날짜</label>
@@ -335,24 +335,23 @@ span.error {
 		       }
 		    });
 		    
-		 }); */
-		$('input[type="radio"]')
-				.on(
-						'change',
-						function() {
+	
+		}); */
+		$('input[type="radio"]').on('change',function() {
 							var value = this.value
 							var quitDate = $("#retired-date");
 							var str = '';
-
 							if (value != "N") {
+								quitDate.addClass('form-group');
+
 								str += '<label for="newsletter" class="control-label col-lg-2 col-sm-3 formdate">퇴사날짜</label>';
 								str += '<div class="col-lg-10 col-sm-9">'
 								str += '<input type="date" class="form-control" name="quitDate" id="quitDate" style="width: 300px; display: inline;" value="${memberOne.quitDate }">'
 								str += '</div>'
 								quitDate.append(str);
-
 							} else {
-								quitDate.hide();
+								quitDate.removeClass('form-group');
+								quitDate.html("");
 							}
 						});
 	</script>

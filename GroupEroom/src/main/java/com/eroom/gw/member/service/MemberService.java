@@ -38,6 +38,9 @@ public interface MemberService {
 	
 	// 비밀번호 중복체크
 	public int pwdcheck(String memberPwd);
+	
+	public Member printSuccessMemberOne(Member member);
+	
 	}
 	
 

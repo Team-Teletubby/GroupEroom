@@ -3,12 +3,15 @@ package com.eroom.gw.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
@@ -42,6 +45,14 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
+	// 로그인 -> 메인페이지 연결
+	@GetMapping(value="index.do")
+	public String mainView() { 
+		
+		return "index";
+	}
+	
+	
 //로그인 
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
@@ -51,20 +62,19 @@ public class MemberController {
 		Member selectOne = service.loginMember(member);
 		String url = "";
 		if (selectOne == null) {
-			System.out.println("테스트1");
+			
 			model.addAttribute("msg", "아이디나 비밀번호가 틀립니다.");
 			return "login";
 		} else {
-			System.out.println("테스트2");
+		
 			if (selectOne.getMemberPwd().equals("1234")) {
 				model.addAttribute("memberId", member.getMemberId());
 				url = "pwdChange";
-				System.out.println("테스트4");
+				
 			} else {
-				System.out.println("테스트3");
 				HttpSession session = request.getSession();
 				session.setAttribute("LoginUser", selectOne);
-				url = "index";
+				url = "redirect:index.do";
 			}
 			
 		}
@@ -79,12 +89,7 @@ public class MemberController {
 		return "redirect:index";
 	}
 
-	// 사원등록에서 홈으로 클릭시 홈으로 연결
 
-	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String indexView() {
-		return "index";
-	}
 
 	// 사원등록 폼 연결
 
@@ -92,15 +97,36 @@ public class MemberController {
 	public String enrollView() {
 		return "member/memberForm";
 	}
+	
+	// 성공페이지 연결 
+	 @RequestMapping(value="success.do", method=RequestMethod.GET)
+	 public ModelAndView joinSuccess(@ModelAttribute Member member, HttpServletResponse response, HttpServletRequest request, ModelAndView mv) throws Exception {
+		 request.setCharacterEncoding("utf-8");
+		 System.out.println(member.getMemberName());
+		try {
+		
+			Member resultMember = service.printSuccessMemberOne(member);
+			mv.addObject("selectOne", resultMember).setViewName("member/joinSuccess");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", "등록실패").setViewName("common/errorPage");
+		}
+	
+		return mv;		
+	 }
 
 	// 사원등록
 	@RequestMapping(value = "memberRegister.do", method = RequestMethod.POST)
-	public ModelAndView memberRegister(@ModelAttribute Member member, @RequestParam("post") String post,
+	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post,
 			@RequestParam("address1") String address1, @RequestParam("address2") String address2,
 			@RequestParam("email1") String email1, @RequestParam("email2") String email2,
 			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request,
-			@RequestParam("Rrn1") String Rrn1, @RequestParam("Rrn2") String Rrn2, ModelAndView mv) {
-
+			@RequestParam("Rrn1") String Rrn1, @RequestParam("Rrn2") String Rrn2, HttpServletResponse response  ) throws Exception {
+		response.setContentType("text/html; charset=utf-8");
+		 request.setCharacterEncoding("utf-8");
+		 response.setCharacterEncoding("utf-8");
+		System.out.println(member.getMemberName());
+			System.out.println("들어옴");
 		if (!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile, request);
 			if (renameFileName != null) {
@@ -108,19 +134,18 @@ public class MemberController {
 				member.setRenameFileName(renameFileName);
 			}
 		}
-
+		member.setMemberName(member.getMemberName());
 		member.setMemberAddr(post + "," + address1 + "," + address2);
 		member.setMemberEmail(email1 + "@" + email2);
 		member.setMemberRrn(Rrn1 + "-" + Rrn2);
 		int result = service.registerMember(member);
 		String path = "";
+		
 		if (result > 0) {
-			mv.addObject("memberOne", member).setViewName("member/joinSuccess");
-
+			return "redirect:success.do?memberName=" + URLEncoder.encode(member.getMemberName(), "utf-8") + "&memberRrn=" + member.getMemberRrn();
 		} else {
-			mv.addObject("msg", "멤버 등록 실패").setViewName("common/errorPage");
+			return "common/errorPage";
 		}
-		return mv;
 	}
 
 	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {

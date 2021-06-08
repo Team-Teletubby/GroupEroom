@@ -90,6 +90,13 @@ public  class MemberServiceImpl implements MemberService {
 		return mStore.pwdcheck(memberPwd);
 	}
 
+	
+	@Override
+	public Member printSuccessMemberOne(Member member) {
+		// TODO Auto-generated method stub
+		return mStore.selectSuccessOne(member);
+	}
+
 
 
 

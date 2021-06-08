@@ -106,5 +106,10 @@ public class MemberStoreLogic implements MemberStore {
 		return sqlSession.selectOne("memberMapper.pwdcheck", memberPwd);
 	}
 
+	@Override
+	public Member selectSuccessOne(Member member) {
+		return sqlSession.selectOne("memberMapper.selectSuccessMember", member);
+	}
+
 	
 }

@@ -26,4 +26,6 @@ public interface MemberStore {
 	public int updatememberPwd(Member member);
 	
 	public int pwdcheck(String memberPwd);
+	
+	public Member selectSuccessOne(Member member);
 }
