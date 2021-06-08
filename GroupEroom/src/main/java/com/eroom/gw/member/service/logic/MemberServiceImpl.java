@@ -58,6 +58,10 @@ public  class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> printdepartMentMemberAll(String depName) {
 		return mStore.selectDepartMentMember(depName);
 	}
+	@Override
+	public ArrayList<Member> printMemberUsedDept(String deptName) {
+		return mStore.selectMemberUsedDept(deptName);
+	}
 
 	@Override
 	public int checkemId(String memberEmail) {
@@ -79,6 +83,13 @@ public  class MemberServiceImpl implements MemberService {
 		int result= mStore.updatememberPwd(member);
 		return result;
 	}
+
+	@Override
+	public int pwdcheck(String memberPwd) {
+
+		return mStore.pwdcheck(memberPwd);
+	}
+
 
 
 

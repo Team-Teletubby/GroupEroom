@@ -17,34 +17,49 @@
 <link rel="stylesheet" href="resources/css/reset.css" />
 <link rel="stylesheet" href="resources/css/index.css" />
 <title>EROOM</title>
+<style type="text/css">
+span.guide {
+	display: none;
+	font-size: 12px;
+	top: 12px;
+	right: 10px;
+}
+
+span.ok {
+	color: green
+}
+
+span.error {
+	color: red
+}
+</style>
 </head>
 <body>
 	<div class="content-box">
 		<div class="content">
 			<div class="title-logo-box">
 				<p>EROOM</p>
+				<p style="font-size: 20px; color: black;">비밀번호 변경</p>
 				<!--<img src="asset/image/logo.png" alt="ë¡ê³ ">-->
 			</div>
 			<div class="login-form">
 				<form action="pwdChange.do" method="post">
-				<input type="hidden" name="memberId" value="${memberId } ">
-					<font color="red">${message }</font>
+					<input type="hidden" name="memberId" value="${memberId } ">
+					<font color="red">${message }</font> <span class="guide ok"
+						id=".guide.ok">비밀번호가 일치합니다.</span> <span class="guide error"
+						id=".guide.error">비밀번호가 일치하지 않습니다.</span>
 					<div class="password_Out_Box">
 						<div class="inputBox">
-							<input type="password" name="memberPwd" class="text-field" id="Password1">
-							<label for="id">비밀번호</label>
+							<input type="password" name="memberPwd1" class="text-field"
+								id="Password1"> <label for="id">비밀번호</label>
 						</div>
 					</div>
 					<div class="password_Out_Box">
 						<div class="inputBox">
-							<input type="password" class="text-field"
-								id="Password2"> <label for="password">비밀번호확인</label>
+							<input type="password" class="text-field" id="Password2"
+								name="memberPwd2"> <label for="password">비밀번호확인</label>
 						</div>
 					</div>
-	
-
-
-
 					<input type="submit" value="로그인" class="submit-btn">
 				</form>
 			</div>
@@ -53,6 +68,40 @@
 	</div>
 	</div>
 	<a href="main.html">임시 이동 주소<<<<<<<<<<<<<<<<<<-</a>
-	<script src="resources/js/login.js"></script>
+	<script>
+		
+	
+		var memberPwd2 = document.querySelector('#Password2');
+		memberPwd2.addEventListener('keyup', function() {
+			
+		var memberPwd1 = document.querySelector('#Password1');
+		var guideOk;
+		var guidError;
+			if (memberPwd1.value == memberPwd2.value) {
+				
+				document.getElementById(".guide.error").style.display = "none";
+				document.getElementById(".guide.ok").style.display = "block";
+			} else {
+			document.getElementById(".guide.ok").style.display = "none";
+			document.getElementById(".guide.error").style.display = "block";
+			}
+		});
+
+		//        $.ajax({
+		//           url : "pwdCheck.do",
+		//           data : { "Password1" : Password1 },
+		//           success : function(result) {
+
+		//              if(result == 0) {
+
+		//              }else{
+
+		//              }
+		//           },
+		//           error : function() {
+		//              console.log("전송 실패");
+		//           }
+		//        });
+	</script>
 </body>
 </html>

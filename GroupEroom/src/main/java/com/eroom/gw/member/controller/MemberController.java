@@ -95,11 +95,11 @@ public class MemberController {
 
 	// 사원등록
 	@RequestMapping(value = "memberRegister.do", method = RequestMethod.POST)
-	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post,
+	public ModelAndView memberRegister(@ModelAttribute Member member, @RequestParam("post") String post,
 			@RequestParam("address1") String address1, @RequestParam("address2") String address2,
-			@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model,
+			@RequestParam("email1") String email1, @RequestParam("email2") String email2,
 			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request,
-			@RequestParam("Rrn1") String Rrn1, @RequestParam("Rrn2") String Rrn2) {
+			@RequestParam("Rrn1") String Rrn1, @RequestParam("Rrn2") String Rrn2, ModelAndView mv) {
 
 		if (!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile, request);
@@ -115,13 +115,12 @@ public class MemberController {
 		int result = service.registerMember(member);
 		String path = "";
 		if (result > 0) {
-			return "redirect:memberList.do";
+			mv.addObject("memberOne", member).setViewName("member/joinSuccess");
 
 		} else {
-			model.addAttribute("msg", "사원등록실패");
-			return "common/errorPage";
+			mv.addObject("msg", "멤버 등록 실패").setViewName("common/errorPage");
 		}
-
+		return mv;
 	}
 
 	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
@@ -282,9 +281,9 @@ public class MemberController {
 		//  비밀번호 중복
 		@ResponseBody
 		@RequestMapping(value ="pwdCheck.do", method=RequestMethod.POST)
-		public String pwdCheck(@RequestParam("memberPwd")String memberPwd ) { 
-			
-			return "";
+		public String pwdCheck(@RequestParam("memberPwd")String memberPwd , Member member, @RequestParam("Password1") String Password1,@RequestParam("Password2")String Password2) { 
+			 member.setMemberPwd(Password1+Password2);
+			return String.valueOf(service.pwdcheck(memberPwd));
 		}
 	}
 

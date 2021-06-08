@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>사원 등록 완료</title>
+
 </head>
 <body>
 	<!-- 헤더 시작 -->
@@ -21,7 +22,28 @@
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 	<font></font>
+	<section id="main-content">
+		<section class="wrapper">
+			<h2 align="center">사원 등록 완료</h2>
 
-			<h2>사원 등록 완료 </h2>
+			<p style="text-align: center;">
+				<img src="/resources/memberproFile/${memberOne.renameFileName }"
+					width="150" height="150" text-align=center />
+			</p>
+				<h2 align="center" style="font-size:28px";>${memberOne.memberName }</h2>
+				
+				<h1 align="center" style="font-size:28px";>${memberOne.memberDept}/ ${memberOne.memberJob}</h1>
+				<br><br>
+				<h2 align="center">사원번호 : ${memberOne.memberId }</h2>
+				
+				<br><br>
+				
+				<div style="text-align: center;">
+				<button class="btn btn-theme04" type="button"
+										onclick="location.href='index.do';">확인</button>
+										</div>
+										</section>
+										</section>
+										
 </body>
 </html>

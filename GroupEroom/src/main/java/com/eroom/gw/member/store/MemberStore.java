@@ -13,7 +13,8 @@ public interface MemberStore {
 	public Member selectOne(Member member);
 	public int insertMember(Member member);
 	public int updateMember(Member member);
-	public ArrayList<Member> selectDepartMentMember(String depName);
+	public ArrayList<Member> selectDepartMentMember(String depName); //전자결재
+	public ArrayList<Member> selectMemberUsedDept(String deptName); //메일
 	public Member selectOneById(int memberId);
 	public Member detailMember(int memberId);
 
@@ -23,4 +24,6 @@ public interface MemberStore {
 	public int selectSearchListCount(Search search);
 	
 	public int updatememberPwd(Member member);
+	
+	public int pwdcheck(String memberPwd);
 }
