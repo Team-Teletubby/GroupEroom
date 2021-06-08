@@ -1,7 +1,6 @@
 package com.eroom.gw.mail.service.logic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,14 +59,9 @@ public class MailServiceImpl implements MailService {
 	}
 //파일 
 	@Override
-	public Object fileUpload(String originalFilename, String renameFilename, String filePath, long fileSize) {
-		HashMap<String, Object> hmap = new HashMap<>();
-		hmap.put("originalFilename", originalFilename);
-		hmap.put("renameFilename", renameFilename);
-		hmap.put("filePath", filePath);
-		hmap.put("fileSize", fileSize);
-		
-		return mStore.uploadFile(hmap);
+	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 //메일이동 및 삭제

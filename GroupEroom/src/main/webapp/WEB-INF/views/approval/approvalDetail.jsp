@@ -12,10 +12,6 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 
-	
-	<script>
-		$("#nav-accordion > li:nth-child(4) > a").addClass("active");
-	</script>
 	<section id="main-content">
 		<section class="wrapper site-min-height detail-wrapper">
 			<h3>

@@ -55,13 +55,10 @@
 									<span><i class="fa fa-paperclip"></i> 첨부파일 </span> <a href="#">Download all attachments</a>
 								</p>
 								<ul>
-									<c:if test="${ !empty fBoardFile.originalFilename }">
-										<c:forEach items="${ fBoardFile }" var="fBoardFile"><%-- 
-											<c:param name="fBoardNo" value="${fBoard.fBoardNo}"> --%>
-												<li>${fBoardFile.originalFilename }</li>
-											<%-- </c:param> --%>
-										</c:forEach>
-									</c:if>
+										<<%-- c:forEach item="${fileList }" var="fBoardFile">
+											<c:param name="fBoardNo" value="${fBoard.fBoardNo}"></c:param>
+											<ul>${fBoardFile.originalFilename }</ul>
+										</c:forEach> --%>
 								</ul>
 							</div>
 							<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$댓글$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->

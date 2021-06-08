@@ -1,95 +1,74 @@
 package com.eroom.gw.mail.domain;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class MailFile {
 	
-	private int fileNo;
+	private int FileNo;
 	private String originalFilename;
 	private String renameFilename;
 	private String filePath;
-	private int fileSize;
-	private Timestamp uploadDate;
+	private long fileSize;
+	private Date uploadDate;
 	private int mailNo;
-	
+	private int memberId;
 	public MailFile() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public MailFile(int fileNo, String originalFilename, String renameFilename, String filePath, int fileSize,
-			Timestamp uploadDate, int mailNo) {
-		super();
-		this.fileNo = fileNo;
-		this.originalFilename = originalFilename;
-		this.renameFilename = renameFilename;
-		this.filePath = filePath;
-		this.fileSize = fileSize;
-		this.uploadDate = uploadDate;
-		this.mailNo = mailNo;
-	}
-
 	public int getFileNo() {
-		return fileNo;
+		return FileNo;
 	}
-
 	public void setFileNo(int fileNo) {
-		this.fileNo = fileNo;
+		FileNo = fileNo;
 	}
-
 	public String getOriginalFilename() {
 		return originalFilename;
 	}
-
 	public void setOriginalFilename(String originalFilename) {
 		this.originalFilename = originalFilename;
 	}
-
 	public String getRenameFilename() {
 		return renameFilename;
 	}
-
 	public void setRenameFilename(String renameFilename) {
 		this.renameFilename = renameFilename;
 	}
-
 	public String getFilePath() {
 		return filePath;
 	}
-
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-
-	public int getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
-
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
-
-	public Timestamp getUploadDate() {
+	public Date getUploadDate() {
 		return uploadDate;
 	}
-
-	public void setUploadDate(Timestamp uploadDate) {
+	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
 	}
-
 	public int getMailNo() {
 		return mailNo;
 	}
-
 	public void setMailNo(int mailNo) {
 		this.mailNo = mailNo;
 	}
-
+	public int getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
-		return "MailFile [fileNo=" + fileNo + ", originalFilename=" + originalFilename + ", renameFilename="
+		return "MailFile [FileNo=" + FileNo + ", originalFilename=" + originalFilename + ", renameFilename="
 				+ renameFilename + ", filePath=" + filePath + ", fileSize=" + fileSize + ", uploadDate=" + uploadDate
-				+ ", mailNo=" + mailNo + "]";
+				+ ", mailNo=" + mailNo + ", memberId=" + memberId + "]";
 	}
 	
 	

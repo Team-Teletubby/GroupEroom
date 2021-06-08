@@ -66,11 +66,11 @@
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
 									View Message
-									<!-- <form action="#" class="pull-right mail-src-position">
+									<form action="#" class="pull-right mail-src-position">
 										<div class="input-append">
 											<input type="text" class="form-control "
 												placeholder="Search Mail">
-										</div> -->
+										</div>
 									</form>
 								</h4>
 							</header>
@@ -110,16 +110,25 @@
 											${mail.mailContents }</div>
 										<div class="attachment-mail">
 											<p>
-												<span><i class="fa fa-paperclip"></i> 첨부파일</span> 
+												<span><i class="fa fa-paperclip"></i> 2 attachments —
+												</span> <a href="#">Download all attachments</a> | <a href="#">View
+													all images</a>
 											</p>
 											<ul>
-												<c:if test="${!empty mailFile.originalFilename }">
-													<c:forEach items="${ mFileList }" var = "file">
-														<li>
-															${file.originalFilename}
-														</li>
-													</c:forEach>
-												</c:if>
+												<li><a class="atch-thumb" href="#"> <img
+														src="img/instagram.jpg"></a> <a class="name" href="#">
+														IMG_001.jpg <span>20KB</span>
+												</a>
+													<div class="links">
+														<a href="#">View</a> - <a href="#">Download</a>
+													</div></li>
+												<li><a class="atch-thumb" href="#"> <img
+														src="img/weather.jpg"></a> <a class="name" href="#">
+														IMG_001.jpg <span>20KB</span>
+												</a>
+													<div class="links">
+														<a href="#">View</a> - <a href="#">Download</a>
+													</div></li>
 											</ul>
 										</div>
 										<div class="compose-btn pull-left">

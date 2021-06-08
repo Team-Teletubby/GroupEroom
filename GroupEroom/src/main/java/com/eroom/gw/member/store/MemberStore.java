@@ -24,4 +24,6 @@ public interface MemberStore {
 	public int selectSearchListCount(Search search);
 	
 	public int updatememberPwd(Member member);
+	
+	public int pwdcheck(String memberPwd);
 }

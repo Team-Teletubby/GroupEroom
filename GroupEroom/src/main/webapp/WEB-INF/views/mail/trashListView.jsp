@@ -60,12 +60,12 @@
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
 									Inbox
-									<!-- <form action="#" class="pull-right mail-src-position">
+									<form action="#" class="pull-right mail-src-position">
 										<div class="input-append">
 											<input type="text" class="form-control "
 												placeholder="Search Mail">
 										</div>
-									</form> -->
+									</form>
 								</h4>
 							</header>
 							<form action="trashListView.do" method="GET">
@@ -128,12 +128,6 @@
 																	<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 																</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
 															</td>
-															<c:if test="${not empty trashlist.note_orgfilename}">
-																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-															</c:if>
-															<c:if test="${empty trashlist.note_orgfilename}">
-																<td class="view-message  inbox-small-cells"></td>
-															</c:if>
 															<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 															<td class="view-message  text-right">${mail.sentDate}</td>
 														</tr>

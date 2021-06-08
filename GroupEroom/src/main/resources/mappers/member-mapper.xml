@@ -27,10 +27,15 @@
 	 SELECT *FROM MEMBER 
 	 WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd } 
 	</select>
-	<!-- 세션 -->
+	<!-- 세션,id 시퀀스조회 -->
 	<select id="selectOneMember" resultMap="memberResultMap">
 		SELECT * FROM MEMBER 
+		<if test="memberId.toString() == ''">
+		WHERE MEMBER_NAME = #{memberName } AND MEMBER_RRN = #{memberRrn}
+		<if test="memberId.toString() == #{memberId}" >
 		WHERE MEMBER_ID = #{memberId } 
+		</if>
+		</if>
 	</select>
 	<!-- 사원 목록 -->
 	<select id="memberList" resultMap="memberResultMap">
@@ -60,6 +65,10 @@
 	<select id="checkemId" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = #{memberEmail }
 		
+	</select>
+	<!-- 비밀번호 체크 -->
+	<select id="pwdcheck" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_PWD = #{memberPwd }
 	</select>
 	
 	<select id="selectListCount" resultType="_int">
@@ -108,7 +117,7 @@
 		<if test='quitYn.toString() == "Y"'>
 		 SET MEMBER_DEPT=#{memberDept },MEMBER_JOB=#{memberJob },MEMBER_PHONE=#{memberPhone },
 		  MEMBER_EMAIL=#{memberEmail},MEMBER_ADDR=#{memberAddr },BANK=#{bank }, 
-		  ACCOUNT=#{bankAccount },QUIT_YN = #{quitYn },RENAMEFILE_NAME = #{renameFileName }, 
+		  ACCOUNT=#{bankAccount },QUIT_YN = #{quitYn },RENAMEFILE_NAME=#{renameFileName }, 
 		  ORIGINALFILE_NAME=#{originalFileName },QUIT_DATE=SYSDATE 
 		</if>
 		<if test='quitYn.toString() == "N"'>

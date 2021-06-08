@@ -84,7 +84,7 @@ span.error {
 			<div align="center">
             <div class="btn-group">
 						<!-- 이전 -->
-						<c:url var="before" value="memberSearch.do">
+						<c:url var="before" value="memberList.do">
 							<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -98,7 +98,7 @@ span.error {
 						
 					<!-- 페이지 -->
 					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-						<c:url var="pagination" value="memberSearch.do">
+						<c:url var="pagination" value="memberList.do">
 							<c:param name="page" value="${p }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -114,7 +114,7 @@ span.error {
 				
 				
 				<!-- 다음 -->
-				<c:url var="after" value="memberSearch.do">
+				<c:url var="after" value="memberList.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 					<c:param name="searchValue" value="${search.searchValue }"></c:param>

@@ -22,16 +22,16 @@
 							<i class="fa fa-angle-right"></i> 공지글 작성란
 						</h4>
 						<br>
-						<form action="noticeRegister.do" method="post" enctype="multipart/form-data">
+						<form action="noticeRegister.do" method="post" enctype="multipart/form-data" name="noticeWriteForm">
 						<input type="hidden" value="${LoginUser.memberId}" name="memberId">
 							    <div class="form-group">
 							      <label class="form-label mt-4">제목</label>
-							      <textarea class="form-control" id="title" rows="1" name="noticeTitle"></textarea>
+							      <textarea class="form-control" id="title" rows="1" name="noticeTitle" class="chk" title="제목을 입력하세요"></textarea>
 							    </div>
 						
 							    <div class="form-group">
 							      <label class="form-label mt-4">내용</label>
-							      <textarea id="summernote" name="noticeContents"></textarea>
+							      <textarea id="summernote" name="noticeContents" class="chk" title="내용을 입력하세요"></textarea>
 							    </div>
 							    <div>
 							      <label for="formFile" class="form-label mt-4">첨부파일</label>
@@ -84,6 +84,28 @@
 				
 			}
 		}); */
+	
+		$(document).ready(function(){
+			var formObj = $("form[name='noticeWriteForm']");
+			$(".write_btn").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "noticeRegister.do");
+				formObj.attr("method", "post");
+				formObj.submit();
+			});
+		})
+		function fn_valiChk(){
+			var regForm = $("form[name='noticeWriteForm'] .chk").length;
+			for(var i = 0; i<regForm; i++){
+				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
+	
 		
 	</script>
 

@@ -28,7 +28,7 @@ public interface MailService {
 	public int composeMailReceive(Mail mail);
 	
 	//파일
-	public Object fileUpload(String originalFilename, String renameFilename, String filePath, long fileSize); //업로드
+	public Object fileUpload(String originalFileName, String renameFileName, String filePath, long fileSize); //업로드
 	
 
 }

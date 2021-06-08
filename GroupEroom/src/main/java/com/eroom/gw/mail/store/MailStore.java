@@ -1,7 +1,6 @@
 package com.eroom.gw.mail.store;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.eroom.gw.common.PageInfo;
@@ -16,7 +15,6 @@ public interface MailStore {
 	public ArrayList<Mail> selectAllTrash(PageInfo pi, int receiverId);
 	public Mail selectOneMail(int mailNo);
 	public int composeMailSender(Mail mail);
-	public Object uploadFile(HashMap<String, Object> hmap);
 	public int composeMailReceiver(Mail mail);
 	public int updateTrashY(Mail mail);
 	public int updateTrashN(Mail mail);

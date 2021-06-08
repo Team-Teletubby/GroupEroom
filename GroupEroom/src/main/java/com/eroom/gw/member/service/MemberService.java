@@ -35,6 +35,9 @@ public interface MemberService {
 	// 비밀번호 변경
 	public int modifymemberPwd (Member member);
 
+	
+	// 비밀번호 중복체크
+	public int pwdcheck(String memberPwd);
 	}
 	
 

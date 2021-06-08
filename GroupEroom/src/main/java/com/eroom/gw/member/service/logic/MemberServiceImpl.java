@@ -84,6 +84,13 @@ public  class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public int pwdcheck(String memberPwd) {
+
+		return mStore.pwdcheck(memberPwd);
+	}
+
+
 
 
 
