@@ -93,7 +93,9 @@ public class FBoardController {
 		//상세조회 불러오기
 		Freeboard fBoard = fService.printOne(fBoardNo);
 		if(fBoard != null) {
-			mv.addObject("fBoard", fBoard).setViewName("fBoard/fBoardDetailView");
+			mv.addObject("fBoardFile", fileList);
+			mv.addObject("fBoard", fBoard);
+			mv.setViewName("fBoard/fBoardDetailView");
 		}else {
 			mv.addObject("msg", "게시글 상세 조회 실패");
 			mv.setViewName("common/errorPage");
@@ -222,7 +224,7 @@ public class FBoardController {
 			//arraylist를 gson형태로 변환
 			gson.toJson(cmtList, response.getWriter());
 		}else {
-			System.out.println("데이터가 없습니다");
+			System.out.println("등록된 댓글이 없습니다");
 		}
 	}
 	
