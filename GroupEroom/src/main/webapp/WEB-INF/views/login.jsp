@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+1<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -40,17 +40,12 @@
 								id="Password"> <label for="password">비밀번호</label>
 						</div>
 					</div>
-	
-
-
 					<input type="submit" value="로그인" class="submit-btn">
 				</form>
 			</div>
 			<p id="question">이슈 발생 시, 담당 부서 관리자에게 문의해주시기 바랍니다.</p>
 		</div>
 	</div>
-	</div>
-	<a href="main.html">임시 이동 주소<<<<<<<<<<<<<<<<<<-</a>
 	<script src="resources/js/login.js"></script>
 </body>
 </html>

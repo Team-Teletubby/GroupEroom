@@ -50,8 +50,5 @@
 			<p id="question">이슈 발생 시, 담당 부서 관리자에게 문의해주시기 바랍니다.</p>
 		</div>
 	</div>
-	</div>
-	<a href="main.html">임시 이동 주소<<<<<<<<<<<<<<<<<<-</a>
-	<script src="resources/js/login.js"></script>
 </body>
 </html>
