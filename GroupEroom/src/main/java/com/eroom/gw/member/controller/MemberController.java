@@ -319,10 +319,14 @@ public class MemberController {
 
 	// 비밀번호 변경
 	@RequestMapping(value = "pwdChange.do", method= RequestMethod.POST)
-	public String pwdChange(@ModelAttribute Member member, Model model) {
+	public String pwdChange(@RequestParam("memberId")int memberId,@RequestParam("memberPwd1")String memberPwd1,@RequestParam("memberPwd2") String memberPwd2, Model model ) {
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPwd(memberPwd1);
 		int result = service.modifymemberPwd(member);
+		System.out.println("테스트");
 		if (result > 0) {
-			return "index";
+			return "login";
 		} else {
 			model.addAttribute("message", "변경하실 비밀번호를 다시한번 확인해주세요.");
 			return "pwdChange";

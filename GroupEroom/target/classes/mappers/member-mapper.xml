@@ -153,9 +153,7 @@
 	</update>
 
 	<update id="updatememberPwd" parameterType="Member">
-		UPDATE MEMBER SET
-		MEMBER_PWD = #{memberPwd}
-		WHERE MEMBER_ID = #{memberId}
+		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_ID = #{memberId}
 	</update>
 
 

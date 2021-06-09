@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html lang="ko">
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,7 @@
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
 <jsp:include page="../common/sideBar.jsp"></jsp:include>
+
 <section id="main-content">
 		<section class="wrapper">
 			<h3>
@@ -23,16 +24,16 @@
 							<i class="fa fa-angle-right"></i> 공지글 작성란
 						</h4>
 						<br>
-						<form action="noticeRegister.do" method="post" enctype="multipart/form-data" name="noticeWriteForm">
+						<form action="noticeRegister.do" method="post" enctype="multipart/form-data">
 						<input type="hidden" value="${LoginUser.memberId}" name="memberId">
 							    <div class="form-group">
 							      <label class="form-label mt-4">제목</label>
-							      <textarea class="form-control" id="title" rows="1" name="noticeTitle" class="chk" title="제목을 입력하세요"></textarea>
+							      <textarea class="form-control" id="title" rows="1" name="noticeTitle"></textarea>
 							    </div>
 						
 							    <div class="form-group">
 							      <label class="form-label mt-4">내용</label>
-							      <textarea id="summernote" name="noticeContents" class="chk" title="내용을 입력하세요"></textarea>
+							      <textarea id="summernote" name="noticeContents"></textarea>
 							    </div>
 							    <div>
 							      <label for="formFile" class="form-label mt-4">첨부파일</label>
@@ -40,7 +41,7 @@
 							    </div>
 							   <br><br>
 							   <div align="center">
-							   	<button type="submit" class="btn btn-theme03"><i class="fa fa-check"></i> 등록</button>&nbsp;&nbsp;
+							   	<button type="submit" class="btn btn-theme03 "><i class="fa fa-check"></i> 등록</button>&nbsp;&nbsp;
 							    <button type="reset" class="btn btn-theme04"><i class="fa fa-times"></i> 취소</button>
 							   </div>
 
@@ -86,27 +87,7 @@
 			}
 		}); */
 	
-		$(document).ready(function(){
-			var formObj = $("form[name='noticeWriteForm']");
-			$(".write_btn").on("click", function(){
-				if(fn_valiChk()){
-					return false;
-				}
-				formObj.attr("action", "noticeRegister.do");
-				formObj.attr("method", "post");
-				formObj.submit();
-			});
-		})
-		function fn_valiChk(){
-			var regForm = $("form[name='noticeWriteForm'] .chk").length;
-			for(var i = 0; i<regForm; i++){
-				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
-					alert($(".chk").eq(i).attr("title"));
-					return true;
-				}
-			}
-		}
-	
+
 		
 	</script>
 

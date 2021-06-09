@@ -67,7 +67,7 @@ span.error {
 		</div>
 	</div>
 	</div>
-	<a href="main.html">임시 이동 주소<<<<<<<<<<<<<<<<<<-</a>
+
 	<script>
 		
 	
