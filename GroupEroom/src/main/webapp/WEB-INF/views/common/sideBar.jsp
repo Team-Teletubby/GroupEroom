@@ -88,7 +88,7 @@
 						</ul>
 					</li>
 					<!-- 협업 메뉴 -->
-					<li><a href="inbox.html"> <i class="fa fa-puzzle-piece"></i> <span>협업관리
+					<li><a href="coopListView.do"> <i class="fa fa-puzzle-piece"></i> <span>협업관리
 						</span>
 					</a></li>
 					<!-- 게시판 메뉴 -->

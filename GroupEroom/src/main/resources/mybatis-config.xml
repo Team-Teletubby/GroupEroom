@@ -26,6 +26,9 @@
 		<typeAlias type="com.eroom.gw.booking.domain.Booking" alias="Booking" />
 		<typeAlias type="com.eroom.gw.calendar.domain.Calendar" alias="Calendar" />
 		<typeAlias type="com.eroom.gw.survey.domain.SurveyList" alias="SurveyList" />
+		<typeAlias type="com.eroom.gw.cooperation.domain.Cooperation" alias="Cooperation" />
+		<typeAlias type="com.eroom.gw.cooperation.domain.CooperationRoom" alias="CooperationRoom" />
+		<typeAlias type="com.eroom.gw.cooperation.domain.CooperationCmt" alias="CooperationCmt" />
 
 	</typeAliases>
 	
@@ -42,6 +45,7 @@
 		<mapper resource="mappers/booking-mapper.xml"></mapper>
 		<mapper resource="mappers/calendar-mapper.xml"></mapper>
 		<mapper resource="mappers/survey-mapper.xml"></mapper>
+		<mapper resource="mappers/cooperation-mapper.xml"></mapper>
 
 	</mappers>
 	

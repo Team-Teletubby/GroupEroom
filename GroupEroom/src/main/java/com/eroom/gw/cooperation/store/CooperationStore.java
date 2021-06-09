@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import com.eroom.gw.cooperation.domain.Cooperation;
 import com.eroom.gw.cooperation.domain.CooperationCmt;
+import com.eroom.gw.cooperation.domain.CooperationRoom;
 
 public interface CooperationStore {
 	
-	public ArrayList<Cooperation> selectAllList(); //게시물 리스트조회
+	public ArrayList<CooperationRoom> selectAllList(); //리스트조회
+	public Cooperation selectOne(int roomNo);
 	public int insertCoop(Cooperation co); //게시물 작성
 	public int updateCoop(Cooperation co); //게시물 수정
 	public int deleteCoop(int coNo); //게시물 삭제

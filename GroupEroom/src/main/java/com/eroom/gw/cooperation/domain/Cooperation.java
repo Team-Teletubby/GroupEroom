@@ -6,6 +6,7 @@ public class Cooperation {
 	
 	private int coNo;
 	private int memberId;
+	private String memberDept;
 	private String coTitle;
 	private String coContents;
 	private String originalFilename;
@@ -17,11 +18,12 @@ public class Cooperation {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Cooperation(int coNo, int memberId, String coTitle, String coContents, String originalFilename,
-			String renameFilename, Date enrollDate) {
+	public Cooperation(int coNo, int memberId, String memberDept, String coTitle, String coContents,
+			String originalFilename, String renameFilename, Date enrollDate) {
 		super();
 		this.coNo = coNo;
 		this.memberId = memberId;
+		this.memberDept = memberDept;
 		this.coTitle = coTitle;
 		this.coContents = coContents;
 		this.originalFilename = originalFilename;
@@ -40,6 +42,12 @@ public class Cooperation {
 	}
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
+	}
+	public String getMemberDept() {
+		return memberDept;
+	}
+	public void setMemberDept(String memberDept) {
+		this.memberDept = memberDept;
 	}
 	public String getCoTitle() {
 		return coTitle;
@@ -74,11 +82,10 @@ public class Cooperation {
 	
 	@Override
 	public String toString() {
-		return "Cooperation [coNo=" + coNo + ", memberId=" + memberId + ", coTitle=" + coTitle + ", coContents="
-				+ coContents + ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename
-				+ ", enrollDate=" + enrollDate + "]";
+		return "Cooperation [coNo=" + coNo + ", memberId=" + memberId + ", memberDept=" + memberDept + ", coTitle="
+				+ coTitle + ", coContents=" + coContents + ", originalFilename=" + originalFilename
+				+ ", renameFilename=" + renameFilename + ", enrollDate=" + enrollDate + "]";
 	}
-	
-	
 
+	
 }

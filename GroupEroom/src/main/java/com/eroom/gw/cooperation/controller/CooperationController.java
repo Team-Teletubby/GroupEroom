@@ -20,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.cooperation.domain.Cooperation;
 import com.eroom.gw.cooperation.domain.CooperationCmt;
+import com.eroom.gw.cooperation.domain.CooperationRoom;
 import com.eroom.gw.cooperation.service.CooperationService;
-import com.eroom.gw.notice.domain.Notice;
 @RestController
 @Controller
 public class CooperationController {
@@ -29,15 +29,14 @@ public class CooperationController {
 	@Autowired
 	private CooperationService coService;
 	
-//게시글리스트 조회
-	@RequestMapping(value="coList.do")
+	@RequestMapping(value="coopListView.do")
 	public ModelAndView coopListView(ModelAndView mv) {	
-		ArrayList<Cooperation> coList = coService.printAll();
+		ArrayList<CooperationRoom> coList = coService.printAll();
 		if(!coList.isEmpty()) {
 			mv.addObject("coList", coList);
-			mv.setViewName("cooperation/coList");
+			mv.setViewName("cooperation/coopRoomList");
 		}else {
-			mv.addObject("msg", "게시글 조회 실패 !");
+			mv.addObject("msg", "리스트 조회 실패");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
