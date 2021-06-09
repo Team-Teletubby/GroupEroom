@@ -18,6 +18,16 @@
 		<result property="trashYn" 		column="TRASH_YN" />
 	</resultMap>
 	
+	<resultMap type="MailFile" id="mailFileResultMap">
+		<id property="fileNo" column="FILE_NO" />
+		<result property="originalFilename" column="ORIGINAL_FILENAME" />
+		<result property="renameFilename" column="RENAME_FILENAME" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="uploadDate" column="UPLOAD_DATE" />
+		<result property="mailNo" column="MAIL_NO" />
+	</resultMap>
+	
 <!-- 카운트 출력 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM MAIL
@@ -32,7 +42,7 @@
 	
 <!-- 받은편지함 출력 -->
 	<select id="selectAllInbox" parameterType="_int" resultMap="mailResultMap">
-		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS SENDER_NAME, b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD hh:mm:ss') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD hh:mm:ss') AS READ_DATE, a.READ_COUNT  
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS SENDER_NAME, b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD HH24:MI:SS') AS READ_DATE, a.READ_COUNT  
 		FROM MAIL a 
 		JOIN MEMBER b ON a.SENDER_ID = b.MEMBER_ID
 		WHERE (RECEIVER_ID = #{value } OR CC_ID = #{value })
@@ -42,7 +52,7 @@
 	</select>
 <!-- 보낸편지함 출력 -->
 	<select id="selectAllSentMail" parameterType="_int" resultMap="mailResultMap">
-		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD hh:mm:ss') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD hh:mm:ss') AS READ_DATE, a.READ_COUNT 
+		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD HH24:MI:SS') AS READ_DATE, a.READ_COUNT 
 		FROM MAIL a 
 		JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID
 		WHERE SENDER_ID = #{value }
@@ -84,12 +94,17 @@
 	<insert id="composeMailReceive">
 		<if test="ccId != null">
 			INSERT INTO MAIL 
-			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, #{ccId }, #{mailTitle }, #{mailContents }, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), DEFAULT, DEFAULT, DEFAULT)
 		</if>
 		<if test="ccId == null">
 			INSERT INTO MAIL 
 			VALUES(MAIL_SEQ.NEXTVAL, #{receiverId }, #{senderId }, DEFAULT, #{mailTitle }, #{mailContents }, SYSDATE, DEFAULT, DEFAULT, DEFAULT)
 		</if>
+	</insert>
+<!-- 파일첨부 -->
+	<insert id="uploadFile" parameterType="HashMap">
+		INSERT INTO MAIL_FILE (FILE_NO, ORIGINAL_FILENAME, RENAME_FILENAME, FILE_PATH, FILE_SIZE, UPLOAD_DATE, MAIL_NO) 
+		VALUES(MAIL_FILE_SEQ.NEXTVAL, #{originalFilename}, #{renameFilename}, #{filePath}, #{fileSize}, SYSDATE, MAIL_SEQ.CURRVAL)
 	</insert>
 	
 <!-- 메일 삭제 -->

@@ -339,10 +339,9 @@
 			$("#receiverName").val(mailMembers.receive.name);
 			$("#receiverId").val(mailMembers.receive.id);
 			$("#ccName").val(mailMembers.cc.name);
-			$("#ccId").val(mailMembers.cc.id);
+			$("#ccId").val(mailMembers.cc.id);			
 			
 			//배열 내부요소 삭제
-			mailMembers.pop();
 			mailMembers.pop();
 			
 			$("#modal").modal('hide');

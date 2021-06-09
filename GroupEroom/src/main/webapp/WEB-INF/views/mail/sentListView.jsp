@@ -115,26 +115,33 @@
 										<div class="table-inbox-wrap ">
 											<table class="table table-inbox table-hover">
 												<tbody>
-													<c:forEach items="${ mailList }" var="mail">
-														<tr class="">
-															<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
-															<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
-															<c:if test="${mail.readCount >= 1}">
-																<td class="view-message" name="readCount"><i class="fa fa-envelope-open"></i>
-															</c:if>
-															<c:if test="${mail.readCount <= 0}">
-																<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
-															</c:if>
-															<td class="view-message" name="receiverName">${mail.receiverName}</td>
-															<td class="view-message" name="mailTilte">
-																<c:url var="mailDetail" value="mailDetailView.do">
-																	<c:param name="mailNo" value="${mail.mailNo }"></c:param>
-																</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
-															</td>
-															<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-															<td class="view-message  text-right">${mail.sentDate}</td>
+													<c:if test="empty ${mailList }">
+														<tr>
+															<td class="view-message"><a>메일이 없습니다.</a></td>
 														</tr>
-													</c:forEach>
+													</c:if>
+													<c:if test="!empty ${mailList }">
+														<c:forEach items="${ mailList }" var="mail">
+															<tr class="">
+																<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
+																<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
+																<c:if test="${mail.readCount >= 1}">
+																	<td class="view-message" name="readCount"><i class="fa fa-envelope-open"></i>
+																</c:if>
+																<c:if test="${mail.readCount <= 0}">
+																	<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
+																</c:if>
+																<td class="view-message" name="receiverName">${mail.receiverName}</td>
+																<td class="view-message" name="mailTilte">
+																	<c:url var="mailDetail" value="mailDetailView.do">
+																		<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																	</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
+																</td>
+																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+																<td class="view-message  text-right">${mail.sentDate}</td>
+															</tr>
+														</c:forEach>
+													</c:if>
 												</tbody>
 											</table>
 										</div>

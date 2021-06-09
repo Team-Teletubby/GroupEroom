@@ -60,7 +60,9 @@ public class MailController {
 			mv.addObject("pi", pi);
 			mv.setViewName("mail/inboxListView");
 		}else {
-			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
+			mv.addObject("mailList", mailList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mail/inboxListView");
 		}
 		return mv;
 	}
@@ -85,7 +87,9 @@ public class MailController {
 			mv.addObject("pi", pi);
 			mv.setViewName("mail/sentListView");
 		}else {
-			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
+			mv.addObject("mailList", mailList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mail/sentListView");
 		}
 		return mv;
 	}
@@ -110,7 +114,9 @@ public class MailController {
 			mv.addObject("pi", pi);
 			mv.setViewName("mail/trashListView");
 		}else {
-			mv.addObject("msg", "메일조회 실패").setViewName("common/errorPage");
+			mv.addObject("mailList", mailList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mail/trashListView");
 		}
 		return mv;
 	}
@@ -183,7 +189,9 @@ public class MailController {
 		session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("LoginUser");
 		mail.setSenderId(loginUser.getMemberId());
-		mail.setCcId(Integer.parseInt(ccId));
+		if(ccId != null) {
+			mail.setCcId(Integer.parseInt(ccId));			
+		}
 		mail.setReceiverId(Integer.parseInt(receiverId));
 		
 		int receiveResult = 0;
