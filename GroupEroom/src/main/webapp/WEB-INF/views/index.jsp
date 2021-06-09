@@ -34,9 +34,10 @@
 									</p>
 									<p id="myinfo-name">${member.memberName }/${member.memberJob }</p>
 									<p id="myinfo-department">${member.memberDept } 부서</p>
-									<span class="myinfo-span">결제할 문서</span> <span
-										class="badge bg-warning">${approvalTypeCount }</span> <span class="myinfo-span">받은
-										메일</span> <span class="badge bg-warning">3</span>
+									<span class="myinfo-span"><b>결제할 문서</b></span> 
+									<span class="badge bg-warning">${approvalTypeCount }</span> 
+									<span class="myinfo-span"><b>받은 메일</b></span> 
+									<span class="badge bg-warning">3</span>
 								</div>
 							</div>
 							<!-- 내 정보 끝 -->

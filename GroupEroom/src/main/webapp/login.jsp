@@ -40,10 +40,6 @@
 								id="Password"> <label for="password">비밀번호</label>
 						</div>
 					</div>
-	
-
-
-
 					<input type="submit" value="로그인" class="submit-btn">
 				</form>
 			</div>

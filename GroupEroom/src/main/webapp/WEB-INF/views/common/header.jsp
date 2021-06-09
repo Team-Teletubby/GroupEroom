@@ -19,7 +19,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.do" class="logo"><b>DASH<span>IO</span></b></a>
+			<a href="index.do" class="logo"><b>GROUP<span>E</span>ROOM</b></a>
 			<!--logo end-->
 			<div class="top-menu">
 				<ul class="nav pull-right top-menu">
