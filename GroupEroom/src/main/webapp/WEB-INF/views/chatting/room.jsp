@@ -166,7 +166,6 @@
 				
 				$('#roomContainer').append(html);
 			});
-			
 		}
 	}
 

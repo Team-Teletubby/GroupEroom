@@ -2,28 +2,21 @@ package com.eroom.gw.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,48 +24,44 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eroom.gw.approval.service.ApprovalService;
-import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
-import com.eroom.gw.fboard.domain.Freeboard;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.service.MemberService;
-import com.sun.media.jfxmedia.logging.Logger;
+import com.eroom.gw.notice.domain.Notice;
+import com.eroom.gw.notice.service.NoticeService;
 
 @Controller
 public class MemberController {
 
-	private int countCheck = 0;
 	@Autowired
 	private MemberService service;
 	
 	@Autowired
 	private ApprovalService approvalService;
+	
+	@Autowired
+	private NoticeService noticeService;
 
+	
 	// 로그인 -> 메인페이지 연결
 	@GetMapping(value="index.do")
 	public ModelAndView mainView(ModelAndView mv, HttpSession session) { 
 		Member member = (Member)session.getAttribute("LoginUser");
 		int memberId = member.getMemberId();
 		
-		// 갯수가 늘어나면 new 출력하기 위한 것
-		String check = null;
 		// 나에게 온 결재문 갯수 
 		int approvalTypeCount = approvalService.printTypeCount(memberId);
-		// 서로 같지 않는다면 (새로 추가된 글이 존재한다면)
-		if(approvalTypeCount > countCheck) {
-			countCheck = approvalTypeCount;
-			check = "true";
-		}else {
-			check = "false";
-		}
+		// 공지사항 리스트
+		ArrayList<Notice> noticeList = noticeService.printAll();
+		
+		// 결재문 갯수
 		mv.addObject("approvalTypeCount", approvalTypeCount);
 		// 회원 정보
 		mv.addObject("member", member);
-		// 새 글 체크
-		mv.addObject("check",check);
-		
+		// 공지사항 리스트
+		mv.addObject("noticeList", noticeList);
 		mv.setViewName("index");
 		
 		return mv;

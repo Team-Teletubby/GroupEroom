@@ -73,5 +73,10 @@ public class NoticeStoreLogic implements NoticeStore {
 		return sqlSession.selectOne("noticeMapper.selectSearchListCount", search);
 	}
 
+	@Override
+	public ArrayList<Notice> selectAllList() {
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectList");
+	}
+
 	
 }

@@ -9,7 +9,7 @@ import com.eroom.gw.notice.domain.Notice;
 public interface NoticeService {
 
 	public int getListCount();
-	public ArrayList<Notice> printAll(PageInfo pi);//전체조죄
+	public ArrayList<Notice> printAll(PageInfo pi);//전체조죄(페이징)
 	public int addReadCount(int noticeNo); // 조회수증가
 	public Notice printOne(int noticeNo); // 상세조회
 	public int registerNotice(Notice notice); //등록
@@ -17,6 +17,7 @@ public interface NoticeService {
 	public int removeNotice(int noticeNo); //삭제
 	public ArrayList<Notice> printSearchAll(Search search, PageInfo pi);//검색
 	public int getSearchListCount(Search search);
+	public ArrayList<Notice> printAll(); // 전체조회
 	
 	
 	

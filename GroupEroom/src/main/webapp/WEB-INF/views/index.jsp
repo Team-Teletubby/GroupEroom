@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -32,12 +35,20 @@
 									<p class="centered" id="myinfo-head">
 										<img src="/resources/memberproFile/${member.renameFileName }" class="img-circle" width="120" height="120">
 									</p>
-									<p id="myinfo-name">${member.memberName }/${member.memberJob }</p>
+									<p id="myinfo-name">${member.memberName } ${member.memberJob }</p>
 									<p id="myinfo-department">${member.memberDept } 부서</p>
-									<a href="suspenseBoard.do"><span class="myinfo-span"><b>결제할 문서</b></span></a>
-									<span class="badge bg-warning">${approvalTypeCount } </span> <span>new</span>
-									<span class="myinfo-span"><b>받은 메일</b></span> 
-									<span class="badge bg-warning">3</span>
+									<div class="myinfo-approval">
+										<a href="suspenseBoard.do">
+											<span class="myinfo-span">결제할 문서</span>
+											<span class="badge bg-warning">${approvalTypeCount } </span> 							
+										</a>
+									</div>
+									<div class="myinfo-mail">
+										<a href="#">
+											<span class="myinfo-span">받은 메일</span> 
+											<span class="badge bg-warning">3</span>																	
+										</a>
+									</div>
 								</div>
 							</div>
 							<!-- 내 정보 끝 -->
@@ -45,7 +56,7 @@
 							<div class="col-md-8 mb">
 								<div class="message-p pn">
 									<div class="message-header">
-										<span>공지사항</span> <span class="more"><a href="">더보기</a></span>
+										<span>공지사항</span> <span class="more"><a href="noticeListView.do">더보기</a></span>
 									</div>
 									<div class="row">
 										<table class="table table-hover workplace-board">
@@ -53,42 +64,14 @@
 											</thead>
 											<tbody>
 												<!-- for문 적어야하는 곳 (6개까지) -->
+												<c:forEach var="item" items="${noticeList }" varStatus="num">
 												<tr>
 													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
+													<td class="text-center" style="width: 50%">${item.noticeTitle }</td>
+													<td class="text-center">관리자</td>
+													<td class="text-center">${item.enrollDate }</td>
 												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
+												</c:forEach>
 											<tbody>
 										</table>
 									</div>
@@ -99,55 +82,91 @@
 						<div class="row mt">
 							<!-- 메일 -->
 							<div class="col-md-4 col-sm-4 mb">
-								<div class="grey-panel pn donut-chart">
-									<div class="grey-header">
+								<div class="grey-panel pn donut-chart" id="mail-wrap">
+									<div class="grey-title">
 										<span>메일</span> <span class="more"><a href="">더보기</a></span>
 									</div>
-									<div class="row">
-										<ul class="mail-menu ul-menu">
-											<!-- id값 넣어줘야 함  -->
-											<li>수신메일</li>
-											<li>발신메일</li>
-											<li>안읽은메일</li>
-										</ul>
-										<!-- 수신메일 -->
-										<div class="mail-content" id="mail-reception">
-											<table class="table table-hover workplace-board">
-												<thead>
-												</thead>
-												<tbody>
-													<!-- for문 적어야하는 곳 (5개까지) -->
-													<tr>
-														<!-- 데이터 넣는 곳 -->
-														<td class="text-center" style="width: 50%">안녕하세요</td>
-														<td class="text-center">김아무개 사원</td>
-													</tr>
-													<tr>
-														<!-- 데이터 넣는 곳 -->
-														<td class="text-center" style="width: 50%">안녕하세요</td>
-														<td class="text-center">김아무개 사원</td>
-													</tr>
-													<tr>
-														<!-- 데이터 넣는 곳 -->
-														<td class="text-center" style="width: 50%">안녕하세요</td>
-														<td class="text-center">김아무개 사원</td>
-													</tr>
-													<tr>
-														<!-- 데이터 넣는 곳 -->
-														<td class="text-center" style="width: 50%">안녕하세요</td>
-														<td class="text-center">김아무개 사원</td>
-													</tr>
-													<tr>
-														<!-- 데이터 넣는 곳 -->
-														<td class="text-center" style="width: 50%">안녕하세요</td>
-														<td class="text-center">김아무개 사원</td>
-													</tr>
-												<tbody>
-											</table>
+									<div class="service-header">
+										<div class="service-header-left">
+											<span>전체메일</span>										
 										</div>
-										<!-- 발신메일 -->
-
-										<!-- 안읽은메일 -->
+										<div class="service-header-right">
+											<span>메일쓰기</span>										
+										</div>
+									</div>
+									<div class="mail-body" id="mail-reception">
+										<div class="timeline-wrap">
+											<ul class="list-timeline">
+												<!-- 데이터 넣는 곳  -->
+												<li class="itme-timeline">
+													<div class="timeline-info">
+														<a href="#" class="info-area">
+															<div class="title-box">
+																<em class="mail-title">안녕하세요 여러부우우운</em>
+															</div>
+															<div class="dsc-box">
+																<div class="dsc-box-inner">
+																	<span class="dsc-time">4시간전</span>
+																	<span class="dsc">잡코리아 | 스마트매치</span>
+																</div>
+															</div>
+														</a>
+													</div>
+												</li>
+												<!-- 데이터 넣는 곳 끝  -->
+															<!-- 데이터 넣는 곳  -->
+												<li class="itme-timeline">
+													<div class="timeline-info">
+														<a href="#" class="info-area">
+															<div class="title-box">
+																<em class="mail-title">안녕하세요 여러부우우운</em>
+															</div>
+															<div class="dsc-box">
+																<div class="dsc-box-inner">
+																	<span class="dsc-time">4시간전</span>
+																	<span class="dsc">잡코리아 | 스마트매치</span>
+																</div>
+															</div>
+														</a>
+													</div>
+												</li>
+												<!-- 데이터 넣는 곳 끝  -->
+															<!-- 데이터 넣는 곳  -->
+												<li class="itme-timeline">
+													<div class="timeline-info">
+														<a href="#" class="info-area">
+															<div class="title-box">
+																<em class="mail-title">안녕하세요 여러부우우운</em>
+															</div>
+															<div class="dsc-box">
+																<div class="dsc-box-inner">
+																	<span class="dsc-time">4시간전</span>
+																	<span class="dsc">잡코리아 | 스마트매치</span>
+																</div>
+															</div>
+														</a>
+													</div>
+												</li>
+												<!-- 데이터 넣는 곳 끝  -->
+															<!-- 데이터 넣는 곳  -->
+												<li class="itme-timeline">
+													<div class="timeline-info">
+														<a href="#" class="info-area">
+															<div class="title-box">
+																<em class="mail-title">안녕하세요 여러부우우운</em>
+															</div>
+															<div class="dsc-box">
+																<div class="dsc-box-inner">
+																	<span class="dsc-time">4시간전</span>
+																	<span class="dsc">잡코리아 | 스마트매치</span>
+																</div>
+															</div>
+														</a>
+													</div>
+												</li>
+												<!-- 데이터 넣는 곳 끝  -->
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -171,36 +190,11 @@
 											<thead>
 											</thead>
 											<tbody>
-												<!-- for문 적어야하는 곳 (6개까지) -->
 												<tr>
 													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
-												</tr>
-												<tr>
-													<!-- 데이터 넣는 곳 -->
-													<td class="text-center" style="width: 50%">안녕하세요</td>
-													<td class="text-center">김아무개 사원</td>
-													<td class="text-center">2021.05.10 11:46</td>
+													<td class="text-center" style="width: 50%">${item.noticeTitle }</td>
+													<td class="text-center">관리자</td>
+													<td class="text-center">${item.enrollDate }</td>
 												</tr>
 											<tbody>
 										</table>

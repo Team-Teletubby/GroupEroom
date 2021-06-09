@@ -17,5 +17,6 @@ public interface NoticeStore {
 	public int deleteNotice(int noticeNo);
 	public ArrayList<Notice> selectSearchList(Search search, PageInfo pi);
 	public int selectSearchListCount(Search search);
+	public ArrayList<Notice> selectAllList();
 
 }

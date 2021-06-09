@@ -70,5 +70,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return nStore.selectSearchListCount(search);
 	}
 
+	@Override
+	public ArrayList<Notice> printAll() {
+		return nStore.selectAllList();
+	}
+
 
 }

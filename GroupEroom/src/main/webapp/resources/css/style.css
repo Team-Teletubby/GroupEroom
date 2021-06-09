@@ -878,7 +878,49 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .myinfo .myinfo-span {
     margin-right: 3px;
-    margin-left: 30px;
+    
+}
+
+.myinfo-approval {
+	display: inline-block;	
+	position: relative;
+	
+}
+
+.myinfo-approval > a:link {
+	color: black;
+}
+
+.myinfo-approval > a:visited {
+	color: black;
+}
+
+.myinfo-approval > a:hover {
+	transition: all .15s linear,bottom 0s;
+	color: #4ECDC4;
+}
+
+.myinfo-mail {
+	display: inline-block;
+	margin-left: 40px;	
+}
+
+.myinfo-mail > a:link {
+	color: black;
+}
+
+.myinfo-mail > a:visited {
+	color: black;
+}
+
+.myinfo-mail > a:hover {
+	transition: all .15s linear,bottom 0s;
+	color: #4ECDC4;
+}
+
+.myinfo-approval .new {
+	position: absolute;
+	top: -5px;
 }
 
 .myinfo > .bg-warning {
@@ -929,22 +971,144 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 *************************************************************************************** */
 
 /* 메일함 크기  */
-.pn {
-	height: 250px;
-	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
-}
 
 /* 메일함 */
 .grey-panel {
 	background: #ffffff;
 }
-.grey-panel .grey-header {
+.grey-panel .grey-title {
 	background: #ffffff;
 	padding: 3px;
     padding-top: 10px;
     padding-bottom: 10px;
+    background: #f1f1f1;
+    padding: 7px;
 }
-.grey-panel .grey-header > span:nth-child(1) {
+
+.service-header {
+	display: block;
+	height: 40px;	
+}
+
+.service-header-left {
+	float: left;
+	padding: 15px 0 15px 17px;
+}
+
+.service-header-right {
+	float: right;
+	padding: 15px 17px 15px 0;
+}
+
+.mail-body {
+	width: 385px;
+	height: 162px;
+	overflow-y: auto;
+	padding: 0px 10px 0px 18px;
+}
+
+.timeline-wrap {
+	position: relative;
+    min-height: 100%;
+}
+
+.timeline-wrap:before {
+	position: absolute;
+    top: 15px;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 1px;
+    background-color: #e4e8eb;
+	
+}
+.list-timeline {
+	padding: 0 0 3px 15px;
+    margin-top: -7px;
+}
+
+.itme-timeline  {
+	position: relative;
+	border-bottom: 1px solid #e4e8eb;
+}
+
+.itme-timeline:before {
+	position: absolute;
+    top: 14px;
+    left: -17px;
+    background-color: #20d782;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    vertical-align: top;
+    content: '';
+}
+
+.timeline-info {
+	overflow: hidden;
+    position: relative;
+}
+
+.info-area {
+	display: block;
+	padding: 10px 0;
+}
+
+.btn-remove {
+	position: absolute;
+    top: 16px;
+    right: 0;
+}
+
+.fa-trash-alt {
+	display: inline-block;
+    width: 12px;
+    height: 14px;
+    background-position: -298px -202px;
+    background-repeat: no-repeat;
+    vertical-align: top;
+    margin: 8px;
+}
+
+.title-box {
+	display: inlin-block;
+	overflow: hidden;
+	max-width: 100%;
+	vertical-align: top;
+}
+
+.mail-title {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+.dsc-box {
+	margin-top: 5px;
+    color: grey;
+}
+
+.dsc-box-inner {
+	display: inline-block;
+    max-width: 100%;
+    vertical-align: top;
+}
+
+.dsc-time {
+	float: right;
+	padding-left: 30px;
+}
+
+.dsc {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+.grey-panel .grey-title > span:nth-child(1) {
     font-size: 17px;
     padding-left: 20px;
 	font-weight: 200;
@@ -3236,3 +3400,26 @@ ul.chat-available-user li a:hover {
 #copyrights a {
   color: #fff;
 }
+
+/* ------------- 탭 메뉴 ------------- */
+.tab {
+	display: inline-box;
+	width: 68px;
+	height: 16px;
+	padding: 13px 0 11px;
+	border: 1px solid black;
+}
+
+.pn {
+	height: 250px;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 
+<div class="tab_box">
+<a href="#" role="tab" class="tab my_Send">수신함</a>
+<a href="#" role="tab" class="tab my_Receive">발신함</a>
+<a href="#" role="tab" class="tab my_NotRead">안읽은메일</a>
+</div>
+*/
