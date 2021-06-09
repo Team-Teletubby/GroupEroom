@@ -92,18 +92,17 @@
 						</span>
 					</a></li>
 					<!-- 게시판 메뉴 -->
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-list-alt"></i> <span>게시판</span>
-					</a>
+					<li class="sub-menu"><a href="javascript:;"> <i class="fa fa-list-alt"></i><span>게시판</span></a>
 						<ul class="sub">
 							<li><a href="noticeListView.do">공지사항</a></li>
 							<li><a href="fBoardListView.do">자유게시판</a></li>
 							<li><a href="cBoardListView.do">동호회게시판</a></li>
-						</ul></li>
+						</ul>
+					</li>
 							<!-- 인사관리 메뉴 -->
 					<c:if test="${sessionScope.LoginUser.memberDept == '인사관리'}">
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-users"></i> <span>인사관리</span>
+					<li class="sub-menu"><a href="javascript:;"> 
+					<i class="fa fa-users"></i> <span>인사관리</span>
 					</a>
 						<ul class="sub">
 							<li><a href="memberList.do">사원목록</a></li>
@@ -118,12 +117,12 @@
 							<span>메신저 </span> 
 						</a>
 					</li>
-					<!-- 설문조사 -->
-					<li>
-						<a href="surveyList.do" onclick="javascript:;"> 
-							<i class="fa fa-tasks"></i>
-							<span>설문조사 </span> 
-						</a>
+					<!-- 투표 -->
+					<li class="sub-menu"><a href="javascript:;"><i class="fa fa-tasks"></i><span>투표</span></a>
+						<ul class="sub">
+						<li><a href="surveyList.do">투표목록</a></li>
+						<li><a href="surveyForm.do">투표작성</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
