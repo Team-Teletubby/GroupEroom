@@ -84,7 +84,7 @@
 							<div class="col-md-4 col-sm-4 mb">
 								<div class="grey-panel pn donut-chart" id="mail-wrap">
 									<div class="grey-title">
-										<span>메일</span> <span class="more"><a href="">더보기</a></span>
+										<span>메일</span> <span class="more"><a href="inboxListView.do">더보기</a></span>
 									</div>
 									<div class="service-header">
 										<div class="service-header-left">
