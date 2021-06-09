@@ -43,6 +43,7 @@ import com.sun.media.jfxmedia.logging.Logger;
 @Controller
 public class MemberController {
 
+	private int countCheck = 0;
 	@Autowired
 	private MemberService service;
 	
@@ -54,11 +55,23 @@ public class MemberController {
 	public ModelAndView mainView(ModelAndView mv, HttpSession session) { 
 		Member member = (Member)session.getAttribute("LoginUser");
 		int memberId = member.getMemberId();
+		
+		// 갯수가 늘어나면 new 출력하기 위한 것
+		String check = null;
 		// 나에게 온 결재문 갯수 
 		int approvalTypeCount = approvalService.printTypeCount(memberId);
+		// 서로 같지 않는다면 (새로 추가된 글이 존재한다면)
+		if(approvalTypeCount > countCheck) {
+			countCheck = approvalTypeCount;
+			check = "true";
+		}else {
+			check = "false";
+		}
 		mv.addObject("approvalTypeCount", approvalTypeCount);
 		// 회원 정보
 		mv.addObject("member", member);
+		// 새 글 체크
+		mv.addObject("check",check);
 		
 		mv.setViewName("index");
 		

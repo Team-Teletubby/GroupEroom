@@ -79,7 +79,7 @@ body {
 }
 
 .submit-btn {
-    margin-top: 10px;
+    margin-top: 30px;
     font-size: 16px;
     border: none;
     width: 388px;
@@ -142,16 +142,22 @@ body {
 }
 
 /* 문자가 들어가있으면 테두리 효과가 계속 유지됨 (사용할 경우 주석 풀 것) */
-/* 
-.id_Out_Box.existence .inputBox input[type="text"],
-.password_Out_Box.existence .inputBox input[type="password"] 
-*/
+
+/* .id_Out_Box .existence .inputBox input[type="text"],
+.password_Out_Box.existence .inputBox input[type="password"],
 .id_Out_Box .inputBox input[type="text"]:focus,
 .password_Out_Box .inputBox input[type="password"]:focus {
-    border: 1px solid  #0059AB;
+    border: 2px solid  #0059AB;
+    box-shadow: 0 0 2px 2px rgba(214, 214, 214, 0.57);
+} */
+
+.id_Out_Box .inputBox input[type="text"]:focus,
+.password_Out_Box .inputBox input[type="password"]:focus,
+.id_Out_Box.existence .inputBox input[type="text"],
+.password_Out_Box.existence .inputBox input[type="password"] {
+    border:1px solid #0059AB;
     box-shadow: 0 0 2px 2px rgba(214, 214, 214, 0.57);
 }
-
 /* 
     === .existence === 
 
