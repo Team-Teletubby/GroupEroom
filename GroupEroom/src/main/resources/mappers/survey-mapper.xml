@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="surveyMapper">
+	<resultMap type="SurveyList" id="surveyResultMap">
+		<id property="todoNo" column="TODO_NO"></id>
+		<result property="memberId" column="MEMBER_ID"></result>
+		<result property="todoPriority" column="TODO_PRIORITY"></result>
+		<result property="todoContents" column="TODO_CONTENTS"></result>
+		<result property="todoState" column="TODO_STATE"></result>
+	</resultMap>
+	
+
+</mapper>

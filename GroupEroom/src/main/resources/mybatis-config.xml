@@ -25,6 +25,7 @@
 		<typeAlias type="com.eroom.gw.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.eroom.gw.booking.domain.Booking" alias="Booking" />
 		<typeAlias type="com.eroom.gw.calendar.domain.Calendar" alias="Calendar" />
+		<typeAlias type="com.eroom.gw.survey.domain.SurveyList" alias="SurveyList" />
 
 	</typeAliases>
 	
@@ -40,6 +41,7 @@
 		<mapper resource="mappers/notice-mapper.xml"></mapper>
 		<mapper resource="mappers/booking-mapper.xml"></mapper>
 		<mapper resource="mappers/calendar-mapper.xml"></mapper>
+		<mapper resource="mappers/survey-mapper.xml"></mapper>
 
 	</mappers>
 	

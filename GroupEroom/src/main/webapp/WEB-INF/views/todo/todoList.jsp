@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>근태관리</title>
+<title>할 일</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -70,9 +70,9 @@
 								</table>
 							</div>
 						</div>
-						<table id="test">
+						<!-- <table id="test">
 						
-						</table>
+						</table> -->
 					</section>
 				</div>
 				<!-- /col-md-12-->
