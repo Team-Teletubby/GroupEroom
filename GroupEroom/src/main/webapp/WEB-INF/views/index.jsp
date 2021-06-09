@@ -91,7 +91,7 @@
 											<span>전체메일</span>										
 										</div>
 										<div class="service-header-right">
-											<span>메일쓰기</span>										
+											<span><a href="mailComposeView.do">메일쓰기</a></span>										
 										</div>
 									</div>
 									<div class="mail-body" id="mail-reception">
