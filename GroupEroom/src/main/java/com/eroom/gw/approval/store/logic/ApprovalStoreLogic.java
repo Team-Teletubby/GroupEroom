@@ -42,7 +42,6 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	@Override
 	public int deleteApproval(int approvalNo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -61,7 +60,6 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	// 승인/반려 버튼
 	@Override
 	public int updateCheck(Approval approval) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("approvalMapper.updateApprovalCheck", approval);
 	}
 	
@@ -80,21 +78,24 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	@Override
 	public int updateReply(ApprovalReply reply) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int deleteReply(ApprovalReply reply) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	// 파일 등록
 	@Override
 	public int insertFile(ApprovalFile aFile) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("approvalMapper.insertFile", aFile);
+	}
+
+	// 안읽은 결재문 개수 출력
+	@Override
+	public int selectTypeCount(int memberId) {
+		return sqlSession.selectOne("approvalMapper.selectTypeCount", memberId);
 	}
 
 }

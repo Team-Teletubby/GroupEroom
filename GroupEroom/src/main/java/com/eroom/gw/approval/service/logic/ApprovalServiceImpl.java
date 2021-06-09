@@ -91,4 +91,10 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.insertFile(aFile);
 	}
 
+	// 안읽은 결재문 개수 출력
+	@Override
+	public int printTypeCount(int memberId) {
+		return approvalStore.selectTypeCount(memberId);
+	}
+
 }

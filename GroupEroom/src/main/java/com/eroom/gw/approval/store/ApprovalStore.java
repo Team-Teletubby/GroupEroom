@@ -96,4 +96,12 @@ public interface ApprovalStore {
 	 */
 	public int insertFile(ApprovalFile file);
 
+	
+	/**
+	 * 안읽은 결재문 개수 출력
+	 * @param memberId
+	 * @return
+	 */
+	public int selectTypeCount(int memberId);
+
 }

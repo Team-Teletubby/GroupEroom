@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.cboard.domain.CBoard;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
@@ -44,12 +45,24 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private ApprovalService approvalService;
 
 	// 로그인 -> 메인페이지 연결
 	@GetMapping(value="index.do")
-	public String mainView() { 
+	public ModelAndView mainView(ModelAndView mv, HttpSession session) { 
+		Member member = (Member)session.getAttribute("LoginUser");
+		int memberId = member.getMemberId();
+		// 나에게 온 결재문 갯수 
+		int approvalTypeCount = approvalService.printTypeCount(memberId);
+		mv.addObject("approvalTypeCount", approvalTypeCount);
+		// 회원 정보
+		mv.addObject("member", member);
 		
-		return "index";
+		mv.setViewName("index");
+		
+		return mv;
 	}
 	
 	

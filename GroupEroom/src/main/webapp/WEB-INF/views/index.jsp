@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +30,12 @@
 							<div class="col-md-4 mb">
 								<div class="myinfo pn">
 									<p class="centered" id="myinfo-head">
-										<img src="img/ui-sam.jpg" class="img-circle" width="80">
+										<img src="/resources/memberproFile/${member.renameFileName }" class="img-circle" width="120" height="120">
 									</p>
-									<p id="myinfo-name">이혜성 사원</p>
-									<p id="myinfo-department">관리부서</p>
+									<p id="myinfo-name">${member.memberName }/${member.memberJob }</p>
+									<p id="myinfo-department">${member.memberDept } 부서</p>
 									<span class="myinfo-span">결제할 문서</span> <span
-										class="badge bg-warning">3</span> <span class="myinfo-span">받은
+										class="badge bg-warning">${approvalTypeCount }</span> <span class="myinfo-span">받은
 										메일</span> <span class="badge bg-warning">3</span>
 								</div>
 							</div>
