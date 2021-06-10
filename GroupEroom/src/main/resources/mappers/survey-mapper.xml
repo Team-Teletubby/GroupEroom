@@ -24,7 +24,11 @@
 	</insert>
 
 
-	<select id="selectAllSurvey">
+	<select id="selectAllSurvey" resultMap="surveyResultMap">
 		SELECT * FROM SURVEY_LIST WHERE TARGET = #{memberDept} OR TARGET = '전체' 
+	</select>
+	
+	<select id="selectOneSurvey" resultMap="surveyResultMap">
+		SELECT * FROM SURVEY_LIST WHERE SURVEY_NO = #{surveyNo}
 	</select>
 </mapper>

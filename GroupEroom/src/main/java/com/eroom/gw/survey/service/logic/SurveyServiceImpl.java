@@ -28,8 +28,12 @@ public class SurveyServiceImpl implements SurveyService{
 
 	@Override
 	public ArrayList<SurveyList> selectAllSurvey(String memberDept) {
-		// TODO Auto-generated method stub
-		return null;
+		return surveyStore.selectAllSurvey(memberDept);
+	}
+
+	@Override
+	public SurveyList selectOneSurvey(int surveyNo) {
+		return surveyStore.selectOneSurvey(surveyNo);
 	}
 
 }

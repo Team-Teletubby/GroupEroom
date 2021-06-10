@@ -28,8 +28,12 @@ public class SurveyStoreLogic implements SurveyStore{
 
 	@Override
 	public ArrayList<SurveyList> selectAllSurvey(String memberDept) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("surveyMapper.selectAllSurvey", memberDept);
+	}
+
+	@Override
+	public SurveyList selectOneSurvey(int surveyNo) {
+		return sqlSession.selectOne("surveyMapper.selectOneSurvey", surveyNo);
 	}
 
 }
