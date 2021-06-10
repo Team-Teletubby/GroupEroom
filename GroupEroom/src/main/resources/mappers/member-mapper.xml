@@ -37,7 +37,7 @@
 	<select id="memberList" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 		ORDER BY
-		MEMBER_ID
+		MEMBER_ID DESC
 
 	</select>
 	<select id="selectSearchList" resultMap="memberResultMap">

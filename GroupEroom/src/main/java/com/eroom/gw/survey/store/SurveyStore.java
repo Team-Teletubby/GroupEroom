@@ -9,5 +9,6 @@ public interface SurveyStore {
 	public int insertSurvey(SurveyList surveyList);
 	public int deleteSurvey(int surveyNo);
 	public ArrayList<SurveyList> selectAllSurvey(String memberDept);
+	public SurveyList selectOneSurvey(int surveyNo);
 
 }

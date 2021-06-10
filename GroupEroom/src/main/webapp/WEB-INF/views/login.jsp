@@ -26,7 +26,7 @@
 				<!--<img src="asset/image/logo.png" alt="ë¡ê³ ">-->
 			</div>
 			<div class="login-form">
-				<form action="login.do" method="post">
+				<form action="login.do" method="post" name="form2">
 					<font color="red">${msg }</font>
 					<div class="id_Out_Box">
 						<div class="inputBox">
@@ -40,12 +40,25 @@
 								id="Password"> <label for="password">비밀번호</label>
 						</div>
 					</div>
-					<input type="submit" value="로그인" class="submit-btn">
+					<input type="submit" value="로그인" class="submit-btn" onclick="input_check()">
 				</form>
 			</div>
 			<p id="question">이슈 발생 시, 담당 부서 관리자에게 문의해주시기 바랍니다.</p>
 		</div>
 	</div>
-	<script src="resources/js/login.js"></script>
+	<script src="resources/js/login.js">
+	function input_check(){
+		if(!document.form2.Id.value) {
+		alert("아이디를 입력하세요");
+		document.form2.Id.focus();
+		return;
+	}
+		if(!document.form2.Password.value) {
+			alert("비밀번호를 입력하세요");
+			return;
+		}
+		document.form2.submit();
+	}
+	</script>
 </body>
 </html>

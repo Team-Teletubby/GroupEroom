@@ -51,16 +51,16 @@ span.error {
 					<div class="password_Out_Box">
 						<div class="inputBox">
 							<input type="password" name="memberPwd1" class="text-field"
-								id="Password1"> <label for="id">비밀번호</label>
+								id="Password1" placeholder="변경할 비밀번호"> <label for="Password1"></label>
 						</div>
 					</div>
 					<div class="password_Out_Box">
 						<div class="inputBox">
 							<input type="password" class="text-field" id="Password2"
-								name="memberPwd2"> <label for="password">비밀번호확인</label>
+								name="memberPwd2" placeholder="변경할 비밀번호확인"> <label for="Password2" ></label>
 						</div>
 					</div>
-					<input type="submit" value="로그인" class="submit-btn">
+					<input type="submit" value="비밀번호 변경" class="submit-btn" name="submit1" id="success">
 				</form>
 			</div>
 			<p id="question">이슈 발생 시, 담당 부서 관리자에게 문의해주시기 바랍니다.</p>
@@ -87,6 +87,12 @@ span.error {
 			}
 		});
 
+		
+		var submit1 = document.querySelector('#success');
+		
+		submit1.addEventListener("click", function() {
+			alert("변경이 완료되었습니다");
+		})
 		//        $.ajax({
 		//           url : "pwdCheck.do",
 		//           data : { "Password1" : Password1 },
