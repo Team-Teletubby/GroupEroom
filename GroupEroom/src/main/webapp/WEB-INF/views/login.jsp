@@ -16,6 +16,7 @@
 <!-- ì¤íì¼ìí¸ -->
 <link rel="stylesheet" href="resources/css/reset.css" />
 <link rel="stylesheet" href="resources/css/index.css" />
+
 <title>EROOM</title>
 </head>
 <body>
@@ -47,18 +48,6 @@
 		</div>
 	</div>
 	<script src="resources/js/login.js">
-	function input_check(){
-		if(!document.form2.Id.value) {
-		alert("아이디를 입력하세요");
-		document.form2.Id.focus();
-		return;
-	}
-		if(!document.form2.Password.value) {
-			alert("비밀번호를 입력하세요");
-			return;
-		}
-		document.form2.submit();
-	}
 	</script>
 </body>
 </html>

@@ -51,7 +51,9 @@ span.error {
 				<i class="fa fa-angle-right"></i>사원 정보 수정
 			</h3>
 			<div class="col-lg-12">
+			
 				<div class="form-panel">
+				<h4 style="color:red; font-size:15px;"> * 는 수정불가능</h4>
 					<div class="form" style="margin: 20px 200px 0px 200px">
 						<form class="cmxform form-horizontal style-form" id="signupForm"
 							method="post" action="memberModify.do"
@@ -67,7 +69,7 @@ span.error {
 							</div>
 
 							<div class="form-group ">
-								<label for="firstname" class="control-label col-lg-2">*
+								<label for="firstname" class="control-label col-lg-2">
 									부서</label>
 
 								<div class="col-lg-10">
@@ -82,7 +84,7 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="lastname" class="control-label col-lg-2">*
+								<label for="lastname" class="control-label col-lg-2">
 									직급</label>
 								<div class="col-lg-10">
 
@@ -122,7 +124,7 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="confirm_password" class="control-label col-lg-2">*
+								<label for="confirm_password" class="control-label col-lg-2">
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text" name="memberPhone"
@@ -201,11 +203,11 @@ span.error {
 							</div>
 							<div class="form-group ">
 								<label for="newsletter" class="control-label col-lg-2 col-sm-3">
-									이메일 </label>
+									*이메일 </label>
 								<div class="col-lg-10 col-sm-9">
 									<input type="text" class="form-control" name="memberEmail"
-										style="width: 300px; display: inline;"
-										value="${memberOne.memberEmail }">
+										style="width: 300px; display: inline; background-color: white;"
+										value="${memberOne.memberEmail }" readonly>
 
 								</div>
 							</div>

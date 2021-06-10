@@ -51,7 +51,7 @@ span.error {
 				<h4>
 					<i class="fa fa-angle-right"></i> 사원목록
 				</h4>
-				<div class="content-panel" style="background-color: white; margin: 20px 200px 0px 200px">
+				<div class="content-panel" style="background-color: white; margin: 20px 0px 0px 0px">
 					<hr>
 					<table class="table">
 						<thead>
@@ -114,7 +114,7 @@ span.error {
 				
 				
 				<!-- 다음 -->
-				<c:url var="after" value="memberSearch.do.do">
+				<c:url var="after" value="memberSearch.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 					<c:param name="searchValue" value="${search.searchValue }"></c:param>
@@ -127,9 +127,10 @@ span.error {
 				</c:if>
 			</div>
 			</div>
+			<br><br>
 			<div align="center">
-				<form action="memberSearch.do" method="get">
-					<select name="searchCondition">
+				<form action="memberSearch.do" method="get" class="form-inline">
+					<select name="searchCondition" class="form-control">
 						<option value="all"
 							<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
 						<option value="name"
@@ -138,9 +139,9 @@ span.error {
 							<c:if test="${search.searchCondition == 'dept' }">selected</c:if>>부서</option>
 						<option value="job"
 							<c:if test="${search.searchCondition == 'job' }">selected</c:if>>직급</option>
-					</select> <input type="text" name="searchValue"
+					</select> <input type="text" name="searchValue" style="width:200px" class="form-control" 
 						value="${search.searchValue }"> <input type="submit"
-						value="검색">
+						value="검색" class="btn btn-theme">
 				</form>
 			</div>
 			<script type="text/javascript">
