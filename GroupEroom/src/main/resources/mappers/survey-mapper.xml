@@ -25,7 +25,7 @@
 
 
 	<select id="selectAllSurvey" resultMap="surveyResultMap">
-		SELECT * FROM SURVEY_LIST WHERE TARGET = #{memberDept} OR TARGET = '전체' 
+		SELECT * FROM SURVEY_LIST WHERE TARGET = #{memberDept} OR TARGET = '전체' ORDER BY SURVEY_NO DESC
 	</select>
 	
 	<select id="selectOneSurvey" resultMap="surveyResultMap">
@@ -36,20 +36,29 @@
 	<!-- ===================설문조사 아이탬 =============== -->
 	<resultMap type="SurveyItem" id="surveyItemResultMap">
 		<id property="surveyNo" column="SURVEY_NO"></id>
-		<result property="memberId" column="MEMBER_ID"></result>
-		<result property="showName" column="SHOW_NAME"></result>
-		<result property="showResult" column="SHOW_RESULT"></result>
-		<result property="surveyTitle" column="SURVEY_TITLE"></result>
-		<result property="surveyObject" column="SURVEY_OBJECT"></result>
-		<result property="surveyQuestion" column="SURVEY_QUESTION"></result>
-		<result property="surveyAnswers" column="SURVEY_ANSWERS"></result>
-		<result property="target" column="TARGET"></result>
-		<result property="startDate" column="START_DATE"></result>
-		<result property="endDate" column="END_DATE"></result>
-		<result property="writeDate" column="WRITE_DATE"></result>
-		<result property="finished" column="FINISHED"></result>
-		<result property="overlap" column="OVERLAP"></result>
+		<result property="itemValue" column="ITEM_VALUE"></result>
+		<result property="memberName" column="MEMBER_NAME"></result>
+		<result property="count" column="COUNT"></result>
 	</resultMap>
 	
+	<insert id="insertSurveyItem">
+		INSERT INTO SURVEY_ITEM VALUES(#{surveyNo}, null , #{itemValue}, #{memberName})
+	</insert>
+	
+	<select id="totalCount" resultType="_int">
+		SELECT COUNT(*) FROM SURVEY_ITEM WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	
+	<select id="selectAllResult" resultMap="surveyItemResultMap">
+		SELECT * FROM SURVEY_ITEM WHERE SURVEY_NO=#{surveyNo}
+	</select>
+	
+	<select id="selectResultCount" resultMap="surveyItemResultMap">
+		SELECT SURVEY_NO, ITEM_VALUE, COUNT(*) COUNT FROM SURVEY_ITEM GROUP BY SURVEY_NO, ITEM_VALUE HAVING SURVEY_NO = #{surveyNo} ORDER BY COUNT DESC
+	</select>
+	
+	<select id="check" resultType="_int">
+		SELECT COUNT(*) FROM SURVEY_ITEM WHERE SURVEY_NO = #{surveyNo} AND MEMBER_NAME = #{memberName}
+	</select>
 	
 </mapper>

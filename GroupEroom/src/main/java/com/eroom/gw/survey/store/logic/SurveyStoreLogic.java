@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.eroom.gw.survey.domain.SurveyItem;
 import com.eroom.gw.survey.domain.SurveyList;
 import com.eroom.gw.survey.store.SurveyStore;
 
@@ -34,6 +35,31 @@ public class SurveyStoreLogic implements SurveyStore{
 	@Override
 	public SurveyList selectOneSurvey(int surveyNo) {
 		return sqlSession.selectOne("surveyMapper.selectOneSurvey", surveyNo);
+	}
+
+	@Override
+	public int insertSurveyItem(SurveyItem surveyItem) {
+		return sqlSession.insert("surveyMapper.insertSurveyItem", surveyItem);
+	}
+
+	@Override
+	public int totalCount(int surveyNo) {
+		return sqlSession.selectOne("surveyMapper.totalCount", surveyNo);
+	}
+
+	@Override
+	public ArrayList<SurveyItem> selectAllResult(int surveyNo) {
+		return (ArrayList)sqlSession.selectList("surveyMapper.selectAllResult", surveyNo);
+	}
+
+	@Override
+	public ArrayList<SurveyItem> selectResultCount(int surveyNo) {
+		return (ArrayList)sqlSession.selectList("surveyMapper.selectResultCount", surveyNo);
+	}
+
+	@Override
+	public int checkSurvey(SurveyItem surveyItem) {
+		return sqlSession.selectOne("surveyMapper.check",surveyItem);
 	}
 
 }

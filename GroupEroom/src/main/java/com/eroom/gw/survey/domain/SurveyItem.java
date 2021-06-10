@@ -3,9 +3,9 @@ package com.eroom.gw.survey.domain;
 public class SurveyItem {
 
 	private int surveyNo;
-	private int itemNo;
-	private int itemValue;
+	private String itemValue;
 	private String memberName;
+	private int count;
 	
 	public SurveyItem() {}
 
@@ -17,19 +17,11 @@ public class SurveyItem {
 		this.surveyNo = surveyNo;
 	}
 
-	public int getItemNo() {
-		return itemNo;
-	}
-
-	public void setItemNo(int itemNo) {
-		this.itemNo = itemNo;
-	}
-
-	public int getItemValue() {
+	public String getItemValue() {
 		return itemValue;
 	}
 
-	public void setItemValue(int itemValue) {
+	public void setItemValue(String itemValue) {
 		this.itemValue = itemValue;
 	}
 
@@ -41,11 +33,20 @@ public class SurveyItem {
 		this.memberName = memberName;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
-		return "SurveyItem [surveyNo=" + surveyNo + ", itemNo=" + itemNo + ", itemValue=" + itemValue + ", memberName="
-				+ memberName + "]";
+		return "SurveyItem [surveyNo=" + surveyNo + ", itemValue=" + itemValue + ", memberName=" + memberName
+				+ ", count=" + count + "]";
 	}
-	
+
+
 	
 }

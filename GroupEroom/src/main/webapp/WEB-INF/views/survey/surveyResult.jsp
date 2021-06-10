@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>투표 목록</title>
+<title>투표 결과</title>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href="resources/css/style-responsive.css" rel="stylesheet">
@@ -36,15 +36,7 @@ $(document).ready(function(){
 	 $("#date").html("<i class='fa fa-calendar'></i> 투표 기간 : " + startDate + " ~ " + endDate);
 	 
 	 $("#complete").on("click", function(){
-		 var check = $("input:radio[name='itemValue']:checked").val();
-		 if(check == null){
-			 alert("항목을 선택해 주세요.");
-			 return false;
-		 }else {
-			 if(confirm("투표 하시겠습니까?")==false){
-					return false;
-			}
-		 }
+		 alert("투표가 완료되었습니다.");
 	 });
 });
 </script>
@@ -58,7 +50,7 @@ $(document).ready(function(){
         <div class="row">
           <div class="col-md-12">
             <div class="form-panel" >
-              <h4><i class="fa fa-angle-right"></i>투표 하기</h4><hr><br>
+              <h4><i class="fa fa-angle-right"></i>투표 결과</h4><hr><br>
               <div id="msg">
               	<div align="center" >
               		<p style="font-size:30px; padding: 20px 20px 0px 20px"><i class="fa fa-angle-double-left"></i> ${survey.surveyTitle } <i class="fa fa-angle-double-right"></i> </p><br>
@@ -78,33 +70,25 @@ $(document).ready(function(){
               		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold">투표대상 모두</span>에게 공개됩니다.</p>
               	</c:if>
               		<hr style="border : 1px solid; color:#4ECDC4; background:#4ECDC4">
+              		<p style="font-size:20px"><i class="fa fa-quora"></i>.${survey.surveyQuestion } <br>총 참여자 수  : ${totalCount } </p>
+              		
+              		
+              		<!-- ==================결과 나오는 곳================== -->
+              		<br>
               		<div>
-              			
+              		<c:forEach var="result" items="${resultCount}" varStatus="status">
+              			<p>${result.itemValue}  : ${result.count }<br>
+              			<c:if test="${survey.showName == 'Y' }"><i class="fa fa-users"></i>
+	              			<c:forEach var="resultAll" items="${resultAll }" varStatus="status">
+	              				<c:if test="${result.itemValue == resultAll.itemValue}">
+	              					<span>${resultAll.memberName }, </span>
+              					</c:if>
+	              			</c:forEach>
+	              		</c:if>
+	              		</p>
+              		</c:forEach>
               		</div>
               		
-              		
-              		<p style="font-size:20px"><i class="fa fa-quora"></i>.${survey.surveyQuestion }</p>
-              		<form action="surveyComplete.do" method="post">
-              		<p>
-              			<c:forTokens items="${survey.surveyAnswers }" delims="," var="answer" varStatus="status">
-              				<input type="hidden" value="${survey.surveyNo }" name="surveyNo">
-              				<span style="padding: 20px"><input type="radio" name="itemValue" value="${answer }">${answer }</span>
-              				
-              			</c:forTokens>
-              		</p><br>
-              		<p>
-	              		<c:choose>
-	              			<c:when test="${check == 0 }">
-		              			<button type="submit" id="complete" class="btn btn-theme02"><i class="fa fa-pencil"></i> 투표 하기</button><br><br>
-		              			<i class="fa fa-exclamation-triangle" style="color:red"></i>투표는 수정할 수 없으니 신중히 선택해 주세요.
-		              		</c:when>
-		              		<c:otherwise>
-		              			<span class="btn btn-theme03"><i class="fa fa-check"></i> 투표완료</span><br><br>
-		              			<i class="fa fa-exclamation-triangle" style="color:red"></i>이미 참여하셨습니다.
-		              		</c:otherwise>
-              			</c:choose>
-              		</p>
-              		</form>
               	</div><br>
          	  </div>
           
