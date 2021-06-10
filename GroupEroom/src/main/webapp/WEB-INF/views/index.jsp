@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
@@ -312,8 +313,7 @@
 							</div>
 							<div class="details">
 								<p>
-									<!-- 시간 -->
-									<!-- <muted>10분전</muted> -->
+								
 									<span class="details-name">이유식 과장</span> <span class="state"
 										style="background-color: #3FC5C4;">회의가능</span> <i
 										class="fa fa-refresh" aria-hidden="true"></i> <br />
@@ -429,5 +429,28 @@
 		</footer>
 		<!--footer end-->
 	</section>
+	
+	<script>
+		$('document').ready(function(){
+			selectMember();
+			
+		});
+		
+		function selectMember() {
+			const memberDept = '${member.memberDept }';
+			$.ajax({
+				url: 'showMemberStatus.do',
+				type: 'POST',
+				data: {
+					"memberDept" : memberDept
+				},
+				dataType: "json",
+				success: function(data) {
+					
+				}
+			});
+		}
+		
+	</script>
 </body>
 </html>
