@@ -282,6 +282,8 @@
 					<div class="col-lg-3 ds">
 						<h4 class="centered mt">집무 현황</h4>
 						<!-- 이 부분이 콘텐츠 하나임 -->
+						<c:forEach items="${memberExecutives }" var="executives" >
+							<c:if test="${executives.memberJob eq '대표' }">
 						<div class="desc">
 							<div class="thumb">
 								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -290,48 +292,50 @@
 								<p>
 									<!-- 시간 -->
 									<!-- <muted>10분전</muted> -->
-									<span class="details-name">정찬식 대표</span> <span class="state">부재중</span>
+									<span class="details-name">${executives.memberName } ${executives.memberJob }</span><span class="state">부재중</span>
 									<i class="fa fa-refresh" aria-hidden="true"></i> <br />
 								</p>
 								<ul class="details-menu">
-									<li><input type="radio" id="reportable"
+									<li><input type="radio" id="reportable1"
 										name="employee-status1" value="reportable"> <label
-										for="reportable">보고가능</label></li>
-									<li><input type="radio" id="conference"
+										for="reportable1">보고가능</label></li>
+									<li><input type="radio" id="conference1"
 										name="employee-status1" value="conference"> <label
-										for="conference">회의중</label></li>
-									<li><input type="radio" id="absence"
+										for="conference1">회의중</label></li>
+									<li><input type="radio" id="absence1"
 										name="employee-status1" value="absence"> <label
-										for=absence"">부재중</label></li>
+										for=absence1"">부재중</label></li>
 								</ul>
 							</div>
 						</div>
-						<!-- 이 부분이 콘텐츠 하나임 -->
+						</c:if>
+						<c:if test="${executives.memberJob eq '부서장' }">
 						<div class="desc">
 							<div class="thumb">
 								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
 							</div>
 							<div class="details">
 								<p>
-								
-									<span class="details-name">이유식 과장</span> <span class="state"
-										style="background-color: #3FC5C4;">회의가능</span> <i
-										class="fa fa-refresh" aria-hidden="true"></i> <br />
+									<!-- 시간 -->
+									<!-- <muted>10분전</muted> -->
+									<span class="details-name">${executives.memberName } ${executives.memberJob }</span> <span class="state">부재중</span>
+									<i class="fa fa-refresh" aria-hidden="true"></i> <br />
 								</p>
 								<ul class="details-menu">
-									<li><input type="radio" id="reportable"
+									<li><input type="radio" id="reportable2"
 										name="employee-status2" value="reportable"> <label
-										for="reportable">보고가능</label></li>
-									<li><input type="radio" id="conference"
+										for="reportable2">보고가능</label></li>
+									<li><input type="radio" id="conference2"
 										name="employee-status2" value="conference"> <label
-										for="conference">회의중</label></li>
-									<li><input type="radio" id="absence"
+										for="conference2">회의중</label></li>
+									<li><input type="radio" id="absence2"
 										name="employee-status2" value="absence"> <label
-										for=absence"">부재중</label></li>
+										for=absence2"">부재중</label></li>
 								</ul>
 							</div>
 						</div>
-
+						</c:if>
+						</c:forEach>
 						<!-- 집무현황 끝 -->
 						<!-- 일정 -->
 						<h4 class="centered mt">일정</h4>
@@ -437,12 +441,12 @@
 		});
 		
 		function selectMember() {
-			const memberDept = '${member.memberDept }';
+			const memberDept = '${member.memberDept }'
 			$.ajax({
 				url: 'showMemberStatus.do',
 				type: 'POST',
 				data: {
-					"memberDept" : memberDept
+					"memberDept" : ${member.memberDept }
 				},
 				dataType: "json",
 				success: function(data) {

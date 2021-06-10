@@ -111,5 +111,10 @@ public class MemberStoreLogic implements MemberStore {
 		return sqlSession.selectOne("memberMapper.selectSuccessMember", member);
 	}
 
+	@Override
+	public ArrayList<Member> selectListExecutives(Member member) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectExecutives", member);
+	}
+
 	
 }

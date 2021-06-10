@@ -97,6 +97,11 @@ public  class MemberServiceImpl implements MemberService {
 		return mStore.selectSuccessOne(member);
 	}
 
+	@Override
+	public ArrayList<Member> printExecutives(Member member) {
+		return mStore.selectListExecutives(member);
+	}
+
 
 
 

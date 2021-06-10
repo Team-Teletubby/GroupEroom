@@ -53,6 +53,9 @@ public class MemberController {
 		
 		// 나에게 온 결재문 갯수 
 		int approvalTypeCount = approvalService.printTypeCount(memberId);
+		// 로그인한 ID와 같은 부서의 임원 정보 가져오기
+		ArrayList<Member> memberList = service.printExecutives(member);
+
 		// 공지사항 리스트
 		ArrayList<Notice> noticeList = noticeService.printAll();
 		
@@ -60,6 +63,8 @@ public class MemberController {
 		mv.addObject("approvalTypeCount", approvalTypeCount);
 		// 회원 정보
 		mv.addObject("member", member);
+		// 임원 정보
+		mv.addObject("memberExecutives", memberList);
 		// 공지사항 리스트
 		mv.addObject("noticeList", noticeList);
 		mv.setViewName("index");

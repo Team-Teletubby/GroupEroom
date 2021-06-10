@@ -28,4 +28,7 @@ public interface MemberStore {
 	public int pwdcheck(String memberPwd);
 	
 	public Member selectSuccessOne(Member member);
+	
+	// 특정 부서별 임원 조회
+	public ArrayList<Member> selectListExecutives(Member member);
 }

@@ -96,6 +96,15 @@
 		</if>
 		ORDER BY MEMBER_ID DESC
 	</select>
+	
+	<!-- 로그인한 유저의 부서 임원들 조회해서 가져오기 -->
+	<select id="selectExecutives" resultMap="memberResultMap" >
+		SELECT * FROM MEMBER m
+		JOIN DEPT_TYPE d on m.MEMBER_JOB = d.NAME
+		WHERE m.MEMBER_JOB = '대표' OR (m.MEMBER_DEPT = #{memberDept } AND m.MEMBER_JOB = '부서장')
+		ORDER BY d.DEPT
+	</select>
+	
 	<!-- 등록 ,id 시퀀스조회 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
