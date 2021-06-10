@@ -119,7 +119,7 @@
 													<div class="timeline-info">
 														<a href="#" class="info-area">
 															<div class="title-box">
-																<em class="mail-title">안녕하세요 여러부우우운</em>
+																<em class="mail-title">1안녕하세요 여러부우우운</em>
 															</div>
 															<div class="dsc-box">
 																<div class="dsc-box-inner">
