@@ -23,27 +23,24 @@ public class CooperationServiceImpl implements CooperationService {
 	}
 
 	@Override
-	public Cooperation printOne(int roomNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Cooperation> printAllByRoom(int roomNo) {
+		return coStore.selectAllByRoom(roomNo);
 	}
 
 	@Override
-	public int registerCoop(Cooperation co) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int registerCoop(Cooperation coop) {
+		return coStore.insertCoop(coop);
 	}
 
 	@Override
-	public int modifyCoop(Cooperation co) {
+	public int modifyCoop(Cooperation coop) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int removeCoop(int coNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return coStore.deleteCoop(coNo);
 	}
 
 	@Override

@@ -10,58 +10,49 @@
 		<result property="status" column="STATUS"></result>
 	</resultMap>
 
-<!-- 	<resultMap type="Cooperation" id="coResultMap">
-		<id property="cBoardNo" column="C_BOARD_NO"></id>
+	<resultMap type="Cooperation" id="coResultMap">
+		<id property="coNo" column="CO_NO"></id>
 		<result property="memberId" column="MEMBER_ID"></result>
 		<result property="memberName" column="MEMBER_NAME"></result>
-		<result property="cBoardTitle" column="C_BOARD_TITLE"></result>
-		<result property="cBoardContents" column="C_BOARD_CONTENTS"></result>
+		<result property="coContents" column="CO_CONTENTS"></result>
+		<result property="originalFilename" column="ORIGINAL_FILENAME"></result>
+		<result property="renameFilename" column="RENAME_FILENAME"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
-		<result property="hits" column="HITS"></result>
-		<result property="originalFileName" column="ORIGINAL_FILE"></result>
-		<result property="renameFileName" column="RENAME_FILE"></result>
-	</resultMap> -->
+		<result property="roomNo" column="ROOM_NO"></result>
+		<result property="roomName" column="ROOM_NAME"></result>
+	</resultMap>
 	
+<!-- 협업관리 방 리스트업 -->
 	<select id="selectAllList" resultMap="coRoomResultMap"> 
 		SELECT ROOM_NO, ROOM_NAME, MEMBER_ID, MEMBER_NAME AS ROOM_ADMIN, STATUS 
 		FROM COOPERATION_ROOM JOIN MEMBER USING(MEMBER_ID) 
 		WHERE STATUS = 'Y' 
 		ORDER BY ROOM_NO DESC
 	</select>
-	<!-- 
-	<select id="selectSearchList" resultMap="cBoardResultMap">
-		SELECT C_BOARD_NO, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE
-		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID)
-			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR C_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR C_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
-			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
-		 ORDER BY C_BOARD_NO DESC
+	
+	<!-- 방 가져오기 -->
+	<select id="selectAllByRoom" resultMap="coResultMap"> 
+		SELECT a.CO_NO, a.MEMBER_ID, b.MEMBER_NAME, a.CO_CONTENTS, a.ORIGINAL_FILENAME, a.RENAME_FILENAME, a.ENROLL_DATE, a.ROOM_NO, c.ROOM_NAME
+		FROM COOPERATION a 
+        INNER JOIN MEMBER b ON a.MEMBER_ID = b.MEMBER_ID 
+		INNER JOIN COOPERATION_ROOM c ON a.ROOM_NO = c.ROOM_NO 
+		WHERE a.ROOM_NO = #{ roomNo }
+		ORDER BY CO_NO
 	</select>
-	
-	<select id="selectSearchListCount" resultType="_int">
-		SELECT COUNT(*) FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID)
-			<if test="searchCondition.toString() == 'ALL'"> WHERE MEMBER_NAME LIKE '%' || #{searchValue } || '%' OR C_BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR C_BOARD_CONTENTS LIKE '%' || #{searchValue } || '%' </if>
-			<if test="searchCondition.toString() != 'ALL'"> WHERE ${searchCondition} LIKE '%' || #{searchValue } || '%'</if>
-		 ORDER BY C_BOARD_NO DESC
-	</select>
-	
-	<select id="selectOne" resultMap="cBoardResultMap" parameterType="_int">
-		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS, ORIGINAL_FILE, RENAME_FILE
-		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) 
-		WHERE C_BOARD_NO = #{cBoardNo}
-		ORDER BY C_BOARD_NO DESC
-	</select>
-	
-	<update id="updateCount">
-		UPDATE CLUBBOARD SET HITS = HITS + 1 WHERE C_BOARD_NO = #{boardNo}
-	</update>
-	
-	<insert id="insertcBoard">
-		INSERT INTO CLUBBOARD VALUES (CBOARD_SEQ.NEXTVAL,#{memberId},#{cBoardTitle},#{cBoardContents},SYSDATE,0, #{originalFileName}, #{renameFileName})
+
+<!-- 글생성 -->	
+	<insert id="insertCoop">
+		INSERT INTO COOPERATION 
+		VALUES (CO_ROOM_SEQ.NEXTVAL, #{memberId}, #{coContents}, #{originalFilename}, #{renameFilename}, SYSDATE, #{roomNo})
 	</insert>
-	
-	<delete id="deletecBoard" parameterType="int">
-		DELETE FROM CLUBBOARD WHERE C_BOARD_NO = #{cBoardNo}
+
+<!-- 글삭제 -->
+	<delete id="deleteCoop" parameterType="int">
+		DELETE FROM COOPERATION WHERE CO_NO = #{coNo}
 	</delete>
+	
+<!-- 	
+	
 	
 	<update id="updatecBoard">
 		UPDATE CLUBBOARD SET C_BOARD_TITLE = #{cBoardTitle}, C_BOARD_CONTENTS = #{cBoardContents}, ORIGINAL_FILE = #{originalFileName} , RENAME_FILE = #{renameFileName}

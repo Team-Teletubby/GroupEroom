@@ -50,6 +50,7 @@
 					</div>
 					<div class="room-desk">
 						<h4 class="pull-left">DEPARTMENT</h4>
+						<a href="#" class="pull-right btn btn-theme02">+ Create Room</a>
 						<form action="coopListView.do">
 							<c:forEach items="${ coList }" var="coopRoom">
 								<div class="room-box">

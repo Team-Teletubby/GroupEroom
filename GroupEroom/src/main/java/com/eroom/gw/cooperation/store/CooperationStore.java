@@ -8,10 +8,10 @@ import com.eroom.gw.cooperation.domain.CooperationRoom;
 
 public interface CooperationStore {
 	
-	public ArrayList<CooperationRoom> selectAllList(); //리스트조회
-	public Cooperation selectOne(int roomNo);
-	public int insertCoop(Cooperation co); //게시물 작성
-	public int updateCoop(Cooperation co); //게시물 수정
+	public ArrayList<CooperationRoom> selectAllList(); //방 리스트조회
+	public ArrayList<Cooperation> selectAllByRoom(int roomNo); //협업 상세조회
+	public int insertCoop(Cooperation coop); //게시물 작성
+	public int updateCoop(Cooperation coop); //게시물 수정
 	public int deleteCoop(int coNo); //게시물 삭제
 	
 	public ArrayList<CooperationCmt> selectAllCmt(int coNo); //댓글조회
