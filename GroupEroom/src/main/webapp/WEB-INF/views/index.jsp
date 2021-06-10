@@ -284,6 +284,7 @@
 						<!-- 이 부분이 콘텐츠 하나임 -->
 						<c:forEach items="${memberExecutives }" var="executives" >
 							<c:if test="${executives.memberJob eq '대표' }">
+							<input type="hidden" id="memberId1" value=${executives.memberId }>
 						<div class="desc">
 							<div class="thumb">
 								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -310,6 +311,7 @@
 						</div>
 						</c:if>
 						<c:if test="${executives.memberJob eq '부서장' }">
+						<input type="hidden" id="memberId2" value=${executives.memberId }>
 						<div class="desc">
 							<div class="thumb">
 								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
@@ -433,7 +435,52 @@
 		</footer>
 		<!--footer end-->
 	</section>
-	
+	<script>
+		$('document').ready(function() {
+		
+		
+		});
+		
+		// 첫번째 input창에 대해서
+		$('input[name=employee-status1]').change(function() {
+			sessionId = ${member.memberId };
+			memberId1 =	$('#memberId1').val();
+			memberId2 = $('#memberId2').val();
+			
+			if(sessionId == memberId1) {
+				// ajax로 상태값 변경
+				$.ajax({
+					url: 'changeCeoStatus.do',
+					type: 'post',
+					data: {
+						"memberId" : memberId1,
+						"status" : $('input[name=employee-status1]:checked').val()
+					},
+					success: function(data) {
+							if(data == 'reportable') {
+								$('#reportable1').prop("checked", true);
+							}else if(data == 'conference') {
+								$('#conference1').prop("checked", true);
+							}else if(data == 'absence') {
+								$('#absence1').prop("checked", true);
+							}
+					}
+					
+				});
+				
+			}else {
+				alert("오류");
+			}
+			
+			
+			// 두번째 input창에 대해서
+		
+		
+			
+			
+		});
+		
+	</script>
 	
 </body>
 </html>

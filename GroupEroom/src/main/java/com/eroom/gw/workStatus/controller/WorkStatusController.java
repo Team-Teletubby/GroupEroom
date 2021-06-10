@@ -15,16 +15,15 @@ import com.eroom.gw.workStatus.domain.WorkStatus;
 import com.eroom.gw.workStatus.service.logic.WorkStatusService;
 
 @Controller
-public class workStatusController {
+public class WorkStatusController {
 
 	@Autowired
 	private WorkStatusService workStatusService;
 	
-	// 로그인 ID의 부서와
-	@RequestMapping(value="showMemberStatus.do", method=RequestMethod.POST)
-	public void showMemberStatus(@ModelAttribute WorkStatus workstatus,HttpSession session, HttpServletResponse response) {
-		Member member = (Member)session.getAttribute("LoginUser");
-		System.out.println(member.getMemberDept());
+	// 상태 변화
+	@RequestMapping(value="changeCeoStatus.do", method=RequestMethod.POST)
+	public void change(@ModelAttribute WorkStatus workstatus) {
+		
 		
 		
 	}
