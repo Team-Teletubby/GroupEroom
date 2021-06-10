@@ -434,27 +434,6 @@
 		<!--footer end-->
 	</section>
 	
-	<script>
-		$('document').ready(function(){
-			selectMember();
-			
-		});
-		
-		function selectMember() {
-			const memberDept = '${member.memberDept }'
-			$.ajax({
-				url: 'showMemberStatus.do',
-				type: 'POST',
-				data: {
-					"memberDept" : ${member.memberDept }
-				},
-				dataType: "json",
-				success: function(data) {
-					
-				}
-			});
-		}
-		
-	</script>
+	
 </body>
 </html>

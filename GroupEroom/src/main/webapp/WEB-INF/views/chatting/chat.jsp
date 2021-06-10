@@ -147,7 +147,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm:ss");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -163,7 +163,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm:ss");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";

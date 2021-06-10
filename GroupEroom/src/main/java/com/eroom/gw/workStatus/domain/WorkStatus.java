@@ -6,6 +6,11 @@ public class WorkStatus {
 	private String memberJob; // 직급
 	private String memberDept; // 부서
 	private String status; // 상태
+	
+	public WorkStatus() {
+		super();
+	}
+	
 	public int getMemberId() {
 		return memberId;
 	}
