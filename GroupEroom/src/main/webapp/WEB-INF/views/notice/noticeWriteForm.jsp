@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
@@ -24,7 +26,7 @@
 							<i class="fa fa-angle-right"></i> 공지글 작성란
 						</h4>
 						<br>
-						<form action="noticeRegister.do" method="post" enctype="multipart/form-data">
+						<form action="noticeRegister.do" method="post" enctype="multipart/form-data" name="form1">
 						<input type="hidden" value="${LoginUser.memberId}" name="memberId">
 							    <div class="form-group">
 							      <label class="form-label mt-4">제목</label>
@@ -41,7 +43,7 @@
 							    </div>
 							   <br><br>
 							   <div align="center">
-							   	<button type="submit" class="btn btn-theme03 "><i class="fa fa-check"></i> 등록</button>&nbsp;&nbsp;
+							   	<button type="button" class="btn btn-theme03 " id="ok"><i class="fa fa-check"></i> 등록</button>&nbsp;&nbsp;
 							    <button type="reset" class="btn btn-theme04"><i class="fa fa-times"></i> 취소</button>
 							   </div>
 
@@ -87,6 +89,23 @@
 			}
 		}); */
 	
+		$(document).ready(function(){
+			$("#ok").click(function() {
+				var title = $("#title").val();
+				var summernote = $("#summernote").val();
+				if (title == "") {
+					alert("제목을 입력하세요");
+					document.form1.noticeTitle.focus();
+					return;
+				}
+				if(summernote == ""){
+					alert("내용을 입력하세요");
+					document.form1.noticeContents.focus();
+					return;
+				}
+				document.form1.submit();
+			});
+		});
 
 		
 	</script>

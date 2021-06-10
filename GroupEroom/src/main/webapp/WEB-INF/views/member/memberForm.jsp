@@ -77,13 +77,13 @@ span.error {
 									<select class="form-control" name="memberJob"
 										style="width: 95%;">
 										<option value="사원">사원</option>
-										<option value="주임">주임</option>
 										<option value="대리">대리</option>
 										<option value="과장">과장</option>
 										<option value="차장">차장</option>
-										<option value="부장">부장</option>
-										<option value="전무">전무</option>
-										<option value="대표" selected="selected">대표</option>
+										<option value="부서장">부서장</option>
+									
+										<option value="대표">대표</option>
+								
 									</select>
 								</div>
 							</div>

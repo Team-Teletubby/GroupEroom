@@ -51,9 +51,9 @@ span.error {
 				<i class="fa fa-angle-right"></i>사원 정보 수정
 			</h3>
 			<div class="col-lg-12">
-			
+
 				<div class="form-panel">
-				<h4 style="color:red; font-size:15px;"> * 는 수정불가능</h4>
+					<h4 style="color: red; font-size: 15px;">* 는 수정불가능</h4>
 					<div class="form" style="margin: 20px 200px 0px 200px">
 						<form class="cmxform form-horizontal style-form" id="signupForm"
 							method="post" action="memberModify.do"
@@ -84,20 +84,18 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="lastname" class="control-label col-lg-2">
-									직급</label>
+								<label for="lastname" class="control-label col-lg-2"> 직급</label>
 								<div class="col-lg-10">
 
 									<select class="form-control" name="memberJob"
 										style="width: 95%;">
-										<option value="대표">대표</option>
-										<option value="주임">주임</option>
+										<option value="사원">사원</option>
 										<option value="대리">대리</option>
 										<option value="과장">과장</option>
 										<option value="차장">차장</option>
-										<option value="부장">부장</option>
-										<option value="전무">전무</option>
-										<option value="사원" selected="selected">사원</option>
+										<option value="부서장">부서장</option>
+										
+										<option value="대표">대표</option>
 									</select>
 								</div>
 							</div>
