@@ -31,6 +31,12 @@ margin:0px 100px 50px 100px;
 </style>
 <script>
 $(document).ready(function(){
+	 var today = moment(new Date()).format("YYYYMMDD");
+	 var end = moment("${survey.endDate}").format("YYYYMMDD");
+	 var diff = today-end;
+	 if(diff>0) {
+		 $("#info").html("<span style='font-size:20px'><i class='fa fa-exclamation-triangle' style='color:red'></i>투표 기간이 지났습니다.</span><br><br><a style='color:white'class='btn btn-theme02' href='surveyList.do'>목록으로</a>");
+	 }
 	 var startDate = moment("${survey.startDate}").format("YYYY-MM-DD");
 	 var endDate = moment("${survey.endDate}").format("YYYY-MM-DD");
 	 $("#date").html("<i class='fa fa-calendar'></i> 투표 기간 : " + startDate + " ~ " + endDate);
@@ -92,7 +98,7 @@ $(document).ready(function(){
               				
               			</c:forTokens>
               		</p><br>
-              		<p>
+              		<p id="info">
 	              		<c:choose>
 	              			<c:when test="${check == 0 }">
 		              			<button type="submit" id="complete" class="btn btn-theme02"><i class="fa fa-pencil"></i> 투표 하기</button><br><br>

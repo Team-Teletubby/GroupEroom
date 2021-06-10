@@ -77,7 +77,16 @@ $(document).ready(function(){
               		<br>
               		<div>
               		<c:forEach var="result" items="${resultCount}" varStatus="status">
-              			<p>${result.itemValue}  : ${result.count }<br>
+              		
+              		<c:choose>
+              			<c:when test="${status.count == '1' }">
+              				<p style="font-size:20px; color : #ac92ec"><i class="fa fa-check-circle"></i>${result.itemValue}  : ${result.count } 표<br>
+              			</c:when>
+              			
+              			<c:otherwise>
+              				<p>*${result.itemValue}  : ${result.count } 표 <br>
+              			</c:otherwise>
+              		</c:choose>
               			<c:if test="${survey.showName == 'Y' }"><i class="fa fa-users"></i>
 	              			<c:forEach var="resultAll" items="${resultAll }" varStatus="status">
 	              				<c:if test="${result.itemValue == resultAll.itemValue}">
@@ -85,6 +94,7 @@ $(document).ready(function(){
               					</c:if>
 	              			</c:forEach>
 	              		</c:if>
+	              		
 	              		</p>
               		</c:forEach>
               		</div>
