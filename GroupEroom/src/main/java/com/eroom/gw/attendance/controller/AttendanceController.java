@@ -102,7 +102,7 @@ public class AttendanceController {
 		model.addAttribute("restHoliday", restHoliday);
 		model.addAttribute("diffDate", diffDate);
 		model.addAttribute("now", now);
-		return "attendance/attendanceList";
+		return "attendance/attendance";
 	}
 	
 	// 연차 기록 전체 출력

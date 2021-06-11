@@ -99,7 +99,6 @@ $(document).ready(function(){
 			              					</c:if>
 				              			</c:forEach>
 				              		</c:if>
-				              		
 				              		</p>
 	              		</c:forEach>
               		</div>
