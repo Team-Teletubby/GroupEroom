@@ -485,17 +485,12 @@
 		$('input[name=employee-status1]')
 				.change(
 						function(event) {
-							sessionId = $
-							{
-								member.memberId
-							}
-							;
+							sessionId = '${member.memberId }';
 							memberId1 = $('#memberId1').val();
 
 							if (sessionId == memberId1) {
-								// ajax로 상태값 변경
-								$
-										.ajax({
+								// ajax로 상태값 변경1111
+								$.ajax({
 											url : 'changeCeoStatus.do',
 											type : 'post',
 											data : {
@@ -543,17 +538,12 @@
 		$('input[name=employee-status2]')
 				.change(
 						function(event) {
-							sessionId = $
-							{
-								member.memberId
-							}
-							;
+							sessionId = ${member.memberId };
 							memberId2 = $('#memberId2').val();
 
 							if (sessionId == memberId2) {
 								// ajax로 상태값 변경
-								$
-										.ajax({
+								$.ajax({
 											url : 'changeCeoStatus.do',
 											type : 'post',
 											data : {
