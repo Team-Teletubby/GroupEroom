@@ -83,7 +83,6 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping("/getRoom.do")
 	public List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
-		System.out.println("getRoom 메소드");
 		roomList = chatService.printChatRoom();
 		return roomList;
 	}
@@ -94,17 +93,14 @@ public class MainController {
 	 */
 	@RequestMapping("/moveChating.do")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params, HttpServletRequest request) {
-		System.out.println("moveChating 실행됨");
 		ModelAndView mv = new ModelAndView();
 		HttpSession session1 = request.getSession();
 		Member member = (Member)session1.getAttribute("LoginUser");
-		
+
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-		System.out.println("무브채팅에서 roomNumber: " + roomNumber);
+		
 		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
-			System.out.println("여기 들어옴");
-			System.out.println("params number :" + params.get("roomNumber") );
 			mv.addObject("userName", member.getMemberName());
 			mv.addObject("userId", member.getMemberId());
 			mv.addObject("roomName", params.get("roomName"));

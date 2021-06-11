@@ -25,7 +25,6 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) {
 		//메시지 발송
-		System.out.println("메시지 왔어요요용");
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
 		
@@ -37,7 +36,6 @@ public class SocketHandler extends TextWebSocketHandler {
 			for(int i=0; i<rls.size(); i++) {
 				String roomNumber = (String) rls.get(i).get("roomNumber"); //세션리스트의 저장된 방번호를 가져와서
 				
-				System.out.println("rls 값 : " + rls.toString());
 				if(roomNumber.equals(rN)) { //같은값의 방이 존재한다면
 					temp = rls.get(i); //해당 방번호의 세션리스트의 존재하는 모든 object값을 가져온다.
 					break;
@@ -51,7 +49,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				}
 				
 				WebSocketSession wss = (WebSocketSession) temp.get(k);
-				System.out.println("wss 값 : " + wss.toString() + "/////");
+				
 				if(wss != null) {
 					try {
 						wss.sendMessage(new TextMessage(obj.toJSONString()));
@@ -66,12 +64,10 @@ public class SocketHandler extends TextWebSocketHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("소켓 연결됨");
 		//소켓 연결
 		super.afterConnectionEstablished(session);
 		boolean flag = false;
 		String url = session.getUri().toString();
-		System.out.println(url);
 		String roomNumber = url.split("/chating/")[1];
 		int idx = rls.size(); //방의 사이즈를 조사한다.
 		if(rls.size() > 0) {
@@ -92,7 +88,6 @@ public class SocketHandler extends TextWebSocketHandler {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("roomNumber", roomNumber);
 			map.put(session.getId(), session);
-			System.out.println("닉네임 변경 전 세션 :" + session.toString());
 			rls.add(map);
 		}
 		

@@ -79,7 +79,6 @@ input {
 			dataType : "json",
 			success : function(data) {
 				const $chatingTag = $("#chating");
-				console.log(data);
 				for(var i in data) {
 					var html = "";
 					if(data[i].userId == userId ){
@@ -112,6 +111,7 @@ input {
 					}
 					
 				}
+				$('div.ps-container').scrollTop($('div.ps-container').prop('scrollHeight'));
 			}
 		});
 	}
@@ -130,8 +130,6 @@ input {
 		ws.onmessage = function(data) {
 			//메시지를 받으면 동작
 			var msg = data.data;
-			console.log(msg);
-			console.log(${userId});
 			if(msg != null && msg.trim() != ''){
 				var d = JSON.parse(msg);
 				if(d.type == "getId"){
@@ -174,7 +172,7 @@ input {
 					console.warn("unknown type!");
 				}
 			}
-			$('div.msg_history').scrollTop($('div.msg_history').prop('scrollHeight'));
+			$('div.ps-container').scrollTop($('div.ps-container').prop('scrollHeight'));
 		}
 
 		document.addEventListener("keypress", function(e){
@@ -183,18 +181,6 @@ input {
 			}
 		});
 	}
-
-	/* function chatName(){
-		var userName = $("#userName").val();
-		if(userName == null || userName.trim() == ""){
-			alert("사용자 이름을 입력해주세요.");
-			$("#userName").focus();
-		}else{
-			wsOpen();
-			$("#yourName").hide();
-			$("#yourMsg").show();
-		}
-	} */
 	
 	function send() {
 		console.log($("#chatting").val());

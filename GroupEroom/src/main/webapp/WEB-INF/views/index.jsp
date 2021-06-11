@@ -193,14 +193,14 @@
 								<div class="grey-panel pn donut-chart" id="mail-wrap">
 									<div class="grey-title">
 										<span>전자결재</span> <span class="more"><a
-											href="inboxListView.do">더보기</a></span>
+											href="progressBoard.do">더보기</a></span>
 									</div>
 									<div class="service-header">
 										<div class="service-header-left">
 											<span>보낸 결재</span>
 										</div>
 										<div class="service-header-right">
-											<span><a href="mailComposeView.do">결재 작성하기</a></span>
+											<span><a href="approvalWriteView.do">결재 작성하기</a></span>
 										</div>
 									</div>
 									<div class="mail-body" id="mail-reception">
