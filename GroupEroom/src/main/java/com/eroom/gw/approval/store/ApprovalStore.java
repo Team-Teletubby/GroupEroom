@@ -18,11 +18,18 @@ public interface ApprovalStore {
 	public int insertApproval(Approval approval);
 	
 	/**
-	 * 게시물 전체 조회
+	 * 게시물 전체 조회(페이징o)
 	 * @param pi, approval
 	 * @return
 	 */
 	public ArrayList<Approval> selectList(PageInfo pi, Approval approval);
+	
+	/**
+	 * 게시물 전체 조회(페이징x)
+	 * @param approval
+	 * @return
+	 */
+	public ArrayList<Approval> selectList(int memberId);
 	
 	/**
 	 * 게시물 상세 조회
@@ -103,5 +110,7 @@ public interface ApprovalStore {
 	 * @return
 	 */
 	public int selectTypeCount(int memberId);
+
+
 
 }

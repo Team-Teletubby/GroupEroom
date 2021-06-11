@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eroom.gw.approval.domain.Approval;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
@@ -55,14 +56,17 @@ public class MemberController {
 		
 		// 나에게 온 결재문 갯수 
 		int approvalTypeCount = approvalService.printTypeCount(memberId);
+		// 작성한 결재문 리스트
+		ArrayList<Approval> approvalList = approvalService.printAll(memberId);
 		// 로그인한 ID와 같은 부서의 임원 정보 가져오기
 		ArrayList<Member> memberList = service.printExecutives(member);
-
 		// 공지사항 리스트
 		ArrayList<Notice> noticeList = noticeService.printAll();
 		
 		// 결재문 갯수
 		mv.addObject("approvalTypeCount", approvalTypeCount);
+		// 결재문 리스트
+		mv.addObject("approvalList", approvalList);
 		// 회원 정보
 		mv.addObject("member", member);
 		// 임원 정보

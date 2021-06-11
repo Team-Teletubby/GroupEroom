@@ -62,8 +62,8 @@ input {
 <script type="text/javascript">
 	$("document").ready(function() {
 		chatLog();
-		
 	});
+	
 	var ws;
 	var roomNumber = ${roomNumber};
 	var userName1 = '${userName}';
@@ -87,7 +87,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + data[i].msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm a");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -103,7 +103,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + data[i].msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(data[i].chatCreateDate).format("HH:mm a");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -146,7 +146,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm a");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -162,7 +162,7 @@ input {
 						html += "<div class='media-body'>";
 						html += "<p>" + d.msg;
 						html += "</p>";
-						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm:ss");
+						html += "<p class='meta' id='meta-time'>" + moment(d.chatCreateDate).format("HH:mm a");
 						html += "</p>";
 						html += "</div>";
 						html += "</div>";
@@ -174,6 +174,7 @@ input {
 					console.warn("unknown type!");
 				}
 			}
+			$('div.msg_history').scrollTop($('div.msg_history').prop('scrollHeight'));
 		}
 
 		document.addEventListener("keypress", function(e){

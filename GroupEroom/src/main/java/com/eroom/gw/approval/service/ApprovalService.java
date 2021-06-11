@@ -22,13 +22,21 @@ public interface ApprovalService {
 	public int registerApproval(Approval approval);
 
 	/**
-	 * 게시물 전체 조회
+	 * 게시물 전체 조회(페이징)
 	 * 
 	 * @param pi, approval
 	 * @return
 	 */
 	public ArrayList<Approval> printAll(PageInfo pi, Approval approval);
 
+	/**
+	 * 게시물 전체 조회(페이징x)
+	 * 
+	 * @param pi, approval
+	 * @return
+	 */
+	public ArrayList<Approval> printAll(int memberId);
+	
 	/**
 	 * 게시물 상세 조회
 	 * 

@@ -24,10 +24,16 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalStore.insertApproval(approval);
 	}
 
-	// 진행함 글 리스트
+	// 진행함 글 리스트(페이징o)
 	@Override
 	public ArrayList<Approval> printAll(PageInfo pi, Approval approval) {
 		return approvalStore.selectList(pi, approval);
+	}
+	
+	// 진행함 글 리스트(페이징x)
+	@Override
+	public ArrayList<Approval> printAll(int memberId) {
+		return approvalStore.selectList(memberId);
 	}
 
 	// 글 상세보기

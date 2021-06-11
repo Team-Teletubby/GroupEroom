@@ -26,12 +26,18 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.insert("approvalMapper.insertApproval", approval);
 	}
 
-	// 진행함 글 리스트
+	// 진행함 글 리스트(페이징o)
 	@Override
 	public ArrayList<Approval> selectList(PageInfo pi, Approval approval) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectList", approval, rowBounds);
+	}
+	
+	// 진행함 글 리스트(페이징x)
+	@Override
+	public ArrayList<Approval> selectList(int memberId) {
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectList2", memberId);
 	}
 	
 	// 글 상세보기
@@ -97,5 +103,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	public int selectTypeCount(int memberId) {
 		return sqlSession.selectOne("approvalMapper.selectTypeCount", memberId);
 	}
+
+
 
 }
