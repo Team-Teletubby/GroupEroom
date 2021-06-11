@@ -24,6 +24,7 @@ import com.eroom.gw.attendance.domain.Attendance;
 import com.eroom.gw.attendance.domain.Pagination;
 import com.eroom.gw.attendance.service.AttendanceService;
 import com.eroom.gw.calendar.domain.Calendar;
+import com.eroom.gw.calendar.service.CalendarService;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.member.domain.Member;
 
@@ -32,6 +33,9 @@ public class AttendanceController {
 
 	@Autowired
 	private AttendanceService atdService;
+	
+	@Autowired
+	private CalendarService calService;
 	
 	@RequestMapping(value="attendanceList.do")
 	public String attendanceList(Model model, HttpSession session, @RequestParam(value="page", required=false)Integer page){
@@ -120,7 +124,15 @@ public class AttendanceController {
 		float diff = restHoliday - usedHoliday;
 		System.out.println(diff);
 		int result = atdService.registerAttendance(attendance);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = new Calendar();
+		calendar.setCalTitle(attendance.getHolidayType());
+		calendar.setMemberId(attendance.getMemberId());
+		calendar.setStartDate(formatter.format(attendance.getStartDate()));
+		calendar.setEndDate(formatter.format(attendance.getEndDate()));
 		if(result>0 && diff>=0) {
+			calService.registerCal(calendar);
 			mv.setViewName("redirect:attendanceList.do");
 		}else {
 			mv.setViewName("error");

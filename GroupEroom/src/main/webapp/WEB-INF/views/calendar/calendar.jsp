@@ -86,7 +86,7 @@
     	  $('#endTime').val(moment(eventObj.end).format('HH:mm'));
     	  $('#calInfo').val(eventObj.groupId);
     	  $("input:radio[name=color]:radio[value='"+eventObj.backgroundColor+"']").prop('checked', true);
-    	  $("#delete-btn").append("<a id='deletebtn' class='btn btn-theme04' href='deleteCal.do?calNo="+eventObj.id+"'>삭제</a>");
+    	  $("#delete-btn").append("<a id='deletebtn' style='color:white' class='btn btn-theme04' href='deleteCal.do?calNo="+eventObj.id+"'>삭제</a>");
     	  detailModal.modal('show');
       },
       
