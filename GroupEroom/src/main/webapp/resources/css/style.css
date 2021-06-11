@@ -190,7 +190,6 @@ hr {
 .centered {
 	text-align: center;
 }
-
 .goleft {
 	text-align: left;
 }
@@ -3451,7 +3450,12 @@ ul.chat-available-user li a:hover {
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-
+.work-title {
+	font-size: 14px;
+    font-weight: 700;
+	padding: 0px 10px 0px 148px;
+	
+}
 /* 
 <div class="tab_box">
 <a href="#" role="tab" class="tab my_Send">수신함</a>

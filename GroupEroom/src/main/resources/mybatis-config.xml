@@ -30,7 +30,7 @@
 		<typeAlias type="com.eroom.gw.cooperation.domain.Cooperation" alias="Cooperation" />
 		<typeAlias type="com.eroom.gw.cooperation.domain.CooperationRoom" alias="CooperationRoom" />
 		<typeAlias type="com.eroom.gw.cooperation.domain.CooperationCmt" alias="CooperationCmt" />
-
+		<typeAlias type="com.eroom.gw.workStatus.domain.WorkStatus" alias="WorkStatus" />
 	</typeAliases>
 	
 	<mappers>
@@ -47,7 +47,7 @@
 		<mapper resource="mappers/calendar-mapper.xml"></mapper>
 		<mapper resource="mappers/survey-mapper.xml"></mapper>
 		<mapper resource="mappers/cooperation-mapper.xml"></mapper>
-
+		<mapper resource="mappers/workStatus-mapper.xml"></mapper>
 	</mappers>
 	
 </configuration>

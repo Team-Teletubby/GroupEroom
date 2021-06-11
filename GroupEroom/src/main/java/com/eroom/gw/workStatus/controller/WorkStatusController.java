@@ -12,13 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.workStatus.domain.WorkStatus;
-import com.eroom.gw.workStatus.service.logic.WorkStatusService;
+import com.eroom.gw.workStatus.service.WorkStatusService;
+import com.eroom.gw.workStatus.service.logic.WorkStatusServiceImpl;
 
 @Controller
 public class WorkStatusController {
 
 	@Autowired
 	private WorkStatusService workStatusService;
+	
+	@RequestMapping(value="workStatusRegister.do", method=RequestMethod.POST)
+	public void workStatusRegister(@ModelAttribute WorkStatus workStatus) {
+
+		int insertResult = workStatusService.registerWorkMember(workStatus);
+		
+	}
+	
 	
 	// 상태 변화
 	@RequestMapping(value="changeCeoStatus.do", method=RequestMethod.POST)
