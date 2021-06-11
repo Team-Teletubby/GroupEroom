@@ -816,7 +816,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     font-weight: 600;
 }
 
-.ds .details .state {
+.ds .details .state1 {
     font-size: 13px;
     padding : 5px;
     border: 1px solid #C4C4C4;
@@ -824,6 +824,16 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     background-color: #C4C4C4;
     border-radius: 10%;
 }
+
+.ds .details .state2 {
+    font-size: 13px;
+    padding : 5px;
+    border: 1px solid #C4C4C4;
+    color: rgb(255, 255, 255);
+    background-color: #C4C4C4;
+    border-radius: 10%;
+}
+
 
 .details ul li {
     float: left;

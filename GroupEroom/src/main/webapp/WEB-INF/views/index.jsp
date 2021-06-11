@@ -293,7 +293,7 @@
 								<p>
 									<!-- 시간 -->
 									<!-- <muted>10분전</muted> -->
-									<span class="details-name">${executives.memberName } ${executives.memberJob }</span><span class="state">부재중</span>
+									<span class="details-name">${executives.memberName } ${executives.memberJob }</span><span class="state1">부재중</span>
 									<i class="fa fa-refresh" aria-hidden="true"></i> <br />
 								</p>
 								<ul class="details-menu">
@@ -320,7 +320,7 @@
 								<p>
 									<!-- 시간 -->
 									<!-- <muted>10분전</muted> -->
-									<span class="details-name">${executives.memberName } ${executives.memberJob }</span> <span class="state">부재중</span>
+									<span class="details-name">${executives.memberName } ${executives.memberJob }</span> <span class="state2">부재중</span>
 									<i class="fa fa-refresh" aria-hidden="true"></i> <br />
 								</p>
 								<ul class="details-menu">
@@ -442,7 +442,7 @@
 		});
 		
 		// 첫번째 input창에 대해서
-		$('input[name=employee-status1]').change(function() {
+		$('input[name=employee-status1]').change(function(event) {
 			sessionId = ${member.memberId };
 			memberId1 =	$('#memberId1').val();
 			
@@ -455,14 +455,25 @@
 						"memberId" : memberId1,
 						"status" : $('input[name=employee-status1]:checked').val()
 					},
-					dataType: 'json',
-					success: function() {
+					success: function(data) {
+						if(data == "success") {
+							if(event.target.id == 'reportable1') {
+								$('.state1').html("보고가능");
+								$('.state1').css({ "background-color":"#7DD481", "border":"1px solid #7DD481" });
+							}else if(event.target.id == 'conference1') {
+								$('.state1').html("회의중");
+								$('.state1').css({ "background-color":"#FF9135", "border":"1px solid #FF9135" });
+							}else if(event.target.id == 'absence1') {
+								$('.state1').html("부재중");
+								$('.state1').css({ "background-color":"#D20606", "border":"1px solid #D20606" });
+							}
+						}
 					}
 				});
 			}
 		});
 		
-		$('input[name=employee-status2]').change(function() {
+		$('input[name=employee-status2]').change(function(event) {
 			sessionId = ${member.memberId };
 			memberId2 = $('#memberId2').val();
 			
@@ -475,8 +486,21 @@
 						"memberId" : memberId2,
 						"status" : $('input[name=employee-status2]:checked').val()
 					},
-					dataType: 'json',
-					success: function() {
+					success: function(data) {
+						if(data == "success") {
+							if(event.target.id == 'reportable2') {
+								$('.state2').html("보고가능");
+								$('.state2').css({ "background-color":"#7DD481", "border":"1px solid #7DD481" });
+							}else if(event.target.id == 'conference2') {
+								$('.state2').html("회의중");
+								$('.state2').css({ "background-color":"#FF9135", "border":"1px solid #FF9135" });
+							}else if(event.target.id == 'absence2') {
+								$('.state2').html("부재중");
+								$('.state2').css({ "background-color":"#D20606", "border":"1px solid #D20606" });
+								
+							}
+							
+						}
 					}
 					
 				});
@@ -492,23 +516,38 @@
 				},
 				dataType: 'json',
 				success: function(data) {
-					console.log(data)
 					if(data[0].status == 'reportable') {
 						$('#reportable1').prop("checked", true);
+						$('.state1').html("보고가능");
+						$('.state1').css({ "background-color":"#7DD481", "border":"1px solid #7DD481" });
+						
 					}else if(data[0].status == 'conference') {
 						$('#conference1').prop("checked", true);
+						$('.state1').html("회의중");
+						$('.state1').css({ "background-color":"#FF9135", "border":"1px solid #FF9135" });
+						
 					}else if(data[0].status == 'absence') {
 						$('#absence1').prop("checked", true);
+						$('.state1').html("부재중");
+						$('.state1').css({ "background-color":"#D20606", "border":"1px solid #D20606" });
+						
 					}
 					
 					if(data[1].status == 'reportable') {
 						$('#reportable2').prop("checked", true);
+						$('.state2').html("보고가능");
+						$('.state2').css({ "background-color":"#7DD481", "border":"1px solid #7DD481" });
+					
 					}else if(data[1].status == 'conference') {
 						$('#conference2').prop("checked", true);
+						$('.state2').html("회의중");
+						$('.state2').css({ "background-color":"#FF9135", "border":"1px solid #FF9135" });
+						
 					}else if(data[1].status == 'absence') {
 						$('#absence2').prop("checked", true);
-					}
-					
+						$('.state2').html("부재중");$('.state2').css({ "background-color":"#D20606", "border":"1px solid #D20606" });
+						
+					}		
 				}
 			});
 			

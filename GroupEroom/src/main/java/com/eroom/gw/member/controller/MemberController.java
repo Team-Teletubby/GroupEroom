@@ -76,8 +76,11 @@ public class MemberController {
 	
 	// 집무현황 상태변경
 	@RequestMapping(value="changeCeoStatus.do", method=RequestMethod.POST)
-	public void changeWorkStatus(@ModelAttribute Member member) {
+	@ResponseBody
+	public String changeWorkStatus(@ModelAttribute Member member) {
 		int result = service.modifyStatus(member);
+		
+		return "success";
 	}
 	
 	// 집무현황 출력
