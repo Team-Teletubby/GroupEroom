@@ -55,7 +55,7 @@
 	</resultMap>
 	
 	<insert id="insertSurveyItem">
-		INSERT INTO SURVEY_ITEM VALUES(#{surveyNo}, null , #{itemValue}, #{memberName})
+		INSERT INTO SURVEY_ITEM VALUES(#{surveyNo}, #{itemValue}, #{memberName})
 	</insert>
 	
 	<select id="totalCount" resultType="_int">
