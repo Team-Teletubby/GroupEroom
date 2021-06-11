@@ -2,9 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	SimpleDateFormat fomatter = new SimpleDateFormat("yyyy-MM-dd");
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +66,10 @@ $(document).ready(function(){
 	              		<p><i class="fa fa-edit"></i> 작성자 : ${list.memberName}</p>
 	              		<p><i class="fa fa-users"> 투표 대상 : ${list.target }</i></p>
 	              		<p>
-	              			<span class="date"><i class="fa fa-calendar-o"> : ${list.startDate } ~ </i>${list.endDate }</span>
+	              			<span class="date"><i class="fa fa-calendar-o">기간 : 
+	              			<c:set var = "startDate" value = "${fn:substring(list.startDate, 0, 10)}" />
+	              			<c:set var = "endDate" value = "${fn:substring(list.endDate, 0, 10)}" />
+	              			${startDate} ~ </i> ${endDate}</span>
 	              		</p>
               		</td>
               		<td style="width:20%" align="right">

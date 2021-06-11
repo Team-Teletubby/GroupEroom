@@ -12,10 +12,13 @@
 <link href="resources/css/style-responsive.css" rel="stylesheet">
 <link href="resources/css/style2.css" rel="stylesheet">
 <link href="resources/js/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+<script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js></script>
 
 <script>
 $(document).ready(function(){
+	
+	
+	
 	$('#answer-count').change(function(event) {
 		var answerCount = $('#answer-count option:selected').val();
 		var answerArea = $("#answer-area");
@@ -32,15 +35,33 @@ $(document).ready(function(){
 		var surveyObject = $("#surveyObject").val();
 		var surveyQuestion = $("#surveyQuestion").val();
 		var target = $("#target").val();
-		var startDate = $("#startDate").val();
+		var startDate = moment($("#startDate").val()).format("YYYY-MM-DD");
 		var endDate = $("#endDate").val();
-		
 		var surveyAnswers = "";
 		for(i = 0; i <$(".items").length; i++){
 			surveyAnswers += $(".items").eq(i).val() + ",";
 		} 
 		surveyAnswers = surveyAnswers.slice(0,-1);
-		alert(surveyAnswers);
+		if(surveyTitle==""){
+			alert("제목을 입력해주세요.");
+			$("#surveyTitle").focus();
+			return false;
+		}else if(startDate==""){
+			alert("시작 일을 설정해주세요.");
+			$("#startDate").focus();
+			return false;
+		}else if(endDate==""){
+			alert("종료 일을 설정해주세요.");
+			$("#endDate").focus();
+			return false;
+		}else if(surveyQuestion==""){
+			alert("질문을 작성해 주세요.")
+			$("#surveyQuestion").focus();
+			return false;
+		}
+		
+		
+		
 		 $.ajax({
 				url : "regSurvey.do",
 				type : "post",
@@ -58,6 +79,7 @@ $(document).ready(function(){
 				success : function(data) {
 					if(data == "success") {
 						alert("성공");
+						window.location.href = "surveyList.do";
 					}else {
 						alert("실패..");
 					}
@@ -88,13 +110,13 @@ $(document).ready(function(){
               <table class="table">
               	<tr>
               		<td>실명 / 익명</td>
-              		<td><input type="radio" name="showName" value="Y">실명 <input type="radio" name="showName" value="N">익명</td>
+              		<td><input type="radio" name="showName" value="Y" checked>실명 <input type="radio" name="showName" value="N">익명</td>
               	</tr>
               	<tr>
               		<td>설문 결과</td>
               		<td>
               		<span>공개는 설문 참여자에게 설문 결과를 공개합니다. 비공개는 설문 작성자만 설문 결과 조회 가능합니다.</span><br>
-              		<input type="radio" name="showResult" value="Y">공개 <input type="radio" name="showResult" value="N">비공개
+              		<input type="radio" name="showResult" value="Y" checked>공개 <input type="radio" name="showResult" value="N">비공개
               		</td>
               	</tr>
               	<tr>

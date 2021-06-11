@@ -33,9 +33,13 @@ margin:0px 100px 50px 100px;
 $(document).ready(function(){
 	 var today = moment(new Date()).format("YYYYMMDD");
 	 var end = moment("${survey.endDate}").format("YYYYMMDD");
-	 var diff = today-end;
-	 if(diff>0) {
+	 var start = moment("${survey.startDate}").format("YYYYMMDD");
+	 var diffAfter = today-end;
+	 var diffBefore = start-today;
+	 if(diffAfter>0) {
 		 $("#info").html("<span style='font-size:20px'><i class='fa fa-exclamation-triangle' style='color:red'></i>투표 기간이 지났습니다.</span><br><br><a style='color:white'class='btn btn-theme02' href='surveyList.do'>목록으로</a>");
+	 }else if(diffBefore > 0){
+		 $("#info").html("<span style='font-size:20px'><i class='fa fa-exclamation-triangle' style='color:red'></i> "+diffBefore+"일 후 투표 가능합니다.</span><br><br><a style='color:white'class='btn btn-theme02' href='surveyList.do'>목록으로</a>");
 	 }
 	 var startDate = moment("${survey.startDate}").format("YYYY-MM-DD");
 	 var endDate = moment("${survey.endDate}").format("YYYY-MM-DD");
