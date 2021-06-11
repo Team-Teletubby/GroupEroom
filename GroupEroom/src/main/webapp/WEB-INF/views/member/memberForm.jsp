@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원등록</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
 .centerText table {
 	margin: auto;
@@ -53,9 +54,9 @@ span.error {
 					<div class="form" style="margin: 20px 200px 0px 200px">
 						<form class="cmxform form-horizontal style-form" id="signupForm"
 							method="post" action="memberRegister.do"
-							enctype="multipart/form-data">
+							enctype="multipart/form-data" name="form2">
 							<div class="form-group ">
-								<label for="firstname" class="control-label col-lg-2">*
+								<label for="firstname" class="control-label col-lg-2">
 									부서</label>
 
 								<div class="col-lg-10">
@@ -70,7 +71,7 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="lastname" class="control-label col-lg-2">*
+								<label for="lastname" class="control-label col-lg-2">
 									직급</label>
 								<div class="col-lg-10">
 
@@ -81,22 +82,22 @@ span.error {
 										<option value="과장">과장</option>
 										<option value="차장">차장</option>
 										<option value="부서장">부서장</option>
-									
+
 										<option value="대표">대표</option>
-								
+
 									</select>
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="username" class="control-label col-lg-2">*
+								<label for="username" class="control-label col-lg-2">
 									이름</label>
 								<div class="col-lg-10">
-									<input class="form-control" type="text" name="memberName"
+									<input class="form-control"  id="name" type="text" name="memberName"
 										style="width: 95%;">
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="password" class="control-label col-lg-2">*
+								<label for="password" class="control-label col-lg-2">
 									주민등록번호</label>
 								<div class="col-lg-10">
 
@@ -111,7 +112,7 @@ span.error {
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="confirm_password" class="control-label col-lg-2">*
+								<label for="confirm_password" class="control-label col-lg-2">
 									폰번호 </label>
 								<div class="col-lg-10">
 									<input class="form-control" type="text" name="memberPhone"
@@ -214,7 +215,7 @@ span.error {
 								<div align="center">
 									<br>
 									<!-- <button onclick="return validate();">가입하기</button> -->
-									<button class="btn btn-theme" type="submit" value="사원등록">사원등록</button>
+									<button class="btn btn-theme" type="button" value="사원등록" id="ok">사원등록</button>
 									<button class="btn btn-theme04" type="button"
 										onclick="location.href='index.do';">홈으로</button>
 								</div>
@@ -355,6 +356,26 @@ span.error {
 	          } 
  
    	 });
+    	
+		$(document).ready(function(){
+			$("#ok").click(function() {
+				var name = $("#name").val();
+				var memberPhone = $("#memberPhone").val();
+				if (name == "") {
+					alert("정보를 입력해주세요.");
+					document.form2.memberName.focus();
+					return;
+				}
+				if(memberPhone == ""){
+					alert("정보를 입력해주세요.");
+					document.form2.memberPhone.focus();
+					return;
+				}
+				document.form2.submit();
+			});
+		});
+
+		
      	
    </script>
 </body>

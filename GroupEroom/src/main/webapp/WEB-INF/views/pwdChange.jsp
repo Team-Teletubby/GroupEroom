@@ -39,7 +39,7 @@ span.error {
 		<div class="content">
 			<div class="title-logo-box">
 				<p>EROOM</p>
-				<p style="font-size: 20px; color: black;">비밀번호 변경</p>
+				<p style="font-size: 20px; color: black;">초기비밀번호 변경</p>
 				<!--<img src="asset/image/logo.png" alt="ë¡ê³ ">-->
 			</div>
 			<div class="login-form">
