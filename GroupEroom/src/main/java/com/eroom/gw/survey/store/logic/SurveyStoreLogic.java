@@ -23,8 +23,7 @@ public class SurveyStoreLogic implements SurveyStore{
 
 	@Override
 	public int deleteSurvey(int surveyNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("surveyMapper.deleteSurvey", surveyNo);
 	}
 
 	@Override

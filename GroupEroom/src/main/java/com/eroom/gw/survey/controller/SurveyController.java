@@ -44,7 +44,6 @@ public class SurveyController {
 		surveyItem.setMemberName(memberName);
 		surveyItem.setSurveyNo(surveyNo);
 		int check = surveyService.checkSurvey(surveyItem);
-		System.out.println("체크한다" + check);
 		SurveyList survey = surveyService.selectOneSurvey(surveyNo);
 		if(survey!=null) {
 			model.addAttribute("check", check);
@@ -108,5 +107,16 @@ public class SurveyController {
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("survey",survey);
 		return "survey/surveyResult";
+	}
+	
+	//투표 삭제
+	@RequestMapping(value="deleteSurvey.do")
+	public String deleteSurvey(@RequestParam("surveyNo")int surveyNo) {
+		int result = surveyService.removeSurvey(surveyNo);
+		if(result>0) {
+			return "redirect:surveyList.do";
+		}else {
+			return"";
+		}
 	}
 }

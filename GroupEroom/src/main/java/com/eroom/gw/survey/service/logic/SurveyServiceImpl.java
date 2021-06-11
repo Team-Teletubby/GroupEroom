@@ -23,8 +23,7 @@ public class SurveyServiceImpl implements SurveyService{
 
 	@Override
 	public int removeSurvey(int surveyNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return surveyStore.deleteSurvey(surveyNo);
 	}
 
 	@Override

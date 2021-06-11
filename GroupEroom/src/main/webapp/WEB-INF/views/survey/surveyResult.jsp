@@ -57,48 +57,54 @@ $(document).ready(function(){
               		<p style="font-size:20px;"><i class="fa fa-bullhorn"></i> ${survey.surveyObject }</p><br>
               		<p id="date"></p>
               	<c:if test="${survey.showName == 'Y' }">
-              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold">실명</span>으로 진행됩니다.</p>
+              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold; font-size:14px; color:#55a630">실명</span>으로 진행됩니다.</p>
               	</c:if>
               	<c:if test="${survey.showName == 'N' }">
-              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold">익명</span>으로 진행됩니다.</p>
+              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold; font-size:14px; color:#ed5565">익명</span>으로 진행됩니다.</p>
               	</c:if>
               	
               	<c:if test="${survey.showResult == 'Y' }">
-              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold">작성자만 </span>볼 수 있습니다.</p>
+              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold; font-size:14px; color:#55a630;">투표 대상 모두가 </span>볼 수 있습니다.</p>
               	</c:if>
               	<c:if test="${survey.showResult == 'N' }">
-              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold">투표대상 모두</span>에게 공개됩니다.</p>
+              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold; font-size:14px; color:#ed5565">작성자</span>에게만 공개됩니다.</p>
               	</c:if>
               		<hr style="border : 1px solid; color:#4ECDC4; background:#4ECDC4">
-              		<p style="font-size:20px"><i class="fa fa-quora"></i>.${survey.surveyQuestion } <br>총 참여자 수  : ${totalCount } </p>
+              		<p style="font-size:20px"><i class="fa fa-quora"></i>.${survey.surveyQuestion }</p>
               		
               		
               		<!-- ==================결과 나오는 곳================== -->
-              		<br>
+              	<c:choose>
+	              	<c:when test="${sessionScope.LoginUser.memberId != survey.memberId and survey.showResult == 'N' }">
+	              		<p style="font-size:20px"><br><i class="fa fa-exclamation-triangle" style="color:red;"></i>해당 투표 결과는 투표 작성자만 확인할 수 있습니다.</p>
+	              	</c:when>
+              	<c:otherwise>
+              	<p style="font-size:20px">총 참여자 수  : ${totalCount }</p><br>
               		<div>
-              		<c:forEach var="result" items="${resultCount}" varStatus="status">
-              		
-              		<c:choose>
-              			<c:when test="${status.count == '1' }">
-              				<p style="font-size:20px; color : #ac92ec"><i class="fa fa-check-circle"></i>${result.itemValue}  : ${result.count } 표<br>
-              			</c:when>
-              			
-              			<c:otherwise>
-              				<p>*${result.itemValue}  : ${result.count } 표 <br>
-              			</c:otherwise>
-              		</c:choose>
-              			<c:if test="${survey.showName == 'Y' }"><i class="fa fa-users"></i>
-	              			<c:forEach var="resultAll" items="${resultAll }" varStatus="status">
-	              				<c:if test="${result.itemValue == resultAll.itemValue}">
-	              					<span>${resultAll.memberName }, </span>
-              					</c:if>
-	              			</c:forEach>
-	              		</c:if>
-	              		
-	              		</p>
-              		</c:forEach>
+	              		<c:forEach var="result" items="${resultCount}" varStatus="status">
+	              			
+			              		<c:choose>
+			              			<c:when test="${status.count == '1' }">
+			              				<p style="font-size:20px; color : #ac92ec"><i class="fa fa-check-circle"></i>${result.itemValue}  : ${result.count } 표<br>
+			              			</c:when>
+			              			
+			              			<c:otherwise>
+			              				<p>*${result.itemValue}  : ${result.count } 표 <br>
+			              			</c:otherwise>
+			              		</c:choose>
+			              			<c:if test="${survey.showName == 'Y' }"><i class="fa fa-users"></i>
+				              			<c:forEach var="resultAll" items="${resultAll }" varStatus="status">
+				              				<c:if test="${result.itemValue == resultAll.itemValue}">
+				              					<span>${resultAll.memberName }, </span>
+			              					</c:if>
+				              			</c:forEach>
+				              		</c:if>
+				              		
+				              		</p>
+	              		</c:forEach>
               		</div>
-              		
+              	</c:otherwise>
+              	</c:choose>
               	</div><br>
          	  </div>
           

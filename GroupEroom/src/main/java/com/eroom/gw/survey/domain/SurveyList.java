@@ -4,6 +4,7 @@ public class SurveyList {
 	
 	private int surveyNo;
 	private int memberId;
+	private String memberName;
 	private String showName;
 	private String showResult;
 	private String surveyTitle;
@@ -131,14 +132,25 @@ public class SurveyList {
 		this.overlap = overlap;
 	}
 
+	
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
-		return "SurveyList [surveyNo=" + surveyNo + ", memberId=" + memberId + ", showName=" + showName
-				+ ", showResult=" + showResult + ", surveyTitle=" + surveyTitle + ", surveyObject=" + surveyObject
-				+ ", surveyQuestion=" + surveyQuestion + ", surveyAnswers=" + surveyAnswers + ", target=" + target
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", writeDate=" + writeDate + ", finished="
-				+ finished + ", overlap=" + overlap + "]";
+		return "SurveyList [surveyNo=" + surveyNo + ", memberId=" + memberId + ", memberName=" + memberName
+				+ ", showName=" + showName + ", showResult=" + showResult + ", surveyTitle=" + surveyTitle
+				+ ", surveyObject=" + surveyObject + ", surveyQuestion=" + surveyQuestion + ", surveyAnswers="
+				+ surveyAnswers + ", target=" + target + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", writeDate=" + writeDate + ", finished=" + finished + ", overlap=" + overlap + "]";
 	}
+
+	
 
 	
 	

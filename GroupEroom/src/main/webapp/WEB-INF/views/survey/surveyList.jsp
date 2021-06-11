@@ -15,7 +15,7 @@
 <link href="resources/css/style-responsive.css" rel="stylesheet">
 <link href="resources/css/style2.css" rel="stylesheet">
 <link href="resources/js/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+<script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js></script>
 <style>
 .poll{
 	border:1px solid lightgray;
@@ -36,10 +36,14 @@
 .poll:hover{
 	background:#fafaff;
 	border :3px solid #4ECDC4;
-	font-weight:bold;
 }
 #go{ color: white; }
 </style>
+<script>
+$(document).ready(function(){
+	
+});
+</script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -60,9 +64,10 @@
 	              		<p style="font-size:20px">#${list.surveyNo }_
 	              			<span>${list.surveyTitle }</span>
 	              		</p>
-	              		<p><i class="fa fa-users"> : ${list.target }</i></p>
+	              		<p><i class="fa fa-edit"></i> 작성자 : ${list.memberName}</p>
+	              		<p><i class="fa fa-users"> 투표 대상 : ${list.target }</i></p>
 	              		<p>
-	              			<span><i class="fa fa-calendar-o"> : ${list.startDate } ~ </i>${list.endDate }</span>
+	              			<span class="date"><i class="fa fa-calendar-o"> : ${list.startDate } ~ </i>${list.endDate }</span>
 	              		</p>
               		</td>
               		<td style="width:20%" align="right">
@@ -75,13 +80,19 @@
               			<c:url var="surveyResult" value="resultSurvey.do">
 								<c:param name="surveyNo" value="${list.surveyNo}"></c:param>
 						</c:url>
-              			<a href="${surveyResult }" class="btn btn-theme04 btn-lg"><i class="fa fa-pie-chart "></i> 투표 결과</a>
+              			<a href="${surveyResult }" class="btn btn-theme04 btn-lg" style="color:white"><i class="fa fa-pie-chart "></i> 투표 결과</a>
               		</td>
               	</tr>
               	</table>
               	</div>
               	<br>
               </c:forEach>
+              
+              <c:if test="${empty list }">
+             	<div align="center" >
+					<i style="font-size:30px; margin:100px" class="fa fa-lightbulb-o"> 투표 리스트가 없습니다.</i>
+             	</div>
+              </c:if>
          	  </div>
           
           

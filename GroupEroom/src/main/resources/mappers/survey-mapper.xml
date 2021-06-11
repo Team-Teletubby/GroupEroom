@@ -5,6 +5,7 @@
 	<resultMap type="SurveyList" id="surveyResultMap">
 		<id property="surveyNo" column="SURVEY_NO"></id>
 		<result property="memberId" column="MEMBER_ID"></result>
+		<result property="memberName" column="MEMBER_Name"></result>
 		<result property="showName" column="SHOW_NAME"></result>
 		<result property="showResult" column="SHOW_RESULT"></result>
 		<result property="surveyTitle" column="SURVEY_TITLE"></result>
@@ -15,17 +16,29 @@
 		<result property="startDate" column="START_DATE"></result>
 		<result property="endDate" column="END_DATE"></result>
 		<result property="writeDate" column="WRITE_DATE"></result>
-		<result property="finished" column="FINISHED"></result>
-		<result property="overlap" column="OVERLAP"></result>
 	</resultMap>
 	
 	<insert id="insertSurveyList">
-		INSERT INTO SURVEY_LIST VALUES(SURVEY_NO.NEXTVAL,#{memberId}, #{showName}, #{showResult}, #{surveyTitle}, #{surveyObject}, #{surveyQuestion}, #{surveyAnswers}, #{target}, #{startDate}, #{endDate}, SYSDATE, 'N', 'N')
+		INSERT INTO SURVEY_LIST VALUES(SURVEY_NO.NEXTVAL,#{memberId}, #{showName}, #{showResult}, #{surveyTitle}, #{surveyObject}, #{surveyQuestion}, #{surveyAnswers}, #{target}, #{startDate}, #{endDate}, SYSDATE)
 	</insert>
 
 
 	<select id="selectAllSurvey" resultMap="surveyResultMap">
-		SELECT * FROM SURVEY_LIST WHERE TARGET = #{memberDept} OR TARGET = '전체' ORDER BY SURVEY_NO DESC
+		SELECT 
+			SURVEY_NO ,
+			MEMBER_ID ,
+			SHOW_NAME ,
+			SHOW_RESULT ,
+			SURVEY_TITLE ,
+			SURVEY_OBJECT ,
+			SURVEY_QUESTION ,
+			SURVEY_ANSWERS ,
+			TARGET ,
+			START_DATE ,
+			END_DATE ,
+			MEMBER_NAME,
+			WRITE_DATE 
+		FROM SURVEY_LIST JOIN MEMBER USING (MEMBER_ID) WHERE TARGET = #{memberDept} OR TARGET = '전체' ORDER BY SURVEY_NO DESC
 	</select>
 	
 	<select id="selectOneSurvey" resultMap="surveyResultMap">
@@ -60,5 +73,9 @@
 	<select id="check" resultType="_int">
 		SELECT COUNT(*) FROM SURVEY_ITEM WHERE SURVEY_NO = #{surveyNo} AND MEMBER_NAME = #{memberName}
 	</select>
+	
+	<delete id="deleteSurvey">
+		DELETE FROM SURVEY_LIST WHERE SURVEY_NO = #{surveyNo}
+	</delete>
 	
 </mapper>
