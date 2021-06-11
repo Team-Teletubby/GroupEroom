@@ -280,11 +280,7 @@
               *********************************************************************************************************************************************************** -->
 					<!-- 집무 현황 -->
 					<div class="col-lg-3 ds">
-						<h4 class="centered mt">집무 현황
-						<c:if test="${member.memberJob eq '대표' || member.memberJob eq '부서장'}">
-						 	<button class="work-status-register">등록하기</button>
-						</c:if>
-						 </h4>
+						<h4 class="centered mt">집무 현황</h4>
 						<!-- 이 부분이 콘텐츠 하나임 -->
 						<c:forEach items="${memberExecutives }" var="executives" >
 							<c:if test="${executives.memberJob eq '대표' }">
@@ -482,26 +478,6 @@
 		
 			
 			
-		});
-		
-		
-		// 집무 현황 등록
-		$('.work-status-register').on('click', function() {
-			$.ajax({
-				url: 'workStatusRegister.do',
-				type: 'post',
-				data: {
-					"memberId" : ${member.memberId },
-					"memberName" : '${member.memberName }',
-					"memberJob" : '${member.memberJob }',
-					"memberDept" : '${member.memberDept }'
-
-				},
-				success: function() {
-					
-					
-				}
-			});
 		});
 		
 	</script>
