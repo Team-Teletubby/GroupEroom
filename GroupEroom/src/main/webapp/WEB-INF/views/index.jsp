@@ -437,7 +437,7 @@
 	</section>
 	<script>
 		$('document').ready(function() {
-		
+			showStatus();
 		
 		});
 		
@@ -445,7 +445,6 @@
 		$('input[name=employee-status1]').change(function() {
 			sessionId = ${member.memberId };
 			memberId1 =	$('#memberId1').val();
-			memberId2 = $('#memberId2').val();
 			
 			if(sessionId == memberId1) {
 				// ajax로 상태값 변경
@@ -456,29 +455,64 @@
 						"memberId" : memberId1,
 						"status" : $('input[name=employee-status1]:checked').val()
 					},
-					success: function(data) {
-							if(data == 'reportable') {
-								$('#reportable1').prop("checked", true);
-							}else if(data == 'conference') {
-								$('#conference1').prop("checked", true);
-							}else if(data == 'absence') {
-								$('#absence1').prop("checked", true);
-							}
+					dataType: 'json',
+					success: function() {
+					}
+				});
+			}
+		});
+		
+		$('input[name=employee-status2]').change(function() {
+			sessionId = ${member.memberId };
+			memberId2 = $('#memberId2').val();
+			
+			if(sessionId == memberId2) {
+				// ajax로 상태값 변경
+				$.ajax({
+					url: 'changeCeoStatus.do',
+					type: 'post',
+					data: {
+						"memberId" : memberId2,
+						"status" : $('input[name=employee-status2]:checked').val()
+					},
+					dataType: 'json',
+					success: function() {
 					}
 					
 				});
-				
-			}else {
-				alert("오류");
 			}
-			
-			
-			// 두번째 input창에 대해서
-		
-		
-			
-			
 		});
+		
+		function showStatus() {
+			$.ajax({
+				url: "showStatus.do",
+				type: 'post',
+				data: {
+					"memberDept" : '${member.memberDept}'
+				},
+				dataType: 'json',
+				success: function(data) {
+					console.log(data)
+					if(data[0].status == 'reportable') {
+						$('#reportable1').prop("checked", true);
+					}else if(data[0].status == 'conference') {
+						$('#conference1').prop("checked", true);
+					}else if(data[0].status == 'absence') {
+						$('#absence1').prop("checked", true);
+					}
+					
+					if(data[1].status == 'reportable') {
+						$('#reportable2').prop("checked", true);
+					}else if(data[1].status == 'conference') {
+						$('#conference2').prop("checked", true);
+					}else if(data[1].status == 'absence') {
+						$('#absence2').prop("checked", true);
+					}
+					
+				}
+			});
+			
+		}
 		
 	</script>
 	

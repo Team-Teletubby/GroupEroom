@@ -116,5 +116,11 @@ public class MemberStoreLogic implements MemberStore {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectExecutives", member);
 	}
 
+	// 집무현황 상태 변경
+	@Override
+	public int updateStatus(Member member) {
+		return sqlSession.update("memberMapper.updateStatus", member);
+	}
+
 	
 }

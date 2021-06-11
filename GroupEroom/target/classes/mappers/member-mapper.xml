@@ -20,6 +20,7 @@
 		<result property="quitDate" column="QUIT_DATE" />
 		<result property="originalFileName" column="ORIGINALFILE_NAME" />
 		<result property="renameFileName" column="RENAMEFILE_NAME" />
+		<result property="status" column="STATUS"/>
 	</resultMap>
 
 	<!-- 로그인 -->
@@ -119,7 +120,7 @@
 		#{memberPhone }, #{memberEmail }, #{memberAddr
 		}, #{bank }, SYSDATE,'N', DEFAULT,
 		#{bankAccount }, #{originalFileName
-		}, #{renameFileName })
+		}, #{renameFileName }, NULL)
 	</insert>
 
 	<!-- 부서조회키(전자결재, 메일) -->
@@ -165,5 +166,7 @@
 		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_ID = #{memberId}
 	</update>
 
-
+	<update id="updateStatus" parameterType="Member">
+		UPDATE MEMBER SET STATUS = #{status } WHERE MEMBER_ID = #{memberId }
+	</update>
 </mapper>

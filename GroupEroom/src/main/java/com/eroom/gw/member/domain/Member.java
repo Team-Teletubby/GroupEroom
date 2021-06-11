@@ -27,6 +27,7 @@ public class Member {
 	private String role;
 	private String originalFileName;
 	private String renameFileName;
+	private String status;
 	
 	public Member() {
 			
@@ -39,7 +40,7 @@ public class Member {
 
 	public Member(int memberId, String memberDept, String memberJob, String memberName, String memberPwd,
 			String memberRrn, String memberPhone, String memberEmail, String memberAddr, String bank, long bankAccount,
-			Date regDate, String quitYn, Date quitDate, String role, String originalFileName, String renameFileName) {
+			Date regDate, String quitYn, Date quitDate, String role, String originalFileName, String renameFileName, String status) {
 		super();
 		this.memberId = memberId;
 		this.memberDept = memberDept;
@@ -58,6 +59,7 @@ public class Member {
 		this.role = role;
 		this.originalFileName = originalFileName;
 		this.renameFileName = renameFileName;
+		this.status = status;
 	}
 
 	public int getMemberId() {
@@ -196,6 +198,15 @@ public class Member {
 		this.renameFileName = renameFileName;
 	}
 
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberDept=" + memberDept + ", memberJob=" + memberJob
@@ -203,7 +214,7 @@ public class Member {
 				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddr=" + memberAddr
 				+ ", bank=" + bank + ", bankAccount=" + bankAccount + ", regDate=" + regDate + ", quitYn=" + quitYn
 				+ ", quitDate=" + quitDate + ", role=" + role + ", originalFileName=" + originalFileName
-				+ ", renameFileName=" + renameFileName + "]";
+				+ ", renameFileName=" + renameFileName + ", status=" + status + "]";
 	}
 
 	

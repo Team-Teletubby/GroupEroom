@@ -102,6 +102,12 @@ public  class MemberServiceImpl implements MemberService {
 		return mStore.selectListExecutives(member);
 	}
 
+	// 업무 상태 변경
+	@Override
+	public int modifyStatus(Member member) {
+		return mStore.updateStatus(member);
+	}
+
 
 
 

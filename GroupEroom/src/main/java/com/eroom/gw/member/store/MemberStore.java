@@ -31,4 +31,7 @@ public interface MemberStore {
 	
 	// 특정 부서별 임원 조회
 	public ArrayList<Member> selectListExecutives(Member member);
+	
+	// 집무현황 상태 변경
+	public int updateStatus(Member member);
 }

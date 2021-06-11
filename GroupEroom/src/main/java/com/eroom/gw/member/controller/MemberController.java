@@ -31,6 +31,8 @@ import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.service.MemberService;
 import com.eroom.gw.notice.domain.Notice;
 import com.eroom.gw.notice.service.NoticeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 public class MemberController {
@@ -72,9 +74,30 @@ public class MemberController {
 		return mv;
 	}
 	
+	// 집무현황 상태변경
+	@RequestMapping(value="changeCeoStatus.do", method=RequestMethod.POST)
+	public void changeWorkStatus(@ModelAttribute Member member) {
+		int result = service.modifyStatus(member);
+	}
 	
-//로그인 
-
+	// 집무현황 출력
+	@RequestMapping(value="showStatus.do", method=RequestMethod.POST)
+	public void showStatus(@ModelAttribute Member member,
+							HttpServletResponse response) {
+		
+		try {
+			ArrayList<Member> memberList = service.printExecutives(member);
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			
+			gson.toJson(memberList, response.getWriter());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	
+	//로그인 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(Model model, @ModelAttribute Member mem, HttpServletRequest request) {
 

@@ -44,6 +44,9 @@ public interface MemberService {
 	// 해당하는 특정 부서의 임원들만 가져오기
 	public ArrayList<Member> printExecutives(Member member);
 	
+	// 업무현황 상태 변경
+	public int modifyStatus(Member member);
+	
 	}
 	
 
