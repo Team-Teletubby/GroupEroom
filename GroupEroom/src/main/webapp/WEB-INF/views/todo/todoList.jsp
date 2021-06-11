@@ -115,7 +115,9 @@
 				dataType : "json",
 				success : function(data) {
 					var $ul = $("#ul-todo");
+					var $todoContents = $("#todoContents");
 					$ul.html("");
+					$todoContents.val("");
 					if(data.length>0){
 						for(var i in data) {
 							$li = $("<li>");
