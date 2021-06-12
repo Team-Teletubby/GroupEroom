@@ -26,6 +26,8 @@ var editEvent = function (event, element, view) {
     modalTitle.html('일정 상세보기');
     editTitle.val(event.title);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
+    editName.val(event.username);
+    editDept.val(event.userDept);
     editType.val(event.roomNo + '호');
     editDesc.val(event.description);
     editColor.val(event.backgroundColor).css('color', event.backgroundColor);

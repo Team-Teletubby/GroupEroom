@@ -5,7 +5,9 @@ var editAllDay = $('#edit-allDay');
 var editStart = $('#edit-start');
 var editEnd = $('#edit-end');
 var editType = $('#edit-type');
+var editName = $('#edit-name');
 var editColor = $('#edit-color');
+var editDept = $('#edit-dept');
 
 
 var editTitle = $('#edit-title'); // 방이름(201room... 202room..) (1)
