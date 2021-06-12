@@ -1,0 +1,15 @@
+#reply-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: hotpink;
+    color: white;
+    width: 300px;
+    height: 100vh;
+    text-align: center;
+}
+ 
+.emphasized {
+    box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
+}
