@@ -162,6 +162,7 @@ $(document).ready(function(){
 		});
 		
 		function getReplyList() {
+			var writer = '${cBoard.memberName}'
 			var boardNo = '${cBoard.cBoardNo }';
 			var loginUser = '${LoginUser.memberId}';
 			$.ajax({
@@ -187,11 +188,19 @@ $(document).ready(function(){
 								$rWriter = $("<td align='center' style='width:1%'>").html("<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>");
 								$tr.append($td);
 								$tr.append($rWriter);
-								$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+								if(data[i].memberName == writer ){
+									$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+								}else{
+									$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+								}
 							}else{
 								$rWriter = $("<td align='center' style='width:10%'>").html("<img class='memberImage' src='/resources/memberproFile/"+data[i].memberImage+"'></td>");
 								$tr.append($rWriter);
-								$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+								if(data[i].memberName == writer){
+									$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+								}else{
+									$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+								}
 							}
 							$rContent.append("<span style='font-size:10px'>"+data[i].rCreateDate+"  &nbsp&nbsp <a style='color:gray' href='#' onclick='replyChild(this,"+boardNo+","+data[i].family+","+data[i].step+")'>답글쓰기</a></span><br>");
 							/* $rCreateDate = $("<td align='right' style='font-size:8px'>").text(data[i].rCreateDate); */
