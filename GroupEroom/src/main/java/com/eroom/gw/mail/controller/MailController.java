@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,7 +45,7 @@ public class MailController {
 									HttpServletRequest request, HttpSession session, 
 									@RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1; //페이지 대응시키기
-		int listCount = mService.getListCount(); //전체 게시글 개수
+		int listCount = mService.getInboxListCount(); //전체 게시글 개수
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		session = request.getSession();
@@ -73,7 +72,7 @@ public class MailController {
 									HttpServletRequest request, HttpSession session, 
 									@RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1; //페이지 대응시키기
-		int listCount = mService.getListCount(); //전체 게시글 개수
+		int listCount = mService.getSentListCount(); //전체 게시글 개수
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		session = request.getSession();
@@ -100,7 +99,7 @@ public class MailController {
 									HttpServletRequest request, HttpSession session, 
 									@RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1; //페이지 대응시키기
-		int listCount = mService.getListCount(); //전체 게시글 개수
+		int listCount = mService.getTrashListCount(); //전체 게시글 개수
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 		session = request.getSession();
@@ -159,6 +158,17 @@ public class MailController {
 		return mv;
 	}
 	
+//메일함 to 휴지통 with checked
+	@RequestMapping(value="moveToTrashChk.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String moveTrashAjax(HttpServletRequest request) {
+		String[] mailNo = request.getParameterValues("valueArr");
+		int size = mailNo.length;
+		for(int i=0 ; i<size ; i++) {
+			mService.moveToTrashAjax(mailNo[i]);
+		}
+		return "redirect:inboxListView";
+	}
+	
 //휴지통 to 메일함
 	@RequestMapping(value="returnToMailbox.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView returnToMailbox(ModelAndView mv, HttpServletRequest request, @RequestParam("mailNo") int mailNo,
@@ -169,6 +179,20 @@ public class MailController {
 			mv.setViewName("redirect:inboxListView.do");
 		}else {
 			mv.addObject("msg", "휴지통으로 이동 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+//메일삭제
+	@RequestMapping(value="deleteMail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView deleteMail(ModelAndView mv, HttpServletRequest request, 
+								@RequestParam("mailNo") int mailNo, @ModelAttribute Mail mail) {
+		mail.setMailNo(mailNo);
+		int result = mService.removeMail(mail);
+		if(result > 0) {
+			mv.setViewName("redirect:mail/trashListView");
+		}else {
+			mv.addObject("msg", "삭제실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}

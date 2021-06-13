@@ -44,13 +44,11 @@
 					<div class="col-sm-3">
 						<section class="panel">
 							<div class="panel-body">
-								<a href="mailComposeView.do" class="btn btn-compose"><i
-									class="fa fa-pencil"></i>메일쓰기</a>
+								<a href="mailComposeView.do" class="btn btn-compose" style="color:white"><i class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
-									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox</a></li>
-									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>Send Mail </a></li>
-									<li class="active"><a href="trashListView.do"> <i class="fa fa-trash-o"></i>Trash
-									</a></li>
+									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>받은메일함</a></li>
+									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>보낸메일함</a></li>
+									<li class="active"><a href="trashListView.do"> <i class="fa fa-trash-o"></i>휴지통</a></li>
 								</ul>
 							</div>
 						</section>
@@ -58,15 +56,7 @@
 					<div class="col-sm-9">
 						<section class="panel">
 							<header class="panel-heading wht-bg">
-								<h4 class="gen-case">
-									Inbox
-									<!-- <form action="#" class="pull-right mail-src-position">
-										<div class="input-append">
-											<input type="text" class="form-control "
-												placeholder="Search Mail">
-										</div>
-									</form> -->
-								</h4>
+								<h4 class="gen-case">휴지통</h4>
 							</header>
 							<form action="trashListView.do" method="GET">
 								<div class="panel-body minimal">
@@ -80,7 +70,7 @@
 										</div>
 										<!-- ################# 페이징 ################# -->
 										<ul class="unstyled inbox-pagination">
-											<li><span>${pi.currentPage } / ${pi.maxPage }</span></li>
+											<li><span>${pi.currentPage } / ${pi.maxPage + 1 }</span></li>
 											<!-- 이전 -->
 											<c:url var="before" value="trashListView.do">
 												<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
@@ -110,12 +100,12 @@
 										<div class="table-inbox-wrap ">
 											<table class="table table-inbox table-hover">
 												<tbody>
-													<c:if test="empty ${mailList }">
+													<c:if test="${empty mailList }">
 														<tr>
 															<td class="view-message"><a>메일이 없습니다.</a></td>
 														</tr>
 													</c:if>
-													<c:if test="!empty ${mailList }">
+													<c:if test="${!empty mailList }">
 														<c:forEach items="${ mailList }" var="mail">
 															<tr class="">
 																<td class="inbox-small-cells">
@@ -129,18 +119,28 @@
 																	<td class="view-message" name="readCount"><i class="fa fa-envelope"></i></td>
 																</c:if>
 																<td class="view-message" name="senderName">${mail.senderName}</td>
-																<td class="view-message" name="mailTilte">
-																	<c:url var="mailDetail" value="mailDetailView.do">
-																		<c:param name="mailNo" value="${mail.mailNo }"></c:param>
-																	</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
-																</td>
+																<c:if test="${LoginUser.memberName == mail.senderName }">
+																	<td class="view-message" name="mailTilte">
+																		<c:url var="mailDetail" value="mailDetailView.do">
+																			<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																		</c:url> 
+																		<span class="label label-info">send</span>&nbsp;&nbsp;<a href="${mailDetail }">${mail.mailTitle}</a>
+																	</td>
+																</c:if>
+																<c:if test="${LoginUser.memberName != mail.senderName }">
+																	<td class="view-message" name="mailTilte">
+																		<c:url var="mailDetail" value="mailDetailView.do">
+																			<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+																		</c:url> 
+																		<a href="${mailDetail }">${mail.mailTitle}</a>
+																	</td>
+																</c:if>
 																<c:if test="${not empty trashlist.note_orgfilename}">
 																	<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																</c:if>
 																<c:if test="${empty trashlist.note_orgfilename}">
 																	<td class="view-message  inbox-small-cells"></td>
 																</c:if>
-																<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																<td class="view-message  text-right">${mail.sentDate}</td>
 															</tr>
 														</c:forEach>

@@ -64,14 +64,16 @@
 									<div class="mail-header row">
 										<div class="col-md-8">
 											<h4 class="pull-left" name="mailTitle">${mail.mailTitle }</h4>
-											<a id="mailNo" name="mailNo" hidden>${mail.mailNo }</a>
+											<a id=mailNo name="mailNo" hidden>${mail.mailNo }</a>
 										</div>
 										<div class="col-md-4">
 											<div class="compose-btn pull-right">
-												<a href="mail_compose.html" class="btn btn-sm btn-theme" style="color:white"><i class="fa fa-reply"></i>&nbsp;답장</a>
 												<button class="btn btn-sm tooltips"
-													data-original-title="Trash" data-toggle="tooltip"
-													data-placement="top" onclick="moveTrash(${mail.mailNo})">
+													data-original-title="Return" data-toggle="tooltip" data-placement="top" onclick="return();">
+													<i class="fa fa-reply"></i>
+												</button>
+												<button class="btn btn-sm tooltips"
+													data-original-title="Trash" data-toggle="tooltip" data-placement="top" onclick="delete();">
 													<i class="fa fa-trash-o"></i>
 												</button>
 											</div>
@@ -148,12 +150,36 @@
 	<!--common script for all pages-->
 	<script src="lib/common-scripts.js"></script>
 	<!--script for this page-->
-	
+	<!-- 메일함으로 재이동 -->
 	<script>
-		function moveTrash(mailNo) {
-			var chk = confirm("휴지통으로 이동하시겠습니까?");
+		function return() {
+			var chk = confirm("메일을 다시 이동하시겠습니까?");
+			var url = 'returnToMailbox.do?mailNo='+${mail.mailNo};
+			$.ajax({
+				url : url,
+				type : 'POST',
+				traditional : true,
+				data : {
+					mailNo : ${mail.mailNo}
+				},
+				success : function(data) {
+					if(data = 1) {
+						alert("이동되었습니다.");
+						location.replace("mail/trashmailDetailView")
+					}
+					else {
+						alert("이동 실패하였습니다.");
+					}
+				}
+			})
+		}
+	</script>
+	<!-- 완전삭제 -->
+	<script>
+		function delete() {
+			var chk = confirm("메일을 정말 삭제하시겠습니까?");
 			if (chk) {
-				location.href='moveToTrash.do?mailNo='+${mail.mailNo};
+				location.href='deleteMail.do?mailNo='+${mail.mailNo};
 			}
 		}
 	</script>

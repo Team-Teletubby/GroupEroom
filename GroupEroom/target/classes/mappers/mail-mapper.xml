@@ -29,11 +29,24 @@
 	</resultMap>
 	
 <!-- 카운트 출력 -->
-	<select id="selectListCount" resultType="_int">
+	<select id="selectInboxListCount" resultType="_int">
+		SELECT COUNT(*) FROM MAIL 
+		WHERE (RECEIVER_ID = #{value } OR CC_ID = #{value })
+		AND TRASH_YN = 'N' 
+		AND MOD(MAIL_NO, 2) = 1
+	</select>
+	<select id="selectSentListCount" resultType="_int">
+		SELECT COUNT(*) FROM MAIL 
+		WHERE SENDER_ID = #{value }
+		AND TRASH_YN = 'N'
+		AND MOD(MAIL_NO, 3) = 1 
+	</select>
+	<select id="selectTrashListCount" resultType="_int">
 		SELECT COUNT(*) FROM MAIL
+		WHERE (SENDER_ID = #{value } OR RECEIVER_ID = #{value } OR CC_ID = #{value }) AND TRASH_YN = 'Y'
 	</select>
 	
-<!-- 조회수 및 읽음확인 -->
+<!-- 읽음확인 -->
 	<update id="updateCount">
 		UPDATE MAIL
 		SET READ_COUNT = READ_COUNT + 1, READ_DATE = SYSDATE
@@ -120,6 +133,14 @@
 		WHERE MAIL_NO = #{mailNo}
 	</update> 
 	
+<!--  -->
+	<!-- 휴지통으로 이동 -->
+	<update id="updateTrashAjax">
+		UPDATE MAIL 
+		SET TRASH_YN = 'Y'
+		WHERE MAIL_NO = #{mailNo}
+	</update> 
+		
 <!-- 원래 편지함으로 이동 -->
 	<update id="updateTrashN">
 		UPDATE MAIL 
@@ -127,9 +148,5 @@
 		WHERE MAIL_NO = #{mailNo}
 	</update> 
 
-<!-- 게시글 삭제
-	<delete id="deleteBoard" parameterType="_int">
-		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
-	</delete> -->
 
 </mapper>

@@ -43,11 +43,11 @@
 					<div class="col-sm-3">
 						<section class="panel">
 							<div class="panel-body">
-								<a href="mailComposeView.do" class="btn btn-compose"><i class="fa fa-pencil"></i>메일쓰기</a>
+								<a href="mailComposeView.do" class="btn btn-compose" style="color:white"><i class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
-									<li class="active"><a href="inboxListView.do"> <i class="fa fa-inbox"></i>Inbox</a></li>
-									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>Send Mail</a></li>
-									<li><a href="trashListView.do"> <i class="fa fa-trash-o"></i>Trash</a></li>
+									<li class="active"><a href="inboxListView.do"> <i class="fa fa-inbox"></i>받은메일함</a></li>
+									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>보낸메일함</a></li>
+									<li><a href="trashListView.do"> <i class="fa fa-trash-o"></i>휴지통</a></li>
 								</ul>
 							</div>
 						</section>
@@ -55,40 +55,22 @@
 					<div class="col-sm-9">
 						<section class="panel">
 							<header class="panel-heading wht-bg">
-								<h4 class="gen-case">
-									Inbox
-									<!-- <form action="#" class="pull-right mail-src-position">
-										<div class="input-append">
-											<input type="text" class="form-control " placeholder="Search Mail">
-										</div>
-									</form> -->
-								</h4>
+								<h4 class="gen-case">받은메일함</h4>
 							</header>
 							<form action="inboxListView.do" method="GET">
 								<div class="panel-body minimal">
 									<div class="mail-option">
 										<div class="chk-all">
-											<div class="pull-left mail-checkbox">
-												<input type="checkbox" class="">
-											</div>
-											<div class="btn-group">
-												<a data-toggle="dropdown" href="#" class="btn mini all"> All <i class="fa fa-angle-down "></i>
-												</a>
-												<ul class="dropdown-menu">
-													<li><a href="#"> None</a></li>
-													<li><a href="#"> Read</a></li>
-													<li><a href="#"> Unread</a></li>
-												</ul>
-											</div>
+											<input type="checkbox" id="reportChkBox" name="checkAll">
 										</div>
 										<div class="btn-group">
-											<a data-original-title="Delete" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+											<a data-original-title="Delete" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips" onclick="moveToTrash();">
 												<i class="fa fa-trash-o"></i>
 											</a>
 										</div>
 										<!-- ################# 페이징 ################# -->
 										<ul class="unstyled inbox-pagination">
-											<li><span>${pi.currentPage } / ${pi.maxPage }</span></li>
+											<li><span>${pi.currentPage } / ${pi.maxPage + 1}</span></li>
 											<!-- 이전 -->
 											<c:url var="before" value="inboxListView.do">
 												<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
@@ -123,8 +105,7 @@
 														<c:forEach items="${ mailList }" var="mail">
 															<c:if test="${mail.readCount >= 1}">
 																<tr class="read">
-																	<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
-																	<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
+																	<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox" id="${ mail.mailNo }" name="chkBoxRow" value="${ mail.mailNo }"></td>
 																	<td class="view-message" name="mailNo" hidden>${mail.mailNo}</td>
 																	<td class="view-message" name="senderName">${mail.senderName}</td>
 																	<td class="view-message" name="mailTilte">
@@ -132,14 +113,12 @@
 																			<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 																		</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
 																	</td>
-																	<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																	<td class="view-message  text-right">${mail.sentDate}</td>
 																</tr>
 															</c:if>
 															<c:if test="${mail.readCount <= 0}">
 																<tr class="unread">
-																	<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></td>
-																	<!-- <td class="inbox-small-cells"><i class="fa fa-star"></i></td> -->
+																	<td class="inbox-small-cells"><input type="checkbox" class="mail-checkbox" id="${ mail.mailNo }" name="chkBoxRow" value="${ mail.mailNo }"></td>
 																	<td class="view-message  dont-show" hidden><a> ${mail.mailNo} </a></td>
 																	<td class="view-message  dont-show">${mail.senderName}</a></td>
 																	<td class="view-message" name="mailTilte">
@@ -147,7 +126,6 @@
 																			<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 																		</c:url> <a href="${mailDetail }">${mail.mailTitle}</a>
 																	</td>
-																	<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
 																	<td class="view-message  text-right">${mail.sentDate}</td>
 																</tr>
 															</c:if>
@@ -157,6 +135,7 @@
 											</table>
 										</div>
 									</div>
+								</div>
 							</form>
 						</section>
 					</div>
@@ -181,7 +160,7 @@
           	-->
 					Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
 				</div>
-				<a href="inbox.html#" class="go-top"> <i class="fa fa-angle-up"></i>
+				<a href="mail/inboxListView" class="go-top"> <i class="fa fa-angle-up"></i>
 				</a>
 			</div>
 		</footer>
@@ -196,6 +175,60 @@
 	<!--common script for all pages-->
 	<script src="resources/js/common-scripts.js"></script>
 	<!--script for this page-->
+	
+	<script>
+		$(function() {
+			var chkObj = document.getElementsByName("chkBoxRow");
+			var rowCnt = chkObj.length;
+			
+			$("input[name='checkAll']").click(function() {
+				var chk_listArr = $("input[name='chkBoxRow']");
+				for (var i=0 ; i<chk_listArr.length; i++) {
+					chk_listArr[i].checked = this.checked;
+				}
+			});
+			$("input[name='chkBoxRow']").click(function() {
+				if ($("input[name='chkBoxRow']:checked").length == rowCnt) {
+					$("input[name='checkAll']")[0].checked = true;
+				} else{
+					$("input[name='checkAll']")[0].checked = false;
+				}
+			});
+		});
+		function moveToTrash() {
+			var url = "moveToTrashChk.do";
+			var valueArr = new Array();
+			var list = $("input[name='chkBoxRow']");
+			for(var i=0 ; i < list.length; i++) {
+				if(list[i].checked) {
+					valueArr.push(list[i].value);
+				}
+			}
+			if (valueArr.length == 0) {
+				alert("선택된 메일이 없습니다.");
+			}
+			else {
+				var chk = confirm("정말 이동하시겠습니까?");
+				$.ajax({
+					url : url,
+					type : 'POST',
+					traditional : true,
+					data : {
+						valueArr : valueArr
+					},
+					success : function(data) {
+						if(data = 1) {
+							alert("이동되었습니다.");
+							location.replace("mail/inboxListView")
+						}
+						else {
+							alert("삭제 실패하였습니다.");
+						}
+					}
+				})
+			}
+		}
+	</script>
 
 </body>
 </html>

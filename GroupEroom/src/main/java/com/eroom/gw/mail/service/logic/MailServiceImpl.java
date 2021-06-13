@@ -19,8 +19,16 @@ public class MailServiceImpl implements MailService {
 	private MailStore mStore;
 	
 	@Override
-	public int getListCount() {
-		return mStore.selectListCount();
+	public int getInboxListCount() {
+		return mStore.selectInboxListCount();
+	}
+	@Override
+	public int getSentListCount() {
+		return mStore.selectSentListCount();
+	}
+	@Override
+	public int getTrashListCount() {
+		return mStore.selectTrashListCount();
 	}
 	@Override
 	public int addReadCount(int mailNo) {
@@ -78,6 +86,14 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public int returnToMailbox(Mail mail) {
 		return mStore.updateTrashN(mail);
+	}
+	@Override
+	public Object moveToTrashAjax(String mailNo) {
+		return mStore.updateTrashAjax(mailNo);
+	}
+	@Override
+	public int removeMail(Mail mail) {
+		return mStore.deleteMail(mail);
 	}
 	
 

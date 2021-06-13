@@ -14,11 +14,15 @@ public interface MailService {
 
 	//이동 및 삭제
 	public int moveToTrash(Mail mail); //휴지통으로 이동
+	public Object moveToTrashAjax(String mailNo); //선택하여 이동
 	public int returnToMailbox(Mail mail); //메일함으로 리턴
+	public int removeMail(Mail mail); //영구삭제
 	
 	//페이징
-	public int getListCount();
-	public int addReadCount(int mailNo);
+	public int getInboxListCount(); //받은메일함
+	public int getSentListCount(); //보낸메일함
+	public int getTrashListCount(); //휴지통
+	public int addReadCount(int mailNo); //읽음확인
 
 	//상세보기
 	public Mail printOne(int mailNo);

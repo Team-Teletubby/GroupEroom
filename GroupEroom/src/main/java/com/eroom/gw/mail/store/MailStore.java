@@ -9,7 +9,9 @@ import com.eroom.gw.mail.domain.Mail;
 
 public interface MailStore {
 	
-	public int selectListCount();
+	public int selectInboxListCount();
+	public int selectSentListCount();
+	public int selectTrashListCount();
 	public int addReadCount(int mailNo);
 	public ArrayList<Mail> selectAllInbox(PageInfo pi, int receiverId);
 	public ArrayList<Mail> selectAllSentMail(PageInfo pi, int senderId);
@@ -20,5 +22,7 @@ public interface MailStore {
 	public int composeMailReceiver(Mail mail);
 	public int updateTrashY(Mail mail);
 	public int updateTrashN(Mail mail);
+	public int deleteMail(Mail mail);
+	public Object updateTrashAjax(String mailNo);
 
 }

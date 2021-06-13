@@ -46,18 +46,11 @@
 					<div class="col-sm-3">
 						<section class="panel">
 							<div class="panel-body">
-								<a href="mailComposeView.do" class="btn btn-compose"><i
-									class="fa fa-pencil"></i>메일쓰기</a>
+								<a href="mailComposeView.do" class="btn btn-compose" style="color:white"><i class="fa fa-pencil"></i>메일쓰기</a>
 								<ul class="nav nav-pills nav-stacked mail-nav">
-									<li class="active"><a href="inboxListView.do"> <i
-											class="fa fa-inbox"></i>Inbox
-									</a></li>
-									<li><a href="sentListView.do"> <i
-											class="fa fa-envelope-o"></i>Send Mail
-									</a></li>
-									<li><a href="trashListView.do"> <i
-											class="fa fa-trash-o"></i>Trash
-									</a></li>
+									<li><a href="inboxListView.do"> <i class="fa fa-inbox"></i>받은메일함 </a></li>
+									<li><a href="sentListView.do"> <i class="fa fa-envelope-o"></i>보낸메일함 </a></li>
+									<li><a href="trashListView.do"> <i class="fa fa-trash-o"></i>휴지통</a></li>
 								</ul>
 							</div>
 						</section>
@@ -65,14 +58,7 @@
 					<div class="col-sm-9">
 						<section class="panel">
 						  <header class="panel-heading wht-bg">
-							<h4 class="gen-case">
-								Compose Mail
-				<!-- 				<form action="#" class="pull-right mail-src-position">
-								  <div class="input-append">
-									<input type="text" class="form-control " placeholder="Search Mail">
-								  </div>
-								</form> -->
-							  </h4>
+							<h4 class="gen-case">메일쓰기</h4>
 						  </header>
 						  <div class="panel-body">
 							<div class="compose-mail">
