@@ -57,45 +57,19 @@ public class AttendanceController {
 		long diffDate = calDate / baseDay;
 		long diffMonth = calDate / baseMonth;
 		long diffYear = calDate / baseYear;
-				
-		System.out.println(diffYear);
-		System.out.println(diffMonth);
-		System.out.println(diffDate);
+		
+		// 1년 미만 : 한 달 씩 연차 1일 증가
+		// 1년 이상 : 15일에서 2년차마다 2일 증가
 		if(diffYear < 1) {
 			for(int i=0; i<diffMonth+1; i++) {
 				totalHoliday = i;
 			}
-		} else if(diffYear <= 2) {
-			totalHoliday = 15;
-		} else if(diffYear <= 4) {
-			totalHoliday = 16;
-		} else if(diffYear <= 6) {
-			totalHoliday = 17;
-		} else if(diffYear <= 8) {
-			totalHoliday = 18;
-		} else if(diffYear <= 10) {
-			totalHoliday = 19;
-		} else if(diffYear <= 12) {
-			totalHoliday = 20;
-		} else if(diffYear <= 14) {
-			totalHoliday = 21;
-		} else if(diffYear <= 16) {
-			totalHoliday = 22;
-		} else if(diffYear <= 18) {
-			totalHoliday = 23;
-		} else if(diffYear <= 20) {
-			totalHoliday = 24;
-		} else if(diffYear <= 22) {
-			totalHoliday = 25;
-		} else if(diffYear <= 24) {
-			totalHoliday = 26;
-		} else if(diffYear <= 26) {
-			totalHoliday = 27;
-		} else if(diffYear <= 28) {
-			totalHoliday = 28;
-		} else if(diffYear <= 30) {
-			totalHoliday = 29;
-		} //for문으로 어케 바꾸
+		}else if(diffYear >=1){
+			totalHoliday = 14;
+			for(int i=0; i<diffYear; i=i+2) {
+				totalHoliday++;
+			}
+		} 
 		
 		int currentPage = (page !=null) ? page : 1;
 		int listCount = atdService.getListCount(memberId);
@@ -116,20 +90,12 @@ public class AttendanceController {
 		return "attendance/attendance";
 	}
 	
-	// 연차 기록 전체 출력
-	public ModelAndView atdListView(ModelAndView mv,@RequestParam("")int memberId) {
-		return mv;
-	}
-	
 	// 연차 등록
 	@RequestMapping(value="attendanceRegister.do" ,method=RequestMethod.POST)
 	public ModelAndView atdRegister(ModelAndView mv, @ModelAttribute Attendance attendance, @RequestParam("restHoliday")float restHoliday,HttpServletResponse response ) throws IOException {
 		int calDate = (int) (attendance.getEndDate().getTime() - attendance.getStartDate().getTime() );
 		int calDiff = (calDate / (24*60*60*1000))+1;
 		attendance.setUsedHoliday(calDiff);
-		float usedHoliday = attendance.getUsedHoliday();
-		float diff = restHoliday - usedHoliday;
-		System.out.println(diff);
 		int result = atdService.registerAttendance(attendance);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -138,7 +104,7 @@ public class AttendanceController {
 		calendar.setMemberId(attendance.getMemberId());
 		calendar.setStartDate(formatter.format(attendance.getStartDate()));
 		calendar.setEndDate(formatter.format(attendance.getEndDate()));
-		if(result>0 && diff>=0) {
+		if(result>0) {
 			calService.registerCal(calendar);
 			mv.setViewName("redirect:attendanceList.do");
 		}else {

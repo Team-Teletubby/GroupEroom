@@ -86,6 +86,16 @@ public class CBoardServiceImpl implements CBoardService{
 		return store.deleteReply(reply);
 	}
 
+	@Override
+	public int registerReplyChild(Reply reply) {
+		return store.insertReplyChild(reply);
+	}
+
+	@Override
+	public ArrayList<Reply> replyCount() {
+		return store.replyCount();
+	}
+
 	
 
 }

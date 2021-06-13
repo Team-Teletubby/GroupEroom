@@ -47,7 +47,9 @@ public class CBoardController {
 		int listCount = service.getListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<CBoard> list = service.printAll(pi);
+		ArrayList<Reply> replyCount = service.replyCount();
 		if(!list.isEmpty()) {
+			mv.addObject("replyCount",replyCount);
 			mv.addObject("cBoardList",list);
 			mv.addObject("pi", pi);
 			mv.setViewName("cBoard/cBoardListView");
@@ -242,7 +244,7 @@ public class CBoardController {
 		System.out.println(cBoardNo);
 		ArrayList<Reply> rList = service.printAllReply(cBoardNo);
 		if(!rList.isEmpty()) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); // 날짜 포맷 변경!
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:ss").create(); // 날짜 포맷 변경!
 			gson.toJson(rList, response.getWriter());
 		}else {
 			System.out.println("데이터가 없습니다.");
@@ -261,6 +263,23 @@ public class CBoardController {
 			return "fail";
 		}
 	}
+	
+	// 대 댓글 등록
+	@ResponseBody
+	@RequestMapping(value="cBoardAddReplyChild.do", method=RequestMethod.POST)
+	public String addReplyChild(@ModelAttribute Reply reply, HttpSession session) {
+		System.out.println(reply);
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		reply.setMemberId(loginUser.getMemberId());
+		int result = service.registerReplyChild(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	
 	//댓글수정 :)
 	@ResponseBody
 	@RequestMapping(value="cBoardModifyReply.do", method=RequestMethod.POST)

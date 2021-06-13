@@ -13,12 +13,16 @@
 		<result property="hits" column="HITS"></result>
 		<result property="originalFileName" column="ORIGINAL_FILE"></result>
 		<result property="renameFileName" column="RENAME_FILE"></result>
+		<result property="memberImage" column="RENAMEFILE_NAME" />
+		<result property="memberDept" column="MEMBER_DEPT" />
+		<result property="memberJob" column="MEMBER_JOB" />
 	</resultMap>
 
-	
 	<select id="selectListCount" resultType="_int"> 
 		SELECT COUNT(*) FROM CLUBBOARD
 	</select>
+	
+	
 	
 	<select id="selectAllList" resultMap="cBoardResultMap"> 
 		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS
@@ -41,10 +45,9 @@
 	</select>
 	
 	<select id="selectOne" resultMap="cBoardResultMap" parameterType="_int">
-		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS, ORIGINAL_FILE, RENAME_FILE
+		SELECT C_BOARD_NO, MEMBER_ID, MEMBER_NAME, C_BOARD_TITLE, C_BOARD_CONTENTS, ENROLL_DATE, HITS, ORIGINAL_FILE, RENAME_FILE, RENAMEFILE_NAME, MEMBER_DEPT, MEMBER_JOB
 		FROM CLUBBOARD JOIN MEMBER USING(MEMBER_ID) 
 		WHERE C_BOARD_NO = #{cBoardNo}
-		ORDER BY C_BOARD_NO DESC
 	</select>
 	
 	<update id="updateCount">
@@ -72,17 +75,30 @@
 		<result property="cBoardNo" column="C_BOARD_NO" />
 		<result property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberImage" column="RENAMEFILE_NAME" />
+		<result property="family" column="FAMILY" />
+		<result property="step" column="STEP" />
+		<result property="count" column="COUNT" />
 	</resultMap>
 
+	<select id="replyCount" resultMap="replyResultMap">
+		SELECT C_BOARD_NO, COUNT(*)COUNT FROM CLUBBOARD JOIN CLUBBOARD_REPLY USING(C_BOARD_NO) GROUP BY C_BOARD_NO
+	</select>
+
 	<select id="selectReplyList" resultMap="replyResultMap">
-		SELECT REPLY_NO, REPLY_CONTENT, R_CREATE_DATE, C_BOARD_NO, MEMBER_ID, MEMBER_NAME
+		SELECT REPLY_NO, REPLY_CONTENT, R_CREATE_DATE, C_BOARD_NO, MEMBER_ID, MEMBER_NAME, FAMILY, STEP, RENAMEFILE_NAME
 		FROM CLUBBOARD_REPLY JOIN MEMBER USING(MEMBER_ID)
-		WHERE C_BOARD_NO = #{cBoardNo } ORDER BY REPLY_NO ASC
+		WHERE C_BOARD_NO = #{cBoardNo } ORDER BY FAMILY ASC, STEP ASC
 	</select>
 	
 	<insert id="insertReply">
 		INSERT INTO CLUBBOARD_REPLY
-		VALUES(CBOARD_REPLY_SEQ.NEXTVAL, #{replyContent}, SYSDATE, #{cBoardNo},#{memberId})
+			VALUES(CBOARD_REPLY_SEQ.NEXTVAL, #{replyContent}, SYSDATE, #{cBoardNo},#{memberId}, CREPLY_PARENT_SEQ.NEXTVAL, 0)
+	</insert>
+	
+	<insert id="insertReplyChild">
+		INSERT INTO CLUBBOARD_REPLY
+			VALUES(CBOARD_REPLY_SEQ.NEXTVAL, #{replyContent}, SYSDATE, #{cBoardNo},#{memberId}, #{family}, #{step}+1)
 	</insert>
 	
 	<update id="updateReply">
@@ -93,5 +109,7 @@
 	<delete id="deleteReply">
 		DELETE FROM CLUBBOARD_REPLY WHERE REPLY_NO = #{replyNo}
 	</delete>
+	
+
 
 </mapper>

@@ -1,27 +1,21 @@
 package com.eroom.gw.cboard.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Reply {
 	
 	private int replyNo;
 	private String replyContent;
-	private Date rCreateDate;
+	private Timestamp rCreateDate;
 	private int cBoardNo;
 	private int memberId;
 	private String memberName;
+	private String memberImage;
+	private int family;
+	private int step;
+	private int count;
 	
 	public Reply() {}
-
-	public Reply(int replyNo, String replyContent, Date rCreateDate, int cBoardNo, int memberId, String memberName) {
-		super();
-		this.replyNo = replyNo;
-		this.replyContent = replyContent;
-		this.rCreateDate = rCreateDate;
-		this.cBoardNo = cBoardNo;
-		this.memberId = memberId;
-		this.memberName = memberName;
-	}
 
 	public int getReplyNo() {
 		return replyNo;
@@ -39,11 +33,11 @@ public class Reply {
 		this.replyContent = replyContent;
 	}
 
-	public Date getrCreateDate() {
+	public Timestamp getrCreateDate() {
 		return rCreateDate;
 	}
 
-	public void setrCreateDate(Date rCreateDate) {
+	public void setrCreateDate(Timestamp rCreateDate) {
 		this.rCreateDate = rCreateDate;
 	}
 
@@ -71,10 +65,43 @@ public class Reply {
 		this.memberName = memberName;
 	}
 
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
+	public int getFamily() {
+		return family;
+	}
+
+	public void setFamily(int family) {
+		this.family = family;
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", rCreateDate=" + rCreateDate
-				+ ", cBoardNo=" + cBoardNo + ", memberId=" + memberId + ", memberName=" + memberName + "]";
+				+ ", cBoardNo=" + cBoardNo + ", memberId=" + memberId + ", memberName=" + memberName + ", memberImage="
+				+ memberImage + ", family=" + family + ", step=" + step + ", count=" + count + "]";
 	}
 
 	

@@ -13,22 +13,11 @@ public class CBoard {
 	private int hits;
 	private String originalFileName;
 	private String renameFileName;
+	private String memberImage;
+	private String memberDept;
+	private String memberJob;
 	
 	public CBoard() {}
-
-	public CBoard(int cBoardNo, int memberId, String memberName, String cBoardTitle, String cBoardContents,
-			Date enrollDate, int hits, String originalFileName, String renameFileName) {
-		super();
-		this.cBoardNo = cBoardNo;
-		this.memberId = memberId;
-		this.memberName = memberName;
-		this.cBoardTitle = cBoardTitle;
-		this.cBoardContents = cBoardContents;
-		this.enrollDate = enrollDate;
-		this.hits = hits;
-		this.originalFileName = originalFileName;
-		this.renameFileName = renameFileName;
-	}
 
 	public int getcBoardNo() {
 		return cBoardNo;
@@ -102,12 +91,39 @@ public class CBoard {
 		this.renameFileName = renameFileName;
 	}
 
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
+	public String getMemberDept() {
+		return memberDept;
+	}
+
+	public void setMemberDept(String memberDept) {
+		this.memberDept = memberDept;
+	}
+
+	public String getMemberJob() {
+		return memberJob;
+	}
+
+	public void setMemberJob(String memberJob) {
+		this.memberJob = memberJob;
+	}
+
 	@Override
 	public String toString() {
 		return "CBoard [cBoardNo=" + cBoardNo + ", memberId=" + memberId + ", memberName=" + memberName
 				+ ", cBoardTitle=" + cBoardTitle + ", cBoardContents=" + cBoardContents + ", enrollDate=" + enrollDate
-				+ ", hits=" + hits + ", originalFile=" + originalFileName + ", renameFileName=" + renameFileName + "]";
+				+ ", hits=" + hits + ", originalFileName=" + originalFileName + ", renameFileName=" + renameFileName
+				+ ", memberImage=" + memberImage + ", memberDept=" + memberDept + ", memberJob=" + memberJob + "]";
 	}
+
+	
 	
 	
 	

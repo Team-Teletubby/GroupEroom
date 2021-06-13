@@ -22,8 +22,10 @@ public interface CBoardStore {
 	public int insertReply(Reply reply);
 	public int updateReply(Reply reply);
 	public int deleteReply(Reply reply);
+	public int insertReplyChild(Reply reply);
 	
 	public ArrayList<CBoard> selectSearchList(Search search, PageInfo pi);
 	public int selectSearchListCount(Search search);
+	public ArrayList<Reply> replyCount();
 
 }

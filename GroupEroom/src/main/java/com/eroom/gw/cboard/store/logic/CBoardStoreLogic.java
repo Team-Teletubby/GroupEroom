@@ -88,5 +88,16 @@ public class CBoardStoreLogic implements CBoardStore{
 		return sqlSession.delete("cBoardMapper.deleteReply", reply);
 	}
 
+	@Override
+	public int insertReplyChild(Reply reply) {
+		System.out.println("로직컴");
+		return sqlSession.insert("cBoardMapper.insertReplyChild", reply);
+	}
+
+	@Override
+	public ArrayList<Reply> replyCount() {
+		return (ArrayList)sqlSession.selectList("cBoardMapper.replyCount");
+	}
+
 	
 }

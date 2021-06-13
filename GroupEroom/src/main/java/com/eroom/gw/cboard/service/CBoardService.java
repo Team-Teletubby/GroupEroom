@@ -22,10 +22,14 @@ public interface CBoardService {
 	public int registerReply(Reply reply);
 	public int modifyReply(Reply reply);
 	public int removeReply(Reply reply);
+	public int registerReplyChild(Reply reply);
 
 	
 	//검색
 	public ArrayList<CBoard> printSearchAll(Search search, PageInfo pi);
 	public int getSearchListCount(Search search);
+
+	public ArrayList<Reply> replyCount();
+
 
 }

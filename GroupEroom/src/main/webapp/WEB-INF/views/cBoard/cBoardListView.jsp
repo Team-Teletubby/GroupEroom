@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,8 @@
             <div class="content-panel">
               <h4><i class="fa fa-angle-right"></i> 동호회 게시판</h4>
                 <hr>
+                
+              <div style="margin:50px" >
                 <div class="form-group" align="right">
                 <form action="cBoardSearch.do" method="get" class="form-inline" role="form">
                 <select class="form-control" name="searchCondition">
@@ -31,7 +34,7 @@
                 	<option value="MEMBER_NAME">작성자</option>
                 </select>
                 <input type="text" name="searchValue" style="width:100px" class="form-control" >
-                <input type="submit" value="검색" class="btn btn-theme">
+                <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i> 검색</button>
                 </form>
                 </div>
                 
@@ -42,24 +45,49 @@
                     <th>제목</th>
                     <th>작성자</th>
                     <th>작성일</th>
-                    <th>조회수</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
 					<c:forEach items="${cBoardList }" var="cBoard">
+						
+						
+						
 						<tr>
 							<td>${cBoard.cBoardNo }</td>
 							<td>
 								<c:url var="cBoardDetail" value="cBoardDetail.do">
 									<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
 								</c:url>
-								<a href="${cBoardDetail}">${cBoard.cBoardTitle }</a>
+								<a href="${cBoardDetail}">${cBoard.cBoardTitle } </a>
+									<jsp:useBean id="now" class="java.util.Date" />
+										<fmt:formatDate value="${now}" pattern="yyyyMMdd" var="today" />
+										<fmt:formatDate value="${cBoard.enrollDate}" pattern="yyyyMMdd" var="enrollDate"/>
+								<c:if test="${enrollDate-today == 0}">
+										<span class="label label-success">NEW</span>
+								</c:if>
 							</td>
 							<td>${cBoard.memberName }</td>
 							<td>${cBoard.enrollDate }</td>
-							<td>${cBoard.hits }</td>
+							<td>
+								<i class='fa fa-eye'></i>&nbsp;&nbsp;&nbsp;${cBoard.hits }
+							</td>
+							
+							<td>
+							<i class='fa fa-comments-o'></i>
+							<c:forEach items="${replyCount }" var="replyCount">
+								<c:choose>
+								<c:when test="${cBoard.cBoardNo eq replyCount.cBoardNo }">
+									${replyCount.count}
+								</c:when>
+							</c:choose>
+							</c:forEach>
+							
+							</td>
 						</tr>
-					</c:forEach>
+						</c:forEach>
+					
                </tbody>
             </table>
             <div align="center">
@@ -103,8 +131,9 @@
 			</div>
 			</div>
               <div align="right">
-              	<a href="cBoardWriteView.do" class="btn btn-theme02">글 쓰기</a>
+              	<a style="color:white" href="cBoardWriteView.do" class="btn btn-theme02"><i class="fa fa-pencil"></i> 글 쓰기</a>
               </div>
+            </div>
             </div>
           </div>
         </div>

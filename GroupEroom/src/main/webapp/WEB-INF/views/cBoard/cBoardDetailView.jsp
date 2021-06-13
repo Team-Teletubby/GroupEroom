@@ -9,7 +9,33 @@
 <link href="resources/css/style2.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>동호회 게시판</title>
-
+<style>
+.msg{
+border:1px solid lightgray;
+padding:0px 25px 0px 25px;
+-webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+ -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+ -o-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+ box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+ -webkit-transition: all 0.5s ease-in;
+ -moz-transition: all 0.5s ease-in;
+ -o-transition: all 0.5s ease-in;
+ -ms-transition: all 0.5s ease-in;
+ transition: all 0.5s ease-in;
+}
+.memberImage{
+ 	width: 50px;
+    height: 50px; 
+    border-radius: 70%;
+	padding:0px;
+	maring:0px;
+	border:1px solid lightgray;
+} 
+.td1{
+	margin:0px 0px 0px 0px;
+	padding:0px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	$("#delete-btn").on("click", function () {
@@ -32,24 +58,39 @@ $(document).ready(function(){
             <div class="content-panel">
               <h4><i class="fa fa-angle-right"></i> 동호회 게시판</h4>
                 <hr>
-                <div style="margin:0px 100px 50px 100px; padding:20px; border:1px solid lightgray">
-					<h3>#${cBoard.cBoardNo }_${cBoard.cBoardTitle }</h3><br>
-					<div style="font-size:15px">
-					<span style="align:left">작성자 : ${cBoard.memberName }</span>
-					<span style="float:right">작성일 : ${cBoard.enrollDate} <i class="fa fa-eye"></i>조회수 : ${cBoard.hits }</span>
+                <div style="margin:0px 50px 0px 50px">
+                <div class="msg">
+					<h3><b>#${cBoard.cBoardNo }_${cBoard.cBoardTitle }</b></h3><br>
+					<div>
+						<div style="float:left; width:5%" >
+						<c:if test="${null ne cBoard.memberImage}">
+							<img class='memberImage' src="/resources/memberproFile/${cBoard.memberImage }">
+						</c:if>
+						<c:if test="${ null eq cBoard.memberImage }">
+							<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>
+						</c:if>
+						</div>
+						<div style="float:left; width:47%; font-size:15px"><span class="label label-warning">${cBoard.memberDept }</span><br> ${cBoard.memberName } ${cBoard.memberJob }</div>
+						<div align="right" style="float:left; width:48% "><br><i class="fa fa-calendar-o"></i> 작성일 : ${cBoard.enrollDate} &nbsp; <i class="fa fa-eye"></i>조회수 : ${cBoard.hits }</div>
 					</div>
-					<div style="padding:50px; border:1px solid lightgrey; font-size:15px">${cBoard.cBoardContents }</div>
-					<i class="fa fa-paperclip"></i>첨부 파일 : <a href="/resources/cBoardFiles/${cBoard.renameFileName }" download>${cBoard.originalFileName}</a><br><br>
-					<div style="padding:10px; border:1px solid lightgrey; font-size:15px">
 					
+					<br><br>
+					<hr style="border : 1px solid; color:#4ECDC4; background:#4ECDC4">
+					<div style="font-size:15px">${cBoard.cBoardContents }</div><br>
+					<i class="fa fa-paperclip"></i>첨부 파일 : <a href="/resources/cBoardFiles/${cBoard.renameFileName }" download>${cBoard.originalFileName}</a><br><br>
+				</div><br><br>
+					
+					<div style="padding:10px; border:1px solid lightgrey; font-size:15px">
 					<table style="width:100%" id="rtb">
 						<thead>
 							<tr>
 								<!-- 댓글 갯수 -->
-								<td colspan="2"><b id="rCount"></b></td>
+								<td colspan="2"><b style='color:#4ECDC4'id="rCount"></b></td>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+						<!-- 댓글 나오는 칸 -->
+						</tbody>
 					</table>
 					</div><br>
 					
@@ -57,10 +98,10 @@ $(document).ready(function(){
 					<table style="width:100%">
 						<tr>
 							<td style="width:90%">
-								<textarea placeholder="댓글 입력 창" class="form-control" style="width:100%" id="rContent" name="comment" required></textarea>
+								<textarea placeholder="댓글을 입력해 주세요" class="form-control" style="width:100%" id="rContent" name="comment" required></textarea>
 							</td>
 							<td style="width:10%" align="right">
-								<button class="btn btn-theme" id="rSubmit">등록하기</button>
+								<button class="btn btn-theme02" id="rSubmit"><i class="fa fa-pencil"></i> 댓글 등록</button>
 							</td>
 						</tr>
 					</table>
@@ -70,13 +111,13 @@ $(document).ready(function(){
 						<c:url var="cBoardModify" value="cBoardModifyView.do">
 							<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
 						</c:url>
-							<a href="${cBoardModify }"  style="color:white" class="btn btn-theme02">수정</a>
+							<a href="${cBoardModify }"  style="color:white" class="btn btn-theme03"><i class="fa fa-edit"></i> 수정</a>
 						
 						<c:url var="cBoardDelete" value="cBoardDelete.do">
 							<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
 							<c:param name="renameFileName" value="${cBoard.renameFileName }"></c:param>
 						</c:url>
-							<a href="${cBoardDelete }" style="color:white" class="btn btn-theme04" id="delete-btn">삭제</a>
+							<a href="${cBoardDelete }" style="color:white" class="btn btn-theme04" id="delete-btn"><i class="fa fa-trash"></i> 삭제</a>
 					</div><br>
 				</c:if>
 					
@@ -93,6 +134,9 @@ $(document).ready(function(){
       <script>
 		$(function() {
 			getReplyList();
+			
+			
+			
 			$("#rSubmit").on("click", function() {
 				var boardNo = '${cBoard.cBoardNo }';
 				var rContent = $("#rContent").val();
@@ -126,11 +170,6 @@ $(document).ready(function(){
 				data : { "cBoardNo" : boardNo },
 				dataType : "json",
 				success : function(data) {
-					// db에 있는 데이터를 json형태로 가져와서
-					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
-					//console.log(data);
-					// tbody에 필요한 tr, td 태그를 만들면서
-					// 데이터를 tbody에 꽂아줄 것임.
 					var $tableBody = $("#rtb tbody");
 					$tableBody.html(""); // 비워주기
 					var $tr;
@@ -138,21 +177,31 @@ $(document).ready(function(){
 					var $rContent;
 					var $rCreateDate;
 					var $btnArea;
-					$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
+					var $td;
+					$("#rCount").html("<i class='fa fa-comments-o'></i> 댓글 (" + data.length + ")"); // 댓글 갯수 표시
 					if(data.length > 0) {
 						for(var i in data) {
 							$tr = $("<tr>");
-							$rWriter = $("<td>").text(data[i].memberName);
-							$rContent = $("<td>").text(data[i].replyContent);
-							$rCreateDate = $("<td align='right'>").text(data[i].rCreateDate);
+							if(data[i].memberImage == null){
+								$td = $("<td></td>");
+								$rWriter = $("<td align='center' style='width:1%'>").html("<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>");
+								$tr.append($td);
+								$tr.append($rWriter);
+								$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+							}else{
+								$rWriter = $("<td align='center' style='width:10%'>").html("<img class='memberImage' src='/resources/memberproFile/"+data[i].memberImage+"'></td>");
+								$tr.append($rWriter);
+								$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+							}
+							$rContent.append("<span style='font-size:10px'>"+data[i].rCreateDate+"  &nbsp&nbsp <a style='color:gray' href='#' onclick='replyChild(this,"+boardNo+","+data[i].family+","+data[i].step+")'>답글쓰기</a></span><br>");
+							/* $rCreateDate = $("<td align='right' style='font-size:8px'>").text(data[i].rCreateDate); */
 							if(data[i].memberId == loginUser){
-								$btnArea = $("<td align='right'>")
-								.append("<a href='#' id='modfiy-btn' onclick='modifyReply(this,"+boardNo+","+data[i].replyNo+",\""+data[i].replyContent+"\");'>수정 </a>")							
-								.append("<a href='#' onclick='removeReply("+boardNo+","+data[i].replyNo+");'> 삭제</a>");
+								$btnArea = $("<td align='right' style='width:10%'>")
+								.append("<a style='color:lightgray' href='#' id='modfiy-btn' onclick='modifyReply(this,"+boardNo+","+data[i].replyNo+",\""+data[i].replyContent+"\");'>수정 </a>")							
+								.append("<a style='color:lightgray' href='#' onclick='removeReply("+boardNo+","+data[i].replyNo+");'> 삭제</a>");
 							}else {
 								$btnArea = $("<td align='right'>")
 							}
-							$tr.append($rWriter);
 							$tr.append($rContent);
 							$tr.append($rCreateDate);
 							$tr.append($btnArea);
@@ -165,6 +214,40 @@ $(document).ready(function(){
 				}
 			});
 		}
+		
+		
+		function replyChild(obj, boardNo, family, step){
+			$tr = $("<tr><td></td>");
+			$td = $("<td colspan='2'><input id='replyChild' type='text' class='form-control' placeholder='답글을 입력해 주세요' ></td><td align='right'><button onclick='addReplyChild("+boardNo+","+family+","+step+")' class='btn btn-theme'>답글 등록</button></td>");
+			$tr.append($td);
+			$(obj).parent().parent().parent().after($tr);
+		}
+		
+		function addReplyChild(boardNo, family, step){
+			var replyChild = $("#replyChild").val();
+			$.ajax({
+				url : "cBoardAddReplyChild.do",
+				type : "post",
+				data : { 
+					"cBoardNo" : boardNo , 
+					"family" : family, 
+					"step" : step,
+					"replyContent" : replyChild 
+				},
+				success : function(data) {
+					if(data == "success") {
+						getReplyList();
+					}else{
+						alert("댓글 수정 실패!");
+					}
+				},
+				error : function() {
+					alert("서버 통신 실패!");
+				}
+			});
+			
+		}
+		
 		
 		function modifyReply(obj, boardNo, replyNo, replyContent) {
 			/* $("#modify-btn").css(display,none); */

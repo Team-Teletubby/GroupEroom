@@ -22,6 +22,8 @@
             <div class="content-panel">
               <h4><i class="fa fa-angle-right"></i> 동호회 게시판</h4>
                 <hr>
+                
+                <div style="margin:50px" >
                 <div class="form-group" align="right">
                 <form action="cBoardSearch.do" method="get" class="form-inline" role="form">
                 <select class="form-control" name="searchCondition">
@@ -31,7 +33,7 @@
                 	<option value="MEMBER_NAME">작성자</option>
                 </select>
                 <input type="text" name="searchValue" style="width:100px" class="form-control" value="${search.searchValue }">
-                <input type="submit" value="검색" class="btn btn-theme">
+                <button type="submit" class="btn btn-theme"><i class="fa fa-search"></i> 검색</button>
                 </form>
                 </div>
                 
@@ -109,8 +111,9 @@
 			</div>
 			</div>
               <div align="right">
-              	<a href="#" class="btn btn-theme02">글 쓰기</a>
+              	<a style="color:white" href="cBoardWriteView.do" class="btn btn-theme02"><i class="fa fa-pencil"></i> 글 쓰기</a>
               </div>
+            </div>
             </div>
           </div>
         </div>
