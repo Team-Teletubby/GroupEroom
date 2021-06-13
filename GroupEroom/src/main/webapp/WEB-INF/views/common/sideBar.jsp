@@ -141,7 +141,7 @@
 	   	
 	   	function nowTime() {
 	   		let now = new Date();
-	   		let today = now.getMonth() + "월 " + now.getDate() + "일";
+	   		let today = now.getMonth()+1 + "월 " + now.getDate() + "일";
 	   		$('.today').html("<p class='today-contents'>" + today + "</p>");
 	   	}
 	</script>
