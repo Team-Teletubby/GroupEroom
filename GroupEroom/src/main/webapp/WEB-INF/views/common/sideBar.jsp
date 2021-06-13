@@ -37,6 +37,7 @@
 	<section id="container">
 		<aside>
 			<div id="sidebar" class="nav-collapse ">
+				<div class="today"></div>
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<!-- 홈 메뉴 -->
@@ -48,7 +49,6 @@
 							class="fa fa-desktop"></i> <span>전자결재</span>
 					</a>
 						<ul class="sub">
-							<li><a href="general.html">전자결재홈</a></li>
 							<li><a href="approvalWriteView.do">결재문 작성</a></li>
 							<li><a href="progressBoard.do">진행함</a></li>
 							<li><a href="suspenseBoard.do">미결함</a></li>
@@ -110,19 +110,19 @@
 						</ul>
 						</li>
 						</c:if>
-						<!-- 채팅  -->
-					<li>
-						<a href="#" onclick="javascript:openWin();"> 
-							<i class="fa fa-comments-o"></i>
-							<span>메신저 </span> 
-						</a>
-					</li>
 					<!-- 투표 -->
 					<li class="sub-menu"><a href="javascript:;"><i class="fa fa-tasks"></i><span>투표</span></a>
 						<ul class="sub">
 						<li><a href="surveyList.do">투표목록</a></li>
 						<li><a href="surveyForm.do">투표작성</a></li>
 						</ul>
+					</li>
+						<!-- 채팅  -->
+					<li>
+						<a href="#" onclick="javascript:openWin();"> 
+							<i class="fa fa-comments-o"></i>
+							<span>메신저 </span> 
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -132,11 +132,18 @@
 	// =============== 시간 ====================
 	   	$(document).ready(function(){
 			$('.flipTimer').flipTimer({ direction: 'up' });
+			nowTime();
 		});
 	
 	   	function openWin(){ 
 		  	window.open("room.do", "채팅", "width=505, height=842, toolbar=no, menubar=yes, scrollbars=no, resizable=no" ); 
 		}
+	   	
+	   	function nowTime() {
+	   		let now = new Date();
+	   		let today = now.getMonth() + "월 " + now.getDate() + "일";
+	   		$('.today').html("<p class='today-contents'>" + today + "</p>");
+	   	}
 	</script>
 	<!-- 스크롤, 사이드바 등 설정  -->
 	<script src="resources/js/timer/jquery.flipTimer.js"></script>
