@@ -1205,7 +1205,8 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .weather {
-	background: url(../img/weather.jpg) no-repeat center top;
+	background: url(https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=970&q=80) no-repeat;
+	
 	text-align: center;
 	background-position: center center;
 }

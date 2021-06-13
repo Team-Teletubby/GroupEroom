@@ -5,6 +5,7 @@
 <html>
 <head>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -246,10 +247,10 @@
 						<div class="row">
 							<!-- 날씨 -->
 							<div class="col-md-4 mb">
-								<div class="weather pn">
-									<i class="fa fa-cloud fa-4x"></i>
-									<h2>11º C</h2>
-									<h4>서울 특별시</h4>
+								<div class="weather pn Currlcon">
+									<i id="weather-icon"></i>
+									<h2 class="CurrTemp">11º C</h2>
+									<h4 class="weather-city">서울 특별시</h4>
 								</div>
 							</div>
 							<!-- 날씨 끝 -->
@@ -478,7 +479,48 @@
 	<script>
 		$('document').ready(function() {
 			showStatus();
+			  let weatherIcon = {
+				        '01' : 'fas fa-sun fa-7x', // 태양
+				        '02' : 'fas fa-sun fa-7x',
+				        '03' : 'fas fa-sun fa-7x',
+				        '04' : 'fas fa-sun fa-7x',
+				        '09' : 'fas fa-sun fa-7x',
+				        '10' : 'fas fa-sun fa-7x', // 비구름
+				        '11' : 'fas poo-storm',
+				        '13' : 'far snowflake',
+				        '50' : 'fas fa-smog'
+				    };
 
+					let weatherBack = {
+				        '01' : 'weather-sunny', // 태양
+				        '02' : 'weather-sunny',
+				        '03' : 'weather-sunny',
+				        '04' : 'weather-sunny',
+				        '09' : 'weather-sunny',
+				        '10' : 'weather-sunny', // 비구름
+				        '11' : 'weather-sunny',
+				        '13' : 'weather-sunny',
+				        '50' : 'weather-sunny'
+				    };
+
+				/*weather-sunny*/
+				/*weather-cloudy*/
+				    $.ajax({
+				        url : 'http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=9f79b4b7b5bb7ec20b98862a5abafae2&units=metric',
+				        dataType : 'json',
+				        type : 'GET',
+				        success : function(data) {
+				            var $Icon = (data.weather[0].icon).substr(0,2);
+				            var $Temp = Math.floor(data.main.temp);
+				            var $city = data.name;
+
+				            $('#weather-icon').addClass(weatherIcon[$Icon]);
+				            $('.CurrTemp').html($Temp + '°C');
+							$('#mWeather').css('background-image', 'url(/assets/img/' + weatherBack[$Icon] + '.jpg)');
+				        
+				            $('.weather-city').html('서울 특별시');
+				        }
+				    })  
 		});
 
 		// 첫번째 input창에 대해서
