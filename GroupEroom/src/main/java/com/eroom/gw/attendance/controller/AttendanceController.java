@@ -37,6 +37,8 @@ public class AttendanceController {
 	@Autowired
 	private CalendarService calService;
 	
+	
+	//근태 리스트 출력
 	@RequestMapping(value="attendanceList.do")
 	public String attendanceList(Model model, HttpSession session, @RequestParam(value="page", required=false)Integer page){
 		Member LoginUser = (Member)session.getAttribute("LoginUser");
@@ -56,8 +58,13 @@ public class AttendanceController {
 		long diffMonth = calDate / baseMonth;
 		long diffYear = calDate / baseYear;
 				
+		System.out.println(diffYear);
+		System.out.println(diffMonth);
+		System.out.println(diffDate);
 		if(diffYear < 1) {
-			totalHoliday = 11;
+			for(int i=0; i<diffMonth+1; i++) {
+				totalHoliday = i;
+			}
 		} else if(diffYear <= 2) {
 			totalHoliday = 15;
 		} else if(diffYear <= 4) {

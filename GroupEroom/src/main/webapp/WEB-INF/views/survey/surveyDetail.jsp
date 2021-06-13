@@ -115,8 +115,11 @@ $(document).ready(function(){
 		              			<i class="fa fa-exclamation-triangle" style="color:red"></i>투표는 수정할 수 없으니 신중히 선택해 주세요.
 		              		</c:when>
 		              		<c:otherwise>
-		              			<span class="btn btn-theme03"><i class="fa fa-check"></i> 투표완료</span><br><br>
-		              			<i class="fa fa-exclamation-triangle" style="color:red"></i>이미 참여하셨습니다.
+		              			<span class="btn btn-theme03"><i class="fa fa-check"></i> 투표완료</span>
+		              			<span><a style="color:white" href="resultSurvey.do?surveyNo=${survey.surveyNo }" class="btn btn-danger"><i class="fa fa-pie-chart "></i>결과보기</a></span>
+		              			<br><br>
+		              			<i class="fa fa-exclamation-triangle" style="color:red"></i>이미 참여하셨습니다.<br><br><br>
+		              			<a style="color:white"href="surveyList.do" class="btn btn-theme02">목록</a>
 		              		</c:otherwise>
               			</c:choose>
               		</p>

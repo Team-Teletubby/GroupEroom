@@ -16,12 +16,12 @@
 <link href="resources/js/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js></script>
 <style>
-.poll{
+/* .poll{
 	border:1px solid lightgray;
 	padding:5px;
 	border-radius : 10px;
 	width:100%;
-	-webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+-webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
  -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
  -o-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
@@ -31,10 +31,12 @@
  -ms-transition: all 0.5s ease-in;
  transition: all 0.1s ease-in;
 	
-}
-.poll:hover{
+} */
+.showback:hover{
 	background:#fafaff;
-	border :3px solid #4ECDC4;
+	font-weight: bold;
+	color:#22242a; transition:0.2s;
+	box-shadow:0px 0px 10px 0px #4ECDC4 ;
 }
 #go{ color: white; }
 </style>
@@ -56,7 +58,7 @@ $(document).ready(function(){
               <h4><i class="fa fa-angle-right"></i>투표 목록</h4><hr><br>
               <div style="margin:0px 100px 0px 100px">
               <c:forEach items="${list }" var="list">
-              	<div class="poll" >
+              	<div class="showback" >
               	<table style="width:100%";>
               	<tr>
               		<td style="width:60%;">

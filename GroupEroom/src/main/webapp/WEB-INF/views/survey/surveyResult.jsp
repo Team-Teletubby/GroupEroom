@@ -186,6 +186,7 @@
 								</tr>
 							</table>
 							<br>
+							<div align="center"><a style="color:gray"href="surveyList.do" class="btn btn-default">목록으로</a></div><br><br>
 						</div>
 
 					</div>

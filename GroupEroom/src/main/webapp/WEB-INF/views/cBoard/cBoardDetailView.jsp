@@ -36,7 +36,7 @@ $(document).ready(function(){
 					<h3>#${cBoard.cBoardNo }_${cBoard.cBoardTitle }</h3><br>
 					<div style="font-size:15px">
 					<span style="align:left">작성자 : ${cBoard.memberName }</span>
-					<span style="float:right">작성일 : ${cBoard.enrollDate} 조회수 : ${cBoard.hits }</span>
+					<span style="float:right">작성일 : ${cBoard.enrollDate} <i class="fa fa-eye"></i>조회수 : ${cBoard.hits }</span>
 					</div>
 					<div style="padding:50px; border:1px solid lightgrey; font-size:15px">${cBoard.cBoardContents }</div>
 					<i class="fa fa-paperclip"></i>첨부 파일 : <a href="/resources/cBoardFiles/${cBoard.renameFileName }" download>${cBoard.originalFileName}</a><br><br>
@@ -70,13 +70,13 @@ $(document).ready(function(){
 						<c:url var="cBoardModify" value="cBoardModifyView.do">
 							<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
 						</c:url>
-							<a href="${cBoardModify }" class="btn btn-theme02">수정</a>
+							<a href="${cBoardModify }"  style="color:white" class="btn btn-theme02">수정</a>
 						
 						<c:url var="cBoardDelete" value="cBoardDelete.do">
 							<c:param name="cBoardNo" value="${cBoard.cBoardNo }"></c:param>
 							<c:param name="renameFileName" value="${cBoard.renameFileName }"></c:param>
 						</c:url>
-							<a href="${cBoardDelete }" class="btn btn-theme04" id="delete-btn">삭제</a>
+							<a href="${cBoardDelete }" style="color:white" class="btn btn-theme04" id="delete-btn">삭제</a>
 					</div><br>
 				</c:if>
 					
