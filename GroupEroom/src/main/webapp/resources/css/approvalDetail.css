@@ -6,14 +6,32 @@ tr > th {
 .panel-body {
     background-color: white;
     padding-top: 10px;
+    border-right: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    box-sizing: border-box;
+    color: black;
 }
 
 .panel-body > .header-title {
     font-size: 25px;
     padding-top : 3px;
     padding-bottom: 50px;
-    margin-bottom: 50px;
-    border-bottom: 1px solid rgb(204, 204, 204);
+    border-bottom: 1px solid #4ECDC4;
+}
+
+.approvalDetail-table {
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.approvalDetail-table > tbody > tr > th {
+	background-color: #e8e8e8;
+	
+}
+.header-line {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-bottom: 3px solid #4ECDC4;	
 }
 
 .mail-header {
@@ -32,6 +50,10 @@ tr > th {
     float: right;
 }
 
+.contents {
+	padding: 0px 100px;
+}
+
 .bottom-btnbox > .fl {
     float: left;
 }
@@ -40,16 +62,48 @@ tr > th {
     float: right;
 }
 
+.file {
+	margin-right: 10px;
+}
+
+.file-contents {
+	margin-bottom: 15px;
+}
+
 .comment-count {
+	font-size: 16px;
     padding-bottom: 7px;
     border-bottom: 1px solid rgb(211, 211, 211);
 }
 
+.count {
+	font-size: 17px;
+	color: red;
+}
 .cmt-list {
     padding-left: 20px;
     padding-right: 20px;
 }
 
+.profile-info {
+	margin-bottom: 5px;
+}
+.profile-name {
+	margin-right: 2px;
+}
+
+.profile-job {
+	margin-right: 20px;
+}
+
+.comment-tile {
+	margin-right: 20px;
+}
+
+.comment-delete {
+	color: red;
+	cursor:pointer;
+}
 .ub-content:not(:last-child) {
     border-bottom: 1px solid rgb(224, 224, 224);
 }
@@ -76,6 +130,9 @@ tr > th {
     padding-top: 15px;
 }
 
+#cmtContents {
+	resize: none;
+}
 .comment-btn {
     float: right;
 }

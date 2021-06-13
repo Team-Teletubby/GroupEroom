@@ -85,22 +85,32 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return 0;
 	}
 
+	// 댓글 삭제
 	@Override
 	public int deleteReply(ApprovalReply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+		return approvalStore.deleteReply(reply);
 	}
 
+	//================ 파일 ================
 	// 파일 등록
 	@Override
 	public int registerFile(ApprovalFile aFile) {
 		return approvalStore.insertFile(aFile);
 	}
 
+	// 파일 가져오기
+	@Override
+	public ArrayList<ApprovalFile> printFile(int approvalNo) {
+		return approvalStore.selectFile(approvalNo);
+	}
+	
+	
+	
 	// 안읽은 결재문 개수 출력
 	@Override
 	public int printTypeCount(int memberId) {
 		return approvalStore.selectTypeCount(memberId);
 	}
+
 
 }

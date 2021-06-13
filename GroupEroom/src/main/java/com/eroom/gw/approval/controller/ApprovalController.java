@@ -67,51 +67,50 @@ public class ApprovalController {
 	public ModelAndView approvalRegister(ModelAndView mv, @ModelAttribute Approval approval,
 			MultipartHttpServletRequest mtfRequest,
 			HttpServletRequest request) {
+		String path = ""; 
 		
-		ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
-		HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
-		Member loginUser = (Member)session.getAttribute("LoginUser"); 		// 멤버 객체에 세션 저장
-		approval.setMemberId(loginUser.getMemberId());		// 세션에 저장된 멤버ID값 결재 객체에 저장
-		
-		String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
-		String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
-		File folder = new File(savePath); // 저장 폴더 선택
-		if(!folder.exists()) { // 폴더 없으면 자동 생성
-			folder.mkdir(); 
-		}
-		
-		// jsp에서 uploadFile 정보를 가져오기 (다중 파일)
-		List<MultipartFile> multFileList = mtfRequest.getFiles("uploadFile");
-		
-		for(MultipartFile mf : multFileList) {
-			if(mf.getOriginalFilename().equals("")) {
-				approval.setApprovalFileCheck("N");
-			}else {
-				approval.setApprovalFileCheck("Y");
-				
-				aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
-				aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
-				aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
-				aFile.setApprovalFilePath(folder + "\\" + aFile.getReNameFileName());
-				int resultFile = approvalService.registerFile(aFile); // DB에 파일 정보 등록
-				
-				if(resultFile > 0) {
-					System.out.println("파일 저장 성공");
+		try {
+			ApprovalFile aFile = new ApprovalFile(); 		// 파일 정보 저장하는 객체
+			HttpSession session = request.getSession(); 		// 세션에 등록된 로그인 정보 가져오기
+			Member loginUser = (Member)session.getAttribute("LoginUser"); 		// 멤버 객체에 세션 저장
+			approval.setMemberId(loginUser.getMemberId());		// 세션에 저장된 멤버ID값 결재 객체에 저장
+			
+			String root = request.getSession().getServletContext().getRealPath("resources"); // resources 폴더 위치 저장
+			String savePath = root + "\\approvalFiles"; // 파일 저장할 폴더 이름
+			File folder = new File(savePath); // 저장 폴더 선택
+			if(!folder.exists()) { // 폴더 없으면 자동 생성
+				folder.mkdir(); 
+			}
+			
+			// jsp에서 uploadFile 정보를 가져오기 (다중 파일)
+			List<MultipartFile> multFileList = mtfRequest.getFiles("uploadFile");
+			
+			// 파일 유무 체크
+			for(MultipartFile mf : multFileList) {
+				if(mf.getOriginalFilename().contentEquals("")) {
+					approval.setApprovalFileCheck("N");
 				}else {
-					System.out.println("파일 저장 실패");
+					approval.setApprovalFileCheck("Y");
 				}
 			}
+			
+			int resultApproval = approvalService.registerApproval(approval); // DB에 결재글 등록
+			
+			if(approval.getApprovalFileCheck() == "Y") {
+				for(MultipartFile mf : multFileList) {
+					aFile.setOriginalFileName(mf.getOriginalFilename()); // 실제 파일명 저장
+					aFile.setReNameFileName(saveFile(mf, folder, request)); // 실제 파일 저장, 바뀐 이름 반환
+					aFile.setApprovalFileSize(mf.getSize()); // 파일 크기
+					aFile.setApprovalFilePath(folder + "\\" + aFile.getReNameFileName());
+					
+					int resultApprovalFile = approvalService.registerFile(aFile);
+				}	
+			}
+		} catch (Exception e) {
+			
 		}
 		
-		int resultApproval = approvalService.registerApproval(approval); // DB에 결재글 등록
-		
-		String path = ""; 		
-		if(resultApproval > 0) { // DB 저장여부 확인 후, 페이지 이동
-			path = "index";
-		}else {
-			mv.addObject("msg", "결재등록or파일등록 실패");
-			path = "common/errorPage";
-		}
+		path = "redirect:index.do";
 		mv.setViewName(path);
 		
 		return mv;
@@ -131,7 +130,6 @@ public class ApprovalController {
 		// 진행함으로 들어가기 위한 문장
 		String state = "progress";
 		approval.setApprovalState(state);
-		System.out.println(approval.getApprovalState());
 		
 		//======================== 글 페이징 ========================
 		// jsp에 page가 존재할 경우, 1로 변경
@@ -141,7 +139,6 @@ public class ApprovalController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		//===========================================================
 		//======================== 글 리스트 ========================
-		System.out.println("로그인한 유저id : " + approval.getMemberId());
 		// 글 목록 가져오기
 		ArrayList<Approval> aList = approvalService.printAll(pi, approval);
 		//===========================================================
@@ -268,11 +265,14 @@ public class ApprovalController {
 		Member member = (Member)session.getAttribute("LoginUser");
 		// 글 상세보기 가져오기
 		Approval approval = approvalService.printOne(approvalNo);
+		// 해당 글의 파일 가져오기
+		ArrayList<ApprovalFile> approvalFile = approvalService.printFile(approvalNo);
+		System.out.println(approvalFile);
 		if(approval != null) {
 			// 결재문 상태 변경하기 (해당 결재와 연관있는 결재자)
 			viewStateChange(approval, member);
 			mv.addObject("approval", approval);
-			System.out.println(approval.getMemberId());
+			mv.addObject("approvalFile", approvalFile);
 			mv.addObject("loginUserId", member.getMemberId());
 			mv.setViewName("approval/approvalDetail");
 		}else {
@@ -376,7 +376,7 @@ public class ApprovalController {
 		
 		ArrayList<ApprovalReply> replyList = approvalService.printAllReply(approvalNo);
 		if(replyList != null) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 			gson.toJson(replyList, response.getWriter());
 		}else {
 			System.out.println("댓글 리스트 못가져옴");
@@ -406,8 +406,16 @@ public class ApprovalController {
 	}
 	
 	// 댓글 삭제
-	public String replyDelete(@ModelAttribute ApprovalReply reply, Model model) {
+	@RequestMapping(value="replyDelete.do", method=RequestMethod.GET)
+	@ResponseBody
+	public String replyDelete(@ModelAttribute ApprovalReply reply) {
 		
+		try {
+			int result = approvalService.deleteReply(reply);			
+		} catch (Exception e) {
+			
+		}
+	
 		return "success";
 	}
 	// ======================================================

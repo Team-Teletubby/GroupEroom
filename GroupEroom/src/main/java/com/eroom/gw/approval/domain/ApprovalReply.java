@@ -1,6 +1,7 @@
 package com.eroom.gw.approval.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 // 전자결재 댓글
 public class ApprovalReply {
@@ -8,9 +9,10 @@ public class ApprovalReply {
 	// 멤버변수
 	private int cmtNo;
 	private String cmtContents;
-	private Date enrollDate;
+	private Timestamp enrollDate;
 	private int approvalNo;
 	private int memberId;
+	private String memberJob;
 	private String memberName;
 	
 	// 생성자
@@ -18,7 +20,7 @@ public class ApprovalReply {
 		super();
 	}
 	
-	public ApprovalReply(int cmtNo, String cmtContents, Date enrollDate, int approvalNo, int memberId, String memberName) {
+	public ApprovalReply(int cmtNo, String cmtContents, Timestamp enrollDate, int approvalNo, int memberId, String memberName, String memberJob) {
 		super();
 		this.cmtNo = cmtNo;
 		this.cmtContents = cmtContents;
@@ -26,6 +28,7 @@ public class ApprovalReply {
 		this.approvalNo = approvalNo;
 		this.memberId = memberId;
 		this.memberName = memberName;
+		this.memberJob = memberJob;
 	}
 	
 	// getter/setter
@@ -41,10 +44,10 @@ public class ApprovalReply {
 	public void setCmtContents(String cmtContents) {
 		this.cmtContents = cmtContents;
 	}
-	public Date getEnrollDate() {
+	public Timestamp getEnrollDate() {
 		return enrollDate;
 	}
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(Timestamp enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 	public int getApprovalNo() {
@@ -65,12 +68,21 @@ public class ApprovalReply {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	
-	// toString
+
+	public String getMemberJob() {
+		return memberJob;
+	}
+
+	public void setMemberJob(String memberJob) {
+		this.memberJob = memberJob;
+	}
+
 	@Override
 	public String toString() {
 		return "ApprovalReply [cmtNo=" + cmtNo + ", cmtContents=" + cmtContents + ", enrollDate=" + enrollDate
-				+ ", approvalNo=" + approvalNo + ", memberId=" + memberId +", memberName =" + memberName + "]";
+				+ ", approvalNo=" + approvalNo + ", memberId=" + memberId + ", memberJob=" + memberJob + ", memberName="
+				+ memberName + "]";
 	}
+
 
 }

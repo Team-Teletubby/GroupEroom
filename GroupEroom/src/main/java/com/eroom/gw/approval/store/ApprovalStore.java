@@ -8,6 +8,10 @@ import com.eroom.gw.approval.domain.ApprovalFile;
 import com.eroom.gw.approval.domain.ApprovalReply;
 import com.eroom.gw.common.PageInfo;
 
+/**
+ * @author gkdia
+ *
+ */
 public interface ApprovalStore {
 
 	/**
@@ -95,7 +99,6 @@ public interface ApprovalStore {
 	 */
 	public int deleteReply(ApprovalReply reply);
 
-	
 	/**
 	 * 파일 등록
 	 * @param file
@@ -103,6 +106,12 @@ public interface ApprovalStore {
 	 */
 	public int insertFile(ApprovalFile file);
 
+	/**
+	 * 파일 가져오기
+	 * @param approvalNo
+	 * @return
+	 */
+	public ArrayList<ApprovalFile> selectFile(int approvalNo);
 	
 	/**
 	 * 안읽은 결재문 개수 출력
@@ -110,6 +119,7 @@ public interface ApprovalStore {
 	 * @return
 	 */
 	public int selectTypeCount(int memberId);
+
 
 
 

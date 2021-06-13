@@ -87,9 +87,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return 0;
 	}
 
+	// 댓글 삭제
 	@Override
 	public int deleteReply(ApprovalReply reply) {
-		return 0;
+		return sqlSession.delete("approvalMapper.deleteReply", reply);
 	}
 
 	// 파일 등록
@@ -98,12 +99,15 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return sqlSession.insert("approvalMapper.insertFile", aFile);
 	}
 
+	// 파일 가져오기
+	@Override
+	public ArrayList<ApprovalFile> selectFile(int approvalNo) {
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectFileList", approvalNo);
+	}
+	
 	// 안읽은 결재문 개수 출력
 	@Override
 	public int selectTypeCount(int memberId) {
 		return sqlSession.selectOne("approvalMapper.selectTypeCount", memberId);
 	}
-
-
-
 }

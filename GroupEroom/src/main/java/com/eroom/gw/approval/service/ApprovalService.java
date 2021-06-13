@@ -118,9 +118,17 @@ public interface ApprovalService {
 	public int registerFile(ApprovalFile file);
 
 	/**
+	 * 파일 이름 가져오기
+	 * @param approvalNo
+	 * @return
+	 */
+	public ArrayList<ApprovalFile> printFile(int approvalNo);
+	
+	/**
 	 * 안읽은 결재문 개수 출력
 	 * @param memberId
 	 * @return
 	 */
 	public int printTypeCount(int memberId);
+
 }

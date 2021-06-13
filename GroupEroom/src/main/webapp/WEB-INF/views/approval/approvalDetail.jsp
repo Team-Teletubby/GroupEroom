@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>문서 상세보기</title>
 <link href="resources/css/approvalDetail.css" rel="stylesheet">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -18,7 +19,7 @@
 				<i class="fa fa-angle-right"></i> 문서 상세보기
 			</h3>
 			<div class="row">
-				<div class="col-md-11">
+				<div class="col-md-12">
 					<div class="content-panel">
 						<h4>
 							<i class="fa fa-angle-right"></i> 결재번호 ${approval.approvalNo }
@@ -62,9 +63,10 @@
 									</c:if>
 								</div>
 							</div>
+							<p class="header-line"></p>
 							<div class="mail-header row">
 								<div class="col-md-4">
-									<table class="table">
+									<table class="table approvalDetail-table">
 										<h4>기안자 정보</h4>
 										<tr>
 											<th>성명</th>
@@ -81,7 +83,7 @@
 									</table>
 								</div>
 								<div class="col-md-4">
-									<table class="table">
+									<table class="table approvalDetail-table">
 										<h4>문서 정보</h4>
 										<tr>
 											<th>문서번호</th>
@@ -106,7 +108,7 @@
 									</table>
 								</div>
 								<div class="col-md-4">
-									<table class="table">
+									<table class="table approvalDetail-table">
 										<h4>결재 정보</h4>
 										<tr>
 											<th></th>
@@ -139,15 +141,21 @@
 							</div>
 							<div class="mail-sender">
 								<div class="row">
-									<div class="col-md-8">
+									<div class="contents">
 										<span>${approval.approvalContents }</span>
 									</div>
 								</div>
 							</div>
 							<div>
 								<p>
-									<span> <i class="fa fa-paperclip"></i> 첨부파일
-									</span> <a href="#">Download all attachments</a>
+									<span class="file-title"> 
+										<i class="fa fa-paperclip"></i> 첨부파일
+									</span> 
+									<div class="file-contents">
+										<c:forEach var="file" items="${approvalFile }">
+											<a class="file" href="/resources/approvalFiles/${file.reNameFileName }" download>${file.originalFileName}</a>
+										</c:forEach>
+									</div>
 								</p>
 							</div>
 							<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$댓글$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -182,13 +190,14 @@
 								<div class="card-body">
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">
-											<div></div> <textarea class="form-control" id="cmtContents"
+											<div></div> 
+											<c:if test="${(approval.memberId == loginUserId && approval.approvalState == 'N') || (approval.memberId == loginUserId && approval.approvalState == 'N') || (approval.approvalFirstId == loginUserId && approval.approvalState == 'N') || (approval.approvalFirstId == loginUserId && approval.approvalState == 'I') || (approval.approvalSecondId == loginUserId && approval.approvalState == 'N') || (approval.approvalSecondId == loginUserId && approval.approvalState == 'I') }">
+											<textarea class="form-control" id="cmtContents"
 												rows="3" placeholder="댓글을 입력하세요."></textarea>
 											<div align="right" style="margin-top: 2px">
-												<c:if test="${approval.approvalState == 'N' || approval.approvalState == 'I' }">
 												<button class="btn btn-sm btn-theme03" id="cmtSubmit">등록</button>
-												</c:if>
 											</div>
+											</c:if>
 										</li>
 									</ul>
 								</div>
@@ -281,22 +290,25 @@
 					/* 댓글 갯수  */
 					const $count = $(".count");
 					$count.html(data.length);
-
 					var html = "";
 					if (data.length > 0) {
 						for ( var i in data) {
 							html += "<li class='ub-content'>";
 							html += "<div class='cmt-info-clear'>";
 							html += "<div class='comment-content'>";
+							html += "<input type='hidden' class='cmtNo' name='cmtNo' value='" + data[i].cmtNo + "'/>";
 							html += "<div class='profile-info'>";
 							html += "<span class='profile-name'>"
 							html += data[i].memberName;
 							html += "</span>";
+							html += "<span class='profile-job'>";
+							html += data[i].memberJob;
+							html += "</span>";
 							html += "<span class='comment-tile'>";
-							html += data[i].enrollDate;
+							html += moment(data[i].enrollDate).format('YYYY-MM-DD HH:mm');
 							html += "</span>";
 							if(${loginUserId } == data[i].memberId) {
-								html += "<span class='comment-delete'>";
+								html += "<span class='comment-delete' onclick='deleteComment("+ data[i].approvalNo +','+ data[i].cmtNo +");'>";
 								html += "삭제";
 								html += "</span>";
 							}
@@ -310,6 +322,8 @@
 
 							$ul.html(html);
 						}
+					}else {
+						$ul.html("");
 					}
 				},
 				error : function() {
@@ -317,6 +331,23 @@
 				}
 			});
 		}
+		
+		/* 댓글 삭제  */
+		function deleteComment(approvalNo, cmtNo){
+			$.ajax({
+				url: 'replyDelete.do',
+				type: 'get',
+				data: {
+					"approvalNo" : approvalNo, 
+					"cmtNo" : cmtNo
+				},
+				success: function(data) {
+					getCommentList();
+				}
+				
+			});
+		}
+		
 	</script>
 </body>
 </html>

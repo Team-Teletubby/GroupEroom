@@ -37,6 +37,17 @@
 		<result column="CMT_CONTENTS" property="cmtContents" />
 		<result column="ENROLL_DATE" property="enrollDate" />
 		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_JOB" property="memberJob" />
+	</resultMap>
+	
+	<resultMap type="ApprovalFile" id="approvalFileResultMap">
+		<id column="A_FILE_NO" property="approvalFileNo" />
+		<result column="A_FILE_ORIGINAL_NAME" property="originalFileName" />
+		<result column="A_FILE_RENAME" property="reNameFileName" />
+		<result column="A_FILE_PATH" property="approvalFilePath" />
+		<result column="A_FILE_SIZE" property="approvalFileSize" />
+		<result column="A_FILE_UPDATE" property="approvalUploadTime" />
+		<result column="APPROVAL_NO" property="approvalNo" />
 	</resultMap>
 	
 	<!-- =============== SELECT =============== -->
@@ -99,7 +110,7 @@
 	<select id="selectList2" resultMap="approvalResultMap" parameterType="_int">
 	 <![CDATA[
 		SELECT ROWNUM, A.* 
-		FROM (SELECT * FROM APPROVAL WHERE MEMBER_ID = #{memberId } ORDER BY APPROVAL_NO DESC) A WHERE ROWNUM >= 1 AND ROWNUM <= 11
+		FROM (SELECT * FROM APPROVAL WHERE MEMBER_ID = #{memberId } AND NOT APPROVAL_STATE = 'D' ORDER BY APPROVAL_NO DESC) A WHERE ROWNUM >= 1 AND ROWNUM <= 11
 		]]>
 	</select>
 	
@@ -115,11 +126,16 @@
 	
 	<!-- 댓글 리스트  -->
 	<select id="selectListReply" resultMap="approvalReplyResultMap" parameterType="_int">
-		SELECT a.CMT_NO, a.MEMBER_ID, b.MEMBER_NAME AS MEMBER_NAME, a.APPROVAL_NO, a.CMT_CONTENTS, a.ENROLL_DATE
+		SELECT a.CMT_NO, a.MEMBER_ID, b.MEMBER_NAME AS MEMBER_NAME, b.MEMBER_JOB AS MEMBER_JOB, a.APPROVAL_NO, a.CMT_CONTENTS, a.ENROLL_DATE
 		FROM APPROVAL_CMT a
 		INNER JOIN MEMBER b ON a.MEMBER_ID = b.MEMBER_ID
 		WHERE a.APPROVAL_NO = #{approvalNo }
-		ORDER BY a.ENROLL_DATE DESC
+		ORDER BY a.ENROLL_DATE ASC
+	</select>
+	
+	<!-- 파일 리스트  -->
+	<select id="selectFileList" resultMap="approvalFileResultMap" parameterType="_int">
+		SELECT * FROM APPROVAL_FILE WHERE APPROVAL_NO = #{approvalNo }
 	</select>
 	
 	<!-- =============== INSERT =============== -->
@@ -160,4 +176,11 @@
 		</if>
 		WHERE APPROVAL_NO = #{approvalNo }
 	</update>
+	
+	<!-- =============== DELETE =============== -->
+	<!-- 댓글 삭제  -->
+	<delete id="deleteReply" parameterType="ApprovalReply">
+		DELETE FROM APPROVAL_CMT
+		WHERE APPROVAL_NO = #{approvalNo } AND CMT_NO = #{cmtNo }
+	</delete>
 </mapper>
