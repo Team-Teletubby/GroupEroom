@@ -33,7 +33,7 @@
 									<option value="ALL">전체</option>
 									<option value="F_BOARD_TITLE">제목</option>
 									<option value="F_BOARD_CONTENTS">내용</option>
-									<option value="MEMBER_NAME">작성자</option>
+									<option value="F_WRITER">작성자</option>
 								</select> <input type="text" name="searchValue" style="width: 250px"
 									class="form-control"> <input type="submit" value="검색"
 									class="btn btn-theme">
@@ -54,7 +54,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${ fList }" var="fBoard">
+								<c:forEach items="${ fBoardList }" var="fBoard">
 									<tr>
 										<td>${ fBoard.fBoardNo }</td>
 										<td>${ fBoard.fBullet }</td>

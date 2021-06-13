@@ -52,16 +52,19 @@
 							</div>
 							<div class="attachment-mail">
 								<p>
-									<span><i class="fa fa-paperclip"></i> 첨부파일 </span> <a href="#">Download all attachments</a>
+									<span><i class="fa fa-paperclip"></i> 첨부파일 </span>
 								</p>
 								<ul>
-									<c:if test="${ !empty fBoardFile.originalFilename }">
-										<c:forEach items="${ fBoardFile }" var="fBoardFile"><%-- 
-											<c:param name="fBoardNo" value="${fBoard.fBoardNo}"> --%>
-												<li>${fBoardFile.originalFilename }</li>
-											<%-- </c:param> --%>
-										</c:forEach>
-									</c:if>
+									<c:forEach items="${ fBoardFile }" var="fBoardFile">
+										<c:if test="${ !empty fBoardFile.renameFilename}">
+											<c:if test="${ fBoardFile.fBoardNo == fBoard.fBoardNo }">
+												<li style="width:400px"><a href="/resources/fUploadFiles/${fBoardFile.renameFilename }" download>- ${fBoardFile.originalFilename }</li>
+											</c:if>
+											<c:if test="${ fBoardFile.renameFilename == null }">
+												<li></li>
+											</c:if>
+										</c:if>
+									</c:forEach>
 								</ul>
 							</div>
 							<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$댓글$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -96,22 +99,20 @@
 								</div>
 								<!-- 댓글조회 -->
 								<br>
-								<br>
-								<br>
 								<div class="button" align="center">
 									<button onclick="location.href='fBoardListView.do'"
 										class="btn btn-theme03">목록으로</button>
 									<c:if test="${LoginUser.memberId==fBoard.memberId }">
-									<c:url var="fModify" value="fBoardModifyView.do">
-										<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
-									</c:url>
-									<c:url var="fDelete" value="fBoardDelete.do">
-										<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
-									</c:url>
-									<button onclick="location.href='${fModify}'"
-										class="btn btn-theme02">수정</button>
-									<button onclick="location.href='${fDelete}'"
-										class="btn btn-theme04">삭제</button>
+										<c:url var="fModify" value="fBoardModifyView.do">
+											<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+										</c:url>
+										<c:url var="fDelete" value="fBoardDelete.do">
+											<c:param name="fBoardNo" value="${fBoard.fBoardNo }"></c:param>
+										</c:url>
+										<button onclick="location.href='${fModify}'"
+											class="btn btn-theme02">수정</button>
+										<button onclick="location.href='${fDelete}'"
+											class="btn btn-theme04">삭제</button>
 									</c:if>
 								</div>
 							</div>

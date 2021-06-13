@@ -111,7 +111,7 @@ public class FBoardStoreLogic implements FBoardStore {
 	public ArrayList<Freeboard> printFbSearchAll(Search search, PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("fBoardMapper.fbSelectSearchList", null, rowBounds); 
+		return (ArrayList)sqlSession.selectList("fBoardMapper.fbSelectSearchList", search, rowBounds); 
 	}
 
 	@Override

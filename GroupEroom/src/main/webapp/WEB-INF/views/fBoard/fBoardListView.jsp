@@ -27,13 +27,12 @@
 						</h4>
 						<br> <br> <br>
 						<div class="form-group" align="center">
-							<form action="fBoardSearch.do" method="get" class="form-inline"
-								role="form">
+							<form action="fBoardSearch.do" method="get" class="form-inline" role="form">
 								<select class="form-control" name="searchCondition">
 									<option value="ALL">전체</option>
 									<option value="F_BOARD_TITLE">제목</option>
 									<option value="F_BOARD_CONTENTS">내용</option>
-									<option value="MEMBER_NAME">작성자</option>
+									<option value="F_WRITER">작성자</option>
 								</select> <input type="text" name="searchValue" style="width: 250px"
 									class="form-control"> <input type="submit" value="검색"
 									class="btn btn-theme">
@@ -58,10 +57,11 @@
 									<tr>
 										<td>${ fBoard.fBoardNo }</td>
 										<td>${ fBoard.fBullet }</td>
-										<td><c:url var="fBoardDetail" value="fBoardDetail.do">
+										<td>
+											<c:url var="fBoardDetail" value="fBoardDetail.do">
 												<c:param name="fBoardNo" value="${fBoard.fBoardNo}"></c:param>
 											</c:url> <a href="${fBoardDetail }">${fBoard.fBoardTitle }</a>&nbsp;&nbsp;
-											<span class="badge bg-info"><b id="cmtCount"></b></span></td>
+										</td>
 										<td>${fBoard.fWriter }</td>
 										<td>${fBoard.enrollDate }</td>
 										<td>${fBoard.hits }</td>
