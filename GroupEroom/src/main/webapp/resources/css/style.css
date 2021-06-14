@@ -2955,6 +2955,14 @@ ul.chat-available-user li a:hover {
 }
 
 /* -----------수정하는 부분 ----------- */
+.w3-sidebar {
+	overflow-y: scroll;
+    overflow-x: hidden;
+	height: 100%;
+	top: 55px;
+    right: 0px;
+    bottom: 0px;
+}
 
 .first-part {
 	font-size: 17px;
@@ -2964,7 +2972,6 @@ ul.chat-available-user li a:hover {
 	font-weight: 600;
 }
 
-
 .time {
 	display: inline-block;
 }
@@ -2972,6 +2979,62 @@ ul.chat-available-user li a:hover {
 .second-part {
 	font-size:14px;
 }
+
+
+.side-enrollDate {
+	display: inline-block;
+}
+
+.p-threads {
+	display: flex;
+    align-items: center;
+    padding-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: calc(100% - 22px);
+	
+}
+
+.p-threads-line{
+	flex: 1;
+    margin: 1px 0 0 0;
+    border-top-color: rgba(var(--sk_foreground_low,29,28,29),.13);
+	
+}
+.replyList-wrap {
+	padding: 0px;
+	
+}
+.reply {
+	padding-left: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #eaeaea;
+}
+
+.reply:hover {
+	background-color:#f8f7f8; 
+}
+.replyMemberName {
+	display: inline-block;
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+
+.replyEnrollDate {
+	display: inline-block;
+	padding-right: 15px;
+	
+}
+
+.reply-btn {
+	display: inline-block;
+}
+
+#delete-btn{
+	color: red;
+}
+
 /* 수정한 부분  
 .group-rom .first-part, .group-rom .second-part, .group-rom .third-part {
     float: left;
@@ -2983,8 +3046,8 @@ ul.chat-available-user li a:hover {
     width: 25%;
 } */
 
+/* ---------------수정한 부분 끝  */
 .group-rom .first-part.odd {
-    background: #f7f8fa;
     color: #6a6a6a;
     font-weight: 600;
 }

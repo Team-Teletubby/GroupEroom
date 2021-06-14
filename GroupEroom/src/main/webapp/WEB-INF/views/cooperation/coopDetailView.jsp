@@ -52,45 +52,44 @@
 							<aside class="mid-side">
 								<!-- 오른쪽 사이드바 -->
 								<div class="w3-sidebar w3-bar-block w3-animate-right"
-									style="width: 400px; right: 0; display: none;" id="mySidebar">
+									style="width: 400px; right: 0; display: none; border-left: 1px solid #eaeaea;" id="mySidebar">
 									<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 										&times;</button>
 									<aside class="right-side">
 										<div class="invite-row">
 											<div class="group-rom">
-												<div class="first-part odd">${ coop.memberName }</div>
+												<div class="first-part odd side-name"></div>
+												<div class="side-enrollDate"></div>
 												<div class="second-part2" id="OpenBtn"></div>
-												<div class="third-part">${ coop.enrollDate }</div>
+												<div class="third-part"></div>
 											</div>
 										</div>
-										<div style="padding: 10px; border: 1px solid lightgrey; font-size: 15px">
-											<table style="width: 100%" id="rtb">
-												<thead>
-													<tr>
-														<!-- 댓글 갯수 -->
-														<td colspan="2"><b style='color: #4ECDC4' id="rCount"></b></td>
-													</tr>
-												</thead>
-												<tbody>
-													<!-- 댓글 나오는 칸 -->
-												</tbody>
-											</table>
+										<!-- ?개의 답글 보이는 곳 영역  -->
+										<div class="p-threads">
+											<!-- 댓글 갯수 들어가는 곳 -->
+											<span class="rCount"></span>
+											<!-- 갯수 옆 선  -->
+											<hr class="p-threads-line">
+										</div>
+										<!-- ?개의 답글 보이는 곳 영역 끝 -->
+										<!-- 답글 시작 영역  -->
+										<div style="padding: 10px; font-size: 15px">
+											<ul class="replyList-wrap">
+												<!-- 댓글 데이터값 들어가는 곳  -->
+												<li class="reply">
+													<div class="replyMemberName"></div>
+													<div class="replyEnrollDate"></div>
+													<div class="replyContents"></div>
+													<div class="reply-btn"></div>
+												</li>
+												<!-- 댓글 데이터값 들어가는 곳 끝  -->
+											</ul>
 										</div>
 										<br>
-										<table style="width: 100%">
-											<tr>
-												<td style="width: 90%" id="inputZone">
-													<!-- <textarea placeholder="댓글을 입력해 주세요" 
-											class="form-control" style="width: 100%" id="rContent" name="comment" required></textarea> -->
-												</td>
-												<td id="buttonZone" style="width: 10%" align="right">
-													<%-- <button class="btn btn-theme02 btn-xs" id="rSubmit"
-														onclick="submitCmt('${coop.coNo}')">
-														<i class="fa fa-pencil"></i> 댓글 등록
-														</button> --%>
-												</td>
-											</tr>
-										</table>
+										<div>
+											<textarea placeholder="댓글을 입력해 주세요" class="form-control" style="width: 100%" id="rContent" name="comment" required></textarea>
+											<div id="buttonZone"></div>
+										</div>
 									</aside>
 								</div>
 								<div class="chat-room-head">
@@ -153,8 +152,8 @@
 													<c:param name="roomNo" value="${ coopList.roomNo }"></c:param>
 													<c:param name="coNo" value="${ coopList.coNo }"></c:param>
 												</c:url>
-												<div class="second-part"
-													onclick="w3_open(${coopList.coNo},'${ coopList.coContents }')"> ${ coopList.coContents }</div>
+												<div class="second-part" onclick="w3_open(${coopList.coNo},'${coopList.coContents }', '${coopList.memberName }', '${coopList.enrollDate }')"> ${coopList.coContents }</div>
+													
 												
 											</div>
 											<!-- 데이터 끝나는 곳 -->
@@ -226,12 +225,13 @@
 				<!-- 댓글 -->
 				<script>
 					//사이드바 오픈 시
-					function w3_open(coNo, coContents) {
+					function w3_open(coNo, coContents, coName, coDate) {
 						$('#mySidebar').css("display", "block");
 						$('#myOverlay').css("display", "block");
-
 						$('.second-part2').html("");
-						$('.second-part2').html('<p>' + coContents + '</p>');
+						$('.side-name').html(coName);
+						$('.side-enrollDate').html(coDate);
+						$('.second-part2').html(coContents);
 						$("#inputZone").html("<input id='rContent' type='text'>");
 						var rContent = $("#rContent").val();
 						$("#buttonZone").html("<button onclick='submitCmt(" + coNo + ")'>댓글등록</button>");
@@ -280,36 +280,41 @@
 							data: { "coNo": coNo },
 							dataType: "json",
 							success: function (data) {
-								var $tableBody = $("#rtb tbody");
-								$tableBody.html(""); // 비워주기
-								var $tr;
-								var $rWriter;
-								var $rContent;
-								var $rCreateDate;
+								console.log(data);
+								var $ul = $(".replyList-wrap");
+								$ul.html(""); // 비워주기
+								var $li;
+								var $inputHidden;
+								var $memberName;
+								var $enrollDate;
+								var $replyContents;
 								var $btnArea;
-								var $td;
-								$("#cmtCount").text("댓글 (" + data.length + ")"); // 댓글 개수 표시
+								$(".rCount").text(data.length + "개의 답글"); // 댓글 개수 표시
 								if (data.length > 0) {
 									for (var i in data) {
-										$tr = $("<tr>"); /* tr태그가 만들어짐 */
-										$memberId = $("<td width='100'>").text(data[i].writer);
-										$enrollDate = $("<td width='100'>").text(data[i].enrollDate);
-										$btnArea = $("<td>")
+										console.log(data[i]);
+										$li = $("<li class='reply'>"); /* li태그가 만들어짐 */
+										$inputHidden = $("<input type='hidden' id='input-coNo' name='coNo'>").val(data[0].cmtNo);
+										$memberName = $("<div class='replyMemberName'>").text(data[i].memberName);
+										$enrollDate = $("<div class='replyEnrollDate'>").text(data[i].enrollDate);
+										$replyContents = $("<div class='replyContents'>").text(data[i].cmtContents);
+										
+										$btnArea = $("<div class='reply-btn'>")
 											.append("<a href='#' id='modfiy-btn' onclick='modifyReply(this," + coNo + "," + data[i].cmtNo + ",\"" + data[i].cmtContents + "\");'>수정 </a>") //수정버튼 만들기			
-											.append("<a href='#' onclick='cmtDelete(" + coNo + "," + data[i].cmtNo + ");'> 삭제</a>"); //삭제버튼 만들기
-										$cmtContents = $("<td>").text(data[i].cmtContents);
-										$tr.append($memberId);
-										$tr.append($cmtContents);
-										$tr.append($enrollDate);
-										$tr.append($btnArea); //수정,삭제버튼 만들기
-										$tableBody.append($tr);
+											.append("<a href='#' id='delete-btn' onclick='cmtDelete(" + coNo + "," + data[i].cmtNo + ");'> 삭제</a>"); //삭제버튼 만들기
+										$li.append($inputHidden);
+										$li.append($memberName);
+										$li.append($enrollDate);
+										$li.append($btnArea); //수정,삭제버튼 만들기
+										$li.append($replyContents);
+										$ul.append($li); 
 									}
 								}
 							},
 							error: function (data) {
-								alert("서버실패"); //삭제할 곳   
-								var $tableBody = $("#rtb tbody");
-								$tableBody.html(""); // 비워주기
+								alert("서버실패"); //삭제할 곳
+								var $ul = $(".replyList-wrap");
+								$ul.html("");
 							}
 						});
 					}
@@ -359,7 +364,7 @@
 							data: { "coNo": coNo, "cmtNo": cmtNo },
 							success: function (data) {
 								if (data == "success") {
-									getReplyList();
+									getReplyList(coNo);
 								} else {
 									alert("댓글 조회 실패!");
 								}

@@ -13,3 +13,7 @@
 .emphasized {
     box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
 }
+
+.side-enrollDate {
+	display: inline-block;
+}
