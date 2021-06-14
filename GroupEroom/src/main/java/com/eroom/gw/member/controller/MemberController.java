@@ -241,30 +241,39 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
 	// 사원 정보수정
-
 	@RequestMapping(value = "memberModify.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView modifyMember(ModelAndView mv, @ModelAttribute Member member, Model model,
 			HttpServletRequest request, @RequestParam("post") String post, @RequestParam("address1") String addr1,
 			@RequestParam("address2") String addr2,
 			@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
-
-		System.out.println("test" + member.getMemberId());
+		System.out.println(reloadFile);
+		// 파일 수정 안할경우 (reloadFile이 null일때, 기존 member 가져와서 파일이름 그대로 유지시키기)
+		if (reloadFile.isEmpty()) {
+		Member member1 = service.printMemberOne(member.getMemberId());
+		member.setOriginalFileName(member1.getOriginalFileName());
+		member.setRenameFileName(member1.getRenameFileName());
+		System.out.println("테스트3");
+		}
 		// 프로필 수정
+		
 		if (reloadFile != null && !reloadFile.isEmpty()) {
-			if (member.getRenameFileName() != "") {
+		if (member.getRenameFileName() != "") {
+			System.out.println("테스트1");
 				deleteFile(member.getRenameFileName(), request);
 			}
-			// 다시 업로드
-			String renameFileName = saveFile(reloadFile, request);
-			if (renameFileName != null) {
-				member.setOriginalFileName(reloadFile.getOriginalFilename());
+		// 다시 업로드
+		String renameFileName = saveFile(reloadFile, request);
+		if (renameFileName != null) {
+			member.setOriginalFileName(reloadFile.getOriginalFilename());
 				member.setRenameFileName(renameFileName);
 			}
 		}
 
 		String addr = post + "," + addr1 + "," + addr2;
 		member.setMemberAddr(addr);
+		System.out.println("테스트2");
 		int result = service.modifyMember(member);
 		System.out.println(result);
 		if (result > 0) {
