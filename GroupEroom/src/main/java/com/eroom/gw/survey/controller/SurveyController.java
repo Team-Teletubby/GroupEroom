@@ -67,7 +67,7 @@ public class SurveyController {
 		
 		int result = surveyService.completeSurvey(surveyItem);
 		if(result > 0) {
-			return "redirect:surveyList.do";
+			return "redirect:surveyOne.do?surveyNo="+surveyNo;
 		}else {
 			return "";
 		}

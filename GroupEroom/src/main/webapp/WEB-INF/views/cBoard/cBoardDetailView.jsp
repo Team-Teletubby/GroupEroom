@@ -67,7 +67,7 @@ $(document).ready(function(){
 							<img class='memberImage' src="/resources/memberproFile/${cBoard.memberImage }">
 						</c:if>
 						<c:if test="${ null eq cBoard.memberImage }">
-							<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>
+							<i style='font-size:50px; width:5%;color:lightgray' class='fa fa-user-circle'></i>
 						</c:if>
 						</div>
 						<div style="float:left; width:47%; font-size:15px"><span class="label label-warning">${cBoard.memberDept }</span><br> ${cBoard.memberName } ${cBoard.memberJob }</div>

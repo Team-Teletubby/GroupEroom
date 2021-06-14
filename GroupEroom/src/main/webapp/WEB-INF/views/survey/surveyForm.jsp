@@ -78,7 +78,6 @@ $(document).ready(function(){
 				},
 				success : function(data) {
 					if(data == "success") {
-						alert("성공");
 						window.location.href = "surveyList.do";
 					}else {
 						alert("실패..");

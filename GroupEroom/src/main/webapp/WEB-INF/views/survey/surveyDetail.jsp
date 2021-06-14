@@ -81,17 +81,17 @@ $(document).ready(function(){
               		<p style="font-size:20px;"><i class="fa fa-bullhorn"></i> ${survey.surveyObject }</p><br>
               		<p id="date"></p>
               	<c:if test="${survey.showName == 'Y' }">
-              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold">실명</span>으로 진행됩니다.</p>
+              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold; color:yellowgreen">실명</span>으로 진행됩니다.</p>
               	</c:if>
               	<c:if test="${survey.showName == 'N' }">
-              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold">익명</span>으로 진행됩니다.</p>
+              		<p><i class="fa fa-check" style="color:#FCB322"></i>해당 투표는 <span style="font-weight:bold; color:red">익명</span>으로 진행됩니다.</p>
               	</c:if>
               	
               	<c:if test="${survey.showResult == 'Y' }">
-              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold">투표대상 모두가 </span>볼 수 있습니다.</p>
+              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold; color:yellowgreen">투표대상 모두가 </span>볼 수 있습니다.</p>
               	</c:if>
               	<c:if test="${survey.showResult == 'N' }">
-              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold">작성자</span>에게만 공개됩니다.</p>
+              		<p><i class="fa fa-check " style="color:#FCB322"></i>해당 투표 결과는 <span style="font-weight:bold; color:red">작성자</span>에게만 공개됩니다.</p>
               	</c:if>
               		<hr style="border : 1px solid; color:#4ECDC4; background:#4ECDC4">
               		<div>
