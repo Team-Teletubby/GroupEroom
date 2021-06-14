@@ -52,7 +52,7 @@
 							<aside class="mid-side">
 								<!-- 오른쪽 사이드바 -->
 								<div class="w3-sidebar w3-bar-block w3-animate-right"
-									style="width: 400px; right: 0; display: none; border-left: 1px solid #eaeaea;" id="mySidebar">
+									style="width: 500px; right: 0; display: none; border-left: 1px solid #eaeaea;" id="mySidebar">
 									<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 										&times;</button>
 									<aside class="right-side">
@@ -86,10 +86,15 @@
 											</ul>
 										</div>
 										<br>
-										<div>
+										<div class="col-sm-10">
+                    						<input type="text" class="form-control round-form" autocomplete="off" placeholder="댓글을 입력해 주세요" 
+                    								style="width: 0px" id="rContent" name="comment" required>
+                    						<div id="buttonZone"></div>
+                  						</div>
+										<!-- <div>
 											<textarea placeholder="댓글을 입력해 주세요" class="form-control" style="width: 100%" id="rContent" name="comment" required></textarea>
 											<div id="buttonZone"></div>
-										</div>
+										</div> -->
 									</aside>
 								</div>
 								<div class="chat-room-head">
@@ -124,13 +129,6 @@
 
 													<!-- 수정,삭제버튼 -->
 													<c:if test="${ LoginUser.memberId == coopList.memberId}">
-														<c:url var="coModify" value="coopModify.do">
-															<c:param name="roomNo" value="${ coopList.roomNo }">
-															</c:param>
-															<c:param name="coNo" value="${ coopList.coNo }"></c:param>
-															<c:param name="renameFilename"
-																value="${ coopList.renameFilename }"></c:param>
-														</c:url>
 														<c:url var="coDelete" value="coopDelete.do">
 															<c:param name="roomNo" value="${ coopList.roomNo }">
 															</c:param>
@@ -138,10 +136,6 @@
 															<c:param name="renameFilename"
 																value="${ coopList.renameFilename }"></c:param>
 														</c:url>
-														<button type="button" class="btn btn-round btn-warning btn-xs"
-															onclick="location.href='${ coModify }'">
-															<i class="fa fa-times" id="OpenBtn"></i>
-														</button>
 														<button type="button" class="btn btn-round btn-danger btn-xs"
 															onclick="location.href='${ coDelete }'">
 															<i class="fa fa-times"></i>
@@ -234,7 +228,7 @@
 						$('.second-part2').html(coContents);
 						$("#inputZone").html("<input id='rContent' type='text'>");
 						var rContent = $("#rContent").val();
-						$("#buttonZone").html("<button onclick='submitCmt(" + coNo + ")'>댓글등록</button>");
+						$("#buttonZone").html("<button class='btn btn-theme btn-xs' onclick='submitCmt(" + coNo + ")'>댓글등록</button>");
 						getReplyList(coNo);
 					}
 
@@ -272,7 +266,6 @@
 						var writer = '${LoginUser.memberName}';
 						var loginUser = '${LoginUser.memberId}';
 						$("#rContent").val("");
-						alert(writer + coNo + loginUser);
 
 						$.ajax({
 							url: "coopReply.do",

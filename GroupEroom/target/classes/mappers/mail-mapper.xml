@@ -71,7 +71,7 @@
 		JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID
 		WHERE SENDER_ID = #{value }
 		AND TRASH_YN = 'N'
-		AND MOD(MAIL_NO, 3) = 1 
+		AND MOD(MAIL_NO, 2) = 0 
 		ORDER BY SENT_DATE DESC
 	</select>
 	

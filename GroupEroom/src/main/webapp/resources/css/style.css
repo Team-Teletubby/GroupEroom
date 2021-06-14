@@ -1588,9 +1588,6 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 /* Grid Showcase*/
 
-	margin-bottom: 15px;
-}
-
 .show-grid [class^=col-] {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -3058,7 +3055,7 @@ ul.chat-available-user li a:hover {
 
 .group-rom .third-part{
 	display: inline-block;
-	margin-left: 20px;
+	margin-left: 1500px;
     width: 15%;
     color: #d4d3d3;
 }
