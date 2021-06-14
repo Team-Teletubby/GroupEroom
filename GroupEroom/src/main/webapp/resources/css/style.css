@@ -2943,19 +2943,45 @@ ul.chat-available-user li a:hover {
 
 
 .group-rom {
+	padding: 10px 0px 10px 30px;
     width: 100%;
     float: left;
-    border-bottom: 1px solid #eaebee;
+   
 }
 
+.group-rom:hover {
+	background-color: #f8f7f8;
+	
+}
+
+/* -----------수정하는 부분 ----------- */
+
+.first-part {
+	font-size: 17px;
+	margin-bottom: 4px;
+	padding-right: 10px;
+	display: inline-block;
+	font-weight: 600;
+}
+
+
+.time {
+	display: inline-block;
+}
+
+.second-part {
+	font-size:14px;
+}
+/* 수정한 부분  
 .group-rom .first-part, .group-rom .second-part, .group-rom .third-part {
     float: left;
     padding: 15px;
-}
+} */
 
+/* 수정한 부분 
 .group-rom .first-part {
     width: 25%;
-}
+} */
 
 .group-rom .first-part.odd {
     background: #f7f8fa;
@@ -2968,6 +2994,8 @@ ul.chat-available-user li a:hover {
 }
 
 .group-rom .third-part{
+	display: inline-block;
+	margin-left: 20px;
     width: 15%;
     color: #d4d3d3;
 }

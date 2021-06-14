@@ -40,11 +40,26 @@
 		WHERE a.ROOM_NO = #{ roomNo } 
 		ORDER BY a.CO_NO 
 	</select>
+	
+<!-- 글 한 개 가져오기 -->
+	<select id="selectOne" resultMap="coResultMap" parameterType="_int">
+		SELECT a.CO_NO, a.MEMBER_ID, b.MEMBER_NAME, a.CO_CONTENTS, a.ORIGINAL_FILENAME, a.RENAME_FILENAME, a.ENROLL_DATE, a.ROOM_NO, c.ROOM_NAME
+		FROM COOPERATION a
+		INNER JOIN MEMBER b ON a.MEMBER_ID = b.MEMBER_ID 
+		INNER JOIN COOPERATION_ROOM c ON a.ROOM_NO = c.ROOM_NO 
+		WHERE CO_NO = #{coNo}
+	</select>
 
 <!-- 글생성 -->	
 	<insert id="insertCoop">
 		INSERT INTO COOPERATION 
-		VALUES (CO_ROOM_SEQ.NEXTVAL, #{memberId}, #{coContents}, #{originalFilename}, #{renameFilename}, SYSDATE, #{roomNo})
+		VALUES (CO_SEQ.NEXTVAL, #{memberId}, #{coContents}, #{originalFilename}, #{renameFilename}, SYSDATE, #{roomNo})
+	</insert>
+	
+<!-- 방생성 -->	
+	<insert id="insertRoom">
+		INSERT INTO COOPERATION_ROOM 
+		VALUES (CO_ROOM_SEQ.NEXTVAL, #{roomName}, #{memberId}, DEFAULT)
 	</insert>
 
 <!-- 글삭제 -->
@@ -52,42 +67,37 @@
 		DELETE FROM COOPERATION WHERE CO_NO = #{coNo}
 	</delete>
 	
-<!-- 	
-	
-	
-	<update id="updatecBoard">
-		UPDATE CLUBBOARD SET C_BOARD_TITLE = #{cBoardTitle}, C_BOARD_CONTENTS = #{cBoardContents}, ORIGINAL_FILE = #{originalFileName} , RENAME_FILE = #{renameFileName}
-		WHERE C_BOARD_NO = #{cBoardNo}
-	</update>
-
-============== 댓글 ================
-	<resultMap type="Reply" id="replyResultMap">
-		<id property="replyNo" column="REPLY_NO"/>
-		<result property="replyContent" column="REPLY_CONTENT" />
-		<result property="rCreateDate" column="R_CREATE_DATE" />
-		<result property="cBoardNo" column="C_BOARD_NO" />
+<!--============== 댓글 ================-->
+	<resultMap type="CooperationCmt" id="replyResultMap">
+		<id property="cmtNo" column="CMT_NO"/>
+		<result property="cmtContents" column="CMT_CONTENTS" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="coNo" column="CO_NO" />
 		<result property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
 	</resultMap>
 
-	<select id="selectReplyList" resultMap="replyResultMap">
-		SELECT REPLY_NO, REPLY_CONTENT, R_CREATE_DATE, C_BOARD_NO, MEMBER_ID, MEMBER_NAME
-		FROM CLUBBOARD_REPLY JOIN MEMBER USING(MEMBER_ID)
-		WHERE C_BOARD_NO = #{cBoardNo } ORDER BY REPLY_NO ASC
+	<select id="replyCount" resultMap="replyResultMap">
+		SELECT CO_NO, COUNT(*)COUNT FROM COOPERATION JOIN COOPERATION_CMT USING(CO_NO) GROUP BY CO_NO
+	</select>
+
+	<select id="selectAllCmt" resultMap="replyResultMap">
+		SELECT CMT_NO, CMT_CONTENTS, ENROLL_DATE, CO_NO, MEMBER_ID, MEMBER_NAME
+		FROM COOPERATION_CMT JOIN MEMBER USING(MEMBER_ID)
+		WHERE CO_NO = #{coNo } ORDER BY ENROLL_DATE
 	</select>
 	
-	<insert id="insertReply">
-		INSERT INTO CLUBBOARD_REPLY
-		VALUES(CBOARD_REPLY_SEQ.NEXTVAL, #{replyContent}, SYSDATE, #{cBoardNo},#{memberId})
+	<insert id="insertCmt">
+		INSERT INTO COOPERATION_CMT
+		VALUES(CO_CMT_SEQ.NEXTVAL, #{cmtContents}, SYSDATE, #{coNo},#{memberId})
 	</insert>
-	
-	<update id="updateReply">
-		UPDATE CLUBBOARD_REPLY SET REPLY_CONTENT = #{replyContent}
-		WHERE REPLY_NO = #{replyNo}
+
+	<update id="updateCmt">
+		UPDATE COOPERATION_CMT SET CMT_CONTENTS = #{cmtContents}
+		WHERE CMT_NO = #{cmtNo}
 	</update>
 	
-	<delete id="deleteReply">
-		DELETE FROM CLUBBOARD_REPLY WHERE REPLY_NO = #{replyNo}
-	</delete> -->
-
+	<delete id="deleteCmt">
+		DELETE FROM COOPERATION_CMT WHERE CMT_NO = #{cmtNo}
+	</delete>
 </mapper>

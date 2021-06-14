@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eroom.gw.cboard.domain.Reply;
 import com.eroom.gw.cooperation.domain.Cooperation;
 import com.eroom.gw.cooperation.domain.CooperationCmt;
 import com.eroom.gw.cooperation.domain.CooperationRoom;
 import com.eroom.gw.cooperation.service.CooperationService;
+import com.eroom.gw.fboard.domain.Freeboard;
+import com.eroom.gw.fboard.domain.FreeboardFile;
 import com.eroom.gw.member.domain.Member;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 @RestController
 @Controller
 public class CooperationController {
@@ -47,17 +52,57 @@ public class CooperationController {
 		}
 		return mv;
 	}
+	
+//방만들기
+	@RequestMapping(value="roomRegister.do", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView roomRegister(ModelAndView mv, @ModelAttribute CooperationRoom room,
+									@RequestParam("roomName") String roomName,
+									HttpServletRequest request, HttpSession session) {
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		room.setMemberId(loginUser.getMemberId());
+		room.setRoomName(roomName);
+		int result = 0;
+		String path = "";
+		result = coService.registerRoom(room);
+		if(result > 0) {
+			path = "redirect:coopListView.do";
+		}else {
+			mv.addObject("msg", "게시글 등록 실패");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
+		return mv;
+	}
 
 //방 상세화면
 	@RequestMapping(value="coopDetailView.do")
 	public ModelAndView coopListByRoom(ModelAndView mv, @RequestParam("roomNo") int roomNo) {
 		ArrayList<Cooperation> coopList = coService.printAllByRoom(roomNo);
+		
 		if(!coopList.isEmpty()) {
 			mv.addObject("coopList", coopList);
+			mv.addObject("coopName", coopList.get(0).getRoomName());
 			mv.addObject("roomNo",roomNo);
 			mv.setViewName("cooperation/coopDetailView");
 		}else {
-			mv.addObject("msg", "리스트불러오기 실패").setViewName("common/errorPage");
+			mv.setViewName("cooperation/coopDetailView");
+		}
+		return mv;
+	}
+	
+//게시글 상세조회
+	@RequestMapping(value="coopDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView fBoardDetail(ModelAndView mv,
+									@RequestParam("coNo") int coNo) {
+		//상세조회 불러오기
+		CooperationCmt coop = coService.printOne(coNo);
+		if(coop != null) {
+			mv.addObject("coop", coop);
+			mv.setViewName("coopReply.do");
+		}else {
+			mv.addObject("msg", "게시글 상세 조회 실패");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -162,8 +207,59 @@ public class CooperationController {
 		}
 	}
 			
-
+//댓글목록
+	@RequestMapping(value="coopReply.do", method=RequestMethod.GET)
+	public void getReplyList(HttpServletResponse response, @RequestParam("coNo") int coNo) throws Exception {
+		System.out.println(coNo);
+		ArrayList<CooperationCmt> list = coService.printAllCmt(coNo);
+		System.out.println(list);
+		if(!list.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:ss").create(); // 날짜 포맷 변경!
+			gson.toJson(list, response.getWriter());
+		}else {
+			System.out.println("데이터가 없습니다.");
+		}
+	}
+//댓글등록
+	@ResponseBody
+	@RequestMapping(value="coopAddReply.do", method=RequestMethod.POST)
+	public String addReply(@RequestParam("rContent")String rContent, @RequestParam("coNo")int coNo, HttpSession session) {
+		
+		System.out.println(coNo + rContent);
+		Member loginUser = (Member)session.getAttribute("LoginUser");
+		CooperationCmt cmt = new CooperationCmt();
+		cmt.setMemberId(loginUser.getMemberId());
+		cmt.setCoNo(coNo);
+		cmt.setCmtContents(rContent);
+		int result = coService.registerCoopCmt(cmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+//댓글수정
+	@ResponseBody
+	@RequestMapping(value="coopModifyReply.do", method=RequestMethod.POST)
+	public String modifyReply(@ModelAttribute CooperationCmt cmt) {
+		int result = coService.modifyCoopCmt(cmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
-	
+//댓글삭제
+	@ResponseBody
+	@RequestMapping(value="coopDeleteReply.do", method=RequestMethod.GET)
+	public String removeReply(@ModelAttribute CooperationCmt cmt) {
+		int result = coService.removeCoopCmt(cmt);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 }

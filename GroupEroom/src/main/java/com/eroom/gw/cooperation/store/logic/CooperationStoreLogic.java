@@ -22,6 +22,11 @@ public class CooperationStoreLogic implements CooperationStore {
 	public ArrayList<CooperationRoom> selectAllList() {
 		return (ArrayList)sqlSession.selectList("coopMapper.selectAllList");
 	}
+	
+	@Override
+	public int insertRoom(CooperationRoom room) {
+		return sqlSession.insert("coopMapper.insertRoom", room);
+	}
 
 	@Override
 	public ArrayList<Cooperation> selectAllByRoom(int roomNo) {
@@ -45,26 +50,27 @@ public class CooperationStoreLogic implements CooperationStore {
 
 	@Override
 	public ArrayList<CooperationCmt> selectAllCmt(int coNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("coopMapper.selectAllCmt", coNo);
 	}
 
 	@Override
 	public int insertCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("coopMapper.insertCmt", cmt);
 	}
 
 	@Override
 	public int updateCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("coopMapper.updateCmt", cmt);
 	}
 
 	@Override
 	public int deleteCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("coopMapper.deleteCmt", cmt);
+	}
+
+	@Override
+	public CooperationCmt selectOne(int coNo) {
+		return sqlSession.selectOne("coopMapper.selectOne", coNo);
 	}
 
 	

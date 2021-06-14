@@ -23,6 +23,11 @@ public class CooperationServiceImpl implements CooperationService {
 	}
 
 	@Override
+	public int registerRoom(CooperationRoom room) {
+		return coStore.insertRoom(room);
+	}
+
+	@Override
 	public ArrayList<Cooperation> printAllByRoom(int roomNo) {
 		return coStore.selectAllByRoom(roomNo);
 	}
@@ -45,27 +50,29 @@ public class CooperationServiceImpl implements CooperationService {
 
 	@Override
 	public ArrayList<CooperationCmt> printAllCmt(int coNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return coStore.selectAllCmt(coNo);
 	}
 
 	@Override
 	public int registerCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return coStore.insertCoopCmt(cmt);
 	}
 
 	@Override
 	public int modifyCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return coStore.updateCoopCmt(cmt);
 	}
 
 	@Override
 	public int removeCoopCmt(CooperationCmt cmt) {
-		// TODO Auto-generated method stub
-		return 0;
+		return coStore.deleteCoopCmt(cmt);
 	}
+
+	@Override
+	public CooperationCmt printOne(int coNo) {
+		return coStore.selectOne(coNo);
+	}
+
 	
 	
 

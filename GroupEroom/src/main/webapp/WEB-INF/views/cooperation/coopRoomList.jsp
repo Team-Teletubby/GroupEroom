@@ -50,7 +50,7 @@
 					</div>
 					<div class="room-desk">
 						<h4 class="pull-left">DEPARTMENT</h4>
-						<a href="#" class="pull-right btn btn-theme02">+ Create Room</a>
+						<a href="#" class="pull-right btn btn-theme02" data-toggle="modal" data-target="#myModal" style="color:white">+ Create Room</a>
 						<form action="coopListView.do">
 							<c:forEach items="${ coList }" var="coopRoom">
 								<div class="room-box">
@@ -71,6 +71,35 @@
 				</aside>
 			</div>
 			<!-- page end-->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title" id="myModalLabel">방만들기</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form action="roomRegister.do" method="post" enctype="multipart/form-data">
+							<fieldset>
+ 							    <div class="form-group">
+							      <label class="form-label mt-4">작성자</label>
+							      <textarea class="form-control hidden" id="title" rows="1" name="memberId">${LoginUser.memberId }</textarea>
+							      <textarea class="form-control" id="title" rows="1" name="memberName" readonly>${LoginUser.memberName }</textarea>
+							    </div>		
+							    <div class="form-group">
+							      <label class="form-label mt-4">방이름</label>
+							      <textarea class="form-control" id="title" rows="1" name="roomName" required></textarea>
+							    </div>
+							</fieldset>
+                    		<div class="modal-footer">
+		                      <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		                      <button type="submit" class="btn btn-primary">생성</button>
+                    		</div>
+						</form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 		</section>
 		<!-- /wrapper -->
 	</section>

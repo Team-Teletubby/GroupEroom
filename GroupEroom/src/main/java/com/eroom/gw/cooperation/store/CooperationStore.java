@@ -9,6 +9,7 @@ import com.eroom.gw.cooperation.domain.CooperationRoom;
 public interface CooperationStore {
 	
 	public ArrayList<CooperationRoom> selectAllList(); //방 리스트조회
+	public int insertRoom(CooperationRoom room); //방만들기
 	public ArrayList<Cooperation> selectAllByRoom(int roomNo); //협업 상세조회
 	public int insertCoop(Cooperation coop); //게시물 작성
 	public int updateCoop(Cooperation coop); //게시물 수정
@@ -18,6 +19,7 @@ public interface CooperationStore {
 	public int insertCoopCmt(CooperationCmt cmt); //댓글생성
 	public int updateCoopCmt(CooperationCmt cmt); //댓글수정
 	public int deleteCoopCmt(CooperationCmt cmt); //댓글삭제
+	public CooperationCmt selectOne(int coNo); //1개만 조회
 
 
 }
