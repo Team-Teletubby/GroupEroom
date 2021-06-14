@@ -244,8 +244,8 @@
 							</div>
 							<!-- 전자결재 끝 -->
 						</div>
-						<div class="row">
-							<!-- 날씨 -->
+						<!-- <div class="row">
+							날씨
 							<div class="col-md-4 mb">
 								<div class="weather pn Currlcon">
 									<i id="weather-icon"></i>
@@ -253,8 +253,8 @@
 									<h4 class="weather-city">서울 특별시</h4>
 								</div>
 							</div>
-							<!-- 날씨 끝 -->
-							<!-- 사내 게시판 -->
+							날씨 끝
+							사내 게시판
 							<div class="col-md-8 mb">
 								<div class="message-p pn">
 									<div class="message-header">
@@ -265,39 +265,39 @@
 											<thead>
 											</thead>
 											<tbody>
-												<!-- for문 적어야하는 곳 (6개까지) -->
+												for문 적어야하는 곳 (6개까지)
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
 												</tr>
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
 												</tr>
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
 												</tr>
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
 												</tr>
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
 												</tr>
 												<tr>
-													<!-- 데이터 넣는 곳 -->
+													데이터 넣는 곳
 													<td class="text-center" style="width: 50%">안녕하세요</td>
 													<td class="text-center">김아무개 사원</td>
 													<td class="text-center">2021.05.10 11:46</td>
@@ -307,8 +307,8 @@
 									</div>
 								</div>
 							</div>
-							<!-- 사내 게시판 끝 -->
-						</div>
+							사내 게시판 끝
+						</div> -->
 						<div class="row"></div>
 						<div class="row"></div>
 					</div>
@@ -381,70 +381,14 @@
 						</c:forEach>
 						<!-- 집무현황 끝 -->
 						<!-- 일정 -->
-						<h4 class="centered mt">일정</h4>
+						<h4 class="centered mt">날씨</h4>
 						<!-- First Member -->
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="img/ui-divya.jpg" width="35px"
-									height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#">DIVYA MANIAN</a><br />
-									<muted>Available</muted>
-								</p>
-							</div>
-						</div>
-						<!-- Second Member -->
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="img/ui-sherman.jpg" width="35px"
-									height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#">DJ SHERMAN</a><br />
-									<muted>I am Busy</muted>
-								</p>
-							</div>
-						</div>
-						<!-- Third Member -->
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="img/ui-danro.jpg" width="35px"
-									height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#">DAN ROGERS</a><br />
-									<muted>Available</muted>
-								</p>
-							</div>
-						</div>
-						<!-- Fourth Member -->
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="img/ui-zac.jpg" width="35px"
-									height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#">Zac Sniders</a><br />
-									<muted>Available</muted>
-								</p>
-							</div>
-						</div>
-						<!-- CALENDAR-->
-						<div id="calendar" class="mb">
-							<div class="panel green-panel no-margin">
-								<div class="panel-body">
-									<div id="date-popover" class="popover top"
-										style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-										<div class="arrow"></div>
-										<h3 class="popover-title" style="disadding: none;"></h3>
-										<div id="date-popover-content" class="popover-content"></div>
-									</div>
-									<div id="my-calendar"></div>
+						<div class="row">
+							<div class="">
+								<div class="weather pn Currlcon">
+									<i id="weather-icon"></i>
+									<h2 class="CurrTemp">11º C</h2>
+									<h4 class="weather-city">서울 특별시</h4>
 								</div>
 							</div>
 						</div>

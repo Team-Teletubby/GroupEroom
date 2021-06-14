@@ -277,6 +277,7 @@
 		});
 		
         $(document).ready(function() {
+        	$('ul').eq(4).addClass("active");
         	// =============== 문서 종류 ====================
         	$("#approvalType").change(function() {
         		// 협조문

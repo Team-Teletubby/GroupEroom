@@ -246,7 +246,9 @@
 	<script>
 		$(document).ready(function() {
 			getCommentList();
-		});
+			
+			
+		})
 
 		/* 댓글 등록  */
 		$("#cmtSubmit").click(function() {
