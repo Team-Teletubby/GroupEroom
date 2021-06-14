@@ -31,6 +31,16 @@
 
 		<section id="main-content">
 			<section class="wrapper site-min-height">
+			<h3>
+				<i class="fa fa-angle-right"></i> 예약관리
+			</h3>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content-panel">
+						<h4>
+							<i class="fa fa-angle-right"></i> 회의실 예약하기
+						</h4>
+						<br>
 				<div id="wrapper">
 					<div id="loading"></div>
 					<div id="calendar"></div>
@@ -147,8 +157,8 @@
 	</section>
 	<script>
 		$(document).ready(function() {
-			$('.sub-menu').eq(2).children('a').addClass("active");
-	    	$('.sub-menu').eq(2).children('ul').css("display", "block");
+			$('.sub-menu').eq(3).children('a').addClass("active");
+	    	$('.sub-menu').eq(3).children('ul').css("display", "block");
 		});
 	
 		$('.time-set').click(function() {

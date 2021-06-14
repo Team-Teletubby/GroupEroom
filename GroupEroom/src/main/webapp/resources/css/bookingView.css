@@ -65,9 +65,29 @@ body {
   font-size: 13px;
 }
 
+..modal-body {
+	padding: 25px 15px 15px 15px;
+}
 .inputModal {
   width: 65%;
+  padding-left: 15px;
   margin-bottom: 10px;
+  border: none;
+}
+
+.row-1st {
+	margin-top: 35px;	
+}
+
+.inputModal:focus {
+	outline:none;
+}
+
+#edit-desc {
+	resize: none;
+}
+.col-xs-12 {
+	margin-bottom: 10px;
 }
 
 #contextMenu {

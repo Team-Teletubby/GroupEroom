@@ -27,11 +27,21 @@
 
 		<section id="main-content">
 			<section class="wrapper site-min-height">
+			<h3>
+				<i class="fa fa-angle-right"></i> 예약관리
+			</h3>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content-panel">
+						<h4>
+							<i class="fa fa-angle-right"></i> 예약관리 홈
+						</h4>
+						<br>
 				<div id="wrapper">
 					<div id="loading"></div>
 					<div id="calendar" class="calendar-form"></div>
 				</div>
-
+				
 				<!-- 일정 추가 MODAL -->
 				<div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
 					<div class="modal-dialog" role="document">
@@ -44,50 +54,54 @@
 								<h4 class="modal-title"></h4>
 							</div>
 							<div class="modal-body">
-								<div class="row">
+								<div class="row row-1st">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-title">일정명</label> <input
-											class="inputModal" type="text" name="edit-title"
-											id="edit-title" required="required" />
+										<label class="col-xs-3" for="edit-title">일정명</label>
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-title" id="edit-title" required="required" readOnly/> 
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-type">사원명</label> 
-										<input class="inputModal" type="text" name="edit-type" id="edit-name">
+										<label class="col-xs-3" for="edit-type">사원명</label> 
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-type" id="edit-name" readOnly>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-type">부서명</label> 
-										<input class="inputModal" type="text" name="edit-dept" id="edit-dept">
+										<label class="col-xs-3" for="edit-type">부서명</label> 
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-dept" id="edit-dept" readOnly>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-start">시작</label> <input
-											class="inputModal" type="text" name="edit-start"
-											id="edit-start" />
+										<label class="col-xs-3" for="edit-start">시작</label> 
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-start" id="edit-start" readOnly/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-end">끝</label> <input
-											class="inputModal" type="text" name="edit-end" id="edit-end" />
+										<label class="col-xs-3" for="edit-end">끝</label> 
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-end" id="edit-end" readOnly/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-type">회의실</label> <input
-											class="inputModal" type="text" name="edit-type"
-											id="edit-type">
+										<label class="col-xs-3" for="edit-type">회의실</label> 
+										<span>|</span> 
+										<input class="inputModal" type="text" name="edit-type" id="edit-type" readOnly>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<label class="col-xs-4" for="edit-desc">설명</label>
+										<label class="col-xs-3" for="edit-desc">설명</label>
+										<span style="float:left">|</span> 
 										<textarea rows="4" cols="50" class="inputModal"
-											name="edit-desc" id="edit-desc"></textarea>
+											name="edit-desc" id="edit-desc" readOnly></textarea>
 									</div>
 								</div>
 							</div>
@@ -130,8 +144,8 @@
 	</section>
 	<script>
 		$(document).ready(function() {
-			$('.sub-menu').eq(2).children('a').addClass("active");
-	    	$('.sub-menu').eq(2).children('ul').css("display", "block");
+			$('.sub-menu').eq(3).children('a').addClass("active");
+	    	$('.sub-menu').eq(3).children('ul').css("display", "block");
 		});
 	</script>
 	<!-- <script src="resources/vendor/js/jquery.min.js"></script> -->
