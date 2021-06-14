@@ -193,7 +193,7 @@ span.error {
 							</div>
 							<div class="form-group ">
 								<label for="formFile" class="control-label col-lg-2 col-sm-3">
-									프로필사진 </label> <input type="file" id=formFile name="uploadFile">
+								프로필사진 </label>  <input type="file" id=formFile name="uploadFile">
 								<div class="col-lg-10 col-sm-9">
 
 									<!-- 이미지 미리보기 영역 -->

@@ -14,25 +14,62 @@
 	<jsp:include page="../common/sideBar.jsp"></jsp:include>
 	<section id="main-content">
 		<section class="wrapper">
+		<h3><i class="fa fa-angle-right"></i>인사관리</h3>
 			<div class="row">
-					<h1 align="center">${memberOne.memberName} ${memberOne.memberJob} 상세보기</h1>
+			 <div class="col-md-12">
+            <div class="form-panel" >
+            <h4><i class="fa fa-angle-right"></i>사원 상세 조회</h4>
 					
-							<p style="text-align: center;">	
-						<img src="/resources/memberproFile/${memberOne.renameFileName }" width="150"  height="150" text-align=center/>
-						</p>
-				<div class="form-panel" style="width: 800px; margin: 0px auto; " >
+							
+						
+				<%-- <div align="center">
+						<table>
+							<tr><td>비밀번호</td><td>${memberOne.memberPwd }</td></tr>
+							<tr><td>주민등록번호</td><td>${memberOne.memberRrn }</td></tr>
+							<tr><td>폰번호</td><td>${memberOne.memberPhone }</td></tr>
+							<tr><td>이메일</td><td>${memberOne.memberEmail }</td></tr>
+							<tr><td>주소</td><td>${memberOne.memberAddr }</td></tr>
+							<tr><td>은행</td><td>${memberOne.bank }</td></tr>
+							<tr><td>계좌번호</td><td>${memberOne.bankAccount }</td></tr>
+							<tr><td>퇴사여부</td><td>${memberOne.quitYn }</td></tr>
+							<tr><td>퇴사날짜</td><td>${memberOne.quitDate }</td></tr>
+						</table>
+					
+				</div>	 --%>
+				
+						
+						
+						
+						
+						
+				<div class="showback" style="width: 800px; margin: 0px auto; border:1px solid lightgray " >
+				<h3 align="center" style="background-color: white; margin:10px 255px 0px 255px;"><i class="fa fa-address-card-o"></i>  ${memberOne.memberName} ${memberOne.memberJob} 상세보기</h3>
+				<hr style="border : 1px solid; color:#4ECDC4; background:#4ECDC4">	
+				<div>
+				
+					<div align="center" style="float:left; width:50%; ">
+						<img src="/resources/memberproFile/${memberOne.renameFileName }" style="width:150px; height:150px; text-align:center; border-radius:50%"/>
+					</div>		
+					<div style="float:left; width:50%;">
+					<br><br>
+						<table style="width:100%; font-size:15px;">
+							<tr><td>사번</td><td>${memberOne.memberId }</td></tr>
+							<tr><td>부서</td><td>${memberOne.memberDept }</td></tr>
+							<tr><td>직급</td><td>${memberOne.memberJob }</td></tr>
+							<tr><td>이름</td><td>${memberOne.memberName }</td></tr>
+						</table>
+					</div>
+				</div><br><br><br><br><br><br><br><br><br>
+				
+				
+				
+				
               <div class=" form" style="margin: 20px 100px 0px 100px; height:auto;" >
-                <form class="cmxform form-horizontal style-form" id="commentForm" method="get" style >
-                  <div class="form-group ">
-                    <label for="cname" class="control-label col-lg-2">사번</label>
-                    <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="memberId" minlength="2" type="text" value="${memberOne.memberId }" readonly >
-                    </div>
-                  </div>
+                <form class="cmxform form-horizontal style-form" id="commentForm" method="get" >
                   <div class="form-group ">
                     <label for="cemail" class="control-label col-lg-2">비밀번호</label>
                     <div class="col-lg-10">
-                      <input class="form-control " id="cemail" type="email" name="memberPwd" value="${memberOne.memberPwd }" readonly>
+                      <input class="form-control " id="cemail" type="text" name="memberPwd" value="****" readonly>
                     </div>
                   </div>
                   <div class="form-group ">
@@ -102,19 +139,21 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
+                    <div align="center">
                        <c:url var="mModify" value="info.do">
 							<c:param name="memberId" value="${memberOne.memberId }"></c:param>
 						</c:url>
-							
-                    <a href="${mModify } " class="btn btn-theme02">수정</a>
-                   
+                   		 <a href="${mModify } " class="btn btn-theme02" style="color:white"><i class="fa fa-edit"></i> 수정</a>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-				
+            <br><br><br><br>
+            
+            <!--end form panel -->
+				</div>
+				</div>
 				
 			</div>
 		</section>

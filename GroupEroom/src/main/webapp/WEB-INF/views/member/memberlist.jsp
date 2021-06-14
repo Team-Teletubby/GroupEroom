@@ -47,20 +47,42 @@ span.error {
 
 	<section id="main-content">
 		<section class="wrapper">
+		<h3><i class="fa fa-angle-right"></i>인사관리</h3>
 			<div class="col-md-12">
+			<div class="form-panel" >
 				<h4>
 					<i class="fa fa-angle-right"></i> 사원목록
 				</h4>
-				<div class="content-panel" style="background-color: white; margin: 20px 0px 0px 0px">
-					<hr>
-					<table class="table">
-						<thead>
+				<div align="right">
+				<form action="memberSearch.do" method="get" class="form-inline">
+					<select name="searchCondition" class="form-control">
+						<option value="all"
+							<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
+						<option value="name"
+							<c:if test="${search.searchCondition == 'name' }">selected</c:if>>이름</option>
+						<option value="dept"
+							<c:if test="${search.searchCondition == 'dept' }">selected</c:if>>부서</option>
+						<option value="job"
+							<c:if test="${search.searchCondition == 'job' }">selected</c:if>>직급</option>
+					</select> <input type="text" name="searchValue" style="width:200px" class="form-control" 
+						value="${search.searchValue }"> <input type="submit"
+						value="검색" class="btn btn-theme">
+				</form>
+			</div>
+				
+				
+				
+				
+				<div class="content-panel" style="background-color: white; margin: 20px 0px 0px 0px; text-align: center;">
+				
+					<table class="table" style="text-align-last:center;">
+						<thead class="text-center">
 							<tr>
 								<th>사번</th>
 								<th>부서</th>
 								<th>직급</th>
 								<th>이름</th>
-								<th>폰번호</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -72,14 +94,13 @@ span.error {
 									<td>${ row.memberDept }</td>
 									<td>${row.memberJob }</td>
 									<td>${row.memberName }</td>
-									<td>${row.memberPhone }</td>
+									
 								</tr>
 						
 						</c:forEach>
 						</tbody>
 					</table>
-				</div>
-			</div>
+				
 			</div>
 			<div align="center">
             <div class="btn-group">
@@ -128,24 +149,10 @@ span.error {
 			</div>
 			</div>
 			<br><br>
-			<div align="center">
-				<form action="memberSearch.do" method="get" class="form-inline">
-					<select name="searchCondition" class="form-control">
-						<option value="all"
-							<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-						<option value="name"
-							<c:if test="${search.searchCondition == 'name' }">selected</c:if>>이름</option>
-						<option value="dept"
-							<c:if test="${search.searchCondition == 'dept' }">selected</c:if>>부서</option>
-						<option value="job"
-							<c:if test="${search.searchCondition == 'job' }">selected</c:if>>직급</option>
-					</select> <input type="text" name="searchValue" style="width:200px" class="form-control" 
-						value="${search.searchValue }"> <input type="submit"
-						value="검색" class="btn btn-theme">
-				</form>
+			
 			</div>
-			<script type="text/javascript">
-					
-					</script>
+			</div>
+			</section>
+			</section>
 </body>
 </html>
