@@ -113,10 +113,9 @@
 		MEMBER_RRN,
 		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDR, BANK, REG_DATE,
 		QUIT_YN, QUIT_DATE,
-		ACCOUNT, ORIGINALFILE_NAME, RENAMEFILE_NAME)
+		ACCOUNT, ORIGINALFILE_NAME, RENAMEFILE_NAME, STATUS)
 		VALUES(ID_SEQ.NEXTVAL, #{memberDept }, #{memberJob }, #{memberName },
-		DEFAULT, #{memberRrn
-		},
+		DEFAULT, #{memberRrn},
 		#{memberPhone }, #{memberEmail }, #{memberAddr
 		}, #{bank }, SYSDATE,'N', DEFAULT,
 		#{bankAccount }, #{originalFileName
