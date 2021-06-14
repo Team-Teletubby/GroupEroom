@@ -183,25 +183,52 @@ $(document).ready(function(){
 					if(data.length > 0) {
 						for(var i in data) {
 							$tr = $("<tr>");
-							if(data[i].memberImage == null){
+							if(data[i].step > 0){
 								$td = $("<td></td>");
-								$rWriter = $("<td align='center' style='width:1%'>").html("<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>");
-								$tr.append($td);
-								$tr.append($rWriter);
-								if(data[i].memberName == writer ){
-									$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+								if(data[i].memberImage == null){
+									$rWriter = $("<td align='center' style='width:1%;'>").html("<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>");
+									$tr.append($td);
+									$tr.append($rWriter);
+									if(data[i].memberName == writer ){
+										$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+									}else{
+										$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									}
 								}else{
-									$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									$rWriter = $("<td align='center' style='width:1%'>").html("<img class='memberImage' src='/resources/memberproFile/"+data[i].memberImage+"'></td>");
+									$tr.append($td);
+									$tr.append($rWriter);
+									if(data[i].memberName == writer){
+										$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+									}else{
+										$rContent = $("<td style='padding:0px 0px 0px 20px'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									}
 								}
 							}else{
-								$rWriter = $("<td align='center' style='width:10%'>").html("<img class='memberImage' src='/resources/memberproFile/"+data[i].memberImage+"'></td>");
-								$tr.append($rWriter);
-								if(data[i].memberName == writer){
-									$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+								if(data[i].memberImage == null){
+									
+									$rWriter = $("<td align='center' style='width:8%'>").html("<i style='font-size:50px; color:lightgray' class='fa fa-user-circle'></i>");
+									$tr.append($rWriter);
+									if(data[i].memberName == writer ){
+										$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+									}else{
+										$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold;'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									}
 								}else{
-									$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									$rWriter = $("<td align='center' style='width:8%'>").html("<img class='memberImage' src='/resources/memberproFile/"+data[i].memberImage+"'></td>");
+									$tr.append($rWriter);
+									if(data[i].memberName == writer){
+										$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"<span style='color:#da4453'> (작성자)</span></span><br>"+data[i].replyContent+"<br>");
+									}else{
+										$rContent = $("<td colspan='2'>").html("<span style='font-weight:bold'>"+data[i].memberName+"</span><br>"+data[i].replyContent+"<br>");
+									}
 								}
 							}
+									
+									
+									
+									
+									
 							$rContent.append("<span style='font-size:10px'>"+data[i].rCreateDate+"  &nbsp&nbsp <a style='color:gray' href='#' onclick='replyChild(this,"+boardNo+","+data[i].family+","+data[i].step+")'>답글쓰기</a></span><br>");
 							/* $rCreateDate = $("<td align='right' style='font-size:8px'>").text(data[i].rCreateDate); */
 							if(data[i].memberId == loginUser){
