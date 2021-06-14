@@ -248,9 +248,9 @@
 					<!-- 사용자 지정 부분③ : 텍스트 메시지 -->
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					<button type="button" id="save-btn" class="btn btn-primary save"
-						data-dismiss="modal">Save changes</button>
+						data-dismiss="modal">확인</button>
 
 				</div>
 			</div>
