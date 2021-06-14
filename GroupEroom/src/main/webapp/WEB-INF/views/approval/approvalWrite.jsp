@@ -277,7 +277,8 @@
 		});
 		
         $(document).ready(function() {
-        	$('ul').eq(4).addClass("active");
+        	$('.sub-menu').eq(0).children('a').addClass("active");
+        	$('.sub-menu').eq(0).children('ul').css("display", "block");
         	// =============== 문서 종류 ====================
         	$("#approvalType").change(function() {
         		// 협조문

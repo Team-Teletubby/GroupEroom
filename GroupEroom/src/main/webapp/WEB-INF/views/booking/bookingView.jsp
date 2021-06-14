@@ -128,6 +128,12 @@
 			</div>
 		</footer>
 	</section>
+	<script>
+		$(document).ready(function() {
+			$('.sub-menu').eq(2).children('a').addClass("active");
+	    	$('.sub-menu').eq(2).children('ul').css("display", "block");
+		});
+	</script>
 	<!-- <script src="resources/vendor/js/jquery.min.js"></script> -->
 	<script src="resources/vendor/js/bootstrap.min.js"></script>
 	<script src="resources/vendor/js/moment.min.js"></script>

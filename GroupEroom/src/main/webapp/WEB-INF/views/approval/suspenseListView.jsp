@@ -148,5 +148,11 @@
 		</footer>
 		<!--footer end-->
 	</section>
+	<script>
+		$(document).ready(function() {
+			$('.sub-menu').eq(0).children('a').addClass("active");
+	    	$('.sub-menu').eq(0).children('ul').css("display", "block");
+		});
+	</script>
 </body>
 </html>

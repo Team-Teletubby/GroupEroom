@@ -146,6 +146,11 @@
 		</footer>
 	</section>
 	<script>
+		$(document).ready(function() {
+			$('.sub-menu').eq(2).children('a').addClass("active");
+	    	$('.sub-menu').eq(2).children('ul').css("display", "block");
+		});
+	
 		$('.time-set').click(function() {
 			$('.time-set').removeClass('click')
 			$(this).addClass('click');

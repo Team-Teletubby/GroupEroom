@@ -41,7 +41,7 @@
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<!-- 홈 메뉴 -->
-					<li class="mt"><a class="active" href="index.html"> <i
+					<li class="mt"><a class="" href="index.html"> <i
 							class="fa fa-dashboard"></i> <span>홈</span>
 					</a></li>
 					<!-- 전자결재 메뉴 -->
@@ -56,7 +56,7 @@
 							<li><a href="rejectBoard.do">반려함</a></li>
 						</ul></li>
 					<!-- 메일 메뉴 -->
-					<li>
+					<li class="sub-menu">
 						<a href="inboxListView.do"> 
 							<i class="fa fa-envelope"></i>
 							<span>메일 </span> 

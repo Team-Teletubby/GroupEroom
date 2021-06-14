@@ -177,6 +177,15 @@
 	<!--script for this page-->
 	
 	<script>
+		$(document).ready(function() {
+			$('.sub-menu').eq(1).addClass("active");
+		});
+	
+		$('.time-set').click(function() {
+			$('.time-set').removeClass('click')
+			$(this).addClass('click');
+		});
+		
 		$(function() {
 			var chkObj = document.getElementsByName("chkBoxRow");
 			var rowCnt = chkObj.length;
@@ -219,7 +228,7 @@
 					success : function(data) {
 						if(data = 1) {
 							alert("이동되었습니다.");
-							location.replace("mail/inboxListView")
+							location.replace("mail/in8boxListView")
 						}
 						else {
 							alert("삭제 실패하였습니다.");
