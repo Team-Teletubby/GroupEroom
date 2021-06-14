@@ -50,6 +50,11 @@ public class MailStoreLogic implements MailStore {
 		return (ArrayList) sqlSession.selectList("mailMapper.selectAllInbox", receiverId, rowBounds);
 	}
 	
+	@Override
+	public ArrayList<Mail> selectAllInbox(int memberId) {
+		return (ArrayList)sqlSession.selectList("mailMapper.selectAllInboxIndex", memberId);
+	}
+
 //보낸편지함리스트
 	@Override
 	public ArrayList<Mail> selectAllSentMail(PageInfo pi, int senderId) {

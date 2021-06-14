@@ -116,72 +116,22 @@
 										<div class="timeline-wrap">
 											<ul class="list-timeline">
 												<!-- 데이터 넣는 곳  -->
+												<c:forEach var="item" items="${mailList }" varStatus="num">
 												<li class="itme-timeline">
 													<div class="timeline-info">
-														<a href="#" class="info-area">
+														<a href="mailDetailView.do?mailNo=${item.mailNo }" class="info-area">
 															<div class="title-box">
-																<em class="mail-title">안녕하세요 여러부우우운</em>
+																<em class="mail-title">${item.mailTitle }</em>
 															</div>
 															<div class="dsc-box">
 																<div class="dsc-box-inner">
-																	<span class="dsc-time">4시간전</span> <span class="dsc">잡코리아
-																		| 스마트매치</span>
+																	<span class="dsc-time">${item.sentDate }</span> <span class="dsc">${item.senderName }</span>
 																</div>
 															</div>
 														</a>
 													</div>
 												</li>
-												<!-- 데이터 넣는 곳 끝  -->
-												<!-- 데이터 넣는 곳  -->
-												<li class="itme-timeline">
-													<div class="timeline-info">
-														<a href="#" class="info-area">
-															<div class="title-box">
-																<em class="mail-title">1안녕하세요 여러부우우운</em>
-															</div>
-															<div class="dsc-box">
-																<div class="dsc-box-inner">
-																	<span class="dsc-time">4시간전</span> <span class="dsc">잡코리아
-																		| 스마트매치</span>
-																</div>
-															</div>
-														</a>
-													</div>
-												</li>
-												<!-- 데이터 넣는 곳 끝  -->
-												<!-- 데이터 넣는 곳  -->
-												<li class="itme-timeline">
-													<div class="timeline-info">
-														<a href="#" class="info-area">
-															<div class="title-box">
-																<em class="mail-title">안녕하세요 여러부우우운</em>
-															</div>
-															<div class="dsc-box">
-																<div class="dsc-box-inner">
-																	<span class="dsc-time">4시간전</span> <span class="dsc">잡코리아
-																		| 스마트매치</span>
-																</div>
-															</div>
-														</a>
-													</div>
-												</li>
-												<!-- 데이터 넣는 곳 끝  -->
-												<!-- 데이터 넣는 곳  -->
-												<li class="itme-timeline">
-													<div class="timeline-info">
-														<a href="#" class="info-area">
-															<div class="title-box">
-																<em class="mail-title">안녕하세요 여러부우우운</em>
-															</div>
-															<div class="dsc-box">
-																<div class="dsc-box-inner">
-																	<span class="dsc-time">4시간전</span> <span class="dsc">잡코리아
-																		| 스마트매치</span>
-																</div>
-															</div>
-														</a>
-													</div>
-												</li>
+												</c:forEach>
 												<!-- 데이터 넣는 곳 끝  -->
 											</ul>
 										</div>

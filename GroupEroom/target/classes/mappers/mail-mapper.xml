@@ -63,6 +63,7 @@
 		AND MOD(MAIL_NO, 2) = 1
 		ORDER BY SENT_DATE DESC
 	</select>
+	
 <!-- 보낸편지함 출력 -->
 	<select id="selectAllSentMail" parameterType="_int" resultMap="mailResultMap">
 		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "RECEIVER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, TO_CHAR(a.SENT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS SENT_DATE, TO_CHAR(a.READ_DATE, 'YYYY-MM-DD HH24:MI:SS') AS READ_DATE, a.READ_COUNT 
@@ -73,6 +74,7 @@
 		AND MOD(MAIL_NO, 3) = 1 
 		ORDER BY SENT_DATE DESC
 	</select>
+	
 <!-- 휴지통 출력 -->
 	<select id="selectAllTrash" parameterType="_int" resultMap="mailResultMap">
 		SELECT a.MAIL_NO, a.RECEIVER_ID, a.SENDER_ID, b.MEMBER_NAME AS "SENDER_NAME", b.MEMBER_DEPT, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.READ_DATE, a.READ_COUNT   
@@ -90,6 +92,16 @@
 		INNER JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID 
 		INNER JOIN MEMBER c ON a.SENDER_ID = c.MEMBER_ID 
 		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<select id="selectAllInboxIndex" parameterType="_int" resultMap="mailResultMap">
+		SELECT a.Mail_no, a.RECEIVER_ID, b.MEMBER_NAME AS RECEIVER_NAME, a.SENDER_ID, a.MAIL_TITLE, a.MAIL_CONTENTS, a.SENT_DATE, a.TRASH_YN, a.SENDER_ID, c.MEMBER_NAME AS SENDER_NAME
+		FROM MAIL a
+		INNER JOIN MEMBER b ON a.RECEIVER_ID = b.MEMBER_ID
+		INNER JOIN MEMBER c ON a.SENDER_ID = c.MEMBER_ID
+		WHERE a.RECEIVER_ID = #{memberId }
+		AND MOD(MAIL_NO, 2) = 1
+		ORDER BY MAIL_NO desc
 	</select>
 	
 <!-- 보내는사람 메일생성 -->

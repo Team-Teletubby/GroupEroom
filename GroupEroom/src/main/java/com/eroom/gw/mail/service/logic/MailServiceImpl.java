@@ -41,6 +41,11 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
+	public ArrayList<Mail> printAllInbox(int memberId) {
+		return mStore.selectAllInbox(memberId);
+	}
+	
+	@Override
 	public ArrayList<Mail> printAllSentMail(PageInfo pi, int senderId) {
 		return mStore.selectAllSentMail(pi, senderId);
 	}

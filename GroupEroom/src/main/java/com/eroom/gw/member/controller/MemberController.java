@@ -27,6 +27,8 @@ import com.eroom.gw.approval.domain.Approval;
 import com.eroom.gw.approval.service.ApprovalService;
 import com.eroom.gw.common.PageInfo;
 import com.eroom.gw.common.Pagination;
+import com.eroom.gw.mail.domain.Mail;
+import com.eroom.gw.mail.service.MailService;
 import com.eroom.gw.member.domain.Member;
 import com.eroom.gw.member.domain.Search;
 import com.eroom.gw.member.service.MemberService;
@@ -46,6 +48,9 @@ public class MemberController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private MailService mailService;
 
 	
 	// 로그인 -> 메인페이지 연결
@@ -62,7 +67,10 @@ public class MemberController {
 		ArrayList<Member> memberList = service.printExecutives(member);
 		// 공지사항 리스트
 		ArrayList<Notice> noticeList = noticeService.printAll();
+		// 메일 리스트 가져오기
+		ArrayList<Mail> mailList = mailService.printAllInbox(memberId);
 		
+		System.out.println(mailList);
 		// 결재문 갯수
 		mv.addObject("approvalTypeCount", approvalTypeCount);
 		// 결재문 리스트
@@ -71,6 +79,8 @@ public class MemberController {
 		mv.addObject("member", member);
 		// 임원 정보
 		mv.addObject("memberExecutives", memberList);
+		//메일 리스트
+		mv.addObject("mailList", mailList);
 		// 공지사항 리스트
 		mv.addObject("noticeList", noticeList);
 		mv.setViewName("index");

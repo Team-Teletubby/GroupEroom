@@ -9,6 +9,7 @@ import com.eroom.gw.mail.domain.Mail;
 public interface MailService {
 	//메일함 리스트출력
 	public ArrayList<Mail> printAllInbox(PageInfo pi, int receiverId);
+	public ArrayList<Mail> printAllInbox(int memberId); // 추가함 (메인에 출력하기 위해서)
 	public ArrayList<Mail> printAllSentMail(PageInfo pi, int receiverId);
 	public ArrayList<Mail> printAllTrash(PageInfo pi, int receiverId);
 
