@@ -229,6 +229,7 @@ public class FBoardController {
 	}
 	
 //댓글등록
+	@ResponseBody
 	@RequestMapping(value="fbCmtAdd.do", method=RequestMethod.POST)
 	public String addFBoardCmt(@ModelAttribute FreeboardCmt fBoardCmt, HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("LoginUser");

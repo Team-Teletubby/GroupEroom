@@ -134,10 +134,10 @@
 					data : { "fBoardNo" : fBoardNo, "cmtContents" : cmtContents},
 					success : function(data) {
 						if(data == "success") {
-							// 댓글 불러오기
-							getRCmtList();
 							// 작성 후 내용 초기화
 							$("#cmtContents").val("");
+							// 댓글 불러오기
+							getCmtList();
 						}else {
 							alert("댓글 등록 실패..");
 						}
@@ -180,10 +180,13 @@
 							$tr.append($btnArea); //수정,삭제버튼 만들기
 							$tableBody.append($tr);
 						}
+					}else {
+						$tableBody.html("");
 					}
 				},
 				error : function(data) {
-					
+					var $tableBody = $("#cmttb tbody");
+					$tableBody.html("");
 				}
 			});
 		}
