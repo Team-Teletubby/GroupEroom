@@ -240,8 +240,10 @@ span.error {
 								<label for="formFile" class="control-label col-lg-2 col-sm-3">
 									프로필사진 </label> <input type="file" id="formFile" name="reloadFile"
 									value="${memberOne.renameFileName }">
+									<img src="/resources/memberproFile/${memberOne.renameFileName }"
+											class="img-circle" width="120" height="120">
 								<div class="col-lg-10 col-sm-9">
-
+									<%-- <span>"${memberOne.renameFileName }"</span> --%>
 									<!-- 이미지 미리보기 영역 -->
 									<div id="imgViewArea" style="margin-top: 10px; display: none;">
 										<img id="imgArea" style="width: 200px; height: 100px;"
