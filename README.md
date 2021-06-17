@@ -70,7 +70,7 @@ FramWork | Spring, Bootstrap
 <br><br>
 
 - 이혜성
-  - 전자결재
+ - 전자결재
    - <결재 작성>
      - SummerNote 사용
      - 문서 종류, 조직도를 활용한 결재선 2명 선택
