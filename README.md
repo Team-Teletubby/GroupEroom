@@ -1,3 +1,4 @@
+![로고](https://user-images.githubusercontent.com/77327044/122395556-134eed00-cfb2-11eb-99c9-5a8d36255750.png)
 ![Group E Room-logo](https://user-images.githubusercontent.com/77327044/122395429-f0bcd400-cfb1-11eb-9fe2-a850eb313396.png)
 
 # GROUP E ROOM
