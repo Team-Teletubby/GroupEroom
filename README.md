@@ -70,11 +70,11 @@ FramWork | Spring, Bootstrap
 <br><br>
 
 - 이혜성
- - 전자결재
-   - <결재 작성>
-     - SummerNote 사용
-     - 문서 종류, 조직도를 활용한 결재선 2명 선택
-   
+  - 전자결재
+    - <결재 작성>
+      - SummerNote 사용
+      - 문서 종류, 조직도를 활용한 결재선 2명 선택
+<br>
    - <진행함>, <미결함>, <완료함>, <반려함>
      - 게시글 수정, 삭제, 조회, 페이징
      - 댓글 등록, 삭제
@@ -84,7 +84,7 @@ FramWork | Spring, Bootstrap
      - 일정 등록, 수정, 삭제
 
   - 채팅
-     - Web Socket을 이용한 실시간 채팅 (1:N)
+     - Web Socket을 이용한 실시간 채팅 (N:N)
 
  <br><br>
    
