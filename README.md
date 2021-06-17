@@ -84,7 +84,7 @@ FramWork | Spring, Bootstrap
      - 일정 등록, 수정, 삭제
 
   - 채팅
-     - Web Socket을 이용한 실시간 채팅 (N:N)
+     - Web Socket을 이용한 실시간 채팅 (M:N)
 
  <br><br>
    
