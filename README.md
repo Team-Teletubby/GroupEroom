@@ -82,6 +82,10 @@ FramWork | Spring, Bootstrap
      - fullCalendar 사용
      - 일정 등록, 수정, 삭제
     <br>
+  - 집무현황
+    - 부서별 직급이 높은 특정 사원의 상태(보고가능, 회의중, 부재중) 확인 가능
+    - ajax를 활용하여 상태 변경
+    <br>
   - 채팅
      - Web Socket을 이용한 실시간 채팅 (M:N)
    <br><br>
