@@ -65,7 +65,7 @@
 											<input type="checkbox" id="reportChkBox" name="checkAll">
 										</div>
 										<div class="btn-group">
-											<a data-original-title="Delete" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+											<a data-original-title="Delete" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips" onclick="moveToTrash();">
 												<i class="fa fa-trash-o"></i>
 											</a>
 										</div>

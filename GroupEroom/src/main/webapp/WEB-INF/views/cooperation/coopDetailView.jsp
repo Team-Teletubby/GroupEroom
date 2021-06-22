@@ -88,7 +88,7 @@
 										<br>
 										<div class="col-sm-10">
                     						<input type="text" class="form-control round-form" autocomplete="off" placeholder="댓글을 입력해 주세요" 
-                    								style="width: 0px" id="rContent" name="comment" required>
+                    								style="width: 400px" id="rContent" name="comment" required>
                     						<div id="buttonZone"></div>
                   						</div>
 										<!-- <div>
@@ -118,7 +118,7 @@
 													<span class="first-part">${ coopList.memberName }</span>
 												</c:if>
 												<c:if test="${coopList.memberName == LoginUser.memberName }">
-													<div class="first-part odd" style="height:100%">${
+							 						<div class="first-part odd" style="height:100%">${
 														coopList.memberName }</div>
 												</c:if>
 												<c:if test="${ !empty coopList.renameFilename } != null">
@@ -129,6 +129,13 @@
 
 													<!-- 수정,삭제버튼 -->
 													<c:if test="${ LoginUser.memberId == coopList.memberId}">
+														<c:url var="coModify" value="coopModify.do">
+															<c:param name="roomNo" value="${ coopList.roomNo }">
+															</c:param>
+															<c:param name="coNo" value="${ coopList.coNo }"></c:param>
+															<c:param name="renameFilename"
+																value="${ coopList.renameFilename }"></c:param>
+														</c:url>
 														<c:url var="coDelete" value="coopDelete.do">
 															<c:param name="roomNo" value="${ coopList.roomNo }">
 															</c:param>
@@ -136,6 +143,10 @@
 															<c:param name="renameFilename"
 																value="${ coopList.renameFilename }"></c:param>
 														</c:url>
+														<button type="button" class="btn btn-round btn-warning btn-xs"
+															onclick="location.href='${ coModify }'">
+															<i class="fa fa-times" id="OpenBtn"></i>
+														</button>
 														<button type="button" class="btn btn-round btn-danger btn-xs"
 															onclick="location.href='${ coDelete }'">
 															<i class="fa fa-times"></i>
